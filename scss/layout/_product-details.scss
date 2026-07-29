@@ -1,0 +1,249 @@
+// ==========================================================================
+// Product details — featured product (info column + image gallery)
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.product-details {
+  @include flex($align: center, $justify: space-between);
+  padding: 100px 42px;
+  gap: 40px;
+
+  &__badge {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-primary;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 45px;
+    line-height: 40px;
+    color: $color-black;
+    margin-top: 12px;
+  }
+
+  &__description {
+    font-family: $font-display;
+    font-size: 18px;
+    line-height: 25px;
+    color: $color-black;
+    max-width: 581px;
+    margin-top: 20px;
+  }
+
+  &__price {
+    @include flex($align: baseline, $gap: 12px);
+    margin-top: 24px;
+  }
+
+  &__price-current {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 25px;
+    letter-spacing: -0.5px;
+    color: $color-primary;
+  }
+
+  &__price-original {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.36px;
+    color: #b9b9b9;
+    text-decoration: line-through;
+  }
+
+  &__options {
+    @include flex($align: flex-start, $gap: 80px);
+    margin-top: 28px;
+  }
+
+  &__option-label {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 14px;
+    color: $color-black;
+    margin-bottom: 12px;
+  }
+
+  &__sizes {
+    @include flex($align: center, $gap: 6px);
+  }
+
+  &__size {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 0.5px solid $color-black;
+    background: $color-white;
+    font-family: $font-display;
+    font-size: 9px;
+    color: $color-black;
+
+    &--active {
+      background: $color-black;
+      color: $color-white;
+    }
+  }
+
+  &__quantity {
+    margin-top: 28px;
+  }
+
+  &__quantity-control {
+    @include flex($align: center, $justify: space-between);
+    width: 109px;
+  }
+
+  &__quantity-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ebebeb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__quantity-value {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.32px;
+    color: $color-black;
+  }
+
+  &__actions {
+    @include flex($align: center, $gap: 10px);
+    margin-top: 36px;
+  }
+
+  &__btn {
+    width: 307px;
+    padding: 22px 30px;
+    border-radius: 2px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-white;
+    text-align: center;
+
+    &--cart {
+      background: $color-primary;
+    }
+
+    &--buy {
+      background: $color-black;
+    }
+  }
+
+  &__gallery {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  &__thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__thumb {
+    width: 203px;
+    height: 156px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  &__main-image {
+    width: 451px;
+    height: 487px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:232 : galerie en bandeau défilant (303 × 381),
+// puis le bloc d'informations sur toute la largeur.
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .product-details {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 54px 21px;
+
+    &__badge {
+      font-size: 12px;
+    }
+
+    &__title {
+      font-size: 25px;
+      line-height: 40px;
+    }
+
+    &__description {
+      font-size: 14px;
+      line-height: 25px;
+      max-width: 348px;
+    }
+
+    &__price-current {
+      font-size: 25px;
+      letter-spacing: -0.5px;
+    }
+
+    &__price-original {
+      font-size: 18px;
+      letter-spacing: -0.36px;
+    }
+
+    // Galerie : les 4 visuels deviennent un carrousel horizontal
+    &__gallery {
+      flex-direction: row;
+      gap: 8px;
+      width: 100%;
+      height: 381px;
+      overflow-x: auto;
+    }
+
+    &__thumbs {
+      flex-direction: row;
+      gap: 8px;
+      order: 2;
+    }
+
+    &__thumb,
+    &__main-image {
+      flex: 0 0 303px;
+      width: 303px;
+      height: 381px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    &__actions {
+      flex-direction: row;
+      gap: 6px;
+      width: 100%;
+    }
+
+    &__btn {
+      flex: 1;
+      padding: 14px 30px;
+      font-size: 16px;
+    }
+  }
+}

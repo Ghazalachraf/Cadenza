@@ -1,0 +1,96 @@
+// ==========================================================================
+// Elevate your fashion — marquee ticker + headline with inline photo pills
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.ticker {
+  background: $color-light-brown;
+  overflow: hidden;
+  padding: 15px 0;
+
+  &__track {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    animation: ticker-scroll 30s linear infinite;
+  }
+
+  &__item {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.32px;
+    color: $color-black;
+    white-space: nowrap;
+  }
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.elevate {
+  position: relative;
+  background-color: #f5f4f2;
+  background-image: url('../assets/icons/bg-squiggle.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 90px 40px;
+  text-align: center;
+
+  &__text {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 1.8;
+    color: $color-black;
+    max-width: 1216px;
+    margin: 0 auto;
+  }
+
+  &__pill {
+    display: inline-block;
+    width: 100px;
+    height: 45px;
+    border-radius: 24px;
+    object-fit: cover;
+    vertical-align: middle;
+    margin: 0 4px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:202 (h=396) : bandeaux défilants + texte réduit
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .ticker {
+    padding: 10px 0;
+
+    &__item {
+      font-size: 12px;
+    }
+
+    &__track {
+      gap: 24px;
+    }
+  }
+
+  .elevate {
+    padding: 40px 20px;
+
+    &__text {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    &__pill {
+      width: 52px;
+      height: 24px;
+      border-radius: 14px;
+    }
+  }
+}

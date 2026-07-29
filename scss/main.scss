@@ -1,0 +1,38 @@
+// ==========================================================================
+// Cadenza — main stylesheet entry
+// Compiled manually to css/main.css (no build tool):
+//   npx sass scss/main.scss css/main.css --no-source-map --style=expanded
+// ==========================================================================
+
+// --- Abstracts (no CSS output) --------------------------------------------
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+// --- Base -----------------------------------------------------------------
+@use 'base/fonts';
+@use 'base/reset';
+
+// --- Global layout (shared components) ------------------------------------
+@use 'layout/promo-header';
+@use 'layout/site-header';
+@use 'layout/site-footer';
+
+// --- Home page sections ---------------------------------------------------
+@use 'layout/hero';
+@use 'layout/promo-banner';
+@use 'layout/new-arrivals';
+@use 'layout/sale-banner';
+@use 'layout/our-collections';
+@use 'layout/best-seller';
+@use 'layout/elevate';
+@use 'layout/product-details';
+@use 'layout/spotlight';
+@use 'layout/collections-info';
+@use 'layout/compare';
+@use 'layout/latest-articles';
+@use 'layout/seasonal-sale';
+@use 'layout/accessories';
+@use 'layout/faq';
+@use 'layout/timeline';
+@use 'layout/gallery';
+@use 'layout/newsletter';

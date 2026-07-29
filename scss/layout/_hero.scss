@@ -1,0 +1,146 @@
+// ==========================================================================
+// Hero — Home page banner (background photo + headline + CTA)
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.hero {
+  position: relative;
+  height: 873px;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 270px;
+  }
+
+  &__eyebrow {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 24px;
+    color: $color-white;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 70px;
+    letter-spacing: -1.28px;
+    color: $color-white;
+    max-width: 801px;
+    margin-top: 24px;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    padding: 20px 34px;
+    border-radius: 4px;
+    background: $color-white;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-black;
+    text-transform: capitalize;
+  }
+
+  &__dots {
+    position: absolute;
+    right: 90px;
+    bottom: 79px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 0;
+
+    &--active {
+      width: 16px;
+      height: 16px;
+      background: transparent;
+      border: 1px solid $color-white;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 3px;
+        border-radius: 50%;
+        background: $color-white;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:47 (390 × 519)
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .hero {
+    height: 519px;
+
+    &__content {
+      padding-top: 159px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    &__eyebrow {
+      font-size: 11px;
+    }
+
+    &__title {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 30px;
+      letter-spacing: -0.48px;
+      max-width: 315px;
+      margin-top: 12px;
+    }
+
+    &__cta {
+      margin-top: 22px;
+      padding: 12px 20px;
+      border-radius: 2px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    &__dots {
+      display: none;
+    }
+  }
+}

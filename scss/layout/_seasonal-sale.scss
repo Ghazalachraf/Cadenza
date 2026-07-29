@@ -1,0 +1,110 @@
+// ==========================================================================
+// Seasonal sale — bandeau photo pleine largeur, titre à gauche + 2 CTA à droite
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.seasonal-sale {
+  position: relative;
+  height: 268px;
+  @include flex($align: center, $justify: space-between);
+  @include container-padding;
+  overflow: hidden;
+  color: $color-white;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  &__content {
+    position: relative;
+    max-width: 660px;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 52px;
+    text-transform: uppercase;
+  }
+
+  &__note {
+    font-family: $font-display;
+    font-size: 18px;
+    margin-top: 12px;
+  }
+
+  &__actions {
+    position: relative;
+    @include flex($align: center, $gap: 16px);
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 34px;
+    border-radius: 4px;
+    font-family: $font-display;
+    font-size: 18px;
+
+    &--light {
+      background: $color-white;
+      color: $color-black;
+      text-transform: capitalize;
+    }
+
+    &--primary {
+      background: $color-primary;
+      color: $color-white;
+      text-transform: lowercase;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:432 (h=249)
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .seasonal-sale {
+    height: 249px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    padding: 0 20px;
+
+    &__content {
+      max-width: 300px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 28px;
+    }
+
+    &__note {
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    &__btn {
+      padding: 12px 24px;
+      border-radius: 2px;
+      font-size: 12px;
+    }
+  }
+}

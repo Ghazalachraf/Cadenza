@@ -1,0 +1,186 @@
+// ==========================================================================
+// Timeline — navigation verticale par années + contenu éditorial 2 colonnes
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.timeline {
+  @include flex($align: center, $justify: space-between, $gap: 60px);
+  max-width: 1216px;
+  margin: 0 auto;
+  padding: 100px 20px;
+
+  // ---- Colonne des années -------------------------------------------------
+  &__years {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    flex-shrink: 0;
+  }
+
+  &__arrow {
+    width: 60px;
+    height: 60px;
+
+    &--up img {
+      transform: rotate(-90deg);
+    }
+
+    &--down img {
+      transform: rotate(90deg);
+    }
+  }
+
+  &__year {
+    font-family: $font-heading;
+    font-weight: 400;
+    font-size: 44px;
+    color: #424041;
+    display: block;
+
+    &--active {
+      font-weight: 500;
+      font-size: 54px;
+      letter-spacing: -1.08px;
+      color: $color-black;
+    }
+  }
+
+  // ---- Contenu ------------------------------------------------------------
+  &__content {
+    @include flex($align: flex-start, $gap: 30px);
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 440px;
+    padding: 24px 0;
+
+    &--second {
+      gap: 30px;
+    }
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 50px;
+    letter-spacing: 0.2px;
+    color: $color-black;
+  }
+
+  &__text {
+    font-family: $font-display;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    color: $color-text-secondary;
+    margin-top: 24px;
+  }
+
+  &__card {
+    position: relative;
+    width: 440px;
+    height: 538px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  &__card-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 278px;
+  }
+
+  &__card-date {
+    position: absolute;
+    top: calc(50% + 62px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.44px;
+    color: $color-white;
+    white-space: nowrap;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:1019 (h=951) : années en bandeau horizontal
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .timeline {
+    flex-direction: column;
+    gap: 30px;
+    padding: 54px 21px;
+
+    &__years {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    &__arrow {
+      display: none;
+    }
+
+    &__year {
+      font-size: 20px;
+
+      &--active {
+        font-size: 24px;
+        letter-spacing: -0.48px;
+      }
+    }
+
+    &__content {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    &__col,
+    &__card {
+      width: 100%;
+    }
+
+    &__card {
+      height: 340px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    &__card-logo {
+      width: 180px;
+    }
+
+    &__card-date {
+      top: calc(50% + 46px);
+      font-size: 16px;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+# Editor / tooling
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Outils d'assistance locaux
+.claude/
+.claude-plugin/
+.mcp.json
+
+# Temporary SCSS compilation helpers
+_only_*.scss
+_only_*.css
+_validate_*.html
+
+# Dependencies
+node_modules/
+
+# Environment & secrets
+.env
+.env.*
+*.pem

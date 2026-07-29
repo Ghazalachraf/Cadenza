@@ -1,0 +1,106 @@
+// ==========================================================================
+// Site header — main nav, overlaid on the hero (transparent bg, white text)
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.site-header {
+  @include flex($align: center, $justify: space-between);
+  @include container-padding;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  z-index: 10;
+
+  &__menu {
+    @include flex($align: center, $gap: 30px);
+  }
+
+  &__link {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 14px;
+    color: $color-white;
+
+    &--dropdown {
+      @include flex($align: center, $gap: 2px);
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  &__logo img {
+    height: 30px;
+    width: auto;
+  }
+
+  &__actions {
+    @include flex($align: center, $gap: 30px);
+  }
+
+  &__bag {
+    position: relative;
+  }
+
+  &__bag-count {
+    position: absolute;
+    top: -4px;
+    right: -14px;
+    font-size: 10px;
+    font-family: $font-heading;
+    color: $color-white;
+  }
+
+  &__burger,
+  &__mobile-icons {
+    display: none;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:52 : burger 24px / logo centré / user + panier 18px
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .site-header {
+    height: 44px;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    &__menu,
+    &__actions {
+      display: none;
+    }
+
+    &__burger {
+      display: block;
+      order: 1;
+    }
+
+    &__logo {
+      order: 2;
+
+      img {
+        width: 94px;
+        height: 18px;
+      }
+    }
+
+    &__mobile-icons {
+      @include flex($align: center, $gap: 10px);
+      order: 3;
+
+      img {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}

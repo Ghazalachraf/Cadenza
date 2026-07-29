@@ -1,0 +1,135 @@
+// ==========================================================================
+// Site footer — dark link columns + copyright/payment bar
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.site-footer {
+  position: relative;
+  background: #121212;
+  padding: 100px;
+
+  &__inner {
+    display: flex;
+    gap: 120px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 313px;
+  }
+
+  &__logo {
+    width: 157px;
+    height: auto;
+  }
+
+  &__tagline {
+    font-family: $font-display;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #ddddde;
+  }
+
+  &__social {
+    @include flex($align: center, $gap: 26px);
+
+    img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__heading {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.5;
+    color: $color-white;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    a {
+      font-family: $font-display;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #ddddde;
+    }
+  }
+
+  &__link--highlight {
+    color: $color-orange;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  &__top {
+    position: absolute;
+    left: 45px;
+    bottom: 84px;
+    width: 68px;
+    height: 68px;
+  }
+}
+
+.bottom-footer {
+  @include flex($align: center, $justify: space-between);
+  padding: 12px 90px;
+  background: #141414;
+
+  &__copy {
+    font-family: $font-display;
+    font-size: 14px;
+    color: #ddddde;
+  }
+
+  &__payments {
+    height: 24px;
+    width: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .site-footer {
+    padding: 50px 20px;
+
+    &__inner {
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    &__heading {
+      font-size: 18px;
+    }
+
+    &__brand {
+      width: 100%;
+    }
+
+    &__top {
+      display: none;
+    }
+  }
+
+  .bottom-footer {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+}

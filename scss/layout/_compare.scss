@@ -1,0 +1,166 @@
+// ==========================================================================
+// Compare — before/after colour-way slider (Neri Loungewear blue vs pink)
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.compare {
+  padding: 60px 0 80px;
+  text-align: center;
+
+  &__eyebrow {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-primary;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 40px;
+    color: $color-black;
+    margin-top: 8px;
+  }
+
+  &__viewer {
+    position: relative;
+    height: 860px;
+    margin-top: 78px;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  &__screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &--after {
+      // Revealed from the right; width driven by JS via --compare-pos.
+      width: 100%;
+      clip-path: inset(0 0 0 var(--compare-pos, 86%));
+    }
+  }
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__label {
+    position: relative;
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 54px;
+    line-height: 52px;
+    color: $color-black;
+    text-transform: uppercase;
+    max-width: 517px;
+  }
+
+  &__cta {
+    position: relative;
+    margin-top: 40px;
+    padding: 22px 34px;
+    border-radius: 4px;
+    background: $color-white;
+    font-family: $font-display;
+    font-size: 18px;
+    color: $color-black;
+    text-transform: uppercase;
+  }
+
+  &__divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--compare-pos, 86%);
+    width: 1px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+  }
+
+  &__handle {
+    position: absolute;
+    top: 50%;
+    left: var(--compare-pos, 86%);
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: $color-white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: ew-resize;
+    z-index: 3;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+
+    img:first-child {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:1118 (h=569) : comparateur tactile
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .compare {
+    padding: 40px 0;
+
+    &__eyebrow {
+      font-size: 14px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    &__viewer {
+      height: 420px;
+      margin-top: 30px;
+    }
+
+    &__label {
+      font-size: 24px;
+      line-height: 28px;
+      max-width: 272px;
+    }
+
+    &__cta {
+      margin-top: 22px;
+      padding: 12px 24px;
+      border-radius: 2px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    &__handle {
+      width: 48px;
+      height: 48px;
+
+      img {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}

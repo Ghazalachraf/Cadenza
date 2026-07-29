@@ -1,0 +1,113 @@
+// ==========================================================================
+// Gallery — Instagram strip (@Cadenza)
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.gallery {
+  padding: 100px 10px 80px;
+  text-align: center;
+
+  &__eyebrow {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 16px;
+    color: $color-primary;
+    text-transform: uppercase;
+  }
+
+  &__handle {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 44px;
+    letter-spacing: -0.88px;
+    color: $color-black;
+    margin-top: 4px;
+  }
+
+  &__subtitle {
+    font-family: $font-display;
+    font-size: 18px;
+    color: rgba(37, 35, 36, 0.8);
+    margin-top: 4px;
+  }
+
+  &__strip {
+    @include flex($align: center, $justify: center, $gap: 6px);
+    padding: 0 24px;
+    margin-top: 50px;
+  }
+
+  &__item {
+    position: relative;
+    flex: 0 0 227px;
+    height: 196px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: $color-primary;
+
+    &--wide {
+      flex-basis: 459px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  &__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 157px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .gallery {
+    padding: 40px 0;
+
+    &__handle {
+      font-size: 28px;
+      letter-spacing: -0.56px;
+    }
+
+    &__eyebrow {
+      font-size: 13px;
+    }
+
+    &__subtitle {
+      font-size: 14px;
+      padding: 0 20px;
+    }
+
+    &__item {
+      flex-basis: 160px;
+      height: 138px;
+    }
+
+    &__item--wide {
+      flex-basis: 300px;
+    }
+
+    &__logo {
+      width: 110px;
+    }
+
+    &__strip {
+      overflow-x: auto;
+      justify-content: flex-start;
+      padding: 0;
+    }
+  }
+}

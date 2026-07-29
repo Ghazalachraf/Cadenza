@@ -1,0 +1,91 @@
+// ==========================================================================
+// PromoHeader — top announcement bar (social links / promo slider / lang+currency)
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.promo-header {
+  @include flex($align: center, $justify: space-between);
+  @include container-padding;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background: $color-primary;
+
+  &__social {
+    @include flex($align: center, $gap: 26px);
+
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__slider {
+    @include flex($align: center, $justify: center, $gap: 80px);
+
+    button {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__slider-text {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 14px;
+    color: $color-white;
+    white-space: nowrap;
+  }
+
+  &__settings {
+    @include flex($align: center, $gap: 24px);
+  }
+
+  &__setting-btn {
+    @include flex($align: center, $gap: 2px);
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 14px;
+    color: $color-white;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:39 : seul le slider promo est conservé (h=30)
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .promo-header {
+    justify-content: center;
+    height: 30px;
+    padding: 5px 16px;
+
+    &__social,
+    &__settings {
+      display: none;
+    }
+
+    &__slider {
+      gap: 20px;
+
+      button {
+        width: 20px;
+        height: 20px;
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &__slider-text {
+      font-size: 11px;
+    }
+  }
+}

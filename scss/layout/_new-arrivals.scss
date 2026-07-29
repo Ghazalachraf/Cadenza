@@ -1,0 +1,249 @@
+// ==========================================================================
+// New Arrivals — heading, category tabs, product card carousel
+// Also defines .product-card, reused by best-seller / accessories sections
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.new-arrivals {
+  @include container-padding;
+  padding-top: 94px;
+  padding-bottom: 80px;
+  text-align: center;
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 34px;
+    letter-spacing: -0.68px;
+    color: $color-black;
+  }
+
+  &__tabs {
+    @include flex($align: center, $justify: center, $gap: 40px);
+    margin-top: 34px;
+    overflow-x: auto;
+  }
+
+  &__tab {
+    font-family: $font-display;
+    font-size: 16px;
+    color: $color-black;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    &--active {
+      color: $color-primary;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+}
+
+.product-carousel {
+  position: relative;
+  margin-top: 34px;
+
+  &__track {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: $color-white;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+    img {
+      width: 21px;
+      height: 21px;
+    }
+
+    &--prev {
+      left: 8px;
+
+      img {
+        transform: rotate(180deg);
+      }
+    }
+
+    &--next {
+      right: 8px;
+    }
+  }
+}
+
+.product-card {
+  flex: 0 0 342px;
+  scroll-snap-align: start;
+  border-radius: 10px;
+  overflow: hidden;
+  background: $color-white;
+  border: 1px solid #f5f4f2;
+  text-align: left;
+
+  &__media {
+    position: relative;
+    height: 408px;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__actions {
+    position: absolute;
+    top: 19px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &__variants {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 27px 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.8) 77%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover &__actions,
+  &:hover &__variants {
+    opacity: 1;
+  }
+
+  &__variant-label {
+    font-family: $font-display;
+    font-size: 14px;
+    color: $color-black;
+    margin-bottom: 8px;
+
+    & + & {
+      margin-top: 12px;
+    }
+  }
+
+  &__sizes {
+    @include flex($align: center, $gap: 3px);
+  }
+
+  &__size {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 0.5px solid $color-black;
+    background: $color-white;
+    font-size: 9px;
+    color: $color-black;
+
+    &--active {
+      background: $color-black;
+      color: $color-white;
+    }
+  }
+
+  &__colors img {
+    height: 30px;
+  }
+
+  &__info {
+    position: relative;
+    padding: 21px 17px;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.32px;
+    color: $color-black;
+  }
+
+  &__price {
+    @include flex($align: baseline, $gap: 8px);
+    margin-top: 12px;
+    font-family: $font-display;
+    font-size: 16px;
+    color: $color-primary;
+  }
+
+  &__price-original {
+    font-size: 12px;
+    color: #b9b9b9;
+    text-decoration: line-through;
+  }
+
+  &__cart-btn {
+    position: absolute;
+    right: 16px;
+    bottom: 19px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:71 : cartes conservées à 342 px, défilement libre
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .new-arrivals {
+    padding: 44px 0 50px;
+
+    &__title {
+      font-size: 24px;
+      letter-spacing: -0.48px;
+    }
+
+    &__tabs {
+      justify-content: space-between;
+      gap: 0;
+      margin-top: 20px;
+      padding: 0 20px;
+      font-size: 12px;
+    }
+
+    &__tab {
+      font-size: 12px;
+    }
+  }
+
+  .product-carousel {
+    margin-top: 20px;
+
+    &__arrow {
+      display: none;
+    }
+
+    &__track {
+      gap: 8px;
+      padding: 0 8px;
+    }
+  }
+
+  .product-card {
+    flex-basis: 342px;
+  }
+}

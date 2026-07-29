@@ -1,0 +1,90 @@
+// ==========================================================================
+// FAQ — accordéon. Présent uniquement sur la maquette mobile (451:953).
+// Masqué au-delà de 1024px tant que l'arbitrage A02 n'est pas tranché.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.faq {
+  display: none;
+  position: relative;
+  background-color: #f5f4f2;
+  background-image: url('../assets/icons/bg-faq-swoosh.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 67px 10px 80px;
+  text-align: center;
+  overflow: hidden;
+
+  &__title {
+    position: relative;
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 34px;
+    letter-spacing: -0.68px;
+    color: $color-black;
+  }
+
+  &__intro {
+    position: relative;
+    font-family: $font-display;
+    font-size: 15px;
+    line-height: 23px;
+    color: $color-black;
+    max-width: 313px;
+    margin: 16px auto 0;
+  }
+
+  &__list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 370px;
+    margin: 110px auto 0;
+    text-align: left;
+  }
+
+  &__item {
+    background: $color-white;
+    border-radius: 8px;
+    padding: 22px 24px;
+  }
+
+  &__header {
+    @include flex($align: center, $gap: 16px);
+    width: 100%;
+    text-align: left;
+  }
+
+  &__question {
+    flex: 1;
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    color: $color-black;
+  }
+
+  &__chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  &__answer {
+    font-family: $font-display;
+    font-size: 12px;
+    line-height: 21px;
+    color: rgba(37, 35, 36, 0.8);
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .faq {
+    display: block;
+  }
+}
