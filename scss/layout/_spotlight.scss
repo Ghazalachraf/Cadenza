@@ -36,8 +36,12 @@
     background: rgba(0, 0, 0, 0.3);
   }
 
+  // Position portée par --x / --y dans le markup, pour être surchargeable
+  // en mobile où la maquette place les points de repère ailleurs.
   &__hotspot {
     position: absolute;
+    left: var(--x);
+    top: var(--y);
     width: 34px;
     height: 34px;
   }
@@ -45,6 +49,8 @@
 
 .spotlight-card {
   position: absolute;
+  left: var(--x);
+  top: var(--y);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -122,29 +128,54 @@
 }
 
 // --------------------------------------------------------------------------
-// Mobile — frame Figma 451:1239 (h=470) : panneaux empilés, hotspots en %
+// Mobile — frame Figma 451:1239 (h=470), valeurs extraites des nodes
+// 451:1240→451:1237.
+//
+// ⚠️ Le frame mobile ne contient QUE le panneau de droite (Eleanor Blouse).
+// Le panneau accessoires n'y figure pas : les deux panneaux restent empilés
+// ici, la suppression éventuelle du premier est un arbitrage (A09).
 // --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .spotlight {
     flex-direction: column;
 
     &__panel {
-      height: 235px;
-    }
+      height: 470px;
 
-    // Les hotspots sont positionnés en px pour le desktop : on les neutralise
-    // au profit d'un placement relatif, sinon ils sortent du cadre en 390px.
-    &__hotspot {
-      display: none;
+      // Repères du frame mobile : 67/390 et 279/390 en x, 113/470 et 345/470 en y.
+      &--right .spotlight__hotspot:nth-of-type(1) {
+        --x: 17.2%;
+        --y: 24%;
+      }
+
+      &--right .spotlight__hotspot:nth-of-type(2) {
+        --x: 71.5%;
+        --y: 73.4%;
+      }
+
+      // Faute de frame mobile pour ce panneau, ses repères desktop sont
+      // transposés en pourcentages de la largeur de panneau (720 px).
+      &--left .spotlight__hotspot:nth-of-type(1) {
+        --x: 25.8%;
+        --y: 43.1%;
+      }
+
+      &--left .spotlight__hotspot:nth-of-type(2) {
+        --x: 39.9%;
+        --y: 86.6%;
+      }
     }
   }
 
+  // La carte fait 289 px de large, gabarit fixe : le frame mobile la cale
+  // à 84 px du bord gauche. Le panneau accessoires reprend ce calage,
+  // sa position desktop (56,7 %) débordant du cadre en 390 px.
   .spotlight-card {
-    left: 50% !important;
-    top: auto !important;
-    bottom: 16px;
-    transform: translateX(-50%);
-    width: calc(100% - 32px);
-    max-width: 289px;
+    --x: 84px;
+    --y: 32.3%;
+  }
+
+  .spotlight__panel--left .spotlight-card {
+    --y: 21.7%;
   }
 }

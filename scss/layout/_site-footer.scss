@@ -104,21 +104,23 @@
   }
 }
 
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:515 (h=1238), valeurs extraites des nodes
+// 451:521→451:570. Typographie et gouttières internes identiques au desktop ;
+// seule la mise en colonne change.
+// --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .site-footer {
-    padding: 50px 20px;
+    padding: 100px 38px 0;
 
     &__inner {
       flex-direction: column;
-      gap: 36px;
+      gap: 40px;
     }
 
-    &__heading {
-      font-size: 18px;
-    }
-
-    &__brand {
-      width: 100%;
+    // 40 px séparent la marque du premier bloc de liens, 60 px les blocs entre eux.
+    &__column + &__column {
+      margin-top: 20px;
     }
 
     &__top {
@@ -128,8 +130,24 @@
 
   .bottom-footer {
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    text-align: center;
+    gap: 22px;
+    padding: 60px 0 17px;
+    background: #121212;
+
+    // La maquette mobile place un filet pleine largeur au-dessus du copyright.
+    // Sa couleur n'est pas remontée par l'extraction : valeur à confirmer (A08).
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+    &__copy {
+      font-family: $font-heading;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    // Les moyens de paiement ne figurent pas sur le frame mobile (A07).
+    &__payments {
+      display: none;
+    }
   }
 }

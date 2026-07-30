@@ -73,41 +73,39 @@
   }
 }
 
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:479 (h=310), valeurs extraites des nodes 451:480→451:502.
+// Les tuiles conservent le gabarit desktop (227 × 196, large 459) : le frame
+// mobile fait défiler la bande horizontalement au lieu de la réduire.
+// --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .gallery {
-    padding: 40px 0;
-
-    &__handle {
-      font-size: 28px;
-      letter-spacing: -0.56px;
-    }
+    padding: 0;
 
     &__eyebrow {
-      font-size: 13px;
+      font-size: 12px;
+    }
+
+    &__handle {
+      font-size: 24px;
+      letter-spacing: -0.48px;
+      margin-top: 11px;
     }
 
     &__subtitle {
-      font-size: 14px;
-      padding: 0 20px;
-    }
-
-    &__item {
-      flex-basis: 160px;
-      height: 138px;
-    }
-
-    &__item--wide {
-      flex-basis: 300px;
-    }
-
-    &__logo {
-      width: 110px;
+      font-size: 12px;
+      line-height: 17px;
+      max-width: 267px;
+      margin: 20px auto 0;
     }
 
     &__strip {
       overflow-x: auto;
       justify-content: flex-start;
+      align-items: flex-start;
+      gap: 8px;
       padding: 0;
+      margin-top: 23px;
     }
   }
 }

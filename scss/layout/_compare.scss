@@ -119,7 +119,9 @@
 }
 
 // --------------------------------------------------------------------------
-// Mobile — frame Figma 451:1118 (h=569) : comparateur tactile
+// Mobile — frame Figma 451:1118 (h=569), valeurs extraites des nodes
+// 451:1052→451:1116. Le curseur démarre plus à gauche que sur desktop :
+// le volet révélé mesure 85 px sur 390 et le filet tombe à 301 px.
 // --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .compare {
@@ -131,18 +133,22 @@
 
     &__title {
       font-size: 24px;
-      line-height: 30px;
+      line-height: 40px;
+      margin-top: 23px;
     }
 
     &__viewer {
-      height: 420px;
-      margin-top: 30px;
+      --compare-pos: 77.2%;
+
+      height: 471px;
+      margin-top: 35px;
+      background: #ffdfdf;
     }
 
     &__label {
       font-size: 24px;
       line-height: 28px;
-      max-width: 272px;
+      max-width: 232px;
     }
 
     &__cta {
@@ -154,12 +160,12 @@
     }
 
     &__handle {
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
 
       img {
-        width: 18px;
-        height: 18px;
+        width: 14px;
+        height: 14px;
       }
     }
   }

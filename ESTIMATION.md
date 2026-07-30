@@ -43,38 +43,33 @@
 
 ## 2. Homepage mobile — `451:38` (390 × 12 166 px)
 
-19 sections, **toutes couvertes**. L'ordre des sections mobile **suit exactement celui du desktop** : pas de réorganisation structurelle, l'essentiel du travail a été de l'adaptation de mise en page.
+19 sections, **toutes extraites au pixel** via `get_design_context` sur leur node — détail des relevés dans [ETAT.md](ETAT.md) §2. L'ordre des sections mobile **suit exactement celui du desktop** : pas de réorganisation structurelle, l'essentiel du travail a été de l'adaptation de mise en page.
 
-Deux niveaux de fidélité, détaillés dans [ETAT.md](ETAT.md) §2 :
-
-- 🟢 **extrait au pixel** — `get_design_context` sur le node, valeurs reprises telles quelles ;
-- 🟡 **calé sur la hauteur de frame** — hauteur exacte + tokens du projet, valeurs intermédiaires déduites.
-
-| # | Section mobile | Node | Hauteur | Équivalent desktop | Est. | Fidélité |
-|---|---|---|---|---|---|---|
-| M01 | promo header | `451:39` | 30 px | PromoHeader | 0,1 h | 🟢 |
-| M02 | hero + header burger | `451:47` | 519 px | Hero + Header | 0,4 h | 🟢 |
-| M03 | new arrivals | `451:71` | 658 px | New Arrivals | 0,3 h | 🟢 |
-| M04 | 20%PROMO_container | `451:157` | 304 px | Sale banner | 0,2 h | 🟡 |
-| M05 | our collections | `451:168` | 710 px | Our Collections | 0,3 h | 🟢 |
-| M06 | best seller | `451:289` | 650 px | Best Seller | 0,3 h | 🟢 |
-| M07 | ticker + elevate | `451:202` | 396 px | Ticker + Elevate | 0,2 h | 🟡 |
-| M08 | product details | `451:232` | 977 px | Product Details | 0,4 h | 🟢 |
-| M09 | latest articles | `451:343` | 1 283 px | Latest Articles | 0,4 h | 🟢 |
-| M10 | spotlight | `451:1239` | 470 px | Spotlight | 0,3 h | 🟡 |
-| M11 | collections more info | `451:1167` | 827 px | Collections More Info | 0,3 h | 🟡 |
-| M12 | after & before | `451:1118` | 569 px | After & Before | 0,3 h | 🟡 |
-| M13 | seasonal sale | `451:432` | 249 px | Seasonal Sale | 0,2 h | 🟡 |
-| M14 | accessories | `451:450` | 555 px | Accessories | 0,3 h | 🟢 |
-| M15 | **FAQ** | `451:953` | 850 px | ❌ aucun — section créée | 0,75 h | 🟢 |
-| M16 | timeline | `451:1019` | 951 px | Timeline | 0,3 h | 🟡 |
-| M17 | gallery | `451:479` | 310 px | Gallery | 0,2 h | 🟡 |
-| M18 | newsletter | `451:503` | 225 px | Newsletter | 0,15 h | 🟡 |
-| M19 | footer + bottom | `451:515` | 1 238 px | Footer + bottom | 0,4 h | 🟡 |
+| # | Section mobile | Node | Hauteur | Équivalent desktop | Est. |
+|---|---|---|---|---|---|
+| M01 | promo header | `451:39` | 30 px | PromoHeader | 0,1 h |
+| M02 | hero + header burger | `451:47` | 519 px | Hero + Header | 0,4 h |
+| M03 | new arrivals | `451:71` | 658 px | New Arrivals | 0,3 h |
+| M04 | 20%PROMO_container | `451:157` | 304 px | Sale banner | 0,2 h |
+| M05 | our collections | `451:168` | 710 px | Our Collections | 0,3 h |
+| M06 | best seller | `451:289` | 650 px | Best Seller | 0,3 h |
+| M07 | ticker + elevate | `451:202` | 396 px | Ticker + Elevate | 0,2 h |
+| M08 | product details | `451:232` | 977 px | Product Details | 0,4 h |
+| M09 | latest articles | `451:343` | 1 283 px | Latest Articles | 0,4 h |
+| M10 | spotlight | `451:1239` | 470 px | Spotlight | 0,3 h |
+| M11 | collections more info | `451:1167` | 827 px | Collections More Info | 0,3 h |
+| M12 | after & before | `451:1118` | 569 px | After & Before | 0,3 h |
+| M13 | seasonal sale | `451:432` | 249 px | Seasonal Sale | 0,2 h |
+| M14 | accessories | `451:450` | 555 px | Accessories | 0,3 h |
+| M15 | **FAQ** | `451:953` | 850 px | ❌ aucun — section créée | 0,75 h |
+| M16 | timeline | `451:1019` | 951 px | Timeline | 0,3 h |
+| M17 | gallery | `451:479` | 310 px | Gallery | 0,2 h |
+| M18 | newsletter | `451:503` | 225 px | Newsletter | 0,15 h |
+| M19 | footer + bottom | `451:515` | 1 238 px | Footer + bottom | 0,4 h |
 
 **Sous-total sections mobile : 5,8 h** — auxquelles s'ajoutent 0,25 h d'atelier de correspondance (les frames mobiles portent des noms génériques du type `Frame 1618873136`, remontés par les noms d'enfants et les coordonnées Y).
 
-**Total mobile : 6,05 h réalisées**, sur 6,55 h chiffrées — la validation W3C est faite (0,25 h), la recette sur appareil réel reste due.
+**Total mobile : 6,05 h réalisées**, sur 6,55 h chiffrées — la validation W3C est faite, la recette sur appareil réel reste due.
 
 ---
 
@@ -84,20 +79,19 @@ Deux niveaux de fidélité, détaillés dans [ETAT.md](ETAT.md) §2 :
 |---|---|---|---|
 | Home desktop (21 blocs) | 8,85 h | 8,85 h | — |
 | Homepage mobile (19 sections) | 6,55 h | 6,05 h | 0,5 h *(recette appareil réel)* |
-| Finitions post-intégration | — | — | 2,25 h |
-| **TOTAL** | **15,4 h** | **14,9 h** | **2,75 h** |
+| Finitions post-intégration | — | — | 0,25 h |
+| **TOTAL** | **15,4 h** | **14,9 h** | **0,75 h** |
 
-### Détail du reste — 2,75 h
+### Détail du reste — 0,75 h
 
 | Tâche | Est. |
 |---|---|
-| Extraction fine des 10 sections mobiles 🟡 | 1,5 h |
-| Repositionnement des hotspots Spotlight en mobile | 0,25 h |
 | Défilement horizontal des cartes Latest Articles en mobile | 0,25 h |
 | Recette sur appareil réel (iOS / Android) | 0,5 h |
-| Commit + push vers le dépôt distant | 0,25 h |
 
-**Qualité à date** : W3C Nu **0 erreur / 0 avertissement** · CSS Jigsaw **0 erreur** · 92 assets résolus · 2 602 lignes de CSS.
+Le reste du travail dépend des arbitrages du §4.
+
+**Qualité à date** : W3C Nu **0 erreur / 0 avertissement** · CSS Jigsaw **0 erreur** · 91 assets résolus · 2 698 lignes de CSS.
 
 ---
 
@@ -113,6 +107,10 @@ Aucun de ces points n'a été tranché unilatéralement — ce sont des décisio
 | **A04** | Blocs nommés `video` | La maquette ne fournit que des images fixes | De vraies vidéos sont-elles attendues ? *(+0,5 h + sources)* |
 | **A05** | Onglets New Arrivals | Desktop : Outwears, Dresses, Skirt, **Bottoms**, Sneakers, Gym Suits — Mobile : mêmes moins « Bottoms », ordre Gym Suits/Sneakers inversé | Quelle liste fait foi ? Le markup porte les 6 onglets desktop |
 | **A06** | Best Seller | Desktop : 2 rangées / 10 produits — Mobile : 1 rangée / 4 produits | Masquer la 2ᵉ rangée en mobile ou la conserver ? Actuellement conservée |
+| **A07** | Bottom footer | Moyens de paiement présents sur desktop, absents du frame mobile | Actuellement masqués sous 1024 px. À confirmer |
+| **A08** | Filet du bottom footer mobile | Filet pleine largeur au-dessus du copyright ; couleur non remontée par l'extraction | Valeur provisoire `rgba(255,255,255,0.2)` |
+| **A09** | Spotlight | Desktop : 2 panneaux — Mobile : le panneau accessoires est absent | Masquer le premier panneau en mobile ? Les deux restent empilés |
+| **A10** | Timeline | Desktop : 2 colonnes, **2022** actif — Mobile : 1 carte, **2024** actif alors que le contenu est « First collaboration » | Quelle année et quel contenu font foi ? |
 
 ---
 

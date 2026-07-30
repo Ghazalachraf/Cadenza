@@ -89,33 +89,52 @@
   }
 }
 
+// --------------------------------------------------------------------------
+// Mobile — frame Figma 451:503 (h=225), valeurs extraites des nodes 451:504→451:514.
+// Le formulaire reste sur une ligne, contrairement au premier jet responsive.
+// --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .newsletter {
     height: 225px;
     padding: 0 20px;
+    background: #151515;
 
     &__eyebrow {
-      font-size: 11px;
-    }
-
-    &__note {
-      font-size: 13px;
+      font-size: 12px;
     }
 
     &__title {
       font-size: 24px;
-      line-height: 30px;
-      letter-spacing: -0.48px;
+      line-height: 52px;
+      margin-top: 13px;
+    }
+
+    &__note {
+      font-size: 14px;
+      margin-top: 19px;
     }
 
     &__form {
-      flex-direction: column;
-      width: 100%;
+      gap: 3px;
+      margin-top: 26px;
     }
 
-    &__input,
+    &__input {
+      width: 181px;
+      height: 30px;
+      padding: 10px 14px;
+      border-radius: 2px;
+      box-shadow: none;
+      font-size: 12px;
+    }
+
     &__submit {
-      width: 100%;
+      width: 82px;
+      height: 30px;
+      padding: 10px 34px;
+      border-radius: 2px;
+      font-size: 12px;
+      text-transform: uppercase;
     }
   }
 }

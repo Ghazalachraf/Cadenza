@@ -61,30 +61,40 @@
 }
 
 // --------------------------------------------------------------------------
-// Mobile — frame Figma 451:157 (h=304)
+// Mobile — frame Figma 451:157 (h=304), valeurs extraites des nodes 451:162→451:167
 // --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .sale-banner {
     height: 304px;
     padding: 0 20px;
 
+    // L'assombrissement mobile est plus marqué que sur desktop.
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
     &__eyebrow {
       font-size: 11px;
     }
 
     &__title {
-      font-size: 28px;
-      line-height: 32px;
-      margin-top: 12px;
+      font-size: 34px;
+      line-height: 33px;
+      max-width: 272px;
+      margin-top: 14px;
     }
 
     &__subtitle {
-      font-size: 13px;
-      margin-top: 10px;
+      font-size: 14px;
+      margin-top: 5px;
     }
 
     &__cta {
-      margin-top: 22px;
+      margin-top: 23px;
       padding: 12px 24px;
       border-radius: 2px;
       font-size: 12px;

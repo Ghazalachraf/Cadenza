@@ -73,45 +73,51 @@
 }
 
 // --------------------------------------------------------------------------
-// Mobile — frame Figma 451:1167 (h=827) : titre, accordéon puis photo
+// Mobile — frame Figma 451:1167 (h=827), valeurs extraites des nodes
+// 451:1168→451:1191. La photo passe EN TÊTE de section, contrairement au
+// desktop où elle occupe la colonne de droite.
 // --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .collections-info {
     flex-direction: column;
-    gap: 30px;
-    padding: 54px 21px;
+    gap: 47px;
+    padding: 0 10px;
+
+    &__image {
+      order: -1;
+      width: 100%;
+      height: 289px;
+      border-radius: 10px;
+    }
 
     &__title {
       font-size: 32px;
-      line-height: 36px;
+      line-height: 37px;
     }
 
     &__accordion {
-      margin-top: 30px;
-    }
-
-    &__image {
-      width: 100%;
-      height: auto;
+      margin-top: 41px;
     }
   }
 
+  // Pas de trait entre 451:1170 (titre) et 451:1171 (filet) : 49 px ;
+  // du filet au titre suivant : 30 px.
   .accordion-item {
-    padding: 20px 0;
+    padding: 0 0 21px;
+
+    & + & {
+      margin-top: 30px;
+    }
 
     &__title {
       font-size: 18px;
     }
 
-    &__icon {
-      width: 22px;
-      height: 22px;
-    }
-
     &__body {
       font-size: 14px;
-      line-height: 21px;
-      margin-left: 0;
+      line-height: 24px;
+      max-width: 359px;
+      margin: 29px 0 0 10px;
     }
   }
 }

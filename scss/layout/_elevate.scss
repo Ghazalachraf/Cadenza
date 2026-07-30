@@ -64,33 +64,47 @@
 }
 
 // --------------------------------------------------------------------------
-// Mobile — frame Figma 451:202 (h=396) : bandeaux défilants + texte réduit
+// Mobile — frame Figma 451:202, valeurs extraites des nodes 451:203 et 451:218
 // --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .ticker {
-    padding: 10px 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0;
 
     &__item {
-      font-size: 12px;
-    }
-
-    &__track {
-      gap: 24px;
+      font-size: 13px;
+      letter-spacing: -0.26px;
     }
   }
 
   .elevate {
-    padding: 40px 20px;
+    height: 336px;
+    padding: 31px 9px;
 
     &__text {
-      font-size: 20px;
-      line-height: 1.7;
+      font-size: 24px;
+      line-height: 1.8;
     }
 
+    // Pastilles photo intégrées au fil du texte : chaque gabarit est propre à
+    // son visuel dans la maquette mobile (451:225, 451:228, 451:231).
     &__pill {
-      width: 52px;
-      height: 24px;
-      border-radius: 14px;
+      border-radius: 17px;
+      margin: 0 2px;
+      width: 78px;
+      height: 34px;
+
+      &:nth-of-type(1) {
+        width: 105px;
+        height: 35px;
+      }
+
+      &:nth-of-type(3) {
+        width: 67px;
+        height: 33px;
+      }
     }
   }
 }

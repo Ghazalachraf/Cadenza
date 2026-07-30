@@ -75,7 +75,7 @@
 }
 
 // --------------------------------------------------------------------------
-// Mobile — frame Figma 451:432 (h=249)
+// Mobile — frame Figma 451:432 (h=249), valeurs extraites des nodes 451:441→451:449
 // --------------------------------------------------------------------------
 @media (max-width: 1024px) {
   .seasonal-sale {
@@ -84,27 +84,40 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 20px;
+    gap: 27px;
     padding: 0 20px;
 
     &__content {
-      max-width: 300px;
+      max-width: 233px;
     }
 
     &__title {
       font-size: 24px;
-      line-height: 28px;
+      line-height: 33px;
     }
 
     &__note {
-      font-size: 12px;
-      margin-top: 8px;
+      font-size: 14px;
+      margin-top: 7px;
     }
 
+    // Écart de centres des deux boutons dans la maquette : 70 % − (36,67 % − 6 px)
+    // sur 390 px, soit 136 px, dont ~103 px de largeur de boutons.
+    &__actions {
+      gap: 33px;
+    }
+
+    // Les deux libellés sont en capitales sur le frame mobile, alors que le
+    // desktop distingue capitalize / lowercase.
     &__btn {
       padding: 12px 24px;
       border-radius: 2px;
       font-size: 12px;
+
+      &--light,
+      &--primary {
+        text-transform: uppercase;
+      }
     }
   }
 }
