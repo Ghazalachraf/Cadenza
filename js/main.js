@@ -133,10 +133,68 @@ function initHeroCarousel() {
   show(0);
 }
 
+// --- Galerie produit ------------------------------------------------------
+// « onClick or Hover the main img change to the target img » : la vignette
+// survolée ou cliquée devient l'image principale. Le survol se contente d'un
+// aperçu, seul le clic fixe le choix.
+function initProductGallery() {
+  const gallery = document.querySelector('[data-gallery]');
+  if (!gallery) return;
+
+  const main = gallery.querySelector('[data-gallery-main]');
+  const thumbs = gallery.querySelectorAll('[data-gallery-thumb]');
+  if (!main || !thumbs.length) return;
+
+  let pinned = main.dataset.default;
+
+  const swap = (src) => {
+    main.src = src;
+  };
+
+  thumbs.forEach((thumb) => {
+    const source = thumb.querySelector('img');
+    if (!source) return;
+
+    thumb.addEventListener('mouseenter', () => swap(source.src));
+    thumb.addEventListener('focus', () => swap(source.src));
+    thumb.addEventListener('mouseleave', () => swap(pinned));
+    thumb.addEventListener('blur', () => swap(pinned));
+
+    thumb.addEventListener('click', () => {
+      pinned = source.src;
+      swap(pinned);
+      thumbs.forEach((other) => other.classList.toggle('is-active', other === thumb));
+    });
+  });
+}
+
+// --- Spotlight : repères shoppables ---------------------------------------
+// « onClick or Hover » : le repère révèle la carte produit de son panneau.
+function initSpotlight() {
+  const panels = document.querySelectorAll('.spotlight__panel');
+
+  panels.forEach((panel) => {
+    const card = panel.querySelector('.spotlight-card');
+    const hotspots = panel.querySelectorAll('.spotlight__hotspot');
+    if (!card || !hotspots.length) return;
+
+    const reveal = (state) => panel.classList.toggle('is-revealed', state);
+
+    hotspots.forEach((hotspot) => {
+      hotspot.addEventListener('mouseenter', () => reveal(true));
+      hotspot.addEventListener('click', () => reveal(true));
+    });
+
+    panel.addEventListener('mouseleave', () => reveal(false));
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initCompare();
   initProductCarousel();
   initFaq();
   initHeroCarousel();
+  initProductGallery();
+  initSpotlight();
 });

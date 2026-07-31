@@ -1,7 +1,7 @@
 # Cadenza — État d'avancement
 
 **Périmètre** : Home desktop (`3:2`) + Homepage mobile (`451:38`)
-**Validation** : W3C Nu **0 erreur / 0 avertissement** · CSS Jigsaw **0 erreur** · 95 assets résolus · 2 771 lignes de CSS
+**Validation** : W3C Nu **0 erreur / 0 avertissement** · CSS Jigsaw **0 erreur** · 95 assets résolus · 2 844 lignes de CSS
 
 ---
 
@@ -66,7 +66,7 @@ Il ne reste plus de section calée « au jugé » sur la seule hauteur de frame.
 
 ## 3. Commentaires du designer — Home desktop
 
-Quatre commentaires relevés sur le fichier d'origine (`uTq2yHeiZnMF1eJwvjIHwe`), tous traités.
+Quinze commentaires relevés sur le fichier d'origine (`uTq2yHeiZnMF1eJwvjIHwe`).
 
 | Commentaire | Portée | Traitement |
 |---|---|---|
@@ -74,8 +74,21 @@ Quatre commentaires relevés sur le fichier d'origine (`uTq2yHeiZnMF1eJwvjIHwe`)
 | « use video or images » | Hero | **Résout A04** : les images fixes de la maquette suffisent, aucune source vidéo à prévoir. Les contrôles de lecture du frame `HeroSection-video` (pause 54 px) ne sont donc pas repris |
 | « onClick : change the hero section image and content » | Hero | Carrousel réel : chaque puce bascule le **slide entier** (visuel, accroche, titre, boutons) via `initHeroCarousel()`. Second slide extrait du frame **440:158** |
 | « hover » | New Arrivals | Déjà en place : `.product-card:hover` révèle les actions (favori, aperçu) et le sélecteur de taille / couleur |
+| « On click or on hover, the width will increase, the image will zoom and the item number will appear » | Our Collections | La tuile large de la maquette est désormais comprise comme l'**état survolé** : au repos les 4 tuiles sont égales, au survol `flex-grow: 3`, zoom 1,08, voile porté à 0,45 et compteur révélé |
+| « zoom the image and make it more darker · Display the number of items on this category » | Accessories | Même principe : zoom 1,08, voile passant à `rgba(0,0,0,0.4)` et compteur révélé. Le voile sombre statique de la tuile *Rings* a été retiré du markup |
+| « onHover : display add to cart button & Quick View · zoom on image » | Best Seller | Le bloc *Add to Cart / Quick View* est posé sur **chaque** carte, plus zoom 1,06 |
+| « on hover : zoom · display add to cart button · display fav & quick view button » | Latest Articles | Bouton *Add to Cart* ajouté aux 4 cartes, zoom 1,06, actions favori / aperçu déjà présentes |
+| « move left to right » | Ticker haut | `ticker--ltr` inverse le sens de l'animation |
+| « move right to left » | Ticker bas | Sens par défaut, conservé |
+| « onClick or Hover the main img change to the target img » | Product Details | Vignettes converties en boutons : le survol donne un aperçu, le clic fixe le choix (`initProductGallery()`) |
+| « onClick or Hover » | Spotlight | Les repères deviennent des boutons ; la carte produit n'apparaît qu'à leur contact (`initSpotlight()`) |
+| « onClick » | Collections More Info | Déjà en place : `initAccordion()` |
+| « move Up » | Footer | Retour en haut fluide sur la pastille (`initBackToTop()`) |
+| « Onhaver : display the color name » | Product Details | ⛔ **Non fait** — voir A13 |
 
 **Correctif induit** : le header était positionné en absolu sur le haut de page et recouvrait la barre promo. Il se cale désormais sous elle, conformément à la maquette où seul le header chevauche le hero.
+
+**Défaut préexistant relevé** : la 5ᵉ carte Best Seller a un `__media` vide. Seuls 9 visuels sur 10 avaient été récupérés à l'intégration initiale, et aucun asset disponible ne correspond au manquant. La carte est laissée en l'état plutôt que supprimée, pour ne pas dévier des 10 cartes de la maquette.
 
 ---
 
@@ -96,6 +109,8 @@ Aucun de ces points n'a été tranché unilatéralement.
 | **A09** | Spotlight | Desktop : 2 panneaux (accessoires + blouse) — Mobile : le panneau accessoires est absent | Les deux panneaux restent empilés. Masquer le premier en mobile ? |
 | **A10** | Timeline | Desktop : 2 colonnes / 2 cartes et **2022** actif — Mobile : 1 seule carte et **2024** actif, alors que le contenu affiché est « First collaboration » | Quelle année et quel contenu font foi ? La 2ᵉ colonne reste rendue |
 | **A11** | Puces du hero | La maquette affiche **3 puces** mais le fichier ne contient que **2 frames de hero** (`56:116` et `440:158`) ; la puce active y est la deuxième | Contenu du 3ᵉ slide et ordre des slides. La 3ᵉ puce est rendue mais inactive |
+| **A12** | Nombre d'articles par catégorie | La maquette ne donne le compteur que sur la tuile survolée : **Accessories 21** et **Rings 34**. Les 6 autres tuiles (Sets, Activewear, Lingerie, Necklaces, Glasses, Earrings) n'en ont aucun | Le mécanisme de révélation est en place ; il manque les valeurs pour les 6 autres catégories |
+| **A13** | Nom de la couleur au survol | Les pastilles de couleur du bloc Product Details sont un **SVG unique** (`icon-color-swatches-pd.svg`), pas des éléments distincts. Impossible d'accrocher une infobulle par couleur sans la liste des teintes et de leurs noms | Fournir les noms et codes des couleurs, ou l'accord pour découper le SVG en pastilles individuelles *(+0,5 h)* |
 
 ---
 
@@ -116,4 +131,4 @@ Aucun de ces points n'a été tranché unilatéralement.
 | Recette sur appareil réel (iOS / Android) | 0,5 h |
 | **Total** | **0,75 h** |
 
-Le reste du travail dépend des arbitrages A01, A02, A05 → A11.
+Le reste du travail dépend des arbitrages A01, A02, A05 → A13.

@@ -159,11 +159,31 @@
     gap: 10px;
   }
 
+  // « onClick or Hover the main img change to the target img » : les vignettes
+  // deviennent des commandes, l'image principale suit.
   &__thumb {
     width: 203px;
     height: 156px;
     border-radius: 10px;
-    object-fit: cover;
+    overflow: hidden;
+    padding: 0;
+    border: 2px solid transparent;
+    background: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &:hover,
+    &:focus-visible,
+    &.is-active {
+      border-color: $color-primary;
+    }
   }
 
   &__main-image {

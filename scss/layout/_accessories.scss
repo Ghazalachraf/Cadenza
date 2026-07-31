@@ -60,12 +60,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s ease;
   }
 
   &__overlay {
     position: absolute;
     inset: 0;
     background: rgba(203, 146, 116, 0.2);
+    transition: background 0.3s ease;
 
     &--dark {
       background: rgba(0, 0, 0, 0.4);
@@ -85,6 +87,26 @@
     font-weight: 500;
     font-size: 24px;
     margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  // ---- Survol ------------------------------------------------------------
+  // « zoom the image and make it more darker * Display the number of items
+  // on this category » : la tuile assombrie de la maquette est l'état survolé.
+  &__tile:hover,
+  &__tile:focus-visible {
+    .accessories__image {
+      transform: scale(1.08);
+    }
+
+    .accessories__overlay {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .accessories__tile-count {
+      opacity: 1;
+    }
   }
 }
 

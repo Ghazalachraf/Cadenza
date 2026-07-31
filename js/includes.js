@@ -72,9 +72,22 @@ function initFixedHeader() {
   window.addEventListener('scroll', sync, { passive: true });
 }
 
+// « move Up » : la pastille du footer ramène en haut de page en douceur.
+// Elle vit dans le composant injecté, d'où son câblage ici.
+function initBackToTop() {
+  const button = document.querySelector('.site-footer__top');
+  if (!button) return;
+
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   await loadAllIncludes();
   initBurgerMenu();
   initPromoSlider();
   initFixedHeader();
+  initBackToTop();
 });

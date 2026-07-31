@@ -978,20 +978,19 @@ ul {
   text-align: center;
   color: #ffffff;
 }
-.collection-tile--wide {
-  flex: 3;
-}
 .collection-tile__image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
 .collection-tile__overlay {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
 }
 .collection-tile__title {
   position: relative;
@@ -1005,6 +1004,23 @@ ul {
   font-weight: 500;
   font-size: 24px;
   margin-top: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.collection-tile {
+  transition: flex-grow 0.4s ease;
+}
+.collection-tile:hover, .collection-tile:focus-visible, .collection-tile.is-active {
+  flex-grow: 3;
+}
+.collection-tile:hover .collection-tile__image, .collection-tile:focus-visible .collection-tile__image, .collection-tile.is-active .collection-tile__image {
+  transform: scale(1.08);
+}
+.collection-tile:hover .collection-tile__overlay, .collection-tile:focus-visible .collection-tile__overlay, .collection-tile.is-active .collection-tile__overlay {
+  background: rgba(0, 0, 0, 0.45);
+}
+.collection-tile:hover .collection-tile__count, .collection-tile:focus-visible .collection-tile__count, .collection-tile.is-active .collection-tile__count {
+  opacity: 1;
 }
 
 @media (max-width: 1024px) {
@@ -1043,6 +1059,7 @@ ul {
   .collection-tile__count {
     font-size: 14px;
     margin-top: 4px;
+    opacity: 1;
   }
 }
 .best-seller {
@@ -1102,6 +1119,10 @@ ul {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.best-seller-card:hover .best-seller-card__image {
+  transform: scale(1.06);
 }
 .best-seller-card__wishlist {
   position: absolute;
@@ -1203,6 +1224,9 @@ ul {
   gap: 40px;
   width: max-content;
   animation: ticker-scroll 30s linear infinite;
+}
+.ticker--ltr .ticker__track {
+  animation-direction: reverse;
 }
 .ticker__item {
   font-family: "Jost", sans-serif;
@@ -1438,7 +1462,21 @@ ul {
   width: 203px;
   height: 156px;
   border-radius: 10px;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.product-details__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+.product-details__thumb:hover, .product-details__thumb:focus-visible, .product-details__thumb.is-active {
+  border-color: #cb9274;
 }
 .product-details__main-image {
   width: 451px;
@@ -1536,12 +1574,30 @@ ul {
   top: var(--y);
   width: 34px;
   height: 34px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.spotlight__hotspot img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .spotlight-card {
   position: absolute;
   left: var(--x);
   top: var(--y);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.spotlight__panel.is-revealed .spotlight-card {
+  opacity: 1;
+  visibility: visible;
+}
+.spotlight-card {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1978,6 +2034,10 @@ ul {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.article-card:hover .article-card__image {
+  transform: scale(1.06);
 }
 .article-card__actions {
   position: absolute;
@@ -2237,11 +2297,13 @@ ul {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
 .accessories__overlay {
   position: absolute;
   inset: 0;
   background: rgba(203, 146, 116, 0.2);
+  transition: background 0.3s ease;
 }
 .accessories__overlay--dark {
   background: rgba(0, 0, 0, 0.4);
@@ -2258,6 +2320,17 @@ ul {
   font-weight: 500;
   font-size: 24px;
   margin-top: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.accessories__tile:hover .accessories__image, .accessories__tile:focus-visible .accessories__image {
+  transform: scale(1.08);
+}
+.accessories__tile:hover .accessories__overlay, .accessories__tile:focus-visible .accessories__overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+.accessories__tile:hover .accessories__tile-count, .accessories__tile:focus-visible .accessories__tile-count {
+  opacity: 1;
 }
 
 @media (max-width: 1024px) {

@@ -17,6 +17,13 @@
     animation: ticker-scroll 30s linear infinite;
   }
 
+  // Commentaires du designer : le bandeau du haut défile « left to right »,
+  // celui du bas « right to left ». L'animation par défaut fait défiler le
+  // texte vers la gauche, c'est donc le premier bandeau qui s'inverse.
+  &--ltr &__track {
+    animation-direction: reverse;
+  }
+
   &__item {
     font-family: $font-heading;
     font-weight: 500;

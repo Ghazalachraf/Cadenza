@@ -113,10 +113,16 @@
     overflow: hidden;
   }
 
+  // « on hover : zoom, display add to cart button, display fav & quick view »
   &__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover &__image {
+    transform: scale(1.06);
   }
 
   &__actions {
