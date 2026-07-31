@@ -827,7 +827,7 @@ ul {
 
 @media (max-width: 768px) {
   .new-arrivals {
-    padding: 44px 0 50px;
+    padding: 34px 0 23px;
   }
   .new-arrivals__title {
     font-size: 24px;
@@ -1042,7 +1042,7 @@ ul {
     flex-direction: column;
     height: auto;
     gap: 8px;
-    margin-top: 24px;
+    margin-top: 10px;
     padding: 10px 8px;
   }
   .collection-tile {
@@ -1509,6 +1509,9 @@ ul {
     font-size: 14px;
     line-height: 25px;
     max-width: 348px;
+  }
+  .product-details__options {
+    gap: 20px;
   }
   .product-details__price-current {
     font-size: 25px;

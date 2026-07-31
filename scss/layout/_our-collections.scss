@@ -124,11 +124,13 @@
       margin-right: auto;
     }
 
+    // Mesure comparée à la maquette : la première tuile tombait 14 px trop
+    // bas. Hauteurs (80/80/240/80) et gouttières (8) étaient déjà exactes.
     &__grid {
       flex-direction: column;
       height: auto;
       gap: 8px;
-      margin-top: 24px;
+      margin-top: 10px;
       padding: 10px 8px;
     }
   }

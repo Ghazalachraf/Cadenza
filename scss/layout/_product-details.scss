@@ -233,6 +233,12 @@
       max-width: 348px;
     }
 
+    // La gouttière desktop de 80 px repoussait le bloc Couleur à 239 px du
+    // bord, alors que la maquette mobile le place juste après les tailles.
+    &__options {
+      gap: 20px;
+    }
+
     &__price-current {
       font-size: 25px;
       letter-spacing: -0.5px;

@@ -209,8 +209,11 @@
 // Mobile — frame Figma 451:71 : cartes conservées à 342 px, défilement libre
 // --------------------------------------------------------------------------
 @include mobile {
+  // Mesure comparée à la maquette : le visuel produit fait bien 408 px de
+  // haut, mais démarrait 10 px trop bas et la section traînait 27 px de
+  // trop sous la carte.
   .new-arrivals {
-    padding: 44px 0 50px;
+    padding: 34px 0 23px;
 
     &__title {
       font-size: 24px;
