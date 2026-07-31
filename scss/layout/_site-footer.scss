@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 313px;
+    width: min(313px, 100%);
   }
 
   &__logo {
@@ -109,9 +109,10 @@
 // 451:521→451:570. Typographie et gouttières internes identiques au desktop ;
 // seule la mise en colonne change.
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .site-footer {
-    padding: 100px 38px 0;
+    // 38 px sur 390 = 9,7 % ; la gouttière suit la largeur jusqu'à 768 px.
+    padding: 100px clamp(20px, 9.74vw, 56px) 0;
 
     &__inner {
       flex-direction: column;

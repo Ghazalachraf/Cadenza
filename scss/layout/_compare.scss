@@ -28,7 +28,7 @@
 
   &__viewer {
     position: relative;
-    height: 860px;
+    height: fluid(860px, 420px);
     margin-top: 78px;
     overflow: hidden;
     user-select: none;
@@ -123,7 +123,7 @@
 // 451:1052→451:1116. Le curseur démarre plus à gauche que sur desktop :
 // le volet révélé mesure 85 px sur 390 et le filet tombe à 301 px.
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .compare {
     padding: 40px 0;
 

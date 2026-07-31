@@ -51,7 +51,7 @@
 }
 
 .best-seller-card {
-  flex: 0 0 303px;
+  flex: 0 0 fluid(303px, 220px);
   scroll-snap-align: start;
 
   &__media {
@@ -149,7 +149,7 @@
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:289 : cartes 303 px en défilement, CTA compact
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .best-seller {
     padding: 40px 8px;
 
@@ -178,6 +178,6 @@
   }
 
   .best-seller-card {
-    flex-basis: 303px;
+    flex-basis: fluid-m(303px, 220px);
   }
 }

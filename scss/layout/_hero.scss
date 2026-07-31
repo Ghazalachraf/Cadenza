@@ -7,7 +7,7 @@
 
 .hero {
   position: relative;
-  height: 873px;
+  height: fluid(873px, 520px);
   overflow: hidden;
 
   // ---- Slides ------------------------------------------------------------
@@ -48,7 +48,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding-top: 270px;
+    padding-top: fluid(270px, 140px);
   }
 
   &__eyebrow {
@@ -99,9 +99,8 @@
     .hero__content {
       align-items: flex-start;
       text-align: left;
-      padding-top: 301px;
-      padding-left: $container-padding;
-      padding-right: $container-padding;
+      padding-top: fluid(301px, 150px);
+      @include container-padding;
     }
 
     .hero__title {
@@ -148,7 +147,7 @@
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:47 (390 × 519)
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .hero {
     height: 519px;
 

@@ -10,6 +10,13 @@
   padding: 100px 42px;
   gap: 40px;
 
+  // Sans cela les deux colonnes gardent leur largeur de contenu et
+  // débordent dès que le viewport passe sous la largeur de la maquette.
+  &__info,
+  &__gallery {
+    min-width: 0;
+  }
+
   &__badge {
     font-family: $font-display;
     font-weight: 500;
@@ -162,8 +169,8 @@
   // « onClick or Hover the main img change to the target img » : les vignettes
   // deviennent des commandes, l'image principale suit.
   &__thumb {
-    width: 203px;
-    height: 156px;
+    width: fluid(203px, 120px);
+    height: fluid(156px, 92px);
     border-radius: 10px;
     overflow: hidden;
     padding: 0;
@@ -187,8 +194,8 @@
   }
 
   &__main-image {
-    width: 451px;
-    height: 487px;
+    width: fluid(451px, 260px);
+    height: fluid(487px, 300px);
     border-radius: 10px;
     object-fit: cover;
   }
@@ -198,12 +205,18 @@
 // Mobile — frame Figma 451:232 : galerie en bandeau défilant (303 × 381),
 // puis le bloc d'informations sur toute la largeur.
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .product-details {
     flex-direction: column-reverse;
     align-items: flex-start;
     gap: 30px;
     padding: 54px 21px;
+
+    // En colonne, `align-items: flex-start` laisse le bloc d'informations
+    // prendre sa largeur de contenu : on le ramène à la largeur disponible.
+    &__info {
+      width: 100%;
+    }
 
     &__badge {
       font-size: 12px;
@@ -247,8 +260,8 @@
 
     &__thumb,
     &__main-image {
-      flex: 0 0 303px;
-      width: 303px;
+      flex: 0 0 fluid-m(303px, 220px);
+      width: fluid-m(303px, 220px);
       height: 381px;
       border-radius: 10px;
       object-fit: cover;

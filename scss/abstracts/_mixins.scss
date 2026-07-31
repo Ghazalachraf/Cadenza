@@ -2,6 +2,7 @@
 // Mixins
 // ==========================================================================
 
+@use 'sass:math';
 @use 'variables' as *;
 
 @mixin flex($align: center, $justify: flex-start, $gap: 0) {
@@ -11,7 +12,51 @@
   gap: $gap;
 }
 
+// --------------------------------------------------------------------------
+// Points de rupture
+// --------------------------------------------------------------------------
+// `mobile` porte la maquette 390 px, `desktop` la maquette 1440 px. Entre
+// 769 px et 1440 px c'est la maquette desktop qui s'applique, mais avec des
+// mesures interpolées : d'où les fonctions ci-dessous.
+// --------------------------------------------------------------------------
+
+@mixin mobile {
+  @media (max-width: $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $bp-mobile + 1px) {
+    @content;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mesures fluides
+// --------------------------------------------------------------------------
+// `fluid` convertit une mesure relevée sur une maquette en une valeur qui
+// suit la largeur du viewport, bornée par un plancher et par la valeur
+// d'origine. À 1440 px la page rend donc exactement la maquette ; en dessous
+// elle se réduit proportionnellement sans jamais passer sous `$min`.
+//
+//   width: fluid(440px, 280px);  →  clamp(280px, 30.5556vw, 440px)
+// --------------------------------------------------------------------------
+
+@function fluid($target, $min, $base: $w-design) {
+  $ratio: math.div(math.div($target, 1px) * 100, $base);
+
+  @return clamp(#{$min}, #{$ratio}vw, #{$target});
+}
+
+// Même principe sur la base de la maquette mobile (390 px).
+@function fluid-m($target, $min) {
+  @return fluid($target, $min, $w-mobile);
+}
+
+// Gouttières latérales : 102 px sur la maquette, réduites proportionnellement
+// jusqu'à un minimum lisible sur petit écran.
 @mixin container-padding {
-  padding-left: $container-padding;
-  padding-right: $container-padding;
+  padding-left: fluid($container-padding, 20px);
+  padding-right: fluid($container-padding, 20px);
 }

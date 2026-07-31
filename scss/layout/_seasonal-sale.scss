@@ -77,7 +77,7 @@
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:432 (h=249), valeurs extraites des nodes 451:441→451:449
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .seasonal-sale {
     height: 249px;
     flex-direction: column;

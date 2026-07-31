@@ -59,7 +59,7 @@
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:39 : seul le slider promo est conservé (h=30)
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .promo-header {
     justify-content: center;
     height: 30px;

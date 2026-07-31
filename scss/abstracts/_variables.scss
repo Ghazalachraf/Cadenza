@@ -19,3 +19,16 @@ $font-display: 'DM Sans', sans-serif;
 // Layout
 $container-width: 1440px;
 $container-padding: 102px;
+
+// Points de rupture
+// La maquette desktop fait 1440 px et la maquette mobile 390 px : entre les
+// deux, tout est interpolé. `$bp-mobile` marque le passage d'une maquette
+// à l'autre, `$bp-design` la largeur au-delà de laquelle le desktop est
+// rendu à ses valeurs exactes.
+$bp-mobile: 768px;
+$bp-design: 1440px;
+
+// Largeurs de référence des deux maquettes, utilisées pour convertir une
+// mesure en pourcentage de viewport.
+$w-design: 1440;
+$w-mobile: 390;

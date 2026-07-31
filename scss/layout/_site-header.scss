@@ -104,7 +104,7 @@
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:52 : burger 24px / logo centré / user + panier 18px
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .site-header {
     height: 44px;
     padding-left: 18px;

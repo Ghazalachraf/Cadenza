@@ -35,6 +35,13 @@
     margin: 60px auto 0;
     text-align: left;
   }
+
+  // Le conteneur n'existe que pour le mobile, où les cartes défilent
+  // horizontalement. En desktop il s'efface pour laisser les cartes
+  // participer directement à la grille.
+  &__cards {
+    display: contents;
+  }
 }
 
 // Wide editorial tile (spans 2 columns, photo + overlaid copy)
@@ -190,7 +197,7 @@
 // (order), puis les 4 cartes produit. NB : la maquette fait défiler les
 // cartes horizontalement ; ici elles sont empilées (cf. note ESTIMATION.md).
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .latest-articles {
     padding: 40px 21px;
 
@@ -209,6 +216,16 @@
       flex-direction: column;
       gap: 30px;
       margin-top: 30px;
+    }
+
+    // Les cartes produit défilent horizontalement, comme sur le frame mobile,
+    // au lieu de s'empiler.
+    &__cards {
+      display: flex;
+      order: 2;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
     }
   }
 
@@ -243,10 +260,12 @@
 
   .article-card {
     order: 2;
+    flex: 0 0 fluid-m(303px, 220px);
+    scroll-snap-align: start;
 
     &__media {
-      height: 485px;
-      border-radius: 10px;
+      height: fluid-m(381px, 300px);
+      border-radius: 6px;
     }
 
     &__info {

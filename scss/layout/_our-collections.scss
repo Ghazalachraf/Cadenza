@@ -107,7 +107,7 @@
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:168 : 4 bandeaux empilés, Accessories mis en avant
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .our-collections {
     padding: 50px 0;
 

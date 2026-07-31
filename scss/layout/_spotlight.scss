@@ -12,7 +12,7 @@
   &__panel {
     position: relative;
     flex: 1;
-    height: 686px;
+    height: fluid(686px, 380px);
     overflow: hidden;
 
     &--left {
@@ -73,7 +73,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 289px;
+  width: min(289px, calc(100% - 24px));
   height: 69px;
   padding: 4px 5px;
   border-radius: 4px;
@@ -154,7 +154,7 @@
 // Le panneau accessoires n'y figure pas : les deux panneaux restent empilés
 // ici, la suppression éventuelle du premier est un arbitrage (A09).
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .spotlight {
     flex-direction: column;
 
@@ -189,9 +189,13 @@
   // La carte fait 289 px de large, gabarit fixe : le frame mobile la cale
   // à 84 px du bord gauche. Le panneau accessoires reprend ce calage,
   // sa position desktop (56,7 %) débordant du cadre en 390 px.
+  // 84 px sur 390 = 21,5 % ; la largeur est bornée pour que le couple
+  // décalage + carte tienne jusqu'à 320 px de viewport.
   .spotlight-card {
-    --x: 84px;
+    --x: 21.5%;
     --y: 32.3%;
+
+    width: min(289px, 78.5%);
   }
 
   .spotlight__panel--left .spotlight-card {

@@ -73,7 +73,7 @@
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:202, valeurs extraites des nodes 451:203 et 451:218
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .ticker {
     height: 30px;
     display: flex;

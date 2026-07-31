@@ -37,18 +37,19 @@
     @include flex($align: center, $justify: center, $gap: 6px);
     padding: 0 24px;
     margin-top: 50px;
+    overflow-x: auto;
   }
 
   &__item {
     position: relative;
-    flex: 0 0 227px;
+    flex: 0 0 fluid(227px, 120px);
     height: 196px;
     border-radius: 6px;
     overflow: hidden;
     background: $color-primary;
 
     &--wide {
-      flex-basis: 459px;
+      flex-basis: fluid(459px, 240px);
     }
   }
 
@@ -78,7 +79,7 @@
 // Les tuiles conservent le gabarit desktop (227 × 196, large 459) : le frame
 // mobile fait défiler la bande horizontalement au lieu de la réduire.
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .gallery {
     padding: 0;
 

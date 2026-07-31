@@ -63,7 +63,7 @@
   }
 
   &__input {
-    width: 426px;
+    width: min(426px, 100%);
     padding: 20px 34px;
     border: 0.5px solid $color-white;
     border-radius: 4px;
@@ -93,7 +93,7 @@
 // Mobile — frame Figma 451:503 (h=225), valeurs extraites des nodes 451:504→451:514.
 // Le formulaire reste sur une ligne, contrairement au premier jet responsive.
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .newsletter {
     height: 225px;
     padding: 0 20px;

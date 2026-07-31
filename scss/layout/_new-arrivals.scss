@@ -87,7 +87,7 @@
 }
 
 .product-card {
-  flex: 0 0 342px;
+  flex: 0 0 fluid(342px, 240px);
   scroll-snap-align: start;
   border-radius: 10px;
   overflow: hidden;
@@ -208,7 +208,7 @@
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:71 : cartes conservées à 342 px, défilement libre
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .new-arrivals {
     padding: 44px 0 50px;
 
@@ -244,6 +244,6 @@
   }
 
   .product-card {
-    flex-basis: 342px;
+    flex-basis: fluid-m(342px, 240px);
   }
 }

@@ -32,8 +32,8 @@
   }
 
   &__image {
-    width: 535px;
-    height: 788px;
+    width: fluid(535px, 260px);
+    height: fluid(788px, 420px);
     border-radius: 10px;
     object-fit: cover;
     flex-shrink: 0;
@@ -77,7 +77,7 @@
 // 451:1168→451:1191. La photo passe EN TÊTE de section, contrairement au
 // desktop où elle occupe la colonne de droite.
 // --------------------------------------------------------------------------
-@media (max-width: 1024px) {
+@include mobile {
   .collections-info {
     flex-direction: column;
     gap: 47px;
