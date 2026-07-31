@@ -53,8 +53,28 @@ function initPromoSlider() {
   });
 }
 
+// Le designer renvoie vers le frame Fixed_Header : passé la hauteur de la
+// barre promo + du header, celui-ci se fige en blanc et ses actions passent
+// en icônes. Le basculement est purement visuel, la classe fait le reste.
+function initFixedHeader() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  // Position du header dans le document : passé ce point, il sortirait du
+  // cadre, c'est là qu'il se fige.
+  const trigger = header.getBoundingClientRect().top + window.scrollY;
+
+  const sync = () => {
+    header.classList.toggle('site-header--fixed', window.scrollY > trigger);
+  };
+
+  sync();
+  window.addEventListener('scroll', sync, { passive: true });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   await loadAllIncludes();
   initBurgerMenu();
   initPromoSlider();
+  initFixedHeader();
 });

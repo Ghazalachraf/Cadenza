@@ -5,24 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadenza — New Arrivals</title>
   <meta name="description" content="Satisfy your top obsession with the range of new arrivals at Cadenza.">
-  <link rel="stylesheet" href="css/main.css?v=8">
+  <link rel="stylesheet" href="css/main.css?v=10">
 </head>
 <body>
   <div data-include="header"></div>
 
   <main>
-    <section class="hero">
-      <img class="hero__bg" src="assets/images/hero-bg.jpg" alt="Model wearing a sequined dress by the river" width="2079" height="1000">
-      <div class="hero__overlay" aria-hidden="true"></div>
-      <div class="hero__content">
-        <p class="hero__eyebrow">Be the first</p>
-        <h1 class="hero__title">Satisfy your top obsession with the range of new arrivals.</h1>
-        <a href="shop.html" class="hero__cta">View Collection</a>
+    <section class="hero" data-hero>
+      <div class="hero__slide hero__slide--active" data-hero-slide>
+        <img class="hero__bg" src="assets/images/hero-bg.jpg" alt="Model wearing a sequined dress by the river" width="2079" height="1000">
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="hero__eyebrow">Be the first</p>
+          <h1 class="hero__title">Satisfy your top obsession with the range of new arrivals.</h1>
+          <div class="hero__actions">
+            <a href="shop.html" class="hero__cta">View Collection</a>
+          </div>
+        </div>
       </div>
+
+      <div class="hero__slide hero__slide--left" data-hero-slide hidden>
+        <img class="hero__bg" src="assets/images/hero-slide-2.jpg" alt="Model in a pinstripe blazer holding a phone beside a Cadenza bag" width="2080" height="1387">
+        <div class="hero__overlay hero__overlay--soft" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="hero__eyebrow">Perfect for any occasion!</p>
+          <p class="hero__title">Shield Your Eyes with Fashion.</p>
+          <div class="hero__actions">
+            <a href="shop.html" class="hero__cta">View Collection</a>
+            <a href="shop.html" class="hero__cta hero__cta--primary">Shop Now</a>
+          </div>
+        </div>
+      </div>
+
       <div class="hero__dots">
-        <button type="button" class="hero__dot" aria-label="Slide 1"></button>
-        <button type="button" class="hero__dot hero__dot--active" aria-label="Slide 2"></button>
-        <button type="button" class="hero__dot" aria-label="Slide 3"></button>
+        <button type="button" class="hero__dot hero__dot--active" data-hero-dot aria-label="Slide 1"></button>
+        <button type="button" class="hero__dot" data-hero-dot aria-label="Slide 2"></button>
+        <button type="button" class="hero__dot" disabled aria-label="Slide 3"></button>
       </div>
     </section>
 

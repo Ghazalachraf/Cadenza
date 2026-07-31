@@ -1,7 +1,7 @@
 # Cadenza — État d'avancement
 
 **Périmètre** : Home desktop (`3:2`) + Homepage mobile (`451:38`)
-**Validation** : W3C Nu **0 erreur / 0 avertissement** · CSS Jigsaw **0 erreur** · 91 assets résolus · 2 698 lignes de CSS
+**Validation** : W3C Nu **0 erreur / 0 avertissement** · CSS Jigsaw **0 erreur** · 95 assets résolus · 2 771 lignes de CSS
 
 ---
 
@@ -64,7 +64,22 @@ Il ne reste plus de section calée « au jugé » sur la seule hauteur de frame.
 
 ---
 
-## 3. Écarts desktop / mobile — à arbitrer
+## 3. Commentaires du designer — Home desktop
+
+Quatre commentaires relevés sur le fichier d'origine (`uTq2yHeiZnMF1eJwvjIHwe`), tous traités.
+
+| Commentaire | Portée | Traitement |
+|---|---|---|
+| « You can use them as icons if you'd like; please check the fixed header above. » | Header | État **fixe au scroll** ajouté (`site-header--fixed`) d'après le frame `Fixed_Header` **294:114** : fond blanc, texte noir, actions en icônes de 24 px (recherche, compte, panier). Bascule pilotée par `initFixedHeader()` |
+| « use video or images » | Hero | **Résout A04** : les images fixes de la maquette suffisent, aucune source vidéo à prévoir. Les contrôles de lecture du frame `HeroSection-video` (pause 54 px) ne sont donc pas repris |
+| « onClick : change the hero section image and content » | Hero | Carrousel réel : chaque puce bascule le **slide entier** (visuel, accroche, titre, boutons) via `initHeroCarousel()`. Second slide extrait du frame **440:158** |
+| « hover » | New Arrivals | Déjà en place : `.product-card:hover` révèle les actions (favori, aperçu) et le sélecteur de taille / couleur |
+
+**Correctif induit** : le header était positionné en absolu sur le haut de page et recouvrait la barre promo. Il se cale désormais sous elle, conformément à la maquette où seul le header chevauche le hero.
+
+---
+
+## 4. Écarts desktop / mobile — à arbitrer
 
 Aucun de ces points n'a été tranché unilatéralement.
 
@@ -73,17 +88,18 @@ Aucun de ces points n'a été tranché unilatéralement.
 | **A01** | Promo banner #1 (`144:168`) | Présent sur desktop, absent du frame mobile | Le masquer en mobile ou l'ajouter à la maquette ? |
 | **A02** | Section FAQ (`451:953`) | Présente sur mobile uniquement | Actuellement **mobile-only** (masquée > 1024 px). La porter sur desktop ? *(+0,5 h)* |
 | **A03** | `Group 1321314644` | ✅ **Résolu** — c'est bien la Timeline (années 2020 → 2024) | — |
-| **A04** | Blocs nommés `video` | La maquette ne fournit que des images fixes | De vraies vidéos sont-elles attendues ? *(+0,5 h + sources)* |
+| **A04** | Blocs nommés `video` | ✅ **Résolu** — commentaire du designer : « use video or images » | — |
 | **A05** | Onglets New Arrivals | Desktop : Outwears, Dresses, Skirt, **Bottoms**, Sneakers, Gym Suits — Mobile : les mêmes sans « Bottoms », ordre Gym Suits/Sneakers inversé | Quelle liste fait foi ? Le markup porte les 6 onglets desktop |
 | **A06** | Best Seller | Desktop : 2 rangées / 10 produits — Mobile : 1 rangée / 4 produits | Masquer la 2ᵉ rangée en mobile ou la conserver ? Actuellement conservée |
 | **A07** | Bottom footer | Les moyens de paiement figurent sur le desktop, pas sur le frame mobile | Actuellement **masqués sous 1024 px**. À confirmer |
 | **A08** | Filet du bottom footer mobile | Le frame mobile ajoute un filet pleine largeur au-dessus du copyright ; sa couleur n'est pas remontée par l'extraction | Valeur provisoire `rgba(255,255,255,0.2)` — à confirmer |
 | **A09** | Spotlight | Desktop : 2 panneaux (accessoires + blouse) — Mobile : le panneau accessoires est absent | Les deux panneaux restent empilés. Masquer le premier en mobile ? |
 | **A10** | Timeline | Desktop : 2 colonnes / 2 cartes et **2022** actif — Mobile : 1 seule carte et **2024** actif, alors que le contenu affiché est « First collaboration » | Quelle année et quel contenu font foi ? La 2ᵉ colonne reste rendue |
+| **A11** | Puces du hero | La maquette affiche **3 puces** mais le fichier ne contient que **2 frames de hero** (`56:116` et `440:158`) ; la puce active y est la deuxième | Contenu du 3ᵉ slide et ordre des slides. La 3ᵉ puce est rendue mais inactive |
 
 ---
 
-## 4. Écarts d'intégration assumés
+## 5. Écarts d'intégration assumés
 
 | Section | Maquette | Implémentation | Raison |
 |---|---|---|---|
@@ -92,7 +108,7 @@ Aucun de ces points n'a été tranché unilatéralement.
 
 ---
 
-## 5. Reste à faire
+## 6. Reste à faire
 
 | Tâche | Est. |
 |---|---|
@@ -100,4 +116,4 @@ Aucun de ces points n'a été tranché unilatéralement.
 | Recette sur appareil réel (iOS / Android) | 0,5 h |
 | **Total** | **0,75 h** |
 
-Le reste du travail dépend des arbitrages A01, A02, A04 → A10.
+Le reste du travail dépend des arbitrages A01, A02, A05 → A11.

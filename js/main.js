@@ -103,9 +103,40 @@ function initFaq() {
   });
 }
 
+// --- Hero carousel --------------------------------------------------------
+// Commentaire du designer : « onClick : change the hero section image and
+// content ». Chaque puce bascule donc le slide entier — visuel, accroche et
+// boutons — et non la seule image de fond.
+function initHeroCarousel() {
+  const hero = document.querySelector('[data-hero]');
+  if (!hero) return;
+
+  const slides = hero.querySelectorAll('[data-hero-slide]');
+  const dots = hero.querySelectorAll('[data-hero-dot]');
+  if (!slides.length || !dots.length) return;
+
+  const show = (index) => {
+    slides.forEach((slide, i) => {
+      slide.hidden = i !== index;
+      slide.classList.toggle('hero__slide--active', i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('hero__dot--active', i === index);
+      dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+    });
+  };
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => show(index));
+  });
+
+  show(0);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initCompare();
   initProductCarousel();
   initFaq();
+  initHeroCarousel();
 });

@@ -5,11 +5,20 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+// Le conteneur d'injection sert de référence de positionnement : sa hauteur
+// se réduit à celle de la barre promo, puisque le header en sort du flux.
+// Le header se cale donc à 100 % de cette hauteur, soit juste sous la barre —
+// comme dans la maquette, où seul le header chevauche le hero.
+[data-include='header'] {
+  position: relative;
+  z-index: 10;
+}
+
 .site-header {
   @include flex($align: center, $justify: space-between);
   @include container-padding;
   position: absolute;
-  top: 0;
+  top: 100%;
   left: 0;
   right: 0;
   height: 80px;
@@ -58,9 +67,37 @@
     color: $color-white;
   }
 
+  &__icons,
   &__burger,
   &__mobile-icons {
     display: none;
+  }
+
+  &__icon img {
+    width: 24px;
+    height: 24px;
+  }
+
+  // ---- État fixe au scroll — frame Fixed_Header 294:114 -------------------
+  // Le designer renvoie explicitement vers ce frame : fond blanc, texte noir,
+  // et les actions passent de libellés à des icônes de 24 px.
+  &--fixed {
+    position: fixed;
+    top: 0;
+    background: $color-white;
+    border-bottom: 1px solid rgba(37, 35, 36, 0.1);
+
+    .site-header__link {
+      color: $color-black;
+    }
+
+    .site-header__actions {
+      display: none;
+    }
+
+    .site-header__icons {
+      @include flex($align: center, $gap: 30px);
+    }
   }
 }
 
@@ -101,6 +138,12 @@
         width: 18px;
         height: 18px;
       }
+    }
+
+    // En mobile l'état fixe garde le burger et les deux icônes du frame
+    // mobile (451:63) plutôt que le triptyque desktop.
+    &--fixed .site-header__icons {
+      display: none;
     }
   }
 }
