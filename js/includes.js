@@ -84,10 +84,96 @@ function initBackToTop() {
   });
 }
 
+// --------------------------------------------------------------------------
+// Panneaux Recherche et Panier
+// --------------------------------------------------------------------------
+// Les deux tiroirs partagent la même mécanique : un seul ouvert à la fois,
+// fermeture par la croix, par le voile ou par Échap.
+function initPanels() {
+  const overlay = document.querySelector('[data-panel-overlay]');
+  const panels = document.querySelectorAll('[data-panel]');
+  if (!overlay || !panels.length) return;
+
+  let lastTrigger = null;
+
+  const closeAll = () => {
+    panels.forEach((panel) => {
+      panel.hidden = true;
+    });
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+    if (lastTrigger) {
+      lastTrigger.focus();
+      lastTrigger = null;
+    }
+  };
+
+  const open = (name, trigger) => {
+    const target = document.querySelector(`[data-panel="${name}"]`);
+    if (!target) return;
+
+    panels.forEach((panel) => {
+      panel.hidden = panel !== target;
+    });
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lastTrigger = trigger || null;
+
+    const focusable = target.querySelector('input, button, a');
+    if (focusable) focusable.focus();
+  };
+
+  document.querySelectorAll('[data-panel-open]').forEach((trigger) => {
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      open(trigger.dataset.panelOpen, trigger);
+    });
+  });
+
+  document.querySelectorAll('[data-panel-close]').forEach((button) => {
+    button.addEventListener('click', closeAll);
+  });
+
+  overlay.addEventListener('click', closeAll);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeAll();
+  });
+
+  syncCartState();
+}
+
+// L'état vide du panier (114:565) prend la place de la liste et du récapitulatif
+// dès que celle-ci ne contient plus d'article.
+function syncCartState() {
+  const list = document.querySelector('[data-cart-items]');
+  const empty = document.querySelector('[data-cart-empty]');
+  const summary = document.querySelector('[data-cart-summary]');
+  const count = document.querySelector('[data-cart-count]');
+  if (!list || !empty || !summary) return;
+
+  const items = list.querySelectorAll('.cart-item').length;
+  const isEmpty = items === 0;
+
+  list.hidden = isEmpty;
+  empty.hidden = !isEmpty;
+  summary.hidden = isEmpty;
+
+  const suggestions = list.parentElement.querySelectorAll('.panel__section-title, .panel__slider');
+  suggestions.forEach((node) => {
+    node.hidden = isEmpty;
+  });
+
+  if (count) {
+    count.textContent = isEmpty ? '' : `(${items} Item${items > 1 ? 's' : ''})`;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   await loadAllIncludes();
   initBurgerMenu();
   initPromoSlider();
   initFixedHeader();
   initBackToTop();
+  initPanels();
 });

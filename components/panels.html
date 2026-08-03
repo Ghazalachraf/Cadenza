@@ -1,0 +1,222 @@
+<!-- ==========================================================================
+     Panneaux d'en-tête — Recherche (114:806) et Panier (91:144 / 114:216 /
+     114:565 / 440:157). Les quatre variantes de panier de la maquette sont un
+     seul composant : seul le nombre d'articles de la liste change.
+     Injectés via js/includes.js dans <div data-include="panels"></div>
+     ========================================================================== -->
+<div class="panel-overlay" data-panel-overlay hidden></div>
+
+<!-- ---------------------------------------------------------------- Recherche -->
+<aside class="panel panel--search" id="panel-search" data-panel="search" aria-label="Recherche" hidden>
+  <header class="panel__head">
+    <p class="panel__title">Search</p>
+    <button type="button" class="panel__close" data-panel-close aria-label="Fermer la recherche">
+      <img src="assets/icons/icon-panel-close.svg" alt="" width="28" height="28">
+    </button>
+  </header>
+
+  <div class="panel__body">
+    <form class="search-panel__form" role="search">
+      <label class="visually-hidden" for="search-field">Rechercher un produit</label>
+      <input class="search-panel__input" id="search-field" type="search" placeholder="What are you looking for ?">
+      <button type="submit" class="search-panel__submit" aria-label="Lancer la recherche">
+        <img src="assets/icons/icon-header-search.svg" alt="" width="24" height="24">
+      </button>
+    </form>
+
+    <p class="search-panel__heading">Popular categories</p>
+    <ul class="search-panel__categories">
+      <li><a href="shop.html">Suit</a></li>
+      <li><a href="shop.html">Activewear set</a></li>
+      <li><a href="shop.html">Rompers</a></li>
+      <li><a href="shop.html">Skirt</a></li>
+    </ul>
+
+    <p class="panel__section-title">Suggestions</p>
+    <div class="panel__slider">
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-dumane.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Dumane Brace Dress</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">35,00$ <span class="mini-card__price-original">69,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-noya.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Noya Slim Dress</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">55,00$ <span class="mini-card__price-original">99,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-gym-suit.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Black Gym Suit</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">85,00$ <span class="mini-card__price-original">99,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-shorte.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Shorte with back</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">65,00$ <span class="mini-card__price-original">65,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ------------------------------------------------------------------ Panier -->
+<aside class="panel panel--cart" id="panel-cart" data-panel="cart" aria-label="Panier" hidden>
+  <header class="panel__head">
+    <p class="panel__title">Cart <span class="panel__count" data-cart-count>(2 Items)</span></p>
+    <button type="button" class="panel__close" data-panel-close aria-label="Fermer le panier">
+      <img src="assets/icons/icon-panel-close.svg" alt="" width="28" height="28">
+    </button>
+  </header>
+
+  <div class="panel__body">
+    <ul class="cart-panel__items" data-cart-items>
+      <li class="cart-item">
+        <img class="cart-item__image" src="assets/images/cart-samantha.jpg" alt="">
+        <div class="cart-item__body">
+          <p class="cart-item__name">Samantha Activewear</p>
+          <p class="cart-item__attr">Color - Gray</p>
+          <p class="cart-item__attr">Size - S</p>
+          <div class="cart-item__quantity">
+            <button type="button" class="cart-item__step" aria-label="Augmenter la quantité">
+              <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
+            </button>
+            <span class="cart-item__qty">1</span>
+            <button type="button" class="cart-item__step" aria-label="Diminuer la quantité">
+              <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
+            </button>
+          </div>
+        </div>
+        <button type="button" class="cart-item__remove" aria-label="Retirer Samantha Activewear">
+          <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
+        </button>
+        <p class="cart-item__price">79,00$</p>
+      </li>
+
+      <li class="cart-item">
+        <img class="cart-item__image" src="assets/images/cart-shorte.jpg" alt="">
+        <div class="cart-item__body">
+          <p class="cart-item__name">Shorte with back</p>
+          <p class="cart-item__attr">Color - Gray</p>
+          <p class="cart-item__attr">Size - S</p>
+          <div class="cart-item__quantity">
+            <button type="button" class="cart-item__step" aria-label="Augmenter la quantité">
+              <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
+            </button>
+            <span class="cart-item__qty">1</span>
+            <button type="button" class="cart-item__step" aria-label="Diminuer la quantité">
+              <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
+            </button>
+          </div>
+        </div>
+        <button type="button" class="cart-item__remove" aria-label="Retirer Shorte with back">
+          <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
+        </button>
+        <p class="cart-item__price">65,00$</p>
+      </li>
+    </ul>
+
+    <p class="panel__section-title">You may also like</p>
+    <div class="panel__slider">
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-gym-suit.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Black Gym Suit</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">85,00$ <span class="mini-card__price-original">99,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-shorte.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Shorte with back</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">65,00$ <span class="mini-card__price-original">65,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-noya.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Noya Slim Dress</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">55,00$ <span class="mini-card__price-original">99,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-dumane.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Dumane Brace Dress</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">35,00$ <span class="mini-card__price-original">69,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+    </div>
+
+    <!-- État vide (114:565) : affiché quand la liste ne contient aucun article -->
+    <div class="cart-empty" data-cart-empty hidden>
+      <p class="cart-empty__title">Your cart is empty</p>
+      <p class="cart-empty__text">If you don't know where to start, try these amazing collections.</p>
+      <ul class="cart-empty__list">
+        <li><a class="cart-empty__row" href="shop.html">
+          <img src="assets/images/cat-activewear.jpg" alt="">
+          <span>Activewear</span>
+          <img class="cart-empty__chevron" src="assets/icons/icon-chevron-small-right.svg" alt="" width="7" height="12">
+        </a></li>
+        <li><a class="cart-empty__row" href="shop.html">
+          <img src="assets/images/cat-best-sellers.jpg" alt="">
+          <span>Best Sellers</span>
+          <img class="cart-empty__chevron" src="assets/icons/icon-chevron-small-right.svg" alt="" width="7" height="12">
+        </a></li>
+        <li><a class="cart-empty__row" href="shop.html">
+          <img src="assets/images/cat-dresses.jpg" alt="">
+          <span>Dresses</span>
+          <img class="cart-empty__chevron" src="assets/icons/icon-chevron-small-right.svg" alt="" width="7" height="12">
+        </a></li>
+        <li><a class="cart-empty__row" href="shop.html">
+          <img src="assets/images/cat-lingerie.jpg" alt="">
+          <span>Lingerie</span>
+          <img class="cart-empty__chevron" src="assets/icons/icon-chevron-small-right.svg" alt="" width="7" height="12">
+        </a></li>
+        <li><a class="cart-empty__row" href="shop.html">
+          <img src="assets/images/cat-new-arrivals.jpg" alt="">
+          <span>New Arrivals</span>
+          <img class="cart-empty__chevron" src="assets/icons/icon-chevron-small-right.svg" alt="" width="7" height="12">
+        </a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="cart-panel__summary" data-cart-summary>
+    <p class="cart-panel__subtotal"><span>Subtotal</span><span>144,00$</span></p>
+    <p class="cart-panel__total"><span>Total:</span><span>144,00$</span></p>
+    <div class="cart-panel__actions">
+      <a class="cart-panel__btn cart-panel__btn--ghost" href="cart.html">View cart</a>
+      <a class="cart-panel__btn cart-panel__btn--primary" href="checkout.html">Checkout 144,00$</a>
+    </div>
+    <p class="cart-panel__note">Taxes, discounts and shipping calculated at checkout</p>
+  </footer>
+</aside>
