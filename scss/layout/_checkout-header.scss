@@ -1,0 +1,63 @@
+// ==========================================================================
+// Checkout header — bandeau réduit (nom + panier), sans navigation
+// (frame Fixed_Header 544:13982)
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.checkout-header {
+  @include flex($align: center, $justify: space-between);
+  height: 77px;
+  padding: 0 fluid(185px, 20px);
+  background: $color-white;
+  border-bottom: 0.4px solid #e4e4e4;
+
+  &__logo {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 24px;
+    color: $color-black;
+  }
+
+  &__cart {
+    position: relative;
+
+    img {
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    border-radius: 50%;
+    background: $color-primary;
+    font-family: $font-display;
+    font-size: 10px;
+    color: $color-white;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — même bandeau, gouttières réduites
+// --------------------------------------------------------------------------
+@include mobile {
+  .checkout-header {
+    height: 60px;
+    padding: 0 20px;
+
+    &__logo {
+      font-size: 20px;
+    }
+  }
+}

@@ -78,7 +78,7 @@
 </aside>
 
 <!-- ------------------------------------------------------------------ Panier -->
-<aside class="panel panel--cart" id="panel-cart" data-panel="cart" aria-label="Panier" hidden>
+<aside class="panel panel--cart" id="panel-cart" data-panel="cart" data-cart-instance aria-label="Panier" hidden>
   <header class="panel__head">
     <p class="panel__title">Cart <span class="panel__count" data-cart-count>(2 Items)</span></p>
     <button type="button" class="panel__close" data-panel-close aria-label="Fermer le panier">
@@ -87,49 +87,49 @@
   </header>
 
   <div class="panel__body">
-    <ul class="cart-panel__items" data-cart-items>
-      <li class="cart-item">
+    <ul class="cart-panel__items" data-cart-items data-qty-scope>
+      <li class="cart-item" data-unit-price="79">
         <img class="cart-item__image" src="assets/images/cart-samantha.jpg" alt="">
         <div class="cart-item__body">
           <p class="cart-item__name">Samantha Activewear</p>
           <p class="cart-item__attr">Color - Gray</p>
           <p class="cart-item__attr">Size - S</p>
           <div class="cart-item__quantity">
-            <button type="button" class="cart-item__step" aria-label="Augmenter la quantité">
+            <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">
               <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
             </button>
-            <span class="cart-item__qty">1</span>
-            <button type="button" class="cart-item__step" aria-label="Diminuer la quantité">
+            <span class="cart-item__qty" data-qty>1</span>
+            <button type="button" class="cart-item__step" data-qty-dec aria-label="Diminuer la quantité">
               <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
             </button>
           </div>
         </div>
-        <button type="button" class="cart-item__remove" aria-label="Retirer Samantha Activewear">
+        <button type="button" class="cart-item__remove" data-cart-remove aria-label="Retirer Samantha Activewear">
           <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
         </button>
-        <p class="cart-item__price">79,00$</p>
+        <p class="cart-item__price" data-line-price>79,00$</p>
       </li>
 
-      <li class="cart-item">
+      <li class="cart-item" data-unit-price="65">
         <img class="cart-item__image" src="assets/images/cart-shorte.jpg" alt="">
         <div class="cart-item__body">
           <p class="cart-item__name">Shorte with back</p>
           <p class="cart-item__attr">Color - Gray</p>
           <p class="cart-item__attr">Size - S</p>
           <div class="cart-item__quantity">
-            <button type="button" class="cart-item__step" aria-label="Augmenter la quantité">
+            <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">
               <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
             </button>
-            <span class="cart-item__qty">1</span>
-            <button type="button" class="cart-item__step" aria-label="Diminuer la quantité">
+            <span class="cart-item__qty" data-qty>1</span>
+            <button type="button" class="cart-item__step" data-qty-dec aria-label="Diminuer la quantité">
               <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
             </button>
           </div>
         </div>
-        <button type="button" class="cart-item__remove" aria-label="Retirer Shorte with back">
+        <button type="button" class="cart-item__remove" data-cart-remove aria-label="Retirer Shorte with back">
           <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
         </button>
-        <p class="cart-item__price">65,00$</p>
+        <p class="cart-item__price" data-line-price>65,00$</p>
       </li>
     </ul>
 
@@ -211,11 +211,13 @@
   </div>
 
   <footer class="cart-panel__summary" data-cart-summary>
-    <p class="cart-panel__subtotal"><span>Subtotal</span><span>144,00$</span></p>
-    <p class="cart-panel__total"><span>Total:</span><span>144,00$</span></p>
+    <p class="cart-panel__subtotal"><span>Subtotal</span><span data-cart-subtotal>144,00$</span></p>
+    <p class="cart-panel__total"><span>Total:</span><span data-cart-total>144,00$</span></p>
     <div class="cart-panel__actions">
       <a class="cart-panel__btn cart-panel__btn--ghost" href="cart.html">View cart</a>
-      <a class="cart-panel__btn cart-panel__btn--primary" href="checkout.html">Checkout 144,00$</a>
+      <a class="cart-panel__btn cart-panel__btn--primary" href="checkout.html">
+        Checkout <span data-cart-total>144,00$</span>
+      </a>
     </div>
     <p class="cart-panel__note">Taxes, discounts and shipping calculated at checkout</p>
   </footer>

@@ -56,6 +56,50 @@
   }
 }
 
+// ---- Sélecteurs Langue / Devise (87:2, 87:82) -----------------------------
+.dropdown {
+  position: relative;
+
+  .promo-header__setting-btn[aria-expanded='true'] img {
+    transform: rotate(180deg);
+  }
+
+  &__list {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    z-index: 20;
+    min-width: 180px;
+    padding: 6px 0;
+    background: $color-white;
+    border-radius: 2px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    max-height: 340px;
+    overflow-y: auto;
+  }
+
+  &__item {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    font-family: $font-display;
+    font-size: 14px;
+    color: $color-black;
+    text-align: left;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba(203, 146, 116, 0.08);
+    }
+
+    &.is-active {
+      color: $color-primary;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+  }
+}
+
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:39 : seul le slider promo est conservé (h=30)
 // --------------------------------------------------------------------------

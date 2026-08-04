@@ -15,6 +15,7 @@
 // --- Global layout (shared components) ------------------------------------
 @use 'layout/promo-header';
 @use 'layout/site-header';
+@use 'layout/checkout-header';
 @use 'layout/site-footer';
 
 // --- Home page sections ---------------------------------------------------
@@ -37,3 +38,6 @@
 @use 'layout/gallery';
 @use 'layout/newsletter';
 @use 'layout/panels';        // Panneaux Recherche et Panier (en-tête)
+
+// --- Checkout page ----------------------------------------------------------
+@use 'layout/checkout';

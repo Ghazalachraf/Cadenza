@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Cadenza</title>
+  <meta name="description" content="Complete your order at Cadenza.">
+  <link rel="stylesheet" href="css/main.css?v=14">
+</head>
+<body>
+  <div data-include="checkout-header"></div>
+
+  <main>
+    <div class="checkout">
+      <form class="checkout__form" novalidate>
+        <div class="checkout-step">
+          <button type="button" class="checkout-step__header is-active" data-checkout-step-toggle aria-expanded="true" aria-controls="step-1-body">
+            <span class="checkout-step__title">1 - Social Information</span>
+            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+          </button>
+          <div class="checkout-step__body" id="step-1-body">
+            <div class="checkout-guest">
+              <span class="checkout-guest__label">Order as guest</span>
+              <a href="login.html" class="checkout-guest__login">Log in</a>
+            </div>
+
+            <p class="checkout-field__label" style="margin-top: 20px;">Social title</p>
+            <div class="checkout-radio-group">
+              <label class="checkout-radio">
+                <input type="radio" name="social-title" value="mr" checked>
+                Mr.
+              </label>
+              <label class="checkout-radio">
+                <input type="radio" name="social-title" value="mrs">
+                Mrs.
+              </label>
+            </div>
+
+            <div class="checkout-row">
+              <label class="checkout-field">
+                <span class="checkout-field__label">First name <small>(optional)</small></span>
+                <input class="checkout-field__input" type="text" name="first-name" placeholder="mohamed">
+              </label>
+              <label class="checkout-field">
+                <span class="checkout-field__label">Last name</span>
+                <input class="checkout-field__input" type="text" name="last-name" placeholder="haddou" required>
+              </label>
+            </div>
+
+            <label class="checkout-field">
+              <span class="checkout-field__label">E-mail</span>
+              <input class="checkout-field__input" type="email" name="email" placeholder="haddou0mohamed@gmail.com" required>
+            </label>
+
+            <label class="checkout-checkbox">
+              <input type="checkbox" name="offers-1">
+              Receive offers from our partners
+            </label>
+
+            <p class="checkout-note"><strong>Create an account</strong> (optional) and save time on your next order.</p>
+
+            <div class="checkout-field checkout-field--password">
+              <label class="checkout-field__label" for="checkout-password">Password <small>(optional)</small></label>
+              <input class="checkout-field__input" type="password" name="password" id="checkout-password">
+              <button type="button" class="checkout-field__toggle" data-password-toggle aria-label="Afficher le mot de passe">
+                <img src="assets/icons/icon-eye.svg" alt="" width="20" height="18">
+              </button>
+            </div>
+
+            <label class="checkout-field">
+              <span class="checkout-field__label">Birthday <small>(optional)</small></span>
+              <input class="checkout-field__input" type="text" name="birthday" placeholder="MM/DD/YY">
+            </label>
+
+            <label class="checkout-checkbox">
+              <input type="checkbox" name="offers-2">
+              Receive offers from our partners
+            </label>
+
+            <label class="checkout-checkbox">
+              <input type="checkbox" name="newsletter">
+              <span><strong>Sign up for our newsletter</strong> — you may unsubscribe at any moment. for that purpose, please find our contact info in the legal notice</span>
+            </label>
+
+            <label class="checkout-checkbox">
+              <input type="checkbox" name="terms" required>
+              I agree to the terms and conditions and the privacy policy
+            </label>
+
+            <!-- « Custmer data privacy » : reprend le libellé de la maquette tel quel -->
+            <label class="checkout-checkbox">
+              <input type="checkbox" name="data-privacy">
+              <span><strong>Custmer data privacy</strong> — The personal data you provide is used to answer queries. process orders or allow access to specific information. you have the right to modify and delete all the personal information found in the "My Account" page.</span>
+            </label>
+
+            <button type="submit" class="checkout-next">Next</button>
+          </div>
+        </div>
+
+        <div class="checkout-step">
+          <button type="button" class="checkout-step__header" data-checkout-step-toggle aria-expanded="false" aria-controls="step-2-body">
+            <span class="checkout-step__title">2 - Addresses</span>
+            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+          </button>
+          <div class="checkout-step__body" id="step-2-body" hidden></div>
+        </div>
+
+        <div class="checkout-step">
+          <button type="button" class="checkout-step__header" data-checkout-step-toggle aria-expanded="false" aria-controls="step-3-body">
+            <span class="checkout-step__title">3 - Shipping Method</span>
+            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+          </button>
+          <div class="checkout-step__body" id="step-3-body" hidden></div>
+        </div>
+
+        <div class="checkout-step">
+          <button type="button" class="checkout-step__header" data-checkout-step-toggle aria-expanded="false" aria-controls="step-4-body">
+            <span class="checkout-step__title">4 - Payment</span>
+            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+          </button>
+          <div class="checkout-step__body" id="step-4-body" hidden></div>
+        </div>
+      </form>
+
+      <aside class="checkout__summary" data-cart-instance>
+        <ul class="order-item-list" data-qty-scope>
+          <li class="order-item" data-unit-price="149">
+            <img class="order-item__thumb" src="assets/images/product-shorte-back.jpg" alt="Shorte with back">
+            <div class="order-item__body">
+              <p class="order-item__name">Shorte with back</p>
+              <p class="order-item__attr">Gray - S</p>
+              <div class="order-item__qty">
+                <button type="button" class="order-item__step" data-qty-dec aria-label="Diminuer la quantité">
+                  <img src="assets/icons/icon-minus-small.svg" alt="" width="14" height="14">
+                </button>
+                <span data-qty>2</span>
+                <button type="button" class="order-item__step" data-qty-inc aria-label="Augmenter la quantité">
+                  <img src="assets/icons/icon-plus-small.svg" alt="" width="14" height="14">
+                </button>
+              </div>
+            </div>
+            <p class="order-item__price" data-line-price>298,00$</p>
+          </li>
+
+          <li class="order-item" data-unit-price="79">
+            <img class="order-item__thumb" src="assets/images/cart-samantha.jpg" alt="Samantha Activewear">
+            <div class="order-item__body">
+              <p class="order-item__name">Samantha Activewear</p>
+              <p class="order-item__attr">white - S</p>
+              <div class="order-item__qty">
+                <button type="button" class="order-item__step" data-qty-dec aria-label="Diminuer la quantité">
+                  <img src="assets/icons/icon-minus-small.svg" alt="" width="14" height="14">
+                </button>
+                <span data-qty>1</span>
+                <button type="button" class="order-item__step" data-qty-inc aria-label="Augmenter la quantité">
+                  <img src="assets/icons/icon-plus-small.svg" alt="" width="14" height="14">
+                </button>
+              </div>
+            </div>
+            <p class="order-item__price" data-line-price>79,00$</p>
+          </li>
+        </ul>
+
+        <form class="order-discount">
+          <label class="visually-hidden" for="discount-code">Discount code or gift card</label>
+          <input class="order-discount__input" id="discount-code" type="text" placeholder="Discount code or gift card">
+          <button type="submit" class="order-discount__submit">Apply</button>
+        </form>
+
+        <div class="order-totals" data-cart-shipping="17">
+          <p><span>Subtotal</span><span data-cart-subtotal>377,00$</span></p>
+          <p><span>Shipping</span><span>17,00$</span></p>
+          <p class="order-totals__total"><span>Total</span><span data-cart-total>394,00$</span></p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div data-include="footer"></div>
+  <div data-include="panels"></div>
+
+  <script src="js/includes.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

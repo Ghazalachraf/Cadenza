@@ -189,6 +189,50 @@ function initSpotlight() {
   });
 }
 
+// --- Checkout : étapes repliables ------------------------------------------
+// Un seul volet ouvert à la fois ; l'étape 1 est ouverte par défaut, les
+// étapes 2 à 4 n'exposent que leur en-tête tant qu'aucun contenu n'a été
+// extrait de la maquette pour elles (cf. commentaire dans _checkout.scss).
+function initCheckoutSteps() {
+  const toggles = document.querySelectorAll('[data-checkout-step-toggle]');
+  if (!toggles.length) return;
+
+  toggles.forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const body = document.getElementById(toggle.getAttribute('aria-controls'));
+      if (!body) return;
+
+      const willOpen = body.hidden;
+
+      toggles.forEach((other) => {
+        const otherBody = document.getElementById(other.getAttribute('aria-controls'));
+        other.classList.remove('is-active');
+        other.setAttribute('aria-expanded', 'false');
+        if (otherBody) otherBody.hidden = true;
+      });
+
+      if (willOpen) {
+        toggle.classList.add('is-active');
+        toggle.setAttribute('aria-expanded', 'true');
+        body.hidden = false;
+      }
+    });
+  });
+}
+
+// --- Checkout : afficher / masquer le mot de passe -------------------------
+function initPasswordToggle() {
+  const button = document.querySelector('[data-password-toggle]');
+  const input = document.getElementById('checkout-password');
+  if (!button || !input) return;
+
+  button.addEventListener('click', () => {
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    button.setAttribute('aria-pressed', String(isHidden));
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initCompare();
@@ -197,4 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroCarousel();
   initProductGallery();
   initSpotlight();
+  initCheckoutSteps();
+  initPasswordToggle();
 });

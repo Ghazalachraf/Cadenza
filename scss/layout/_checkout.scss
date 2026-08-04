@@ -1,0 +1,401 @@
+// ==========================================================================
+// Checkout — formulaire en 4 étapes (accordéon) + récapitulatif de commande
+// (Checkout Page 544:13954 — desktop 1440 × 1606, gabarit form/summary
+// 720/720)
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ---- Mise en page deux colonnes -------------------------------------------
+.checkout {
+  display: flex;
+  align-items: flex-start;
+
+  &__form {
+    flex: 1 1 50%;
+    min-width: 0;
+    padding: 40px fluid(64px, 20px) 100px;
+  }
+
+  &__summary {
+    flex: 1 1 50%;
+    min-width: 0;
+    position: sticky;
+    top: 20px;
+    padding: 40px fluid(64px, 20px);
+    background: #f5f4f2;
+  }
+}
+
+// ---- Étapes (accordéon) ----------------------------------------------------
+.checkout-step {
+  border-top: 0.5px solid #ddd;
+
+  &:last-child {
+    border-bottom: 0.5px solid #ddd;
+  }
+
+  &__header {
+    @include flex($align: center, $justify: space-between);
+    width: 100%;
+    padding: 20px;
+    text-align: left;
+
+    &.is-active {
+      background: #f5f4f2;
+    }
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: fluid(24px, 18px);
+    color: $color-black;
+  }
+
+  &__chevron {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease;
+  }
+
+  &__header[aria-expanded='true'] &__chevron {
+    transform: rotate(180deg);
+  }
+
+  &__body {
+    padding: 20px 20px 40px;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}
+
+// ---- Champs de formulaire ---------------------------------------------------
+.checkout-field {
+  display: block;
+  margin-top: 20px;
+
+  &__label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 15px;
+    color: #333;
+
+    small {
+      font-weight: 400;
+      color: #838589;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    height: 50px;
+    padding: 16px 20px;
+    border: 0.5px solid #ddd;
+    border-radius: 4px;
+    font-family: $font-display;
+    font-size: 14px;
+    color: $color-black;
+
+    &::placeholder {
+      color: rgba(51, 51, 51, 0.3);
+    }
+  }
+
+  &--password {
+    position: relative;
+  }
+
+  &__toggle {
+    position: absolute;
+    right: 16px;
+    bottom: 13px;
+
+    img {
+      width: 20px;
+      height: 18px;
+    }
+  }
+}
+
+.checkout-row {
+  display: flex;
+  gap: 20px;
+
+  .checkout-field {
+    flex: 1;
+  }
+}
+
+// « Order as guest  |  Log in » --------------------------------------------
+.checkout-guest {
+  @include flex($align: center, $gap: 20px);
+  margin-top: 20px;
+
+  &__label {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+  }
+
+  &__login {
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 16px;
+    color: $color-text-secondary;
+    text-decoration: underline;
+  }
+}
+
+// Titre / civilité -----------------------------------------------------------
+.checkout-radio-group {
+  @include flex($align: center, $gap: 40px);
+}
+
+.checkout-radio {
+  @include flex($align: center, $gap: 8px);
+  cursor: pointer;
+  font-family: $font-display;
+  font-weight: 500;
+  font-size: 15px;
+  color: $color-text-secondary;
+
+  input {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+
+    &:checked {
+      border-color: $color-black;
+      background: $color-black;
+      box-shadow: inset 0 0 0 2px $color-white;
+    }
+  }
+}
+
+// Cases à cocher ---------------------------------------------------------------
+.checkout-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+  font-family: $font-display;
+  font-size: 14px;
+  line-height: 25px;
+  color: #838589;
+
+  input {
+    appearance: none;
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+
+    &:checked {
+      border-color: $color-black;
+      background: $color-black;
+    }
+  }
+
+  strong {
+    font-weight: 500;
+    color: #5b5859;
+  }
+}
+
+.checkout-note {
+  margin-top: 20px;
+  font-family: $font-display;
+  font-size: 16px;
+  line-height: 27px;
+  color: #5b5859;
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.checkout-next {
+  display: block;
+  width: 100%;
+  margin-top: 36px;
+  padding: 22px;
+  border-radius: 4px;
+  background: $color-black;
+  font-family: $font-display;
+  font-weight: 500;
+  font-size: 18px;
+  color: $color-white;
+  text-align: center;
+}
+
+// ---- Récapitulatif de commande ---------------------------------------------
+.order-item {
+  display: flex;
+  gap: 16px;
+  padding: 8px 0;
+
+  & + & {
+    border-top: 0.4px solid #ddd;
+  }
+
+  &__thumb {
+    flex-shrink: 0;
+    width: 74px;
+    height: 74px;
+    border-radius: 4px;
+    object-fit: cover;
+    background: $color-white;
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 14px;
+    color: $color-black;
+  }
+
+  &__attr {
+    margin-top: 4px;
+    font-family: $font-display;
+    font-size: 12px;
+    color: #5b5859;
+  }
+
+  &__qty {
+    @include flex($align: center, $gap: 8px);
+    margin-top: 8px;
+  }
+
+  &__step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ebebeb;
+
+    img {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &__price {
+    flex-shrink: 0;
+    align-self: flex-start;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 12px;
+    color: $color-primary;
+  }
+}
+
+.order-discount {
+  @include flex($align: center, $gap: 8px);
+  margin-top: 20px;
+
+  &__input {
+    flex: 1;
+    height: 40px;
+    padding: 10px 14px;
+    border: 0.5px solid #ddd;
+    border-radius: 2px;
+    background: $color-white;
+    font-family: $font-display;
+    font-size: 12px;
+    color: #b9b9b9;
+
+    &::placeholder {
+      color: #b9b9b9;
+    }
+  }
+
+  &__submit {
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 2px;
+    background: $color-primary;
+    font-family: $font-display;
+    font-size: 12px;
+    color: $color-white;
+    text-transform: capitalize;
+  }
+}
+
+.order-totals {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 0.4px solid #ddd;
+
+  p {
+    @include flex($align: baseline, $justify: space-between);
+    font-family: $font-display;
+    font-size: 14px;
+    color: #5b5859;
+
+    & + p {
+      margin-top: 12px;
+    }
+  }
+
+  &__total {
+    margin-top: 16px !important;
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — le récapitulatif passe avant le formulaire, colonnes empilées
+// (même traitement que product-details : ce que l'utilisateur achète avant
+// ce qu'il doit remplir). Non extrait pixel par pixel des frames 575:214 /
+// 578:656 : ceux-ci pèsent 3410 et 3806 px pour un contenu déjà connu par
+// le desktop, se limiter à la mise en page fluide déjà en place ailleurs
+// dans le projet évite une double extraction pour un gain marginal.
+// --------------------------------------------------------------------------
+@include mobile {
+  .checkout {
+    flex-direction: column-reverse;
+
+    &__form,
+    &__summary {
+      width: 100%;
+      padding: 24px 20px 60px;
+    }
+
+    &__summary {
+      position: static;
+    }
+  }
+
+  .checkout-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .checkout-guest {
+    flex-wrap: wrap;
+  }
+}

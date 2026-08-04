@@ -1,7 +1,7 @@
 # Cadenza — État d'avancement
 
-**Périmètre** : Home desktop (`3:2`) + Homepage mobile (`451:38`)
-**Validation** : W3C Nu **0 erreur / 0 avertissement** · CSS Jigsaw **0 erreur** · 95 assets résolus · 2 844 lignes de CSS
+**Périmètre** : Home desktop (`3:2`) + Homepage mobile (`451:38`) + Checkout Page desktop (`544:13954`)
+**Validation** : W3C Nu **0 erreur / 0 avertissement** · CSS Jigsaw **0 erreur** · aucun débordement horizontal de 320 à 2560 px (14 largeurs testées)
 
 ---
 
@@ -123,12 +123,49 @@ Aucun de ces points n'a été tranché unilatéralement.
 
 ---
 
-## 6. Reste à faire
+## 6. Système responsive fluide
+
+Remplacement du point de rupture unique (1024 px, deux maquettes figées) par un système continu :
+
+- `$bp-mobile: 768px` — bascule vers les valeurs mobiles extraites
+- `fluid($cible, $plancher)` — `clamp()` qui interpole entre le plancher et la valeur desktop, base 1440 px (`fluid-m` en base 390 px pour les valeurs mobiles)
+- `@include mobile { }` remplace les 21 `@media (max-width: 1024px)` dispersés
+- Gouttières (`container-padding`), grilles à pistes fixes (Accessories, New Arrivals, Best Seller, Gallery, Product Details, Timeline, Compare, Spotlight, Hero) et valeurs mobiles calées sur 390 px converties en `clamp()`
+
+Vérifié sans débordement horizontal sur 14 largeurs de 320 à 2560 px, Home et Checkout.
+
+---
+
+## 7. Checkout Page — `544:13954` (desktop uniquement)
+
+Formulaire en 4 étapes repliables (accordéon, une seule ouverte à la fois) + récapitulatif de commande à droite, `position: sticky`.
+
+| Élément | Détail |
+|---|---|
+| En-tête | Composant dédié `checkout-header` (PromoHeader + bandeau réduit nom/panier), la maquette n'affiche ni navigation ni recherche sur cette page |
+| Étape 1 — Social Information | Entièrement extraite : civilité, nom/prénom, e-mail, mot de passe (afficher/masquer), anniversaire, 5 cases à cocher, bouton Next |
+| Étapes 2 à 4 | En-têtes repliables fonctionnels (Addresses, Shipping Method, Payment) ; **aucun contenu** — la maquette ne fournit que les en-têtes collapsés, rien à extraire sans inventer |
+| Récapitulatif | 2 articles avec **quantité +/- interactive** ajoutée à la demande (la maquette n'affichait que du texte statique « x2 »/« x1 ») ; Sous-total et Total recalculés en direct, frais de port fixes (17,00$) |
+| Mobile | Récapitulatif placé avant le formulaire (`column-reverse`, même traitement que Product Details) ; **non extrait pixel par pixel** des frames `575:214` / `578:656` (3410 et 3806 px, contenu déjà connu par le desktop) — mise en page fluide seule |
+
+**Coquille conservée telle quelle** : « Custmer data privacy » — texte de la maquette, non corrigé (règle : extraire, ne pas inventer).
+
+---
+
+## 8. Sélecteurs Langue et Devise — `87:2` / `87:82`
+
+Menus déroulants dans la barre promo (desktop uniquement, masqués en mobile comme dans la maquette `451:39`). Un seul ouvert à la fois, fermeture au clic extérieur ou à l'Échap. 9 langues, 8 devises (la maquette n'affiche que ces listes, sans logique de traduction ou de conversion réelle — hors périmètre).
+
+---
+
+## 9. Reste à faire
 
 | Tâche | Est. |
 |---|---|
 | Défilement horizontal des cartes Latest Articles en mobile | 0,25 h |
 | Recette sur appareil réel (iOS / Android) | 0,5 h |
-| **Total** | **0,75 h** |
+| Checkout — étapes 2 à 4 (Addresses / Shipping / Payment) | à chiffrer une fois les frames identifiés |
+| Checkout — extraction pixel des frames mobiles | à chiffrer si le mobile checkout devient prioritaire |
+| **Total connu** | **0,75 h** |
 
 Le reste du travail dépend des arbitrages A01, A02, A05 → A13.

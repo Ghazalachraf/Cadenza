@@ -167,6 +167,124 @@ function syncCartState() {
   if (count) {
     count.textContent = isEmpty ? '' : `(${items} Item${items > 1 ? 's' : ''})`;
   }
+
+  document.querySelectorAll('[data-cart-badge]').forEach((badge) => {
+    badge.textContent = items;
+    badge.hidden = isEmpty;
+  });
+}
+
+// --------------------------------------------------------------------------
+// Quantité produit — panneau panier et récapitulatif checkout
+// --------------------------------------------------------------------------
+// Contrat par attributs plutôt que par classe BEM, pour qu'une seule routine
+// pilote à la fois le tiroir panier (`panels.html`) et le récapitulatif de
+// la page checkout, dont les gabarits diffèrent :
+//   [data-cart-instance]  racine d'un panier (tiroir OU récapitulatif)
+//   [data-unit-price]     article, porte le prix unitaire
+//   [data-qty]            son compteur
+//   [data-qty-inc/-dec]   ses boutons + / -
+//   [data-line-price]     sa ligne de prix, recalculée à chaque clic
+//   [data-cart-remove]    retire l'article (bouton corbeille)
+//   [data-cart-subtotal/-total]   cibles récapitulatif (peuvent apparaître
+//                                 plusieurs fois, ex. le bouton Checkout)
+//   [data-cart-shipping]  frais fixes optionnels, portés sur l'élément lui-même
+function formatPrice(value) {
+  return `${value.toFixed(2).replace('.', ',')}$`;
+}
+
+function updateCartInstance(instance) {
+  const items = instance.querySelectorAll('[data-unit-price]');
+  let subtotal = 0;
+
+  items.forEach((item) => {
+    const unit = parseFloat(item.dataset.unitPrice);
+    const qty = parseInt(item.querySelector('[data-qty]').textContent, 10);
+    const line = unit * qty;
+    subtotal += line;
+
+    const priceEl = item.querySelector('[data-line-price]');
+    if (priceEl) priceEl.textContent = formatPrice(line);
+  });
+
+  const shippingEl = instance.querySelector('[data-cart-shipping]');
+  const shipping = shippingEl ? parseFloat(shippingEl.dataset.cartShipping) : 0;
+
+  instance.querySelectorAll('[data-cart-subtotal]').forEach((el) => {
+    el.textContent = formatPrice(subtotal);
+  });
+  instance.querySelectorAll('[data-cart-total]').forEach((el) => {
+    el.textContent = formatPrice(subtotal + shipping);
+  });
+
+  if (instance.hasAttribute('data-panel')) syncCartState();
+}
+
+function initQuantityControls() {
+  document.querySelectorAll('[data-cart-instance]').forEach((instance) => {
+    instance.querySelectorAll('[data-unit-price]').forEach((item) => {
+      const qtyEl = item.querySelector('[data-qty]');
+      const step = (delta) => {
+        const next = Math.max(1, parseInt(qtyEl.textContent, 10) + delta);
+        qtyEl.textContent = next;
+        updateCartInstance(instance);
+      };
+
+      item.querySelector('[data-qty-inc]')?.addEventListener('click', () => step(1));
+      item.querySelector('[data-qty-dec]')?.addEventListener('click', () => step(-1));
+      item.querySelector('[data-cart-remove]')?.addEventListener('click', () => {
+        item.remove();
+        updateCartInstance(instance);
+      });
+    });
+
+    updateCartInstance(instance);
+  });
+}
+
+// --------------------------------------------------------------------------
+// Sélecteurs Langue / Devise (frames 87:2 et 87:82) — un seul ouvert à la
+// fois, fermeture au clic extérieur ou à l'Échap.
+// --------------------------------------------------------------------------
+function initDropdowns() {
+  const dropdowns = document.querySelectorAll('[data-dropdown]');
+  if (!dropdowns.length) return;
+
+  const closeAll = (except) => {
+    dropdowns.forEach((dropdown) => {
+      if (dropdown === except) return;
+      dropdown.querySelector('[data-dropdown-list]').hidden = true;
+      dropdown.querySelector('[data-dropdown-toggle]').setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  dropdowns.forEach((dropdown) => {
+    const toggle = dropdown.querySelector('[data-dropdown-toggle]');
+    const list = dropdown.querySelector('[data-dropdown-list]');
+    const value = dropdown.querySelector('[data-dropdown-value]');
+
+    toggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = list.hidden;
+      closeAll();
+      list.hidden = !willOpen;
+      toggle.setAttribute('aria-expanded', String(willOpen));
+    });
+
+    dropdown.querySelectorAll('[data-dropdown-option]').forEach((option) => {
+      option.addEventListener('click', () => {
+        dropdown.querySelector('.dropdown__item.is-active')?.classList.remove('is-active');
+        option.classList.add('is-active');
+        value.textContent = option.dataset.short || option.textContent;
+        closeAll();
+      });
+    });
+  });
+
+  document.addEventListener('click', () => closeAll());
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeAll();
+  });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -176,4 +294,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   initFixedHeader();
   initBackToTop();
   initPanels();
+  initQuantityControls();
+  initDropdowns();
 });
