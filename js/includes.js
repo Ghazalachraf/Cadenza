@@ -220,24 +220,28 @@ function updateCartInstance(instance) {
   if (instance.hasAttribute('data-panel')) syncCartState();
 }
 
+// Câblage d'un seul article — extrait pour pouvoir être rappelé quand un
+// article est ajouté dynamiquement après coup (cf. product-details dans
+// main.js), sans re-parcourir/re-câbler ceux déjà en place.
+function wireCartItem(item, instance) {
+  const qtyEl = item.querySelector('[data-qty]');
+  const step = (delta) => {
+    const next = Math.max(1, parseInt(qtyEl.textContent, 10) + delta);
+    qtyEl.textContent = next;
+    updateCartInstance(instance);
+  };
+
+  item.querySelector('[data-qty-inc]')?.addEventListener('click', () => step(1));
+  item.querySelector('[data-qty-dec]')?.addEventListener('click', () => step(-1));
+  item.querySelector('[data-cart-remove]')?.addEventListener('click', () => {
+    item.remove();
+    updateCartInstance(instance);
+  });
+}
+
 function initQuantityControls() {
   document.querySelectorAll('[data-cart-instance]').forEach((instance) => {
-    instance.querySelectorAll('[data-unit-price]').forEach((item) => {
-      const qtyEl = item.querySelector('[data-qty]');
-      const step = (delta) => {
-        const next = Math.max(1, parseInt(qtyEl.textContent, 10) + delta);
-        qtyEl.textContent = next;
-        updateCartInstance(instance);
-      };
-
-      item.querySelector('[data-qty-inc]')?.addEventListener('click', () => step(1));
-      item.querySelector('[data-qty-dec]')?.addEventListener('click', () => step(-1));
-      item.querySelector('[data-cart-remove]')?.addEventListener('click', () => {
-        item.remove();
-        updateCartInstance(instance);
-      });
-    });
-
+    instance.querySelectorAll('[data-unit-price]').forEach((item) => wireCartItem(item, instance));
     updateCartInstance(instance);
   });
 }

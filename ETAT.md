@@ -168,6 +168,15 @@ Panneaux plein écran ancrés sous le header (fixe ou non), un seul ouvert à la
 
 Nœud `319:527` (variante "Best Sellers" au lieu de "Collection") repéré mais non implémenté : il appartient visiblement à l'état navbar d'une autre page (Shop ?) qui n'existe pas encore dans le projet — signalé, pas deviné.
 
+## 9ter. Section Product Details — rendue fonctionnelle (`264:…`)
+
+Le lien Figma `node-id=3-2` donné pour "la page Twilight Whisper Skirt" pointait en fait sur le frame `Home` entier (13 729 px) : il n'existe pas de page produit dédiée dans le fichier, seulement cette section déjà présente sur la homepage (`index.html`, déjà extraite au pixel dans une session précédente). Le screenshot fourni correspondait donc à elle. Câblée en JS (`initProductDetails`, `js/main.js`) :
+
+- Taille : sélection au clic, un seul bouton actif.
+- Quantité : +/-, minimum 1.
+- Add to cart / Buy it now : ajoute (ou incrémente si même produit + taille déjà présents) une ligne dans le panier, avec le prix recalculé via le même contrat `data-*` que le tiroir panier et le récapitulatif checkout ; Buy it now enchaîne vers `checkout.html`.
+- Couleur : **non interactive** — les nuances (`icon-color-swatches-pd.svg`) forment un seul SVG assemblé sans élément séparable par couleur (arbitrage A13, inchangé).
+
 ## 10. Reste à faire
 
 | Tâche | Est. |
@@ -176,7 +185,6 @@ Nœud `319:527` (variante "Best Sellers" au lieu de "Collection") repéré mais 
 | Recette sur appareil réel (iOS / Android) | 0,5 h |
 | Checkout — étapes 2 à 4 (Addresses / Shipping / Payment) | à chiffrer une fois les frames identifiés |
 | Checkout — extraction pixel des frames mobiles | à chiffrer si le mobile checkout devient prioritaire |
-| Page Produit dédiée (ex. "Twilight Whisper Skirt") | à chiffrer — lien Figma demandé, seule une capture d'écran a été fournie |
 | **Total connu** | **0,75 h** |
 
 Le reste du travail dépend des arbitrages A01, A02, A05 → A13.

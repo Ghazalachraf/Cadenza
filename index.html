@@ -430,7 +430,7 @@
       </div>
     </div>
 
-    <section class="product-details">
+    <section class="product-details" data-product data-product-name="Twilight Whisper Skirt" data-product-unit-price="220" data-product-image="assets/images/product-detail-main.jpg">
       <div class="product-details__info">
         <p class="product-details__badge">New</p>
         <h2 class="product-details__title">Twilight Whisper Skirt</h2>
@@ -444,7 +444,7 @@
         <div class="product-details__options">
           <div>
             <p class="product-details__option-label">Size</p>
-            <div class="product-details__sizes">
+            <div class="product-details__sizes" data-product-sizes>
               <button type="button" class="product-details__size">M</button>
               <button type="button" class="product-details__size">S</button>
               <button type="button" class="product-details__size product-details__size--active">L</button>
@@ -460,19 +460,19 @@
         <div class="product-details__quantity">
           <p class="product-details__option-label">Quantity</p>
           <div class="product-details__quantity-control">
-            <button type="button" class="product-details__quantity-btn">
+            <button type="button" class="product-details__quantity-btn" data-product-qty-inc>
               <img src="assets/icons/icon-plus-small.svg" alt="Increase quantity">
             </button>
-            <span class="product-details__quantity-value">1</span>
-            <button type="button" class="product-details__quantity-btn">
+            <span class="product-details__quantity-value" data-product-qty>1</span>
+            <button type="button" class="product-details__quantity-btn" data-product-qty-dec>
               <img src="assets/icons/icon-minus-small.svg" alt="Decrease quantity">
             </button>
           </div>
         </div>
 
         <div class="product-details__actions">
-          <button type="button" class="product-details__btn product-details__btn--cart">Add to cart</button>
-          <button type="button" class="product-details__btn product-details__btn--buy">Buy it now</button>
+          <button type="button" class="product-details__btn product-details__btn--cart" data-product-add-cart>Add to cart</button>
+          <button type="button" class="product-details__btn product-details__btn--buy" data-product-buy-now>Buy it now</button>
         </div>
       </div>
 

@@ -233,6 +233,93 @@ function initPasswordToggle() {
   });
 }
 
+// --- Product Details (section homepage "Twilight Whisper Skirt") ----------
+// Taille : sélection simple, un seul bouton actif à la fois.
+// Couleur : non interactive — les nuances de la maquette (296:… icon-color-
+// swatches-pd.svg) forment un unique SVG assemblé, sans élément séparable
+// par couleur (cf. arbitrage A13 dans ETAT.md) ; rien inventé ici.
+// Quantité, Add to cart et Buy it now réutilisent le contrat data-* du
+// panier (formatPrice/updateCartInstance, définis dans includes.js) plutôt
+// que dupliquer la logique de calcul de prix.
+function initProductDetails() {
+  const section = document.querySelector('[data-product]');
+  if (!section) return;
+
+  const sizes = section.querySelectorAll('[data-product-sizes] .product-details__size');
+  sizes.forEach((button) => {
+    button.addEventListener('click', () => {
+      sizes.forEach((other) => other.classList.remove('product-details__size--active'));
+      button.classList.add('product-details__size--active');
+    });
+  });
+
+  const qtyEl = section.querySelector('[data-product-qty]');
+  const stepQty = (delta) => {
+    qtyEl.textContent = Math.max(1, parseInt(qtyEl.textContent, 10) + delta);
+  };
+  section.querySelector('[data-product-qty-inc]')?.addEventListener('click', () => stepQty(1));
+  section.querySelector('[data-product-qty-dec]')?.addEventListener('click', () => stepQty(-1));
+
+  const addToCart = () => {
+    const cartList = document.querySelector('[data-cart-items]');
+    const cartInstance = document.querySelector('[data-cart-instance][data-panel]');
+    if (!cartList || !cartInstance) return;
+
+    const name = section.dataset.productName;
+    const unitPrice = section.dataset.productUnitPrice;
+    const image = section.dataset.productImage;
+    const size = section.querySelector('.product-details__size--active')?.textContent || '';
+    const qty = parseInt(qtyEl.textContent, 10);
+
+    const existing = Array.from(cartList.querySelectorAll('.cart-item')).find((item) => (
+      item.querySelector('.cart-item__name')?.textContent === name
+      && item.querySelector('.cart-item__attr:last-of-type')?.textContent === `Size - ${size}`
+    ));
+
+    if (existing) {
+      const existingQty = existing.querySelector('[data-qty]');
+      existingQty.textContent = parseInt(existingQty.textContent, 10) + qty;
+    } else {
+      const item = document.createElement('li');
+      item.className = 'cart-item';
+      item.dataset.unitPrice = unitPrice;
+      // name/unitPrice/image come from static data-* attributes on this section
+      // (not user input); size is textContent of a fixed M/S/L/XL button set.
+      item.innerHTML = `
+        <img class="cart-item__image" src="${image}" alt="">
+        <div class="cart-item__body">
+          <p class="cart-item__name">${name}</p>
+          <p class="cart-item__attr">Size - ${size}</p>
+          <div class="cart-item__quantity">
+            <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">
+              <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
+            </button>
+            <span class="cart-item__qty" data-qty>${qty}</span>
+            <button type="button" class="cart-item__step" data-qty-dec aria-label="Diminuer la quantité">
+              <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
+            </button>
+          </div>
+        </div>
+        <button type="button" class="cart-item__remove" data-cart-remove aria-label="Retirer ${name}">
+          <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
+        </button>
+        <p class="cart-item__price" data-line-price></p>
+      `;
+      cartList.appendChild(item);
+      wireCartItem(item, cartInstance);
+    }
+
+    updateCartInstance(cartInstance);
+    document.querySelector('[data-panel-open="cart"]')?.click();
+  };
+
+  section.querySelector('[data-product-add-cart]')?.addEventListener('click', addToCart);
+  section.querySelector('[data-product-buy-now]')?.addEventListener('click', () => {
+    addToCart();
+    window.location.href = 'checkout.html';
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initCompare();
@@ -243,4 +330,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initSpotlight();
   initCheckoutSteps();
   initPasswordToggle();
+  initProductDetails();
 });
