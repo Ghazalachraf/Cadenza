@@ -50,7 +50,15 @@
 
   // ---- Contenu ------------------------------------------------------------
   &__content {
+    position: relative;
+  }
+
+  &__panel {
     @include flex($align: flex-start, $gap: 30px);
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   &__col {
@@ -123,6 +131,30 @@
     color: $color-white;
     white-space: nowrap;
   }
+
+  // ---- Carte collaboration (panneau 2024, 440:40) --------------------------
+  &__collab-label {
+    position: absolute;
+    top: calc(50% - 87px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 50px;
+    letter-spacing: 0.2px;
+    color: $color-white;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__collab-logo {
+    position: absolute;
+    top: calc(50% + 28px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: fluid(280px, 170px);
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -185,7 +217,7 @@
       }
     }
 
-    &__content {
+    &__panel {
       flex-direction: column;
       gap: 30px;
       padding: 24px 0;

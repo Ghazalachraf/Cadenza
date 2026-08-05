@@ -2730,10 +2730,16 @@ ul {
   color: #252324;
 }
 .timeline__content {
+  position: relative;
+}
+.timeline__panel {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 30px;
+}
+.timeline__panel[hidden] {
+  display: none;
 }
 .timeline__col {
   display: flex;
@@ -2797,6 +2803,27 @@ ul {
   color: #ffffff;
   white-space: nowrap;
 }
+.timeline__collab-label {
+  position: absolute;
+  top: calc(50% - 87px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Jost", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 50px;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  text-align: center;
+  white-space: nowrap;
+}
+.timeline__collab-logo {
+  position: absolute;
+  top: calc(50% + 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(170px, 19.4444444444vw, 280px);
+}
 
 @media (max-width: 768px) {
   .timeline {
@@ -2841,7 +2868,7 @@ ul {
   .timeline__arrow--down img {
     transform: none;
   }
-  .timeline__content {
+  .timeline__panel {
     flex-direction: column;
     gap: 30px;
     padding: 24px 0;

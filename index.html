@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadenza — New Arrivals</title>
   <meta name="description" content="Satisfy your top obsession with the range of new arrivals at Cadenza.">
-  <link rel="stylesheet" href="css/main.css?v=17">
+  <link rel="stylesheet" href="css/main.css?v=18">
 </head>
 <body>
   <div data-include="header"></div>
@@ -784,38 +784,66 @@
 
     <section class="timeline">
       <div class="timeline__years">
-        <button type="button" class="timeline__arrow timeline__arrow--up" aria-label="Année précédente">
+        <button type="button" class="timeline__arrow timeline__arrow--up" aria-label="Année précédente" data-timeline-prev>
           <img src="assets/icons/icon-timeline-arrow.svg" alt="">
         </button>
-        <button type="button" class="timeline__year">2020</button>
-        <button type="button" class="timeline__year">2021</button>
-        <button type="button" class="timeline__year timeline__year--active" aria-current="true">2022</button>
-        <button type="button" class="timeline__year">2023</button>
-        <button type="button" class="timeline__year">2024</button>
-        <button type="button" class="timeline__arrow timeline__arrow--down" aria-label="Année suivante">
+        <button type="button" class="timeline__year" data-timeline-year="2020">2020</button>
+        <button type="button" class="timeline__year" data-timeline-year="2021">2021</button>
+        <button type="button" class="timeline__year timeline__year--active" data-timeline-year="2022" aria-current="true">2022</button>
+        <button type="button" class="timeline__year" data-timeline-year="2023">2023</button>
+        <button type="button" class="timeline__year" data-timeline-year="2024">2024</button>
+        <button type="button" class="timeline__arrow timeline__arrow--down" aria-label="Année suivante" data-timeline-next>
           <img src="assets/icons/icon-timeline-arrow.svg" alt="">
         </button>
       </div>
 
-      <div class="timeline__content">
-        <div class="timeline__col">
-          <div>
-            <h2 class="timeline__title">Opening Day</h2>
-            <p class="timeline__text">We proudly opened our doors for the very first time, marking the beginning of an exciting journey in the world of fashion. On this special day, we welcomed friends, family, and fashion enthusiasts into our vibrant space, showcasing our unique collections and setting the stage for creativity and style.</p>
+      <div class="timeline__content" data-timeline-content>
+        <!-- 2020, 2021 et 2023 : la maquette Figma ne fournit pas de contenu pour ces
+             années (aucun frame trouvé) ; les boutons restent sélectionnables (le
+             repère change) mais le panneau affiché ne change pas tant que le contenu
+             réel n'a pas été extrait — rien n'est inventé pour combler l'absence. -->
+        <div class="timeline__panel" data-timeline-panel="2022">
+          <div class="timeline__col">
+            <div>
+              <h2 class="timeline__title">Opening Day</h2>
+              <p class="timeline__text">We proudly opened our doors for the very first time, marking the beginning of an exciting journey in the world of fashion. On this special day, we welcomed friends, family, and fashion enthusiasts into our vibrant space, showcasing our unique collections and setting the stage for creativity and style.</p>
+            </div>
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/timeline-chair.jpg" alt="Model seated in a woven chair">
+              <div class="timeline__overlay"></div>
+              <img class="timeline__card-logo" src="assets/icons/logo.svg" alt="Cadenza">
+              <p class="timeline__card-date">05/03/2022</p>
+            </div>
           </div>
-          <div class="timeline__card">
-            <img class="timeline__image" src="assets/images/timeline-chair.jpg" alt="Model seated in a woven chair">
-            <div class="timeline__overlay"></div>
-            <img class="timeline__card-logo" src="assets/icons/logo.svg" alt="Cadenza">
-            <p class="timeline__card-date">05/03/2022</p>
+
+          <div class="timeline__col timeline__col--second">
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/timeline-boutique.jpg" alt="Interior of the Cadenza boutique">
+            </div>
+            <p class="timeline__text">With a warm atmosphere filled with laughter and inspiration, our opening day celebrated not just a store, but a community where fashion meets passion. We are thrilled to embark on this adventure and look forward to sharing our love for fashion with you!</p>
           </div>
         </div>
 
-        <div class="timeline__col timeline__col--second">
-          <div class="timeline__card">
-            <img class="timeline__image" src="assets/images/timeline-boutique.jpg" alt="Interior of the Cadenza boutique">
+        <div class="timeline__panel" data-timeline-panel="2024" hidden>
+          <div class="timeline__col">
+            <div>
+              <h2 class="timeline__title">First collaboration</h2>
+              <p class="timeline__text">On this momentous day, we celebrated our very first collaboration, marking a significant milestone in our journey. Partnering with Cadenza, we fused our distinct styles and visions to create something truly special. This collaboration not only broadened our creative horizons but also allowed us to connect with a wider community of fashion lovers.</p>
+            </div>
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/timeline-collab-cover.jpg" alt="Model in a beige linen shirt">
+              <div class="timeline__overlay"></div>
+              <p class="timeline__collab-label">Collaboration<br>with</p>
+              <img class="timeline__collab-logo" src="assets/icons/logo-rocan.svg" alt="ROCAN">
+            </div>
           </div>
-          <p class="timeline__text">With a warm atmosphere filled with laughter and inspiration, our opening day celebrated not just a store, but a community where fashion meets passion. We are thrilled to embark on this adventure and look forward to sharing our love for fashion with you!</p>
+
+          <div class="timeline__col timeline__col--second">
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/timeline-collab-detail.jpg" alt="Model wearing the collaboration piece">
+            </div>
+            <p class="timeline__text">The excitement in the air was palpable as we unveiled our joint collection, showcasing innovative designs that reflected our shared passion for fashion. This partnership opened new doors and set the stage for future collaborations, reinforcing our commitment to creativity and collaboration in the ever-evolving fashion landscape.</p>
+          </div>
         </div>
       </div>
     </section>

@@ -320,6 +320,44 @@ function initProductDetails() {
   });
 }
 
+// --- Timeline : sélecteur d'année ------------------------------------------
+// Les flèches et les années font défiler le repère parmi les 5 boutons.
+// Seules 2022 et 2024 ont un panneau réel extrait de la maquette (440:40
+// pour 2024) ; le contenu de 2020/2021/2023 n'existe pas côté Figma. Le
+// repère se déplace quand même sur ces années (comportement du sélecteur
+// fidèle à la maquette), mais le panneau affiché ne change pas tant que
+// leur contenu n'a pas été fourni — pas d'invention.
+function initTimeline() {
+  const years = Array.from(document.querySelectorAll('[data-timeline-year]'));
+  const panels = document.querySelectorAll('[data-timeline-panel]');
+  if (!years.length) return;
+
+  const select = (year) => {
+    years.forEach((btn) => {
+      const isActive = btn.dataset.timelineYear === year;
+      btn.classList.toggle('timeline__year--active', isActive);
+      if (isActive) btn.setAttribute('aria-current', 'true');
+      else btn.removeAttribute('aria-current');
+    });
+
+    const panel = document.querySelector(`[data-timeline-panel="${year}"]`);
+    if (panel) panels.forEach((p) => { p.hidden = p !== panel; });
+  };
+
+  years.forEach((btn) => {
+    btn.addEventListener('click', () => select(btn.dataset.timelineYear));
+  });
+
+  const step = (delta) => {
+    const current = years.findIndex((btn) => btn.classList.contains('timeline__year--active'));
+    const next = Math.min(Math.max(current + delta, 0), years.length - 1);
+    select(years[next].dataset.timelineYear);
+  };
+
+  document.querySelector('[data-timeline-prev]')?.addEventListener('click', () => step(-1));
+  document.querySelector('[data-timeline-next]')?.addEventListener('click', () => step(1));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initCompare();
@@ -331,4 +369,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initCheckoutSteps();
   initPasswordToggle();
   initProductDetails();
+  initTimeline();
 });
