@@ -769,30 +769,39 @@ ul {
   flex-wrap: wrap;
   gap: 24px;
 }
+.promo-banner__copy {
+  display: flex;
+  flex-direction: column;
+}
 .promo-banner__title {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 40px;
+  line-height: 1;
   letter-spacing: -0.8px;
   color: #252324;
+  margin-bottom: -12px;
 }
 .promo-banner__text {
   font-family: "DM Sans", sans-serif;
   font-size: 14px;
+  line-height: 1;
   letter-spacing: -0.28px;
   color: #252324;
-  margin-top: 8px;
+  margin-top: 12px;
+  margin-bottom: -4px;
 }
 .promo-banner__cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 18px;
   padding: 11px 30px;
   border-radius: 2px;
   background: #cb9274;
   font-family: "DM Sans", sans-serif;
   font-size: 14px;
+  line-height: 1;
   color: #ffffff;
   text-transform: capitalize;
 }
@@ -823,12 +832,18 @@ ul {
   width: 40px;
   height: 40px;
 }
+.promo-banner__product-copy {
+  display: flex;
+  flex-direction: column;
+}
 .promo-banner__product-title {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 30px;
+  line-height: 1;
   letter-spacing: -0.6px;
   color: #252324;
+  margin-bottom: -9px;
 }
 .promo-banner__product-text {
   font-family: "DM Sans", sans-serif;
@@ -836,7 +851,8 @@ ul {
   line-height: 26px;
   color: #252324;
   max-width: 295px;
-  margin-top: 8px;
+  margin-top: 19px;
+  margin-bottom: -14px;
 }
 
 @media (max-width: 768px) {

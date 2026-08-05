@@ -38,7 +38,7 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 |---|---|---|---|---|---|---|---|
 | `.promo-header` ✅ *(corrigé)* | `6:5` | 1440×42 | 1440×42,0 | ✅ | — | 2 | 102 |
 | `.hero` | `56:116` | 1440×873 | 1440×873,0 | ✅ | 0 | 0 | 0 |
-| `.promo-banner` ☑ *(padding confirmé exact)* | `144:168` | 1440×175 | 1440×205,2 | +30,2 (contenu, pas padding) | 30 | 30 | 102 |
+| `.promo-banner` ✅ *(corrigé, 175px exact)* | `144:168` | 1440×175 | 1440×175,0 | ✅ | 30 | 30 | 102 |
 | `.new-arrivals` | `206:1193` | 1440×789 | 1440×824,8 | **+35,8** | 94 | 94 | 102 |
 | `.sale-banner` | `224:54` | 1440×359 | 1440×359,0 | ✅ | 0 | 0 | 0 |
 | `.our-collections` | `240:370` | 1440×945 | 1440×960,8 | **+15,8** | 100 | 100 | 10 |
@@ -112,6 +112,31 @@ La propriété CSS qui reproduit exactement ce comportement (`text-box-trim`)
 doesn't exist »). Elle est donc écartée par la règle « 0 erreur Jigsaw » du
 projet. La correction doit passer par des `line-height` explicites + marges
 recalibrées, section par section.
+
+### Méthode retenue (validée sur `.promo-banner`, 205,2 px → 175 px exact)
+
+1. Passer le conteneur direct des textes en `display: flex; flex-direction:
+   column;` — **important** : le collapsing de marges CSS (deux marges
+   verticales adjacentes qui fusionnent en une seule) ne s'applique qu'en
+   flux normal (`display: block`), jamais entre éléments flex/grid. Sans ce
+   changement, une marge négative sur un élément se fait absorber
+   imprévisiblement par la marge de son voisin (observé : `margin-bottom:
+   -14px` ne réduisait la hauteur totale que de 7 px au lieu de 14).
+2. `line-height: 1` sur chaque texte sur une seule ligne (ne descend pas
+   jusqu'à la hauteur de capitale exacte, mais s'en rapproche nettement plus
+   que 1.4).
+3. Mesurer la boîte obtenue, calculer l'excédent par rapport à la hauteur
+   Figma (`hauteur rendue − hauteur Figma`), et l'absorber avec un
+   `margin-bottom` négatif de cette valeur sur l'élément — les marges
+   `margin-top` existantes (qui codent l'écart *visuel* voulu entre deux
+   blocs) restent inchangées.
+4. Pour un bloc multi-lignes (`line-height` fixe en px, pas `1`) : le
+   rognage Figma ne s'applique qu'aux bords du bloc, pas à l'interligne.
+   Même principe : `margin-bottom` négatif égal à l'excédent mesuré, sans
+   toucher `line-height`.
+
+Cette méthode est réutilisable telle quelle sur les autres sections listées
+au §1 marquées d'un écart.
 
 ---
 

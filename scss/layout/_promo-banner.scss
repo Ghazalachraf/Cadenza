@@ -14,32 +14,50 @@
   flex-wrap: wrap;
   gap: 24px;
 
+  // Colonnes en display:flex plutôt que des <div> de flux normal : les
+  // marges négatives ci-dessous compensent le rognage à la hauteur de
+  // capitale que fait Figma (text-box-trim, non supporté par Jigsaw — cf.
+  // SPECS.md §3) sans se faire absorber par le collapsing de marges, qui
+  // ne s'applique pas entre éléments flex.
+  &__copy {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__title {
     font-family: $font-heading;
     font-weight: 500;
     font-size: 40px;
+    line-height: 1;
     letter-spacing: -0.8px;
     color: $color-black;
+    // line-height:1 donne une boîte ≈ la taille de police (40px) ; la
+    // maquette (144:173) la rogne à 28px (hauteur de capitale).
+    margin-bottom: -12px;
   }
 
   &__text {
     font-family: $font-display;
     font-size: 14px;
+    line-height: 1;
     letter-spacing: -0.28px;
     color: $color-black;
-    margin-top: 8px;
+    margin-top: 12px;
+    // Boîte ≈14px rendue, 10px dans la maquette (144:172).
+    margin-bottom: -4px;
   }
 
   &__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 18px;
     padding: 11px 30px;
     border-radius: 2px;
     background: $color-primary;
     font-family: $font-display;
     font-size: 14px;
+    line-height: 1;
     color: $color-white;
     text-transform: capitalize;
   }
@@ -72,12 +90,20 @@
     height: 40px;
   }
 
+  &__product-copy {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__product-title {
     font-family: $font-heading;
     font-weight: 500;
     font-size: 30px;
+    line-height: 1;
     letter-spacing: -0.6px;
     color: $color-black;
+    // Boîte ≈30px rendue, 21px dans la maquette (144:182).
+    margin-bottom: -9px;
   }
 
   &__product-text {
@@ -86,7 +112,11 @@
     line-height: 26px;
     color: $color-black;
     max-width: 295px;
-    margin-top: 8px;
+    margin-top: 19px;
+    // Le rognage Figma ne s'applique qu'aux bords du bloc multi-lignes (pas
+    // à l'interligne) : sans lui, les 3 lignes à 26px valent 78px contre
+    // 64px dans la maquette (144:183).
+    margin-bottom: -14px;
   }
 }
 
