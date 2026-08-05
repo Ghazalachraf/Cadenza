@@ -84,7 +84,7 @@ Quinze commentaires relevés sur le fichier d'origine (`uTq2yHeiZnMF1eJwvjIHwe`)
 | « onClick or Hover » | Spotlight | Les repères deviennent des boutons ; la carte produit n'apparaît qu'à leur contact (`initSpotlight()`) |
 | « onClick » | Collections More Info | Déjà en place : `initAccordion()` |
 | « move Up » | Footer | Retour en haut fluide sur la pastille (`initBackToTop()`) |
-| « Onhaver : display the color name » | Product Details | ⛔ **Non fait** — voir A13 |
+| « Onhaver : display the color name » | Product Details | ✅ **Résolu** — voir A13 (correction) |
 
 **Correctif induit** : le header était positionné en absolu sur le haut de page et recouvrait la barre promo. Il se cale désormais sous elle, conformément à la maquette où seul le header chevauche le hero.
 
@@ -110,7 +110,7 @@ Aucun de ces points n'a été tranché unilatéralement.
 | **A10** | Timeline | Desktop : 2 colonnes / 2 cartes et **2022** actif — Mobile : 1 seule carte et **2024** actif, alors que le contenu affiché est « First collaboration » | Quelle année et quel contenu font foi ? La 2ᵉ colonne reste rendue |
 | **A11** | Puces du hero | La maquette affiche **3 puces** mais le fichier ne contient que **2 frames de hero** (`56:116` et `440:158`) ; la puce active y est la deuxième | Contenu du 3ᵉ slide et ordre des slides. La 3ᵉ puce est rendue mais inactive |
 | **A12** | Nombre d'articles par catégorie | La maquette ne donne le compteur que sur la tuile survolée : **Accessories 21** et **Rings 34**. Les 6 autres tuiles (Sets, Activewear, Lingerie, Necklaces, Glasses, Earrings) n'en ont aucun | Le mécanisme de révélation est en place ; il manque les valeurs pour les 6 autres catégories |
-| **A13** | Nom de la couleur au survol | Les pastilles de couleur du bloc Product Details sont un **SVG unique** (`icon-color-swatches-pd.svg`), pas des éléments distincts. Impossible d'accrocher une infobulle par couleur sans la liste des teintes et de leurs noms | Fournir les noms et codes des couleurs, ou l'accord pour découper le SVG en pastilles individuelles *(+0,5 h)* |
+| **A13** | Nom de la couleur au survol | ✅ **Corrigé** — constat initial erroné : `icon-color-swatches-pd.svg` contient en réalité 3 `<circle>` distincts (Ellipse10 noir #252324, Ellipse8 gris #989898, Ellipse9 violet #563f5f), pas un SVG assemblé. Reconstruites en 3 boutons cliquables (sélection + `title`/`aria-label` au survol, noms directement déduits des teintes) | — |
 
 ---
 
@@ -175,7 +175,7 @@ Le lien Figma `node-id=3-2` donné pour "la page Twilight Whisper Skirt" pointai
 - Taille : sélection au clic, un seul bouton actif.
 - Quantité : +/-, minimum 1.
 - Add to cart / Buy it now : ajoute (ou incrémente si même produit + taille déjà présents) une ligne dans le panier, avec le prix recalculé via le même contrat `data-*` que le tiroir panier et le récapitulatif checkout ; Buy it now enchaîne vers `checkout.html`.
-- Couleur : **non interactive** — les nuances (`icon-color-swatches-pd.svg`) forment un seul SVG assemblé sans élément séparable par couleur (arbitrage A13, inchangé).
+- Couleur : **interactive** — sélection au clic entre les 3 teintes réelles (Black/Gray/Purple), incluse dans la ligne panier ; voir A13 (corrigé).
 
 ## 9quater. Bug logo corrigé + robustesse du curseur "Choose your colour"
 

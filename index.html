@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadenza — New Arrivals</title>
   <meta name="description" content="Satisfy your top obsession with the range of new arrivals at Cadenza.">
-  <link rel="stylesheet" href="css/main.css?v=18">
+  <link rel="stylesheet" href="css/main.css?v=19">
 </head>
 <body>
   <div data-include="header"></div>
@@ -453,7 +453,11 @@
           </div>
           <div>
             <p class="product-details__option-label">Color</p>
-            <img src="assets/icons/icon-color-swatches-pd.svg" alt="Available colors" height="30">
+            <div class="product-details__colors" data-product-colors>
+              <button type="button" class="product-details__color product-details__color--black product-details__color--active" aria-label="Black" title="Black" aria-pressed="true"></button>
+              <button type="button" class="product-details__color product-details__color--gray" aria-label="Gray" title="Gray" aria-pressed="false"></button>
+              <button type="button" class="product-details__color product-details__color--purple" aria-label="Purple" title="Purple" aria-pressed="false"></button>
+            </div>
           </div>
         </div>
 

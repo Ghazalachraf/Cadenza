@@ -82,6 +82,37 @@
     @include flex($align: center, $gap: 6px);
   }
 
+  // Nuances extraites de icon-color-swatches-pd.svg (3 cercles séparés,
+  // Ellipse10/8/9) : rien n'empêchait de les rendre cliquables (cf. A13,
+  // corrigé) — chaque nuance est un vrai bouton, l'anneau actif reprend le
+  // rayon 14.5 / trait #cb9274 du cercle "Ellipse13".
+  &__colors {
+    @include flex($align: center, $gap: 6px);
+  }
+
+  &__color {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    &--black {
+      background: $color-black;
+    }
+
+    &--gray {
+      background: #989898;
+    }
+
+    &--purple {
+      background: #563f5f;
+    }
+
+    &--active {
+      outline: 1px solid $color-primary;
+      outline-offset: 2.5px;
+    }
+  }
+
   &__size {
     width: 30px;
     height: 30px;

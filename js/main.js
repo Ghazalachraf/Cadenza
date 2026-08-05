@@ -234,10 +234,10 @@ function initPasswordToggle() {
 }
 
 // --- Product Details (section homepage "Twilight Whisper Skirt") ----------
-// Taille : sélection simple, un seul bouton actif à la fois.
-// Couleur : non interactive — les nuances de la maquette (296:… icon-color-
-// swatches-pd.svg) forment un unique SVG assemblé, sans élément séparable
-// par couleur (cf. arbitrage A13 dans ETAT.md) ; rien inventé ici.
+// Taille et couleur : sélection simple, un seul bouton actif à la fois par
+// groupe. Les nuances de icon-color-swatches-pd.svg sont 3 cercles séparés
+// (Ellipse10/8/9), pas un SVG assemblé — rendues cliquables (correction de
+// l'arbitrage A13).
 // Quantité, Add to cart et Buy it now réutilisent le contrat data-* du
 // panier (formatPrice/updateCartInstance, définis dans includes.js) plutôt
 // que dupliquer la logique de calcul de prix.
@@ -250,6 +250,18 @@ function initProductDetails() {
     button.addEventListener('click', () => {
       sizes.forEach((other) => other.classList.remove('product-details__size--active'));
       button.classList.add('product-details__size--active');
+    });
+  });
+
+  const colors = section.querySelectorAll('[data-product-colors] .product-details__color');
+  colors.forEach((button) => {
+    button.addEventListener('click', () => {
+      colors.forEach((other) => {
+        other.classList.remove('product-details__color--active');
+        other.setAttribute('aria-pressed', 'false');
+      });
+      button.classList.add('product-details__color--active');
+      button.setAttribute('aria-pressed', 'true');
     });
   });
 
@@ -269,12 +281,15 @@ function initProductDetails() {
     const unitPrice = section.dataset.productUnitPrice;
     const image = section.dataset.productImage;
     const size = section.querySelector('.product-details__size--active')?.textContent || '';
+    const color = section.querySelector('.product-details__color--active')?.getAttribute('aria-label') || '';
     const qty = parseInt(qtyEl.textContent, 10);
 
-    const existing = Array.from(cartList.querySelectorAll('.cart-item')).find((item) => (
-      item.querySelector('.cart-item__name')?.textContent === name
-      && item.querySelector('.cart-item__attr:last-of-type')?.textContent === `Size - ${size}`
-    ));
+    const existing = Array.from(cartList.querySelectorAll('.cart-item')).find((item) => {
+      const attrs = Array.from(item.querySelectorAll('.cart-item__attr'), (a) => a.textContent);
+      return item.querySelector('.cart-item__name')?.textContent === name
+        && attrs.includes(`Color - ${color}`)
+        && attrs.includes(`Size - ${size}`);
+    });
 
     if (existing) {
       const existingQty = existing.querySelector('[data-qty]');
@@ -289,6 +304,7 @@ function initProductDetails() {
         <img class="cart-item__image" src="${image}" alt="">
         <div class="cart-item__body">
           <p class="cart-item__name">${name}</p>
+          <p class="cart-item__attr">Color - ${color}</p>
           <p class="cart-item__attr">Size - ${size}</p>
           <div class="cart-item__quantity">
             <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">

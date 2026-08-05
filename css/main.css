@@ -1596,6 +1596,30 @@ ul {
   justify-content: flex-start;
   gap: 6px;
 }
+.product-details__colors {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+}
+.product-details__color {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.product-details__color--black {
+  background: #252324;
+}
+.product-details__color--gray {
+  background: #989898;
+}
+.product-details__color--purple {
+  background: #563f5f;
+}
+.product-details__color--active {
+  outline: 1px solid #cb9274;
+  outline-offset: 2.5px;
+}
 .product-details__size {
   width: 30px;
   height: 30px;
