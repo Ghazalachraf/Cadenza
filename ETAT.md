@@ -201,3 +201,8 @@ Le lien Figma `node-id=3-2` donné pour "la page Twilight Whisper Skirt" pointai
 | **Total connu** | **0,75 h** |
 
 Le reste du travail dépend des arbitrages A01, A02, A05 → A13.
+
+## 11. En attente — signalé par l'utilisateur, pas assez d'info pour agir
+
+- **Carte New Arrivals ("Noya Slim Dress")** : bug de clic décrit ("cliquer sur n'importe quelle carte applique ce changement") mais non reproduit côté code — la structure Figma (`206:1193`) confirme que seule cette carte a le panneau taille/couleur + bouton panier dans la maquette, les 3 autres n'ont que les icônes cœur/loupe (déjà généralisées aux 4 cartes). Repro pas à pas nécessaire avant de creuser plus loin.
+- **Grille "Samantha Activewear" ×3 à prix différents** : composant introuvable dans le code actuel, aucun lien Figma fourni ne correspond. À localiser (bouton/page qui l'ouvre) avant de pouvoir agir.
