@@ -32,6 +32,7 @@
     margin-top: 78px;
     overflow: hidden;
     user-select: none;
+    touch-action: none;
   }
 
   &__screen {
@@ -105,6 +106,7 @@
     justify-content: center;
     gap: 4px;
     cursor: ew-resize;
+    touch-action: none;
     z-index: 3;
 
     img {

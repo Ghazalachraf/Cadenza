@@ -171,9 +171,13 @@
 }
 
 .site-header {
-  &__logo img {
+  &__logo-img {
     height: 30px;
     width: auto;
+
+    &--dark {
+      display: none;
+    }
   }
 
   &__actions {
@@ -217,6 +221,14 @@
       color: $color-black;
     }
 
+    .site-header__logo-img--light {
+      display: none;
+    }
+
+    .site-header__logo-img--dark {
+      display: block;
+    }
+
     .site-header__actions {
       display: none;
     }
@@ -250,7 +262,7 @@
     &__logo {
       order: 2;
 
-      img {
+      .site-header__logo-img {
         width: 94px;
         height: 18px;
       }

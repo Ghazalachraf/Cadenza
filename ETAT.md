@@ -177,6 +177,15 @@ Le lien Figma `node-id=3-2` donné pour "la page Twilight Whisper Skirt" pointai
 - Add to cart / Buy it now : ajoute (ou incrémente si même produit + taille déjà présents) une ligne dans le panier, avec le prix recalculé via le même contrat `data-*` que le tiroir panier et le récapitulatif checkout ; Buy it now enchaîne vers `checkout.html`.
 - Couleur : **non interactive** — les nuances (`icon-color-swatches-pd.svg`) forment un seul SVG assemblé sans élément séparable par couleur (arbitrage A13, inchangé).
 
+## 9quater. Bug logo corrigé + robustesse du curseur "Choose your colour"
+
+**Logo cassé (régression signalée par l'utilisateur).** `assets/icons/logo.svg` n'a jamais été un export isolé du logo : le fichier embarquait tout le fond du frame `Home` (un rectangle blanc de 1440×13729), et les tracés du logo étaient eux-mêmes remplis en blanc — posés sur ce fond blanc, ils étaient invisibles (blanc sur blanc), d'où le rectangle vide vu par l'utilisateur. Corrigé en réextrayant l'asset isolé depuis Figma (`114:788`, noir `#252324`) :
+- `logo.svg` (noir) : état par défaut, utilisé tel quel par le `checkout-header` (fond blanc) et par le header une fois figé au scroll (fond blanc).
+- `logo-white.svg` (même tracé, blanc) : nouvel asset pour l'état initial du header, superposé au hero (texte de nav blanc).
+- Les deux `<img>` coexistent dans `header.html`, basculés par `.site-header--fixed` en CSS — même mécanisme que le basculement libellés/icônes déjà en place.
+
+**Carrousel "Neri Loungewear" (liens `401:99` / `401:26`).** Ces deux frames sont en réalité deux captures d'état (drag à 50 % et à 86 %) du *même* composant, déjà construit dans le projet : la section `.compare` ("Choose your colour", `js/main.js` → `initCompare`). Contenu, textes et bouton "View product" correspondent exactement. En testant le glisser-déposer j'ai ajouté `touch-action: none` sur `.compare__viewer` et `.compare__handle` — sans cette propriété, un geste tactile ou trackpad peut faire perdre la capture du pointeur en plein glissement (le navigateur interprète le geste comme un défilement de page). Correction standard pour tout composant à glisser basé sur Pointer Events.
+
 ## 10. Reste à faire
 
 | Tâche | Est. |
