@@ -287,6 +287,44 @@ function initDropdowns() {
   });
 }
 
+// --------------------------------------------------------------------------
+// Méga-menus New Arrivals / Collection (297:228, 297:237) — clic pour ouvrir,
+// un seul ouvert à la fois, fermeture au clic extérieur ou à l'Échap.
+// --------------------------------------------------------------------------
+function initNavMegaMenus() {
+  const items = document.querySelectorAll('[data-nav-dropdown]');
+  if (!items.length) return;
+
+  const closeAll = () => {
+    items.forEach((item) => {
+      item.classList.remove('is-open');
+      item.querySelector('[data-nav-dropdown-panel]').hidden = true;
+      item.querySelector('[data-nav-dropdown-toggle]').setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  items.forEach((item) => {
+    const toggle = item.querySelector('[data-nav-dropdown-toggle]');
+    const panel = item.querySelector('[data-nav-dropdown-panel]');
+
+    toggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = panel.hidden;
+      closeAll();
+      if (willOpen) {
+        item.classList.add('is-open');
+        panel.hidden = false;
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  document.addEventListener('click', () => closeAll());
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeAll();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   await loadAllIncludes();
   initBurgerMenu();
@@ -296,4 +334,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   initPanels();
   initQuantityControls();
   initDropdowns();
+  initNavMegaMenus();
 });

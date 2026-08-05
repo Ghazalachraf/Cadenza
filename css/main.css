@@ -214,6 +214,119 @@ ul {
   width: 16px;
   height: 16px;
 }
+.site-header__chevron {
+  transition: transform 0.2s ease;
+}
+
+.site-header__nav-item.is-open .site-header__link--dropdown {
+  color: #cb9274;
+  text-decoration: underline;
+}
+.site-header__nav-item.is-open .site-header__chevron {
+  transform: scaleY(-1);
+}
+
+.nav-mega {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+}
+.nav-mega[hidden] {
+  display: none;
+}
+.nav-mega--links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 100px;
+  height: 280px;
+  padding-left: 102px;
+}
+.nav-mega__categories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 144px;
+  height: 194px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #252324;
+}
+.nav-mega__column {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.nav-mega__title {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #252324;
+  margin-bottom: 4px;
+}
+.nav-mega__column a {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #272727;
+}
+.nav-mega__column a:hover {
+  color: #cb9274;
+}
+.nav-mega--cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 280px;
+  padding: 0 24px;
+}
+
+.nav-mega-card {
+  position: relative;
+  flex: 1 1 0;
+  height: 264px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.nav-mega-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.nav-mega-card span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+.nav-mega-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.nav-mega-card--overlay-light::after {
+  background: rgba(0, 0, 0, 0.1);
+}
+.nav-mega-card--overlay-dark::after {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .site-header__logo img {
   height: 30px;
   width: auto;

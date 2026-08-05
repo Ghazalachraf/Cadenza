@@ -158,7 +158,17 @@ Menus déroulants dans la barre promo (desktop uniquement, masqués en mobile co
 
 ---
 
-## 9. Reste à faire
+## 9bis. Méga-menus navbar — `297:228` (New Arrivals) / `297:237` (Collection)
+
+Panneaux plein écran ancrés sous le header (fixe ou non), un seul ouvert à la fois, fermeture au clic extérieur ou à l'Échap. Desktop uniquement (le menu principal est déjà masqué en mobile au profit du burger, `451:52`).
+
+- New Arrivals : 5 colonnes (catégories + 4 listes de liens), texte extrait tel quel — les liens pointent vers `shop.html`, page pas encore construite (cf. §9).
+- Collection : 6 cartes image 227×264, overlay sombre appliqué uniquement là où la maquette en montre un (Lingerie 10 %, bottom 50 %) — les 4 autres cartes n'en ont pas dans le fichier source, gardé fidèle plutôt qu'uniformisé.
+- Logo `checkout-header` : remplacé le texte "Cadenza" par `logo.svg`, pour rester cohérent avec le header principal.
+
+Nœud `319:527` (variante "Best Sellers" au lieu de "Collection") repéré mais non implémenté : il appartient visiblement à l'état navbar d'une autre page (Shop ?) qui n'existe pas encore dans le projet — signalé, pas deviné.
+
+## 10. Reste à faire
 
 | Tâche | Est. |
 |---|---|
@@ -166,6 +176,7 @@ Menus déroulants dans la barre promo (desktop uniquement, masqués en mobile co
 | Recette sur appareil réel (iOS / Android) | 0,5 h |
 | Checkout — étapes 2 à 4 (Addresses / Shipping / Payment) | à chiffrer une fois les frames identifiés |
 | Checkout — extraction pixel des frames mobiles | à chiffrer si le mobile checkout devient prioritaire |
+| Page Produit dédiée (ex. "Twilight Whisper Skirt") | à chiffrer — lien Figma demandé, seule une capture d'écran a été fournie |
 | **Total connu** | **0,75 h** |
 
 Le reste du travail dépend des arbitrages A01, A02, A05 → A13.

@@ -62,14 +62,85 @@
   <nav class="site-header__menu" aria-label="Main navigation">
     <a href="index.html" class="site-header__link">Home</a>
     <a href="shop.html" class="site-header__link">Shop</a>
-    <button type="button" class="site-header__link site-header__link--dropdown">
-      New Arrivals
-      <img src="assets/icons/icon-chevron-down.svg" alt="" width="16" height="16">
-    </button>
-    <button type="button" class="site-header__link site-header__link--dropdown">
-      Collection
-      <img src="assets/icons/icon-chevron-down.svg" alt="" width="16" height="16">
-    </button>
+
+    <!-- Méga-menu New Arrivals (297:228) -->
+    <div class="site-header__nav-item" data-nav-dropdown>
+      <button type="button" class="site-header__link site-header__link--dropdown" data-nav-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+        New Arrivals
+        <img class="site-header__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="16" height="16">
+      </button>
+      <div class="nav-mega nav-mega--links" data-nav-dropdown-panel hidden>
+        <div class="nav-mega__categories">
+          <p>New Arrivals</p>
+          <p>Top Sellings</p>
+          <p>Trendigs Tops</p>
+          <p>Latest Fashion</p>
+        </div>
+        <div class="nav-mega__column">
+          <p class="nav-mega__title">New Arrivals</p>
+          <a href="shop.html">Samantha Activewear</a>
+          <a href="shop.html">Noya Slim Dress</a>
+          <a href="shop.html">Shorte with back</a>
+          <a href="shop.html">Jelna Split Dress</a>
+        </div>
+        <div class="nav-mega__column">
+          <p class="nav-mega__title">Top Sellings</p>
+          <a href="shop.html">Black Co-ord set</a>
+          <a href="shop.html">Denim Jean</a>
+          <a href="shop.html">High rise shorts with top</a>
+          <a href="shop.html">Samantha Activewear</a>
+        </div>
+        <div class="nav-mega__column">
+          <p class="nav-mega__title">Trendigs Tops</p>
+          <a href="shop.html">Jelna Split Dress</a>
+          <a href="shop.html">Noya Slim Dress</a>
+          <a href="shop.html">Samantha Activewear</a>
+          <a href="shop.html">Twilight Whisper Skirt</a>
+        </div>
+        <div class="nav-mega__column">
+          <p class="nav-mega__title">Latest Fashion</p>
+          <a href="shop.html">Contact Information</a>
+          <a href="shop.html">Terms of Service</a>
+          <a href="shop.html">Privacy Policy / GDPR</a>
+          <a href="shop.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Méga-menu Collection (297:237) -->
+    <div class="site-header__nav-item" data-nav-dropdown>
+      <button type="button" class="site-header__link site-header__link--dropdown" data-nav-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+        Collection
+        <img class="site-header__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="16" height="16">
+      </button>
+      <div class="nav-mega nav-mega--cards" data-nav-dropdown-panel hidden>
+        <a href="shop.html" class="nav-mega-card">
+          <img src="assets/images/nav-collection-topshop.jpg" alt="TopShop">
+          <span>TopShop</span>
+        </a>
+        <a href="shop.html" class="nav-mega-card nav-mega-card--overlay-light">
+          <img src="assets/images/nav-collection-lingerie.jpg" alt="Lingerie">
+          <span>Lingerie</span>
+        </a>
+        <a href="shop.html" class="nav-mega-card">
+          <img src="assets/images/nav-collection-topshop2.jpg" alt="TopShop">
+          <span>TopShop</span>
+        </a>
+        <a href="shop.html" class="nav-mega-card nav-mega-card--overlay-dark">
+          <img src="assets/images/nav-collection-bottom.jpg" alt="Bottom">
+          <span>bottom</span>
+        </a>
+        <a href="shop.html" class="nav-mega-card">
+          <img src="assets/images/nav-collection-activewear.jpg" alt="Activewear">
+          <span>Activewear</span>
+        </a>
+        <a href="shop.html" class="nav-mega-card">
+          <img src="assets/images/nav-collection-winter.jpg" alt="Winter">
+          <span>Winter</span>
+        </a>
+      </div>
+    </div>
+
     <a href="about.html" class="site-header__link">About</a>
   </nav>
 

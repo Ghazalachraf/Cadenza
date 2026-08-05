@@ -45,6 +45,132 @@
     }
   }
 
+  &__chevron {
+    transition: transform 0.2s ease;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Méga-menus New Arrivals / Collection (297:228, 297:237) — panneau plein
+// largeur, ancré sous le header (fixe ou non), un seul ouvert à la fois.
+// --------------------------------------------------------------------------
+.site-header__nav-item {
+  &.is-open {
+    .site-header__link--dropdown {
+      color: $color-primary;
+      text-decoration: underline;
+    }
+
+    .site-header__chevron {
+      transform: scaleY(-1);
+    }
+  }
+}
+
+.nav-mega {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: $color-white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+
+  &[hidden] {
+    display: none;
+  }
+
+  &--links {
+    @include flex($align: center, $gap: 100px);
+    height: 280px;
+    padding-left: $container-padding;
+  }
+
+  &__categories {
+    @include flex($justify: space-between);
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 144px;
+    height: 194px;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 20px;
+    color: $color-black;
+  }
+
+  &__column {
+    @include flex($gap: 16px);
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 20px;
+    color: $color-black;
+    // 20px jusqu'au premier lien (297:207/297:208) : 16px de gap flex + 4px ici.
+    margin-bottom: 4px;
+  }
+
+  &__column a {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 16px;
+    color: #272727;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &--cards {
+    @include flex($align: center, $justify: center, $gap: 6px);
+    height: 280px;
+    padding: 0 24px;
+  }
+}
+
+.nav-mega-card {
+  position: relative;
+  flex: 1 1 0;
+  height: 264px;
+  border-radius: 6px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 24px;
+    color: $color-white;
+    white-space: nowrap;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  &--overlay-light::after {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &--overlay-dark::after {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.site-header {
   &__logo img {
     height: 30px;
     width: auto;
