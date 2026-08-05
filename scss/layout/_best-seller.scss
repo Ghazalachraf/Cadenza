@@ -136,7 +136,9 @@
     font-size: 16px;
     letter-spacing: -0.32px;
     color: $color-black;
-    text-align: center;
+    // Aligné à gauche à la demande explicite de l'utilisateur — la maquette
+    // centre ce texte (translate-x-1/2 sur 264:628 & co.).
+    text-align: left;
     margin-top: 18px;
   }
 
@@ -145,7 +147,7 @@
     font-weight: 500;
     font-size: 16px;
     color: $color-primary;
-    text-align: center;
+    text-align: left;
     margin-top: 6px;
   }
 }

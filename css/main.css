@@ -1387,7 +1387,7 @@ ul {
   font-size: 16px;
   letter-spacing: -0.32px;
   color: #252324;
-  text-align: center;
+  text-align: left;
   margin-top: 18px;
 }
 .best-seller-card__price {
@@ -1395,7 +1395,7 @@ ul {
   font-weight: 500;
   font-size: 16px;
   color: #cb9274;
-  text-align: center;
+  text-align: left;
   margin-top: 6px;
 }
 
