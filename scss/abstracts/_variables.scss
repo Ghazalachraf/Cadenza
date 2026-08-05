@@ -12,9 +12,14 @@ $color-light-brown: #eae3db;
 $color-text-secondary: #737373;
 
 // Typography
-$font-body: 'Open Sans', sans-serif;
+// La maquette n'utilise que deux familles : Jost pour les titres et l'UI,
+// DM Sans pour le texte courant. `$font-body` sert de police par défaut du
+// document et vaut donc DM Sans (Open Sans, jamais employée par la maquette,
+// a été retirée : elle ne faisait que fuiter dans les éléments sans
+// `font-family` déclarée).
 $font-heading: 'Jost', sans-serif;
 $font-display: 'DM Sans', sans-serif;
+$font-body: $font-display;
 
 // Layout
 $container-width: 1440px;

@@ -1,5 +1,10 @@
 // ==========================================================================
-// Fonts — Jost (headings/UI) & Open Sans (body), loaded from Google Fonts
+// Fonts — Jost (titres/UI) & DM Sans (corps), chargées depuis Google Fonts
+//
+// La maquette n'emploie que ces deux familles. Les graisses demandées
+// correspondent exactement à celles qu'elle utilise : sans DM Sans 400 et
+// 600, le navigateur repliait silencieusement le Regular sur le Medium et
+// le SemiBold sur le Bold — tout le texte courant s'affichait trop gras.
 // ==========================================================================
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Jost:wght@400;500;600&family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Jost:wght@400;500;600&display=swap');

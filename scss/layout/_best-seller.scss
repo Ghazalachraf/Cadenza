@@ -22,6 +22,10 @@
     font-family: $font-heading;
     font-weight: 600;
     font-size: 32px;
+    // 40px comme dans la maquette (264:613) : sans cette valeur le titre
+    // héritait du 1.4 global et occupait 89,6px au lieu de 80px sur ses
+    // deux lignes — même spec que .latest-articles__title.
+    line-height: 40px;
     color: $color-black;
     max-width: 370px;
     margin-top: 8px;

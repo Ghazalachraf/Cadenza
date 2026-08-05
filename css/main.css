@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Jost:wght@400;500;600&family=Open+Sans:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Jost:wght@400;500;600&display=swap");
 *,
 *::before,
 *::after {
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "DM Sans", sans-serif;
   color: #252324;
   background: #ffffff;
   line-height: 1.4;
@@ -991,6 +991,7 @@ ul {
   border-radius: 50%;
   border: 0.5px solid #252324;
   background: #ffffff;
+  font-family: "DM Sans", sans-serif;
   font-size: 9px;
   color: #252324;
 }
@@ -1289,6 +1290,7 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 600;
   font-size: 32px;
+  line-height: 40px;
   color: #252324;
   max-width: 370px;
   margin-top: 8px;
