@@ -3,21 +3,39 @@
 // ==========================================================================
 
 // --- Accordion (collectionsMoreInfo) --------------------------------------
+// Un seul panneau ouvert à la fois. Seul « Outwears » a un paragraphe dans
+// la maquette (406:213) : les 3 autres catégories (Trending Tops, latest
+// brand, Gym Suits) n'en ont aucun côté Figma. Avant ce correctif, cliquer
+// dessus ne faisait rien (`if (!body) return`) et le paragraphe d'Outwears
+// restait affiché en permanence, donnant l'impression que chaque titre
+// montrait le même texte. Désormais, cliquer sur l'un d'eux ferme
+// correctement le panneau ouvert plutôt que de laisser un contenu qui ne
+// lui correspond pas — sans inventer de texte pour les 3 catégories vides.
 function initAccordion() {
-  const toggles = document.querySelectorAll('[data-accordion-toggle]');
+  const items = document.querySelectorAll('.accordion-item');
+  if (!items.length) return;
 
-  toggles.forEach((toggle) => {
-    toggle.addEventListener('click', () => {
-      const item = toggle.closest('.accordion-item');
+  const closeAll = () => {
+    items.forEach((item) => {
       const body = item.querySelector('.accordion-item__body');
-      const icon = toggle.querySelector('.accordion-item__icon');
-      if (!body) return;
+      const icon = item.querySelector('.accordion-item__icon');
+      if (body) body.style.display = 'none';
+      if (icon) icon.src = 'assets/icons/icon-plus.svg';
+    });
+  };
 
-      const isOpen = body.style.display !== 'none';
-      body.style.display = isOpen ? 'none' : '';
-      icon.src = isOpen
-        ? 'assets/icons/icon-plus.svg'
-        : 'assets/icons/icon-minus.svg';
+  items.forEach((item) => {
+    const toggle = item.querySelector('[data-accordion-toggle]');
+    const body = item.querySelector('.accordion-item__body');
+    const icon = item.querySelector('.accordion-item__icon');
+
+    toggle.addEventListener('click', () => {
+      const wasOpen = body ? body.style.display !== 'none' : false;
+      closeAll();
+      if (body && !wasOpen) {
+        body.style.display = '';
+        icon.src = 'assets/icons/icon-minus.svg';
+      }
     });
   });
 }
