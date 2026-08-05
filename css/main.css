@@ -58,6 +58,7 @@ ul {
   gap: 0;
   padding-left: clamp(20px, 7.0833333333vw, 102px);
   padding-right: clamp(20px, 7.0833333333vw, 102px);
+  height: 42px;
   padding-top: 2px;
   padding-bottom: 2px;
   background: #cb9274;

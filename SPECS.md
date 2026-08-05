@@ -14,6 +14,19 @@ Relevé des dimensions, gouttières et écarts entre la maquette Figma
    (`padding-top` = `y` du premier enfant, `padding-bottom` = hauteur de la
    section − bas du dernier enfant).
 
+**Limite de la méthode (corrigée après coup)** — sur un conteneur flex avec
+`align-items: center`, le `y` du plus grand enfant dépend du centrage vertical,
+pas du seul padding. Pour `.promo-header` (`6:5`), la dérivation indiquait à
+tort un `padding-top` de 9 px : la valeur réelle exportée par Figma (dev mode)
+est `padding: 2px 102px`, déjà appliquée dans le code. Le vrai bug était
+ailleurs — `.promo-header` n'avait pas de `height` explicite, se contentant de
+la hauteur de son contenu (28 px) au lieu des 42 px fixes de la maquette, ce
+qui décale tout le `align-items: center` de son plus grand enfant. Corrigé
+(`height: 42px` ajouté), revérifié à l'identique du dev mode Figma. Cette
+limite peut affecter d'autres lignes du tableau ci-dessous marquées par une
+dérivation de padding sur un conteneur centré — à revalider au cas par cas via
+le CSS exporté par Figma plutôt que la dérivation seule.
+
 ---
 
 ## 1. Sections — hauteur et gouttières
@@ -23,7 +36,7 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 
 | Section | Frame | Figma W×H | Rendu W×H | Écart H | pad-top Figma | pad-top rendu | pad-left rendu |
 |---|---|---|---|---|---|---|---|
-| `.promo-header` | `6:5` | 1440×42 | 1440×28,0 | **−14,0** | 9 | 2 | 102 |
+| `.promo-header` ✅ *(corrigé)* | `6:5` | 1440×42 | 1440×42,0 | ✅ | — | 2 | 102 |
 | `.hero` | `56:116` | 1440×873 | 1440×873,0 | ✅ | 0 | 0 | 0 |
 | `.promo-banner` | `144:168` | 1440×175 | 1440×205,2 | **+30,2** | 30 | 30 | 102 |
 | `.new-arrivals` | `206:1193` | 1440×789 | 1440×824,8 | **+35,8** | 94 | 94 | 102 |
@@ -129,15 +142,17 @@ Mesurée depuis le haut de la barre promo, comparée au `y` Figma dans le frame 
 Écarts de gouttière — indépendants du problème de `line-height`, donc corrigeables
 directement et sans effet de bord :
 
-| Section | Propriété | Actuel | Figma | Gain |
-|---|---|---|---|---|
-| `.promo-header` | `padding` vertical | 2 px | **9 px** | +14 px (comble le −14) |
-| `.timeline` | `padding` vertical | 100 px | **57 px** | −86 px |
-| `.best-seller` | `padding-bottom` | 80 px | **63 px** | −17 px |
-| `.site-footer` | `padding-bottom` | 100 px | **66 px** | −34 px |
+| Section | Propriété | Actuel | Figma | Gain | Statut |
+|---|---|---|---|---|---|
+| `.promo-header` | `height` | absente (28 px de contenu) | **42 px fixe** | +14 px | ✅ **Corrigé** |
+| `.timeline` | `padding` vertical | 100 px | **57 px** | −86 px | À faire |
+| `.best-seller` | `padding-bottom` | 80 px | **63 px** | −17 px | À faire |
+| `.site-footer` | `padding-bottom` | 100 px | **66 px** | −34 px | À faire |
 
-À eux seuls, ces 4 correctifs retirent **~123 px** de la dérive cumulée sans
-toucher à la typographie.
+Ces 4 correctifs retirent **~123 px** de la dérive cumulée sans toucher à la
+typographie. `.promo-header` est fait ; les 3 autres restent à appliquer et à
+revérifier contre le CSS exporté par Figma (dev mode), pas seulement la
+dérivation par position d'enfants, pour éviter l'erreur ci-dessus.
 
 Le reste (~70 px) tient au rognage à la hauteur de capitale et demande une
 recalibration `line-height` + marges sur les blocs de texte des cartes

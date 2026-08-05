@@ -8,6 +8,7 @@
 .promo-header {
   @include flex($align: center, $justify: space-between);
   @include container-padding;
+  height: 42px;
   padding-top: 2px;
   padding-bottom: 2px;
   background: $color-primary;
