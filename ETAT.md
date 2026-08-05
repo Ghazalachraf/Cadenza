@@ -186,6 +186,10 @@ Le lien Figma `node-id=3-2` donné pour "la page Twilight Whisper Skirt" pointai
 
 **Carrousel "Neri Loungewear" (liens `401:99` / `401:26`).** Ces deux frames sont en réalité deux captures d'état (drag à 50 % et à 86 %) du *même* composant, déjà construit dans le projet : la section `.compare` ("Choose your colour", `js/main.js` → `initCompare`). Contenu, textes et bouton "View product" correspondent exactement. En testant le glisser-déposer j'ai ajouté `touch-action: none` sur `.compare__viewer` et `.compare__handle` — sans cette propriété, un geste tactile ou trackpad peut faire perdre la capture du pointeur en plein glissement (le navigateur interprète le geste comme un défilement de page). Correction standard pour tout composant à glisser basé sur Pointer Events.
 
+## 9quinquies. `js/*.js` sans cache-busting — clic couleur signalé "ne marche pas"
+
+`css/main.css` est chargé avec `?v=N` (bumpé à chaque compilation), mais `js/includes.js` et `js/main.js` étaient chargés sans aucun paramètre. Le serveur local (`http-server`) renvoie ces fichiers avec `Cache-Control: max-age=3600` : après une modification JS, le navigateur continue de servir l'ancien script pendant jusqu'à 1h, même sur un rechargement normal (pas seulement un cache obsolète ponctuel). C'est ce qui expliquait le retour « le clic sur une couleur ne fonctionne pas » alors que le code était correct et validé par test automatisé. Les deux scripts portent désormais `?v=19` dans `index.html` et `checkout.html`, à bumper avec `css/main.css` à chaque modification JS.
+
 ## 10. Reste à faire
 
 | Tâche | Est. |
