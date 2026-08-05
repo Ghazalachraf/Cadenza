@@ -204,5 +204,5 @@ Le reste du travail dépend des arbitrages A01, A02, A05 → A13.
 
 ## 11. En attente — signalé par l'utilisateur, pas assez d'info pour agir
 
-- **Carte New Arrivals ("Noya Slim Dress")** : bug de clic décrit ("cliquer sur n'importe quelle carte applique ce changement") mais non reproduit côté code — la structure Figma (`206:1193`) confirme que seule cette carte a le panneau taille/couleur + bouton panier dans la maquette, les 3 autres n'ont que les icônes cœur/loupe (déjà généralisées aux 4 cartes). Repro pas à pas nécessaire avant de creuser plus loin.
+- **Carte New Arrivals ("Noya Slim Dress")** — ✅ **Résolu** : l'utilisateur a confirmé vouloir que l'effet complet de la carte Noya (panneau taille/couleur + bouton panier au survol) soit généralisé aux 5 cartes du carrousel, pas seulement celle qui l'avait dans la maquette (`206:1193`). Fait : les 5 cartes partagent désormais le même bloc `.product-card__variants` + `.product-card__cart-btn`, avec les mêmes valeurs de démonstration (Size M/S/L, `icon-swatches-strip.svg`) déjà utilisées par Noya — décision explicite de l'utilisateur, pas une extraction Figma supplémentaire.
 - **Grille "Samantha Activewear" ×3 à prix différents** : composant introuvable dans le code actuel, aucun lien Figma fourni ne correspond. À localiser (bouton/page qui l'ouvre) avant de pouvoir agir.
