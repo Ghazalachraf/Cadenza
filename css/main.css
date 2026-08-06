@@ -1440,26 +1440,36 @@ ul {
 
 @media (max-width: 768px) {
   .best-seller {
-    padding: 40px 8px;
+    padding: 0 8px 34px;
   }
   .best-seller__eyebrow {
     font-size: 14px;
+    margin-bottom: -4px;
   }
   .best-seller__title {
     font-size: 24px;
     line-height: 30px;
     max-width: 269px;
+    margin-top: 12px;
+    margin-bottom: -13px;
   }
-  .best-seller__row {
+  .best-seller__row:nth-of-type(2) {
+    display: none;
+  }
+  .best-seller__row:first-of-type {
     gap: 8px;
     margin-top: 29px;
+    padding: 0 0 14px;
   }
   .best-seller__more {
-    margin-top: 29px;
+    margin-top: 39px;
     padding: 12px 24px;
-    border-width: 1px;
+    box-shadow: inset 0 0 0 1px #cb9274;
     font-size: 12px;
     text-transform: uppercase;
+  }
+  .best-seller__more-label {
+    margin-bottom: -4px;
   }
   .best-seller-card {
     flex-basis: clamp(220px, 77.6923076923vw, 303px);
@@ -2860,6 +2870,9 @@ ul {
   border-radius: 6px;
   overflow: hidden;
 }
+.timeline__more {
+  display: none;
+}
 .timeline__image {
   width: 100%;
   height: 100%;
@@ -2914,18 +2927,21 @@ ul {
 @media (max-width: 768px) {
   .timeline {
     flex-direction: column;
-    gap: 0;
+    gap: 7px;
     padding: 0 19px;
   }
   .timeline__years {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 35px 14px;
+    align-items: center;
     gap: 32px 0;
     width: 100%;
   }
   .timeline__year {
-    grid-row: 1;
+    grid-row: 2;
     font-size: 20px;
+    line-height: 1;
     text-align: center;
   }
   .timeline__year--active {
@@ -2933,7 +2949,7 @@ ul {
     letter-spacing: normal;
   }
   .timeline__arrow {
-    grid-row: 2;
+    grid-row: 1;
     justify-self: end;
     width: 35px;
     height: 35px;
@@ -2963,6 +2979,18 @@ ul {
     width: 100%;
     gap: 30px;
     padding: 0;
+  }
+  .timeline__col--second {
+    display: none;
+  }
+  .timeline__more {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    line-height: 1;
+    color: #cb9274;
+    text-align: right;
+    text-decoration: underline;
   }
   .timeline__title {
     font-size: 30px;

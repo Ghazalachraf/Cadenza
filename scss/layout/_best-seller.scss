@@ -189,30 +189,51 @@
 // Mobile — frame Figma 451:289 : cartes 303 px en défilement, CTA compact
 // --------------------------------------------------------------------------
 @include mobile {
+  // Gabarit du frame 451:289 (390×650) : en-tête à y=0, rangée unique de
+  // cartes à y=98 (h=447), bouton 135×32 à y=584.
   .best-seller {
-    padding: 40px 8px;
+    padding: 0 8px 34px;
 
     &__eyebrow {
       font-size: 14px;
+      // Boîte 14px rendue, 10px dans la maquette (451:293).
+      margin-bottom: -4px;
     }
 
     &__title {
       font-size: 24px;
       line-height: 30px;
       max-width: 269px;
+      margin-top: 12px;
+      // Bloc de 2 lignes : 60px rendus, 47px dans la maquette (451:294).
+      margin-bottom: -13px;
     }
 
-    &__row {
+    // La maquette mobile n'affiche qu'une rangée : la seconde doublait la
+    // hauteur de la section (1172 au lieu de 650).
+    &__row:nth-of-type(2) {
+      display: none;
+    }
+
+    // Sélecteur aussi spécifique que la règle desktop `:first-of-type`,
+    // sinon son margin-top de 34px l'emporte malgré la media query.
+    &__row:first-of-type {
       gap: 8px;
       margin-top: 29px;
+      padding: 0 0 14px;
     }
 
     &__more {
-      margin-top: 29px;
+      margin-top: 39px;
       padding: 12px 24px;
-      border-width: 1px;
+      box-shadow: inset 0 0 0 1px $color-primary;
       font-size: 12px;
       text-transform: uppercase;
+    }
+
+    &__more-label {
+      // Boîte 12px rendue, 8px dans la maquette (451:342).
+      margin-bottom: -4px;
     }
   }
 

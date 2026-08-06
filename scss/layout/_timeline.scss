@@ -99,6 +99,12 @@
     overflow: hidden;
   }
 
+  // Propre au frame mobile (451:1034) : le panneau desktop (416:523) n'a pas
+  // de lien de fin, ses deux colonnes tenant tout le contenu.
+  &__more {
+    display: none;
+  }
+
   &__image {
     width: 100%;
     height: 100%;
@@ -168,19 +174,26 @@
 @include mobile {
   .timeline {
     flex-direction: column;
-    gap: 0;
+    // 7 px entre le bas de la ligne d'années (y=81) et le haut du bloc de
+    // contenu 451:1020 (y=88).
+    gap: 7px;
     padding: 0 19px;
 
+    // Rangée de flèches (35 px) au-dessus de la ligne d'années (14 px), avec
+    // 32 px entre les deux : 35 + 32 + 14 = 81, hauteur du bloc dans 451:1019.
     &__years {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: 35px 14px;
+      align-items: center;
       gap: 32px 0;
       width: 100%;
     }
 
     &__year {
-      grid-row: 1;
+      grid-row: 2;
       font-size: 20px;
+      line-height: 1;
       text-align: center;
 
       &--active {
@@ -190,7 +203,7 @@
     }
 
     &__arrow {
-      grid-row: 2;
+      grid-row: 1;
       justify-self: end;
       width: 35px;
       height: 35px;
@@ -227,6 +240,25 @@
       width: 100%;
       gap: 30px;
       padding: 0;
+    }
+
+    // Le frame mobile (451:1020) ne montre qu'une colonne : titre, texte et
+    // un seul visuel. Empiler la seconde colonne du desktop ajoutait un
+    // second visuel et un second paragraphe (1647 px au lieu de 951).
+    &__col--second {
+      display: none;
+    }
+
+    // Lien de fin de panneau (451:1034) : mobile uniquement, aligné à droite.
+    // Les 30 px qui le séparent du visuel viennent du `gap` de la colonne.
+    &__more {
+      display: block;
+      font-family: $font-display;
+      font-size: 13px;
+      line-height: 1;
+      color: $color-primary;
+      text-align: right;
+      text-decoration: underline;
     }
 
     &__title {
