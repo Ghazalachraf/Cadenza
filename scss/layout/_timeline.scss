@@ -257,11 +257,14 @@
     &__more {
       display: block;
       font-family: $font-display;
-      font-size: 13px;
+      font-weight: 500;
+      font-size: 18px;
       line-height: 1;
       color: $color-primary;
       text-align: right;
       text-decoration: underline;
+      // Boîte 18px rendue, 13px de hauteur de capitale dans la maquette.
+      margin-bottom: -5px;
     }
 
     &__title {

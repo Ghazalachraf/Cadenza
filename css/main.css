@@ -3038,11 +3038,13 @@ ul {
   .timeline__more {
     display: block;
     font-family: "DM Sans", sans-serif;
-    font-size: 13px;
+    font-weight: 500;
+    font-size: 18px;
     line-height: 1;
     color: #cb9274;
     text-align: right;
     text-decoration: underline;
+    margin-bottom: -5px;
   }
   .timeline__title {
     font-size: 30px;
