@@ -199,6 +199,8 @@
 // --------------------------------------------------------------------------
 @include mobile {
   .latest-articles {
+    // Écart avec la section précédente : 451:343 à y=4240, product details finit à 4223.
+    margin-top: 17px;
     padding: 40px 21px;
 
     &__eyebrow {

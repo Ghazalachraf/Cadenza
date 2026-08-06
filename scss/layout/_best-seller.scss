@@ -192,6 +192,8 @@
   // Gabarit du frame 451:289 (390×650) : en-tête à y=0, rangée unique de
   // cartes à y=98 (h=447), bouton 135×32 à y=584.
   .best-seller {
+    // Écart avec la section précédente : 451:289 débute 19px avant la fin de our collections.
+    margin-top: -19px;
     padding: 0 8px 34px;
 
     &__eyebrow {

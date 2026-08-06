@@ -79,6 +79,8 @@
 // --------------------------------------------------------------------------
 @include mobile {
   .seasonal-sale {
+    // Écart avec la section précédente : 451:432 à y=7652, compare finit à 7598.
+    margin-top: 54px;
     height: 249px;
     flex-direction: column;
     align-items: center;

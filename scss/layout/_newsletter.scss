@@ -95,6 +95,8 @@
 // --------------------------------------------------------------------------
 @include mobile {
   .newsletter {
+    // Écart avec la section précédente : 451:503 à y=10703, gallery finit à 10671.
+    margin-top: 32px;
     height: 225px;
     padding: 0 20px;
     background: #151515;

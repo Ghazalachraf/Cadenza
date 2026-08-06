@@ -65,6 +65,8 @@
 // --------------------------------------------------------------------------
 @include mobile {
   .sale-banner {
+    // Écart avec la section précédente : 451:157 débute 2px avant la fin de new arrivals.
+    margin-top: -2px;
     height: 304px;
     padding: 0 20px;
 

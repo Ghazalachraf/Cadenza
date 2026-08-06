@@ -127,6 +127,8 @@
 // --------------------------------------------------------------------------
 @include mobile {
   .compare {
+    // Écart avec la section précédente : 451:1118 à y=7029, collections info finit à 6944.
+    margin-top: 85px;
     padding: 40px 0;
 
     &__eyebrow {

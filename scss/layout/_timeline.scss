@@ -165,14 +165,17 @@
 
 // --------------------------------------------------------------------------
 // Mobile — frame Figma 451:1019, valeurs extraites des nodes 451:1020→451:1049.
-// Les années passent en bandeau horizontal, les deux flèches se rangent en
-// dessous à droite et pointent gauche/droite au lieu de haut/bas.
+// Les années passent en bandeau horizontal, les deux flèches se rangent
+// au-dessus à droite et pointent gauche/droite au lieu de haut/bas.
 //
-// ⚠️ Le frame mobile ne montre qu'une seule carte : la seconde colonne du
-// desktop (photo boutique + paragraphe) n'y figure pas — arbitrage A10.
+// Le frame mobile ne montre qu'une seule carte : la seconde colonne du
+// desktop (photo boutique + paragraphe) est masquée (arbitrage A10 tranché),
+// et un lien « Read more » (451:1034) ferme le panneau.
 // --------------------------------------------------------------------------
 @include mobile {
   .timeline {
+    // Écart avec la section précédente : 451:1019 à y=9370, la FAQ finit à 9306.
+    margin-top: 64px;
     flex-direction: column;
     // 7 px entre le bas de la ligne d'années (y=81) et le haut du bloc de
     // contenu 451:1020 (y=88).

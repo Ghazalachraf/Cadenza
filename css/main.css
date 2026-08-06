@@ -1142,6 +1142,7 @@ ul {
 
 @media (max-width: 768px) {
   .sale-banner {
+    margin-top: -2px;
     height: 304px;
     padding: 0 20px;
   }
@@ -1442,6 +1443,7 @@ ul {
 
 @media (max-width: 768px) {
   .best-seller {
+    margin-top: -19px;
     padding: 0 8px 34px;
   }
   .best-seller__eyebrow {
@@ -1996,6 +1998,7 @@ ul {
 
 @media (max-width: 768px) {
   .spotlight {
+    margin-top: 58px;
     flex-direction: column;
   }
   .spotlight__panel--left {
@@ -2083,6 +2086,7 @@ ul {
 
 @media (max-width: 768px) {
   .collections-info {
+    margin-top: 66px;
     flex-direction: column;
     gap: 47px;
     padding: 0 10px;
@@ -2220,6 +2224,7 @@ ul {
 
 @media (max-width: 768px) {
   .compare {
+    margin-top: 85px;
     padding: 40px 0;
   }
   .compare__eyebrow {
@@ -2421,6 +2426,7 @@ ul {
 
 @media (max-width: 768px) {
   .latest-articles {
+    margin-top: 17px;
     padding: 40px 21px;
   }
   .latest-articles__eyebrow {
@@ -2553,6 +2559,7 @@ ul {
 
 @media (max-width: 768px) {
   .seasonal-sale {
+    margin-top: 54px;
     height: 249px;
     flex-direction: column;
     align-items: center;
@@ -2928,6 +2935,7 @@ ul {
 
 @media (max-width: 768px) {
   .timeline {
+    margin-top: 64px;
     flex-direction: column;
     gap: 7px;
     padding: 0 19px;
@@ -3083,6 +3091,7 @@ ul {
 
 @media (max-width: 768px) {
   .gallery {
+    margin-top: 40px;
     padding: 0;
   }
   .gallery__eyebrow {
@@ -3188,6 +3197,7 @@ ul {
 
 @media (max-width: 768px) {
   .newsletter {
+    margin-top: 32px;
     height: 225px;
     padding: 0 20px;
     background: #151515;

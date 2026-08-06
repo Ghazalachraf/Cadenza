@@ -79,6 +79,8 @@
 // --------------------------------------------------------------------------
 @include mobile {
   .collections-info {
+    // Écart avec la section précédente : 451:1167 à y=6117, spotlight finit à 6051.
+    margin-top: 66px;
     flex-direction: column;
     gap: 47px;
     padding: 0 10px;

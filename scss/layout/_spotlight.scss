@@ -184,12 +184,13 @@
 // Mobile — frame Figma 451:1239 (h=470), valeurs extraites des nodes
 // 451:1240→451:1237.
 //
-// ⚠️ Le frame mobile ne contient QUE le panneau de droite (Eleanor Blouse).
-// Le panneau accessoires n'y figure pas : les deux panneaux restent empilés
-// ici, la suppression éventuelle du premier est un arbitrage (A09).
+// Le frame mobile ne contient QUE le panneau de droite (Eleanor Blouse) :
+// le panneau accessoires est masqué ici (arbitrage A09 tranché).
 // --------------------------------------------------------------------------
 @include mobile {
   .spotlight {
+    // Écart avec la section précédente : 451:1239 à y=5581, latest articles finit à 5523.
+    margin-top: 58px;
     flex-direction: column;
 
     // Le frame mobile (451:1239) ne contient qu'un seul panneau, celui de

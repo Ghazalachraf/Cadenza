@@ -81,6 +81,8 @@
 // --------------------------------------------------------------------------
 @include mobile {
   .gallery {
+    // Écart avec la section précédente : 451:479 à y=10361, timeline finit à 10321.
+    margin-top: 40px;
     padding: 0;
 
     &__eyebrow {
