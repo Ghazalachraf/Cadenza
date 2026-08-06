@@ -43,7 +43,8 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 | `.sale-banner` | `224:54` | 1440×359 | 1440×359,0 | ✅ | 0 | 0 | 0 |
 | `.our-collections` | `240:370` | 1440×945 | 1440×960,8 | **+15,8** | 100 | 100 | 10 |
 | `.best-seller` | `264:609` | 1440×1310 | 1440×1365,9 | **+55,9** | 94 | 94 | 102 |
-| `.elevate` ¹ | `440:156` | 1440×564 | 1440×540,0 | **−24,0** | — | 90 | 40 |
+| `.ticker` ✅ *(corrigé, 41px exact)* | `440:148` | 1440×41 | 1440×41,0 | ✅ | 15 | 15 | 0 |
+| `.elevate` ¹ (contenu seul, hors tickers) | `440:156` | 1440×564 | 1440×540,0 | **−24,0** | — | 90 | 40 |
 | `.product-details` | `264:415` | 1440×687 | 1440×740,6 | **+53,6** | 100 | 100 | 42 |
 | `.latest-articles` | `242:1416` | 1440×1447 | 1440×1451,2 | +4,2 | 30 | 30 | 10 |
 | `.spotlight` | `436:90` | 1440×686 | 1440×686,0 | ✅ | 0 | 0 | 0 |
@@ -59,9 +60,17 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 
 ¹ Le frame Figma `440:156` (646 px) **englobe les deux bandeaux ticker** (41 px
 chacun), qui sont des éléments séparés (`.ticker`) dans le DOM. La ligne compare
-donc le bloc central seul : 646 − 41 − 41 = 564. Mesuré bout à bout
-(`ticker + .elevate + ticker`), l'ensemble fait **644,8 px contre 646 attendus,
-soit −1,2 px** : c'est la répartition interne qui diffère, pas le total.
+donc le bloc central seul : 646 − 41 − 41 = 564.
+
+Avant correction du `.ticker` (§ ci-dessus), celui-ci rendait 52,4 px au lieu
+de 41 (même excès de `line-height` que les autres textes 16 px). Le total
+mesuré bout à bout (`ticker + .elevate + ticker`) tombait alors à 644,8 px,
+à seulement −1,2 px du total Figma (646) — un **résultat trompeur** : deux
+erreurs s'annulaient presque (ticker +11,4 px ×2, contenu −24 px). Une fois
+le `.ticker` corrigé à 41 px exact, le vrai déficit du contenu de `.elevate`
+(−24 px, ligne ci-dessus) redevient visible et reste à corriger séparément
+(probablement `line-height: 1.8` du `&__text`, à recalibrer avec la même
+méthode que `.promo-banner`/`.new-arrivals`).
 
 ² `.seasonal-sale` positionne son contenu en absolu ; la gouttière dérivée n'est
 pas comparable, mais la hauteur totale est exacte.

@@ -1463,6 +1463,8 @@ ul {
 }
 .ticker__track {
   display: flex;
+  align-items: center;
+  height: 11px;
   gap: 40px;
   width: max-content;
   animation: ticker-scroll 30s linear infinite;
@@ -1474,6 +1476,7 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 1;
   letter-spacing: -0.32px;
   color: #252324;
   white-space: nowrap;

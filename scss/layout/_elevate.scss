@@ -12,6 +12,11 @@
 
   &__track {
     display: flex;
+    align-items: center;
+    // Hauteur de capitale de la maquette (440:149) plutôt que la boîte de
+    // ligne réelle (16px) : le texte déborde visuellement de 2,5px en haut
+    // et en bas, absorbés par le padding de 15px du bandeau (cf. SPECS.md §3).
+    height: 11px;
     gap: 40px;
     width: max-content;
     animation: ticker-scroll 30s linear infinite;
@@ -28,6 +33,7 @@
     font-family: $font-heading;
     font-weight: 500;
     font-size: 16px;
+    line-height: 1;
     letter-spacing: -0.32px;
     color: $color-black;
     white-space: nowrap;
