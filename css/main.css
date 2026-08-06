@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Jost:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Jost:wght@400;500;600&family=Open+Sans&display=swap");
 *,
 *::before,
 *::after {
@@ -552,9 +552,10 @@ ul {
   background: #141414;
 }
 .bottom-footer__copy {
-  font-family: "DM Sans", sans-serif;
-  font-size: 14px;
-  color: #ddddde;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
 }
 .bottom-footer__payments {
   height: 24px;
@@ -587,9 +588,12 @@ ul {
   }
   .bottom-footer__copy {
     font-family: "Jost", sans-serif;
+    font-weight: 400;
     font-size: 14px;
     line-height: 1;
     letter-spacing: 0.5px;
+    text-transform: none;
+    color: #ddddde;
     text-align: center;
   }
   .bottom-footer__payments {
