@@ -1058,15 +1058,17 @@ ul {
 
 @media (max-width: 768px) {
   .new-arrivals {
-    padding: 34px 0 23px;
+    padding: 44px 0 50px;
   }
   .new-arrivals__title {
     font-size: 24px;
     letter-spacing: -0.48px;
+    margin-bottom: -7px;
   }
   .new-arrivals__tabs {
     justify-content: space-between;
     gap: 0;
+    height: 25px;
     margin-top: 20px;
     padding: 0 20px;
     font-size: 12px;
