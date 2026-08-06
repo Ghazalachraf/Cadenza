@@ -1307,14 +1307,18 @@ ul {
   padding-left: clamp(20px, 7.0833333333vw, 102px);
   padding-right: clamp(20px, 7.0833333333vw, 102px);
   padding-top: 94px;
-  padding-bottom: 80px;
+  padding-bottom: 63px;
+  display: flex;
+  flex-direction: column;
 }
 .best-seller__eyebrow {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 1;
   color: #cb9274;
   text-transform: uppercase;
+  margin-bottom: -5px;
 }
 .best-seller__title {
   font-family: "Jost", sans-serif;
@@ -1323,21 +1327,25 @@ ul {
   line-height: 40px;
   color: #252324;
   max-width: 370px;
-  margin-top: 8px;
+  margin-top: 20px;
+  margin-bottom: -18px;
 }
 .best-seller__row {
   display: flex;
   gap: 8px;
+  padding: 8px 0;
   overflow-x: auto;
-  margin-top: 32px;
   scroll-snap-type: x mandatory;
+}
+.best-seller__row:first-of-type {
+  margin-top: 34px;
 }
 .best-seller__more {
   display: block;
   width: fit-content;
-  margin: 40px auto 0;
+  margin: 67px auto 0;
   padding: 23px 54px;
-  border: 2px solid #cb9274;
+  box-shadow: inset 0 0 0 2px #cb9274;
   border-radius: 4px;
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
@@ -1345,10 +1353,17 @@ ul {
   color: #cb9274;
   text-transform: capitalize;
 }
+.best-seller__more-label {
+  display: block;
+  line-height: 1;
+  margin-bottom: -5px;
+}
 
 .best-seller-card {
   flex: 0 0 clamp(220px, 21.0416666667vw, 303px);
   scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
 }
 .best-seller-card__media {
   position: relative;
@@ -1415,18 +1430,22 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 1;
   letter-spacing: -0.32px;
   color: #252324;
   text-align: left;
   margin-top: 18px;
+  margin-bottom: -5px;
 }
 .best-seller-card__price {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 1;
   color: #cb9274;
   text-align: left;
-  margin-top: 6px;
+  margin-top: 12px;
+  margin-bottom: -5px;
 }
 
 @media (max-width: 768px) {

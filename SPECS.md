@@ -42,7 +42,7 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 | `.new-arrivals` ✅ *(corrigé, 789px exact)* | `206:1193` | 1440×789 | 1440×789,0 | ✅ | 94 | 94 | 102 |
 | `.sale-banner` | `224:54` | 1440×359 | 1440×359,0 | ✅ | 0 | 0 | 0 |
 | `.our-collections` | `240:370` | 1440×945 | 1440×960,8 | **+15,8** | 100 | 100 | 10 |
-| `.best-seller` | `264:609` | 1440×1310 | 1440×1365,9 | **+55,9** | 94 | 94 | 102 |
+| `.best-seller` ✅ *(corrigé, 1310px exact)* | `264:609` | 1440×1310 | 1440×1310,0 | ✅ | 94 | 94 | 102 |
 | `.ticker` ✅ *(corrigé, 41px exact)* | `440:148` | 1440×41 | 1440×41,0 | ✅ | 15 | 15 | 0 |
 | `.elevate` ¹ (contenu seul, hors tickers) | `440:156` | 1440×564 | 1440×540,0 | **−24,0** | — | 90 | 40 |
 | `.product-details` | `264:415` | 1440×687 | 1440×740,6 | **+53,6** | 100 | 100 | 42 |
@@ -87,7 +87,7 @@ sont donc pas la cause des écarts, le contenu l'est.
 |---|---|---|---|---|---|
 | `.product-card` (New Arrivals) ✅ *(corrigé)* | `206:1204` | 342×482 | 342,0×482,0 | ✅ | ✅ |
 | `.product-card__media` | `206:1205` | 342×408 | 340,0×408,0 | −2,0 | ✅ |
-| `.best-seller-card` | `264:625` | 303×433 | 303,0×449,8 | ✅ | **+16,8** |
+| `.best-seller-card` ✅ *(corrigé)* | `264:625` | 303×433 | 303,0×433,0 | ✅ | ✅ |
 | `.best-seller-card__media` | `264:626` | 303×381 | 303,0×381,0 | ✅ | ✅ |
 
 Les **zones image sont exactes au pixel** (408 et 381). Tout l'écart vient du
@@ -148,7 +148,11 @@ recalibrées, section par section.
    `border` CSS ajoute sa largeur à la boîte (même en hauteur `auto`), ce
    qu'un simple trait de contour Figma ne fait pas. Remplacée par un
    `box-shadow: inset 0 0 0 1px …` — visuellement identique, sans effet sur
-   les dimensions.
+   les dimensions. Même piège retrouvé sur `.best-seller__more`.
+6. Sur `.best-seller`, les deux rangées de cartes Figma (`264:624`,
+   `264:688`) ont chacune 8px de marge interne haut/bas autour des cartes
+   (conteneur 449px pour des cartes de 433px) : reproduit avec `padding: 8px
+   0` sur `.best-seller__row` plutôt que de bidouiller les marges externes.
 
 Cette méthode est réutilisable telle quelle sur les autres sections listées
 au §1 marquées d'un écart.
@@ -186,7 +190,7 @@ directement et sans effet de bord :
 |---|---|---|---|---|---|
 | `.promo-header` | `height` | absente (28 px de contenu) | **42 px fixe** | +14 px | ✅ **Corrigé** |
 | `.timeline` | `padding` vertical | 100 px | **57 px** | −86 px | À faire |
-| `.best-seller` | `padding-bottom` | 80 px | **63 px** | −17 px | À faire |
+| `.best-seller` | `padding-bottom` | 80 px | **63 px** | −17 px | ✅ **Corrigé** |
 | `.site-footer` | `padding-bottom` | 100 px | **66 px** | −34 px | À faire |
 
 Ces 4 correctifs retirent **~123 px** de la dérive cumulée sans toucher à la
