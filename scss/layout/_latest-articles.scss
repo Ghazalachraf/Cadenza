@@ -201,16 +201,24 @@
   .latest-articles {
     // Écart avec la section précédente : 451:343 à y=4240, product details finit à 4223.
     margin-top: 17px;
-    padding: 40px 21px;
+    // Le frame 451:343 (348×1283) démarre sur l'accroche : aucune gouttière
+    // verticale, seulement les 21 px latéraux.
+    padding: 0 21px;
 
     &__eyebrow {
       font-size: 14px;
+      line-height: 1;
+      // Boîte 14px rendue, 10px dans la maquette (451:345).
+      margin-bottom: -4px;
     }
 
     &__title {
       font-size: 24px;
       line-height: 30px;
       max-width: 267px;
+      margin-top: 13px;
+      // Bloc de 2 lignes : 60px rendus, 47px dans la maquette (451:346).
+      margin-bottom: -13px;
     }
 
     &__grid {
@@ -226,6 +234,8 @@
       display: flex;
       order: 2;
       gap: 8px;
+      // Le conteneur 451:369 fait 589 px pour des cartes de 570.
+      padding-bottom: 19px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
     }
@@ -260,22 +270,31 @@
     }
   }
 
+  // Carte 344×570 dans la maquette (451:370) : visuel 485, ligne nom/prix à
+  // y=513 (h=11), pastilles à y=540 (h=30).
   .article-card {
     order: 2;
-    flex: 0 0 fluid-m(303px, 220px);
+    flex: 0 0 fluid-m(344px, 240px);
     scroll-snap-align: start;
 
     &__media {
-      height: fluid-m(381px, 300px);
+      height: 485px;
       border-radius: 6px;
     }
 
     &__info {
-      margin-top: 18px;
+      margin-top: 28px;
+    }
+
+    &__name,
+    &__price {
+      line-height: 1;
+      // Boîte 16px rendue, 11px dans la maquette (451:374, 451:375).
+      margin-bottom: -5px;
     }
 
     &__swatches {
-      margin-top: 8px;
+      margin-top: 16px;
     }
   }
 }

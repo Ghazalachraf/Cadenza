@@ -2427,15 +2427,19 @@ ul {
 @media (max-width: 768px) {
   .latest-articles {
     margin-top: 17px;
-    padding: 40px 21px;
+    padding: 0 21px;
   }
   .latest-articles__eyebrow {
     font-size: 14px;
+    line-height: 1;
+    margin-bottom: -4px;
   }
   .latest-articles__title {
     font-size: 24px;
     line-height: 30px;
     max-width: 267px;
+    margin-top: 13px;
+    margin-bottom: -13px;
   }
   .latest-articles__grid {
     display: flex;
@@ -2447,6 +2451,7 @@ ul {
     display: flex;
     order: 2;
     gap: 8px;
+    padding-bottom: 19px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
   }
@@ -2476,18 +2481,22 @@ ul {
   }
   .article-card {
     order: 2;
-    flex: 0 0 clamp(220px, 77.6923076923vw, 303px);
+    flex: 0 0 clamp(240px, 88.2051282051vw, 344px);
     scroll-snap-align: start;
   }
   .article-card__media {
-    height: clamp(300px, 97.6923076923vw, 381px);
+    height: 485px;
     border-radius: 6px;
   }
   .article-card__info {
-    margin-top: 18px;
+    margin-top: 28px;
+  }
+  .article-card__name, .article-card__price {
+    line-height: 1;
+    margin-bottom: -5px;
   }
   .article-card__swatches {
-    margin-top: 8px;
+    margin-top: 16px;
   }
 }
 .seasonal-sale {
