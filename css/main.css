@@ -857,17 +857,7 @@ ul {
 
 @media (max-width: 768px) {
   .promo-banner {
-    padding-left: 16px;
-    padding-right: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .promo-banner__title {
-    font-size: 28px;
-  }
-  .promo-banner__product {
-    flex-direction: column;
-    align-items: flex-start;
+    display: none;
   }
 }
 .new-arrivals {

@@ -43,6 +43,7 @@ Il ne reste plus de section calée « au jugé » sur la seule hauteur de frame.
 | # | Section mobile | Node | Points relevés à l'extraction |
 |---|---|---|---|
 | M01 | Promo header | `451:39` | h=30, slider seul, texte 11 px |
+| — | *Promo banner* | *absent* | **Masqué en mobile** : la maquette `451:38` enchaîne le Hero directement sur les New Arrivals |
 | M02 | Hero + header burger | `451:47` | h=519, burger, logo 94×18, icônes 18 px |
 | M03 | New Arrivals | `451:71` | onglets space-between, cartes 342 px |
 | M04 | Sale banner | `451:157` | h=304, voile 0,6, titre 34/33 sur 272 px |

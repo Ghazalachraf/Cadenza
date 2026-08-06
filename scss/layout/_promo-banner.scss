@@ -120,20 +120,12 @@
   }
 }
 
+// --------------------------------------------------------------------------
+// Mobile — absent de la maquette mobile (451:38) : le Hero enchaîne
+// directement sur les New Arrivals, sans bandeau promotionnel intermédiaire.
+// --------------------------------------------------------------------------
 @include mobile {
   .promo-banner {
-    padding-left: 16px;
-    padding-right: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-
-    &__title {
-      font-size: 28px;
-    }
-
-    &__product {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+    display: none;
   }
 }
