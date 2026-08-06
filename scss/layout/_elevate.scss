@@ -52,9 +52,13 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding: 90px 40px;
+  // 102/103 (et non 90) : dérivé du cadre de contenu Figma 440:124 (564px,
+  // deux blocs de texte de 180px chacun, sans écart entre eux).
+  padding: 102px 40px;
   text-align: center;
 
+  // Deux blocs distincts dans la maquette (440:127 puis 440:129), collés
+  // l'un à l'autre (0px d'écart), et de largeurs différentes.
   &__text {
     font-family: $font-heading;
     font-weight: 500;
@@ -63,6 +67,10 @@
     color: $color-black;
     max-width: 1216px;
     margin: 0 auto;
+
+    &:last-of-type {
+      max-width: 1122px;
+    }
   }
 
   &__pill {

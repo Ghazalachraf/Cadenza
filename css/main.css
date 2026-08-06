@@ -1516,7 +1516,7 @@ ul {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding: 90px 40px;
+  padding: 102px 40px;
   text-align: center;
 }
 .elevate__text {
@@ -1527,6 +1527,9 @@ ul {
   color: #252324;
   max-width: 1216px;
   margin: 0 auto;
+}
+.elevate__text:last-of-type {
+  max-width: 1122px;
 }
 .elevate__pill {
   display: inline-block;

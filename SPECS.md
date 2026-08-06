@@ -44,7 +44,7 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 | `.our-collections` | `240:370` | 1440×945 | 1440×960,8 | **+15,8** | 100 | 100 | 10 |
 | `.best-seller` ✅ *(corrigé, 1310px exact)* | `264:609` | 1440×1310 | 1440×1310,0 | ✅ | 94 | 94 | 102 |
 | `.ticker` ✅ *(corrigé, 41px exact)* | `440:148` | 1440×41 | 1440×41,0 | ✅ | 15 | 15 | 0 |
-| `.elevate` ¹ (contenu seul, hors tickers) | `440:156` | 1440×564 | 1440×540,0 | **−24,0** | — | 90 | 40 |
+| `.elevate` ¹ ✅ *(corrigé, 564px exact)* | `440:156` | 1440×564 | 1440×564,0 | ✅ | 102 | 102 | 40 |
 | `.product-details` | `264:415` | 1440×687 | 1440×740,6 | **+53,6** | 100 | 100 | 42 |
 | `.latest-articles` | `242:1416` | 1440×1447 | 1440×1451,2 | +4,2 | 30 | 30 | 10 |
 | `.spotlight` | `436:90` | 1440×686 | 1440×686,0 | ✅ | 0 | 0 | 0 |
@@ -62,15 +62,22 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 chacun), qui sont des éléments séparés (`.ticker`) dans le DOM. La ligne compare
 donc le bloc central seul : 646 − 41 − 41 = 564.
 
-Avant correction du `.ticker` (§ ci-dessus), celui-ci rendait 52,4 px au lieu
-de 41 (même excès de `line-height` que les autres textes 16 px). Le total
-mesuré bout à bout (`ticker + .elevate + ticker`) tombait alors à 644,8 px,
-à seulement −1,2 px du total Figma (646) — un **résultat trompeur** : deux
-erreurs s'annulaient presque (ticker +11,4 px ×2, contenu −24 px). Une fois
-le `.ticker` corrigé à 41 px exact, le vrai déficit du contenu de `.elevate`
-(−24 px, ligne ci-dessus) redevient visible et reste à corriger séparément
-(probablement `line-height: 1.8` du `&__text`, à recalibrer avec la même
-méthode que `.promo-banner`/`.new-arrivals`).
+Avant correction du `.ticker`, celui-ci rendait 52,4 px au lieu de 41 (même
+excès de `line-height` que les autres textes 16 px). Le total mesuré bout à
+bout (`ticker + .elevate + ticker`) tombait alors à 644,8 px, à seulement
+−1,2 px du total Figma (646) — un **résultat trompeur** : deux erreurs
+s'annulaient presque (ticker +11,4 px ×2, contenu −24 px). Une fois le
+`.ticker` corrigé, le vrai déficit du contenu de `.elevate` est redevenu
+visible.
+
+Ce déficit ne venait **pas** du `line-height` (déjà correct : `1.8` = 90 px
+pour 50 px, conforme au dev mode Figma) mais de la structure : la maquette
+découpe le texte en **deux blocs distincts** (`440:127` de 1216 px de large,
+puis `440:129` de 1122 px), collés l'un à l'autre, de 180 px chacun. Le code
+n'avait qu'un seul `<p>` qui se répartissait en 4 lignes de 90 px = 360 px au
+lieu de 2×180. Corrigé en scindant le paragraphe en deux et en portant le
+`padding` vertical de 90 à 102 px (dérivé du cadre `440:124` : 564 − 180 − 180
+= 204, soit 102 de chaque côté). Total vérifié à **646 px exact**.
 
 ² `.seasonal-sale` positionne son contenu en absolu ; la gouttière dérivée n'est
 pas comparable, mais la hauteur totale est exacte.
