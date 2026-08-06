@@ -39,7 +39,7 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 | `.promo-header` ✅ *(corrigé)* | `6:5` | 1440×42 | 1440×42,0 | ✅ | — | 2 | 102 |
 | `.hero` | `56:116` | 1440×873 | 1440×873,0 | ✅ | 0 | 0 | 0 |
 | `.promo-banner` ✅ *(corrigé, 175px exact)* | `144:168` | 1440×175 | 1440×175,0 | ✅ | 30 | 30 | 102 |
-| `.new-arrivals` | `206:1193` | 1440×789 | 1440×824,8 | **+35,8** | 94 | 94 | 102 |
+| `.new-arrivals` ✅ *(corrigé, 789px exact)* | `206:1193` | 1440×789 | 1440×789,0 | ✅ | 94 | 94 | 102 |
 | `.sale-banner` | `224:54` | 1440×359 | 1440×359,0 | ✅ | 0 | 0 | 0 |
 | `.our-collections` | `240:370` | 1440×945 | 1440×960,8 | **+15,8** | 100 | 100 | 10 |
 | `.best-seller` | `264:609` | 1440×1310 | 1440×1365,9 | **+55,9** | 94 | 94 | 102 |
@@ -76,7 +76,7 @@ sont donc pas la cause des écarts, le contenu l'est.
 
 | Composant | Frame | Figma W×H | Rendu W×H | Écart W | Écart H |
 |---|---|---|---|---|---|
-| `.product-card` (New Arrivals) | `206:1204` | 342×482 | 342,0×508,8 | ✅ | **+26,8** |
+| `.product-card` (New Arrivals) ✅ *(corrigé)* | `206:1204` | 342×482 | 342,0×482,0 | ✅ | ✅ |
 | `.product-card__media` | `206:1205` | 342×408 | 340,0×408,0 | −2,0 | ✅ |
 | `.best-seller-card` | `264:625` | 303×433 | 303,0×449,8 | ✅ | **+16,8** |
 | `.best-seller-card__media` | `264:626` | 303×381 | 303,0×381,0 | ✅ | ✅ |
@@ -134,6 +134,12 @@ recalibrées, section par section.
    rognage Figma ne s'applique qu'aux bords du bloc, pas à l'interligne.
    Même principe : `margin-bottom` négatif égal à l'excédent mesuré, sans
    toucher `line-height`.
+
+5. Piège additionnel trouvé sur `.new-arrivals`/`.product-card` : une
+   `border` CSS ajoute sa largeur à la boîte (même en hauteur `auto`), ce
+   qu'un simple trait de contour Figma ne fait pas. Remplacée par un
+   `box-shadow: inset 0 0 0 1px …` — visuellement identique, sans effet sur
+   les dimensions.
 
 Cette méthode est réutilisable telle quelle sur les autres sections listées
 au §1 marquées d'un écart.

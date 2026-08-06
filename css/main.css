@@ -875,20 +875,27 @@ ul {
   padding-right: clamp(20px, 7.0833333333vw, 102px);
   padding-top: 94px;
   padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 .new-arrivals__title {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 34px;
+  line-height: 1;
   letter-spacing: -0.68px;
   color: #252324;
+  margin-bottom: -10px;
 }
 .new-arrivals__tabs {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 40px;
+  width: 100%;
+  height: 41px;
   margin-top: 34px;
   overflow-x: auto;
 }
@@ -907,6 +914,7 @@ ul {
 
 .product-carousel {
   position: relative;
+  width: 100%;
   margin-top: 34px;
 }
 .product-carousel__track {
@@ -914,7 +922,6 @@ ul {
   gap: 8px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 4px;
 }
 .product-carousel__arrow {
   position: absolute;
@@ -950,7 +957,7 @@ ul {
   border-radius: 10px;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid #f5f4f2;
+  box-shadow: inset 0 0 0 1px #f5f4f2;
   text-align: left;
 }
 .product-card__media {
@@ -1021,14 +1028,18 @@ ul {
 }
 .product-card__info {
   position: relative;
-  padding: 21px 17px;
+  display: flex;
+  flex-direction: column;
+  padding: 21px 17px 19px;
 }
 .product-card__name {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 1;
   letter-spacing: -0.32px;
   color: #252324;
+  margin-bottom: -5px;
 }
 .product-card__price {
   display: flex;
@@ -1038,7 +1049,9 @@ ul {
   margin-top: 12px;
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
+  line-height: 1;
   color: #cb9274;
+  margin-bottom: -5px;
 }
 .product-card__price-original {
   font-size: 12px;

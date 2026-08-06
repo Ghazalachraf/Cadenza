@@ -10,18 +10,30 @@
   @include container-padding;
   padding-top: 94px;
   padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 
+  // Colonne flex plutôt que flux normal : évite le collapsing de marges
+  // entre titre/onglets/carrousel (cf. SPECS.md §3, méthode validée sur
+  // .promo-banner) pour que les corrections de line-height soient
+  // prévisibles.
   &__title {
     font-family: $font-heading;
     font-weight: 500;
     font-size: 34px;
+    line-height: 1;
     letter-spacing: -0.68px;
     color: $color-black;
+    // Boîte ≈34px rendue, 24px dans la maquette (206:1194).
+    margin-bottom: -10px;
   }
 
   &__tabs {
     @include flex($align: center, $justify: center, $gap: 40px);
+    width: 100%;
+    height: 41px;
     margin-top: 34px;
     overflow-x: auto;
   }
@@ -43,6 +55,7 @@
 
 .product-carousel {
   position: relative;
+  width: 100%;
   margin-top: 34px;
 
   &__track {
@@ -50,7 +63,6 @@
     gap: 8px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 4px;
   }
 
   &__arrow {
@@ -92,7 +104,10 @@
   border-radius: 10px;
   overflow: hidden;
   background: $color-white;
-  border: 1px solid #f5f4f2;
+  // box-shadow inset plutôt que border : une bordure ajoute 2px à la boîte
+  // (hauteur non fixée en CSS ici), alors que la maquette (206:1204) ne
+  // compte pas le trait de contour dans sa hauteur (482px exact).
+  box-shadow: inset 0 0 0 1px #f5f4f2;
   text-align: left;
 
   &__media {
@@ -172,15 +187,20 @@
 
   &__info {
     position: relative;
-    padding: 21px 17px;
+    display: flex;
+    flex-direction: column;
+    padding: 21px 17px 19px;
   }
 
   &__name {
     font-family: $font-heading;
     font-weight: 500;
     font-size: 16px;
+    line-height: 1;
     letter-spacing: -0.32px;
     color: $color-black;
+    // Boîte ≈16px rendue, 11px dans la maquette (274:104 et analogues).
+    margin-bottom: -5px;
   }
 
   &__price {
@@ -188,7 +208,10 @@
     margin-top: 12px;
     font-family: $font-display;
     font-size: 16px;
+    line-height: 1;
     color: $color-primary;
+    // Boîte ≈16px rendue, 11px dans la maquette (206:1210 et analogues).
+    margin-bottom: -5px;
   }
 
   &__price-original {
