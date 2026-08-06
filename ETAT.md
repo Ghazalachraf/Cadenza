@@ -40,6 +40,16 @@ Toutes les sections proviennent désormais d'un `get_design_context` sur leur no
 tailles, graisses, interlignes, rayons et espacements sont repris tels quels.
 Il ne reste plus de section calée « au jugé » sur la seule hauteur de frame.
 
+**Vérification pixel-perfect complète (audit Playwright vs frame `451:38`)** :
+les 19 sections rendent à leur hauteur ET leur position Y exactes — page
+totale **12 166 px = maquette**, dérive cumulée 1 px. Les écarts
+inter-sections de la maquette (2 chevauchements, 8 respirations de +17 à
++85 px) sont reproduits par des `margin-top` documentés dans chaque
+fichier SCSS. Sections retravaillées lors de cette passe : new arrivals,
+best seller (1 rangée), spotlight (1 panneau), timeline (1 colonne +
+« Read more »), product details, latest articles (cartes 344×570),
+collections info, compare, FAQ, accessories, gallery, footer + copyright.
+
 | # | Section mobile | Node | Points relevés à l'extraction |
 |---|---|---|---|
 | M01 | Promo header | `451:39` | h=30, slider seul, texte 11 px |

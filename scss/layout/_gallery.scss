@@ -85,21 +85,28 @@
     margin-top: 40px;
     padding: 0;
 
+    // Frame 451:479 (374×310) : accroche y=0 (h=8), @Cadenza y=20 (h=17),
+    // description y=57 (h=25), bande y=114 (h=196). Les marges intègrent la
+    // fusion avec les marges négatives de rognage qui les précèdent.
     &__eyebrow {
       font-size: 12px;
+      line-height: 1;
+      margin-bottom: -4px;
     }
 
     &__handle {
       font-size: 24px;
+      line-height: 1;
       letter-spacing: -0.48px;
-      margin-top: 11px;
+      margin-top: 12px;
+      margin-bottom: -7px;
     }
 
     &__subtitle {
       font-size: 12px;
       line-height: 17px;
       max-width: 267px;
-      margin: 20px auto 0;
+      margin: 20px auto -9px;
     }
 
     &__strip {
@@ -108,7 +115,7 @@
       align-items: flex-start;
       gap: 8px;
       padding: 0;
-      margin-top: 23px;
+      margin-top: 32px;
     }
   }
 }

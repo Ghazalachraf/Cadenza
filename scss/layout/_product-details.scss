@@ -249,34 +249,59 @@
       width: 100%;
     }
 
+    // Rythme vertical du bloc product_info (451:242) : badge y=465,
+    // titre y=489, description y=535 (h=110), prix y=671, options y=714,
+    // quantité y=792, boutons y=884 (h=39), fin à 923.
     &__badge {
       font-size: 12px;
+      line-height: 1;
     }
 
     &__title {
       font-size: 25px;
-      line-height: 40px;
+      line-height: 1;
+      margin-top: 12px;
     }
 
     &__description {
       font-size: 14px;
-      line-height: 25px;
+      // 5 lignes × 22 = 110px, hauteur exacte du bloc 451:244.
+      line-height: 22px;
       max-width: 348px;
+      margin-top: 21px;
+    }
+
+    &__price {
+      margin-top: 26px;
     }
 
     // La gouttière desktop de 80 px repoussait le bloc Couleur à 239 px du
     // bord, alors que la maquette mobile le place juste après les tailles.
     &__options {
       gap: 20px;
+      margin-top: 18px;
+    }
+
+    // Libellé 10px de haut + 16px d'écart + contrôles 30px = blocs de 56px
+    // (451:249, 451:273).
+    &__option-label {
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    &__quantity {
+      margin-top: 22px;
     }
 
     &__price-current {
       font-size: 25px;
+      line-height: 1;
       letter-spacing: -0.5px;
     }
 
     &__price-original {
       font-size: 18px;
+      line-height: 1;
       letter-spacing: -0.36px;
     }
 
@@ -308,11 +333,17 @@
       flex-direction: row;
       gap: 6px;
       width: 100%;
+      margin-top: 36px;
     }
 
+    // Boutons 170×39 dans la maquette (451:285, 451:287).
     &__btn {
       flex: 1;
-      padding: 14px 30px;
+      height: 39px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
       font-size: 16px;
     }
   }

@@ -119,20 +119,28 @@
 // Mobile — frame Figma 451:450 : 4 tuiles 348 × 325 en défilement horizontal
 // --------------------------------------------------------------------------
 @include mobile {
+  // Frame 451:450 (390×555) : titre à y=54 (h=17), description à y=91
+  // (h=25), tuiles à y=146 (h=325), 84 px sous les tuiles (barre de
+  // progression à 30 px, puis 54 de gouttière).
   .accessories {
-    padding: 54px 21px;
+    padding: 54px 21px 84px;
 
     &__title {
       font-size: 24px;
+      line-height: 1;
       letter-spacing: -0.48px;
+      // Boîte 24px rendue, 17px dans la maquette (451:453).
+      margin-bottom: -7px;
     }
 
     &__subtitle {
       font-size: 12px;
       line-height: 17px;
       max-width: 228px;
-      margin-left: auto;
-      margin-right: auto;
+      // 13 nets après fusion avec le -7 du titre (20 − 7) : description à
+      // y=91. Le -9 rogne les 2 lignes × 17 (34px) à la boîte Figma de 25px
+      // (451:452).
+      margin: 20px auto -9px;
     }
 
     &__grid {
@@ -140,6 +148,8 @@
       grid-template-columns: none;
       grid-template-rows: none;
       gap: 8px;
+      // 21 nets après fusion avec le -9 de la description (30 − 9) :
+      // tuiles à y=146.
       margin-top: 30px;
       overflow-x: auto;
       justify-content: flex-start;

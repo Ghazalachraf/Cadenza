@@ -129,23 +129,31 @@
   .compare {
     // Écart avec la section précédente : 451:1118 à y=7029, collections info finit à 6944.
     margin-top: 85px;
-    padding: 40px 0;
+    // Le frame (390×569) démarre sur l'accroche et finit au bas du viewer :
+    // aucune gouttière verticale.
+    padding: 0;
 
     &__eyebrow {
       font-size: 14px;
+      line-height: 1;
+      // Boîte 14px rendue, 10px dans la maquette (451:1053).
+      margin-bottom: -4px;
     }
 
     &__title {
       font-size: 24px;
-      line-height: 40px;
-      margin-top: 23px;
+      line-height: 1;
+      margin-top: 13px;
+      // Boîte 24px rendue, 17px dans la maquette (451:1054).
+      margin-bottom: -7px;
     }
 
     &__viewer {
       --compare-pos: 77.2%;
 
+      // En-tête fini à y=40, viewer à y=98 (451:1079).
       height: 471px;
-      margin-top: 35px;
+      margin-top: 58px;
       background: #ffdfdf;
     }
 

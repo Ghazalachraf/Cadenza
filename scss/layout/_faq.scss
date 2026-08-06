@@ -14,7 +14,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding: 67px 10px 80px;
+  // Frame 451:953 (390×850) : titre à y=67 (h=24), description à y=117
+  // (h=79), accordéon à y=276 (h=504), 70 px de gouttière basse.
+  padding: 67px 10px 70px;
   text-align: center;
   overflow: hidden;
 
@@ -23,8 +25,11 @@
     font-family: $font-heading;
     font-weight: 500;
     font-size: 34px;
+    line-height: 1;
     letter-spacing: -0.68px;
     color: $color-black;
+    // Boîte 34px rendue, 24px dans la maquette (451:1010).
+    margin-bottom: -10px;
   }
 
   &__intro {
@@ -34,7 +39,10 @@
     line-height: 23px;
     color: $color-black;
     max-width: 313px;
-    margin: 16px auto 0;
+    // 26 et non 16 : la marge fusionne avec le -10 du titre (flux normal),
+    // soit 16 nets — l'intro tombe à y=117 (451:1011). Le -13 rogne les
+    // 4 lignes × 23 (92px) à la boîte Figma de 79px.
+    margin: 26px auto -13px;
   }
 
   &__list {
@@ -43,7 +51,9 @@
     flex-direction: column;
     gap: 8px;
     max-width: 370px;
-    margin: 110px auto 0;
+    // 67 nets après fusion avec le -13 de l'intro (80 − 13) : l'accordéon
+    // tombe à y=276, à 80 px du bas rogné de l'intro (196).
+    margin: 80px auto 0;
     text-align: left;
   }
 
@@ -64,7 +74,8 @@
     font-family: $font-heading;
     font-weight: 600;
     font-size: 16px;
-    line-height: 1.2;
+    // 19px exact (451:971) : 1.2 donnait 19,2 et l'accordéon cumulait +2px.
+    line-height: 19px;
     color: $color-black;
   }
 

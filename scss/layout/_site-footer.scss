@@ -112,14 +112,21 @@
 @include mobile {
   .site-footer {
     // 38 px sur 390 = 9,7 % ; la gouttière suit la largeur jusqu'à 768 px.
-    padding: 100px clamp(20px, 9.74vw, 56px) 0;
+    // 103 px sous les colonnes avant le filet du copyright (451:568 à
+    // y=1185, colonnes finies à 1082).
+    padding: 100px clamp(20px, 9.74vw, 56px) 103px;
 
     &__inner {
       flex-direction: column;
       gap: 40px;
     }
 
-    // 40 px séparent la marque du premier bloc de liens, 60 px les blocs entre eux.
+    // 70 px séparent la marque du premier bloc de liens (socials finis à
+    // y=270, colonnes à y=340), 60 px les blocs entre eux.
+    &__column:first-of-type {
+      margin-top: 30px;
+    }
+
     &__column + &__column {
       margin-top: 20px;
     }
@@ -129,19 +136,24 @@
     }
   }
 
+  // Barre copyright 451:568 : filet à y=1185, texte à y=1207 (h=14),
+  // fin du frame à 1238 — soit 22 / 14 / 17.
   .bottom-footer {
     flex-direction: column;
     gap: 22px;
-    padding: 60px 0 17px;
+    padding: 22px 0 17px;
     background: #121212;
 
     // La maquette mobile place un filet pleine largeur au-dessus du copyright.
     // Sa couleur n'est pas remontée par l'extraction : valeur à confirmer (A08).
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    // box-shadow inset plutôt que border-top : le trait Figma (451:569) ne
+    // compte pas dans la hauteur de la barre (53 px).
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 
     &__copy {
       font-family: $font-heading;
       font-size: 14px;
+      line-height: 1;
       letter-spacing: 0.5px;
       text-align: center;
     }
