@@ -72,6 +72,7 @@ collections info, compare, FAQ, accessories, gallery, footer + copyright.
 | M17 | Gallery | `451:479` | bande défilante, tuiles 227×196 (gabarit desktop) |
 | M18 | Newsletter | `451:503` | h=225, **formulaire sur une ligne**, champ 181×30 |
 | M19 | Footer | `451:515` | colonne, gouttières 40/60, filet + copyright centré |
+| M20 | Menu mobile (burger) | `451:782` | plein écran, accordéon Home/Shop/New Arrivals/Collection/About, suggestions + langue/devise. **About** affiche un chevron dans la maquette comme les autres entrées, mais n'a pas de mega-menu côté desktop : son sous-menu ne contient donc que le lien réel « About us » plutôt que des catégories inventées |
 
 ---
 

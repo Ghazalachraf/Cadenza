@@ -14,14 +14,61 @@ async function loadAllIncludes() {
   await Promise.all(Array.from(targets, loadInclude));
 }
 
-function initBurgerMenu() {
+// --------------------------------------------------------------------------
+// Menu mobile plein écran (451:782) — ouvert par le burger, accordéon
+// Home/Shop/New Arrivals/Collection/About, un seul panneau ouvert à la fois.
+// --------------------------------------------------------------------------
+function initMobileMenu() {
   const burger = document.querySelector('[data-burger-toggle]');
-  const menu = document.querySelector('.site-header__menu');
+  const menu = document.querySelector('[data-mobile-menu]');
+  const closeBtn = document.querySelector('[data-mobile-menu-close]');
   if (!burger || !menu) return;
 
+  const close = () => {
+    menu.hidden = true;
+    burger.classList.remove('is-active');
+    document.body.style.overflow = '';
+  };
+
+  const open = () => {
+    menu.hidden = false;
+    burger.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  };
+
   burger.addEventListener('click', () => {
-    const isOpen = menu.classList.toggle('is-open');
-    burger.classList.toggle('is-active', isOpen);
+    if (menu.hidden) open();
+    else close();
+  });
+
+  closeBtn?.addEventListener('click', close);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !menu.hidden) close();
+  });
+
+  const accordions = menu.querySelectorAll('[data-mobile-accordion]');
+  const closeAllAccordions = () => {
+    accordions.forEach((item) => {
+      item.classList.remove('is-open');
+      item.querySelector('[data-mobile-accordion-panel]').hidden = true;
+      item.querySelector('[data-mobile-accordion-toggle]').setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  accordions.forEach((item) => {
+    const toggle = item.querySelector('[data-mobile-accordion-toggle]');
+    const panel = item.querySelector('[data-mobile-accordion-panel]');
+
+    toggle.addEventListener('click', () => {
+      const willOpen = panel.hidden;
+      closeAllAccordions();
+      if (willOpen) {
+        item.classList.add('is-open');
+        panel.hidden = false;
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
   });
 }
 
@@ -331,7 +378,7 @@ function initNavMegaMenus() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadAllIncludes();
-  initBurgerMenu();
+  initMobileMenu();
   initPromoSlider();
   initFixedHeader();
   initBackToTop();

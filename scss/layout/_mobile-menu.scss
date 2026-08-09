@@ -1,0 +1,139 @@
+// ==========================================================================
+// Menu mobile plein écran (451:782) — accordéon Home/Shop/New Arrivals/
+// Collection/About, suggestions "You may also like" et sélecteurs
+// langue/devise. Ouvert par le burger (451:52), n'existe que sous $bp-mobile.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow-y: auto;
+  background: rgba(245, 243, 241, 0.96);
+  padding: 89px 41px 40px;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 13px;
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // ---- Accordéon Home / Shop / New Arrivals / Collection / About ---------
+  &__nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    padding-top: 25px;
+
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+
+  &__row {
+    @include flex($align: center, $justify: space-between);
+    width: 100%;
+    padding-bottom: 39px;
+    border-bottom: 1px solid rgba(37, 35, 36, 0.15);
+    text-align: left;
+  }
+
+  &__link {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    color: $color-black;
+  }
+
+  &__chevron {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease;
+  }
+
+  &__item.is-open {
+    .mobile-menu__link {
+      color: $color-primary;
+    }
+
+    .mobile-menu__chevron {
+      transform: scaleY(-1);
+    }
+  }
+
+  &__submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    margin: 30px 0 7px;
+
+    &[hidden] {
+      display: none;
+    }
+
+    a {
+      font-family: $font-display;
+      font-weight: 500;
+      font-size: 16px;
+      color: $color-black;
+    }
+  }
+
+  // ---- "You may also like" (réutilise .panel__section-title/.panel__slider/
+  // .mini-card, identiques au tiroir panier) --------------------------------
+  &__suggestions {
+    margin-top: 40px;
+
+    .panel__section-title {
+      margin-top: 0;
+    }
+  }
+
+  // ---- Langue / devise (451:816) ------------------------------------------
+  &__settings {
+    @include flex($align: center, $justify: center, $gap: 54px);
+    margin-top: 31px;
+  }
+
+  &__setting-btn {
+    @include flex($align: center, $gap: 6px);
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-black;
+
+    &[aria-expanded='true'] img {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// Le menu mobile n'est atteignable que par le burger, absent au-delà de
+// $bp-mobile : par sécurité il reste malgré tout masqué au-delà.
+@include desktop {
+  .mobile-menu {
+    display: none;
+  }
+}

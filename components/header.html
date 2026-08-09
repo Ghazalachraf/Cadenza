@@ -184,3 +184,148 @@
     </a>
   </div>
 </header>
+
+<!-- Menu mobile plein écran (451:782), ouvert par le burger -->
+<div class="mobile-menu" data-mobile-menu hidden>
+  <button type="button" class="mobile-menu__close" data-mobile-menu-close aria-label="Fermer le menu">
+    <img src="assets/icons/icon-panel-close.svg" alt="" width="16" height="16">
+  </button>
+
+  <nav class="mobile-menu__nav" aria-label="Menu principal">
+    <div class="mobile-menu__item">
+      <a href="index.html" class="mobile-menu__row">
+        <span class="mobile-menu__link">Home</span>
+      </a>
+    </div>
+
+    <div class="mobile-menu__item">
+      <a href="shop.html" class="mobile-menu__row">
+        <span class="mobile-menu__link">Shop</span>
+      </a>
+    </div>
+
+    <div class="mobile-menu__item" data-mobile-accordion>
+      <button type="button" class="mobile-menu__row" data-mobile-accordion-toggle aria-expanded="false">
+        <span class="mobile-menu__link">New Arrivals</span>
+        <img class="mobile-menu__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+      </button>
+      <div class="mobile-menu__submenu" data-mobile-accordion-panel hidden>
+        <a href="shop.html">New Arrivals</a>
+        <a href="shop.html">Top Sellings</a>
+        <a href="shop.html">Trendigs Tops</a>
+        <a href="shop.html">Latest Fashion</a>
+      </div>
+    </div>
+
+    <div class="mobile-menu__item" data-mobile-accordion>
+      <button type="button" class="mobile-menu__row" data-mobile-accordion-toggle aria-expanded="false">
+        <span class="mobile-menu__link">Collection</span>
+        <img class="mobile-menu__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+      </button>
+      <div class="mobile-menu__submenu" data-mobile-accordion-panel hidden>
+        <a href="shop.html">TopShop</a>
+        <a href="shop.html">Lingerie</a>
+        <a href="shop.html">Activewear</a>
+        <a href="shop.html">Winter</a>
+      </div>
+    </div>
+
+    <!-- La maquette (451:800/808) affiche un chevron sur "About" comme sur les
+         autres entrées, mais aucun sous-menu n'existe côté desktop pour cette
+         page (lien direct). Plutôt que d'inventer des catégories, ce sous-menu
+         ne contient que le lien réel vers la page. -->
+    <div class="mobile-menu__item" data-mobile-accordion>
+      <button type="button" class="mobile-menu__row" data-mobile-accordion-toggle aria-expanded="false">
+        <span class="mobile-menu__link">About</span>
+        <img class="mobile-menu__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+      </button>
+      <div class="mobile-menu__submenu" data-mobile-accordion-panel hidden>
+        <a href="about.html">About us</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu__suggestions">
+    <p class="panel__section-title">You may also like</p>
+    <div class="panel__slider">
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-gym-suit.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Black Gym Suit</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">85,00$ <span class="mini-card__price-original">99,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-shorte.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Shorte with back</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">65,00$ <span class="mini-card__price-original">65,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-noya.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Noya Slim Dress</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">55,00$ <span class="mini-card__price-original">99,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+
+      <div class="mini-card">
+        <img class="mini-card__thumb" src="assets/images/cart-dumane.jpg" alt="">
+        <div class="mini-card__body">
+          <p class="mini-card__name">Dumane Brace Dress</p>
+          <p class="mini-card__sizes">S - M - L</p>
+          <p class="mini-card__price">35,00$ <span class="mini-card__price-original">69,00$</span></p>
+        </div>
+        <a class="mini-card__link" href="product.html">View details</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-menu__settings">
+    <!-- Langue (451:817) -->
+    <div class="dropdown" data-dropdown>
+      <button type="button" class="mobile-menu__setting-btn" data-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+        <span data-dropdown-value>English</span>
+        <img src="assets/icons/icon-chevron-down.svg" alt="" width="16" height="16">
+      </button>
+      <ul class="dropdown__list" data-dropdown-list hidden>
+        <li><button type="button" class="dropdown__item is-active" data-dropdown-option>English</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option>Chinese</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option>Spanish</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option>French</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option>Hindi</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option>Russian</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option>Bengali</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option>Arabic</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option>Portuguese</button></li>
+      </ul>
+    </div>
+
+    <!-- Devise (451:821) -->
+    <div class="dropdown" data-dropdown>
+      <button type="button" class="mobile-menu__setting-btn" data-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+        <span data-dropdown-value>USD</span>
+        <img src="assets/icons/icon-chevron-down.svg" alt="" width="16" height="16">
+      </button>
+      <ul class="dropdown__list" data-dropdown-list hidden>
+        <li><button type="button" class="dropdown__item is-active" data-dropdown-option data-short="USD">United States, USD</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option data-short="EUR">Eurozone, EUR</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option data-short="JPY">Japan, JPY</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option data-short="GBP">United Kingdom, GBP</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option data-short="AUD">Australia, AUD</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option data-short="CAD">Canada, CAD</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option data-short="CHF">Switzerland, CHF</button></li>
+        <li><button type="button" class="dropdown__item" data-dropdown-option data-short="CNY">China, CNY</button></li>
+      </ul>
+    </div>
+  </div>
+</div>
