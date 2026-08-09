@@ -15,7 +15,14 @@
 }
 
 .site-header {
-  @include flex($align: center, $justify: space-between);
+  // Grid plutôt que flex + space-between : le logo (36:8) est centré sur la
+  // largeur totale du header (642 à 798 sur 1440 = pile 720), indépendamment
+  // de la largeur du menu (405px) et des actions (181px), qui ne sont pas
+  // symétriques. En space-between le bloc du milieu se cale entre les deux
+  // groupes plutôt qu'au vrai centre — d'où un décalage de 117px à droite.
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   @include container-padding;
   position: absolute;
   top: 100%;
@@ -27,6 +34,19 @@
 
   &__menu {
     @include flex($align: center, $gap: 30px);
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  &__logo {
+    grid-column: 2;
+    justify-self: center;
+  }
+
+  &__actions,
+  &__icons {
+    grid-column: 3;
+    justify-self: end;
   }
 
   &__link {
@@ -256,12 +276,11 @@
 
     &__burger {
       display: block;
-      order: 1;
+      grid-column: 1;
+      justify-self: start;
     }
 
     &__logo {
-      order: 2;
-
       .site-header__logo-img {
         width: 94px;
         height: 18px;
@@ -270,7 +289,8 @@
 
     &__mobile-icons {
       @include flex($align: center, $gap: 10px);
-      order: 3;
+      grid-column: 3;
+      justify-self: end;
 
       img {
         width: 18px;
