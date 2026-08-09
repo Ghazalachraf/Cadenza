@@ -143,6 +143,15 @@ function initPanels() {
   syncCartState();
 }
 
+// Pas de page de résultats de recherche dans le projet (ni maquette, ni
+// fichier — cf. product.html/shop.html) : on se contente d'empêcher le
+// rechargement de page que faisait le submit sans action ni handler,
+// plutôt que d'inventer une page ou un état de résultats absents du design.
+function initSearchForm() {
+  const form = document.querySelector('.search-panel__form');
+  form?.addEventListener('submit', (event) => event.preventDefault());
+}
+
 // L'état vide du panier (114:565) prend la place de la liste et du récapitulatif
 // dès que celle-ci ne contient plus d'article.
 function syncCartState() {
@@ -339,4 +348,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   initQuantityControls();
   initDropdowns();
   initNavMegaMenus();
+  initSearchForm();
 });
