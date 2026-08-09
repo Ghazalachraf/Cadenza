@@ -55,6 +55,9 @@
     font-family: $font-heading;
     font-weight: 500;
     font-size: 24px;
+    // Hauteur de capitale du 24px (319:741, 443:66 : h=17), sinon
+    // l'interligne global de 1,4 donnerait 33,6px et pousserait tout le bloc.
+    line-height: 17px;
     color: $color-white;
     text-transform: uppercase;
   }
@@ -67,19 +70,29 @@
     letter-spacing: -1.28px;
     color: $color-white;
     max-width: 801px;
-    margin-top: 24px;
+    // 31px séparent la capitale de l'eyebrow de celle du titre (287 → 318).
+    margin-top: 31px;
+    // Figma arrête le bloc à la dernière capitale (319:740 : h=185 = 2×70+45) ;
+    // la boîte CSS descend jusqu'au bas de la dernière ligne, d'où 25px de
+    // vide en trop à reprendre pour que le CTA retrouve son ancrage.
+    margin-bottom: -25px;
   }
 
   &__actions {
     @include flex($align: center, $gap: 16px);
-    margin-top: 40px;
+    margin-top: 48px;
   }
 
   &__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     padding: 20px 34px;
+    // Figma mesure le libellé à sa hauteur de capitale (text-box-trim) : 13px
+    // pour du 18px, d'où un bouton de 53px = 20 + 13 + 20 (319:738, 443:63).
+    // L'interligne global de 1,4 donnerait sinon 25,2px de texte, soit 65px.
+    line-height: 13px;
     border-radius: 4px;
     background: $color-white;
     font-family: $font-display;
@@ -103,8 +116,9 @@
       @include container-padding;
     }
 
-    .hero__title {
-      margin-top: 31px;
+    // 443:65 finit à 464, le premier bouton (443:63) commence à 520.
+    .hero__actions {
+      margin-top: 56px;
     }
   }
 
@@ -159,6 +173,8 @@
 
     &__eyebrow {
       font-size: 11px;
+      // 451:70 : h=8, capitale du 11px.
+      line-height: 8px;
     }
 
     &__title {
@@ -168,11 +184,15 @@
       line-height: 30px;
       letter-spacing: -0.48px;
       max-width: 315px;
-      margin-top: 12px;
+      // 451:70 finit à 167, 451:49 commence à 181.
+      margin-top: 14px;
+      // 451:49 : h=77 = 2×30 + 17 de capitale ; la boîte CSS en fait 90.
+      margin-bottom: -13px;
     }
 
     &__actions {
-      margin-top: 22px;
+      // 451:49 finit à 258, 451:50 commence à 283.
+      margin-top: 25px;
       gap: 10px;
     }
 
@@ -180,6 +200,8 @@
       padding: 12px 20px;
       border-radius: 2px;
       font-size: 12px;
+      // 451:50 : bouton 146×32, libellé de 8px de capitale (12 + 8 + 12).
+      line-height: 8px;
       text-transform: uppercase;
     }
 
@@ -194,7 +216,12 @@
     }
 
     &__slide--left .hero__title {
-      margin-top: 12px;
+      margin-top: 14px;
+    }
+
+    // Le slide « video » reprend aussi l'ancrage vertical du premier slide.
+    &__slide--left .hero__actions {
+      margin-top: 25px;
     }
 
     &__dots {
