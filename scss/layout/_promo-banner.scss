@@ -47,12 +47,18 @@
     margin-bottom: -4px;
   }
 
+  // 144:170 : 138 × 37, libellé rogné à 10px de capitale (13,5 + 10 + 13,5).
+  // La largeur explicite est indispensable ici : sans elle le bouton, simple
+  // élément d'une colonne flex, s'étire sur toute la largeur de `__copy`.
   &__cta {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    width: 138px;
+    height: 37px;
     margin-top: 18px;
-    padding: 11px 30px;
+    padding: 0 30px;
     border-radius: 2px;
     background: $color-primary;
     font-family: $font-display;
@@ -60,6 +66,10 @@
     line-height: 1;
     color: $color-white;
     text-transform: capitalize;
+    // Le libellé (86px, 144:171) est plus large que la boîte de contenu
+    // (138 − 2×30 = 78) : sans cela il passerait sur deux lignes, alors que
+    // la maquette le garde sur une ligne, centré, débordant sur le padding.
+    white-space: nowrap;
   }
 
   &__product {
