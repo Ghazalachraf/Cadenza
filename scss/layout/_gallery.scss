@@ -13,24 +13,35 @@
     font-family: $font-display;
     font-weight: 500;
     font-size: 16px;
+    line-height: 1;
     color: $color-primary;
     text-transform: uppercase;
+    // Boîte ≈16px rendue, 11px dans la maquette (268:1004).
+    margin-bottom: -5px;
   }
 
   &__handle {
     font-family: $font-heading;
     font-weight: 500;
     font-size: 44px;
+    line-height: 1;
     letter-spacing: -0.88px;
     color: $color-black;
-    margin-top: 4px;
+    // Écart maquette eyebrow → handle (268:1004 → 268:982) : 111 à 130 = 19px.
+    margin-top: 19px;
+    // Boîte 44px rendue, 31px dans la maquette (268:982).
+    margin-bottom: -13px;
   }
 
   &__subtitle {
     font-family: $font-display;
     font-size: 18px;
+    line-height: 1;
     color: rgba(37, 35, 36, 0.8);
-    margin-top: 4px;
+    // Écart maquette handle → subtitle (268:982 → 268:981) : 161 à 182 = 21px.
+    margin-top: 21px;
+    // Boîte ≈18px rendue, 13px dans la maquette (268:981).
+    margin-bottom: -5px;
   }
 
   &__strip {

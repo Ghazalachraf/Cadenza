@@ -13,8 +13,12 @@
     font-family: $font-heading;
     font-weight: 500;
     font-size: 34px;
+    line-height: 1;
     letter-spacing: -0.68px;
     color: $color-black;
+    // Boîte ≈34px rendue, 24px dans la maquette (287:65) — même bloc que
+    // .our-collections__title (240:373).
+    margin-bottom: -2px;
   }
 
   &__subtitle {
@@ -35,7 +39,9 @@
     margin-right: auto;
     gap: 6px;
     justify-content: center;
-    margin-top: 30px;
+    // 30px d'écart avec l'en-tête + 20px de marge interne du cadre grille
+    // (287:66 : contenu à y=20 dans un cadre de 710px pour 690px de grille).
+    margin-top: 50px;
   }
 
   &__tile {

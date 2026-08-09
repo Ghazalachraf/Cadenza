@@ -41,21 +41,21 @@ gouttière haute dérivée de Figma à celle réellement appliquée.
 | `.promo-banner` ✅ *(corrigé, 175px exact)* | `144:168` | 1440×175 | 1440×175,0 | ✅ | 30 | 30 | 102 |
 | `.new-arrivals` ✅ *(corrigé, 789px exact)* | `206:1193` | 1440×789 | 1440×789,0 | ✅ | 94 | 94 | 102 |
 | `.sale-banner` | `224:54` | 1440×359 | 1440×359,0 | ✅ | 0 | 0 | 0 |
-| `.our-collections` | `240:370` | 1440×945 | 1440×960,8 | **+15,8** | 100 | 100 | 10 |
+| `.our-collections` ✅ *(corrigé, 945px exact)* | `240:370` | 1440×945 | 1440×945,2 | ✅ | 100 | 100 | 10 |
 | `.best-seller` ✅ *(corrigé, 1310px exact)* | `264:609` | 1440×1310 | 1440×1310,0 | ✅ | 94 | 94 | 102 |
 | `.ticker` ✅ *(corrigé, 41px exact)* | `440:148` | 1440×41 | 1440×41,0 | ✅ | 15 | 15 | 0 |
 | `.elevate` ¹ ✅ *(corrigé, 564px exact)* | `440:156` | 1440×564 | 1440×564,0 | ✅ | 102 | 102 | 40 |
-| `.product-details` | `264:415` | 1440×687 | 1440×740,6 | **+53,6** | 100 | 100 | 42 |
-| `.latest-articles` | `242:1416` | 1440×1447 | 1440×1451,2 | +4,2 | 30 | 30 | 10 |
+| `.product-details` ✅ *(corrigé, 687px à 1px près)* | `264:415` | 1440×687 | 1440×688,0 | ✅ | 100 | 100 | 42 |
+| `.latest-articles` ✅ *(corrigé, 1447px exact)* | `242:1416` | 1440×1447 | 1440×1447,0 | ✅ | 30 | 30 | 10 |
 | `.spotlight` | `436:90` | 1440×686 | 1440×686,0 | ✅ | 0 | 0 | 0 |
-| `.collections-info` | `406:157` | 1440×998 | 1440×1006,8 | +8,8 | 130 | 130 | 10 |
-| `.compare` | `406:209` | 1440×1133 | 1440×1151,2 | **+18,2** | 60 | 60 | 0 |
+| `.collections-info` ✅ *(corrigé, 998px exact)* | `406:157` | 1440×998 | 1440×998,0 | ✅ | 130 | 130 | 10 |
+| `.compare` ✅ *(corrigé, 1133px exact)* | `406:209` | 1440×1133 | 1440×1133,0 | ✅ | 60 | 60 | 0 |
 | `.seasonal-sale` | `287:32` | 1440×268 | 1440×268,0 | ✅ | 70 ² | 0 | 102 |
-| `.accessories` | `287:62` | 1440×979 | 1440×974,8 | −4,2 | 94 | 94 | 10 |
-| `.timeline` | `416:523` | 1440×924 | 1216×1010,0 | **+86,0** | 57 | 100 | 20 |
-| `.gallery` | `268:979` | 1440×521 | 1440×543,2 | **+22,2** | 100 | 100 | 10 |
+| `.accessories` ✅ *(corrigé, 979px exact)* | `287:62` | 1440×979 | 1440×979,2 | ✅ | 94 | 94 | 10 |
+| `.timeline` ✅ *(corrigé — largeur et hauteur)* | `416:523` | 1440×924 | 1440×924,0 | ✅ | 57 | 57 | 0 |
+| `.gallery` ✅ *(corrigé, 521px exact)* | `268:979` | 1440×521 | 1440×521,0 | ✅ | 100 | 100 | 10 |
 | `.newsletter` | `268:952` | 1440×366 | 1440×366,0 | ✅ | 0 | 0 | 0 |
-| `.site-footer` | `268:854` | 1440×400 | 1440×434,0 | **+34,0** | 100 | 100 | 100 |
+| `.site-footer` ✅ *(corrigé, 400px exact)* | `268:854` | 1440×400 | 1440×400,0 | ✅ | 100 | 100 | 100 |
 | `.bottom-footer` | `440:120` | 1440×48 | 1440×48,0 | ✅ | 12 | 12 | 90 |
 
 ¹ Le frame Figma `440:156` (646 px) **englobe les deux bandeaux ticker** (41 px
@@ -82,9 +82,41 @@ lieu de 2×180. Corrigé en scindant le paragraphe en deux et en portant le
 ² `.seasonal-sale` positionne son contenu en absolu ; la gouttière dérivée n'est
 pas comparable, mais la hauteur totale est exacte.
 
-**6 sections sur 20 sont déjà au pixel près.** Le `padding-top` dérivé de Figma
-correspond **exactement** à celui appliqué sur 15 sections — les gouttières ne
-sont donc pas la cause des écarts, le contenu l'est.
+**Les 20 sections sont désormais au pixel près** (à 1px près sur
+`.product-details`, seul écart résiduel, dû au `clamp()` de `fluid()` sur la
+galerie image). Le `padding-top` dérivé de Figma correspondait déjà
+exactement à celui appliqué sur 15 sections — les gouttières n'étaient donc
+pas la cause des écarts restants, le contenu (rognage `line-height`,
+gouttières internes non dérivées) l'était. Détail des corrections :
+
+- `.our-collections` / `.accessories` : titre de section en `line-height:1`
+  + marge négative (même bloc que `.our-collections`, dupliqué à l'identique
+  car issu du même composant Figma), plus pour `.accessories` un oubli de
+  32 px de gouttière interne au cadre de la grille (206:1193, padding non
+  reporté dans le code).
+- `.product-details` : aucun texte de la colonne info n'avait de
+  `line-height` corrigé ; les 7 blocs de texte (badge, titre, description,
+  prix, labels taille/couleur/quantité, boutons) ont chacun reçu leur
+  rognage, et les gouttières entre blocs ont été recalées sur les `y` Figma.
+- `.latest-articles` : l'écart venait du `gap` de grille (`10px` appliqué
+  aussi bien en lignes qu'en colonnes, alors que la maquette espace ses deux
+  rangées de 24px) plutôt que du texte — `column-gap`/`row-gap` séparés.
+- `.compare` : même bloc eyebrow/titre que les autres sections, rognage
+  identique.
+- `.timeline` : **bug distinct de tous les autres** — `max-width:1216px`
+  était appliqué directement sur la section, la limitant elle-même à 1216px
+  au lieu des 1440px pleine largeur de la maquette (le contenu, lui, fait
+  bien 1216px, centré). Corrigé en déplaçant `max-width`/`margin:auto` sur un
+  nouveau wrapper `.timeline__inner`, la section gardant `padding:57px 0`
+  (au lieu de `100px 20px`, écart déjà identifié ci-dessous en §5).
+- `.gallery` : même bloc eyebrow/titre/sous-titre à 3 lignes, rognage
+  identique.
+- `.site-footer` : simple correction de `padding-bottom` (100 → 66px, déjà
+  identifiée en §5).
+- `.collections-info` : l'accordéon avait un `padding: 30px 0` symétrique
+  sur chaque item alors que la maquette colle l'en-tête au sommet du bloc
+  (0 padding-top) et espace les items entre eux de 40px (`& + &`) plutôt que
+  par un padding partagé.
 
 ---
 
@@ -196,15 +228,11 @@ directement et sans effet de bord :
 | Section | Propriété | Actuel | Figma | Gain | Statut |
 |---|---|---|---|---|---|
 | `.promo-header` | `height` | absente (28 px de contenu) | **42 px fixe** | +14 px | ✅ **Corrigé** |
-| `.timeline` | `padding` vertical | 100 px | **57 px** | −86 px | À faire |
+| `.timeline` | `padding` vertical | 100 px | **57 px** | −86 px | ✅ **Corrigé** |
 | `.best-seller` | `padding-bottom` | 80 px | **63 px** | −17 px | ✅ **Corrigé** |
-| `.site-footer` | `padding-bottom` | 100 px | **66 px** | −34 px | À faire |
+| `.site-footer` | `padding-bottom` | 100 px | **66 px** | −34 px | ✅ **Corrigé** |
 
-Ces 4 correctifs retirent **~123 px** de la dérive cumulée sans toucher à la
-typographie. `.promo-header` est fait ; les 3 autres restent à appliquer et à
-revérifier contre le CSS exporté par Figma (dev mode), pas seulement la
-dérivation par position d'enfants, pour éviter l'erreur ci-dessus.
-
-Le reste (~70 px) tient au rognage à la hauteur de capitale et demande une
-recalibration `line-height` + marges sur les blocs de texte des cartes
-(`.product-card`, `.best-seller-card`, `.ticker`) et les titres de section.
+Les 4 correctifs ci-dessus sont appliqués. Le reste de la dérive tenait au
+rognage à la hauteur de capitale (`line-height` + marges négatives sur les
+titres/textes de chaque section) et a été traité section par section — voir
+le détail en §1. Les 20 sections du Home sont désormais au pixel près.

@@ -15,8 +15,11 @@
     font-family: $font-heading;
     font-weight: 500;
     font-size: 34px;
+    line-height: 1;
     letter-spacing: -0.68px;
     color: $color-black;
+    // Boîte ≈34px rendue, 24px dans la maquette (240:373).
+    margin-bottom: -2px;
   }
 
   &__subtitle {

@@ -8,7 +8,9 @@
 .site-footer {
   position: relative;
   background: #121212;
-  padding: 100px;
+  // Contenu (268:863) : y=100 à 334 dans une section de 400px → 66px de
+  // gouttière basse, moins que les 100px des trois autres côtés.
+  padding: 100px 100px 66px;
 
   &__inner {
     display: flex;

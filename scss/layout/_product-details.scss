@@ -21,8 +21,11 @@
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 1;
     color: $color-primary;
     text-transform: uppercase;
+    // Boîte ≈18px rendue (line-height:1), 13px dans la maquette (264:496).
+    margin-bottom: -5px;
   }
 
   &__title {
@@ -31,51 +34,67 @@
     font-size: 45px;
     line-height: 40px;
     color: $color-black;
-    margin-top: 12px;
+    // Écart maquette badge → titre (264:496 → 264:425) : 126 à 152 = 26px.
+    margin-top: 26px;
+    // Boîte 40px rendue, 32px dans la maquette (264:425).
+    margin-bottom: -8px;
   }
 
   &__description {
     font-family: $font-display;
     font-size: 18px;
-    line-height: 25px;
-    color: $color-black;
+    // 4 lignes à 22px = 88px, hauteur exacte du bloc maquette (264:427).
+    line-height: 22px;
     max-width: 581px;
-    margin-top: 20px;
+    // Écart maquette titre → description (264:425 → 264:427) : 184 à 210 = 26px.
+    margin-top: 26px;
   }
 
   &__price {
     @include flex($align: baseline, $gap: 12px);
-    margin-top: 24px;
+    // Écart maquette description → prix (264:427 → 264:524) : 298 à 320 = 22px.
+    margin-top: 22px;
   }
 
   &__price-current {
     font-family: $font-display;
     font-weight: 500;
     font-size: 25px;
+    line-height: 1;
     letter-spacing: -0.5px;
     color: $color-primary;
+    // Boîte ≈25px rendue, 18px dans la maquette (264:436).
+    margin-bottom: -7px;
   }
 
   &__price-original {
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 1;
     letter-spacing: -0.36px;
     color: #b9b9b9;
     text-decoration: line-through;
+    // Boîte ≈18px rendue, 13px dans la maquette (264:437).
+    margin-bottom: -5px;
   }
 
   &__options {
     @include flex($align: flex-start, $gap: 80px);
-    margin-top: 28px;
+    // Écart maquette prix → options (264:524 → 264:523) : 338 à 357 = 19px.
+    margin-top: 19px;
   }
 
   &__option-label {
     font-family: $font-display;
     font-weight: 500;
     font-size: 14px;
+    line-height: 1;
     color: $color-black;
     margin-bottom: 12px;
+    // line-height:1 ramène déjà la boîte à 14px (10px dans la maquette,
+    // 264:441/264:484) : suffisant pour retomber sur les 56px du groupe
+    // (264:523, 264:495) sans marge négative supplémentaire.
   }
 
   &__sizes {
@@ -130,7 +149,8 @@
   }
 
   &__quantity {
-    margin-top: 28px;
+    // Écart maquette options → quantité (264:523 → 264:495) : 413 à 435 = 22px.
+    margin-top: 22px;
   }
 
   &__quantity-control {
@@ -163,16 +183,21 @@
 
   &__actions {
     @include flex($align: center, $gap: 10px);
-    margin-top: 36px;
+    // Écart maquette quantité → boutons (264:495 → 264:525) : 491 à 517 = 26px.
+    margin-top: 26px;
   }
 
   &__btn {
     width: 307px;
-    padding: 22px 30px;
+    // 22px + line-height:1 (18px) = 62px de haut sans rognage, contre 57px
+    // dans la maquette (264:525) : padding vertical ramené à 19,5px de
+    // chaque côté (plutôt qu'asymétrique, pour garder le texte centré).
+    padding: 19.5px 30px;
     border-radius: 2px;
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 1;
     color: $color-white;
     text-align: center;
 

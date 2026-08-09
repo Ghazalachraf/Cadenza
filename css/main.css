@@ -473,7 +473,7 @@ ul {
 .site-footer {
   position: relative;
   background: #121212;
-  padding: 100px;
+  padding: 100px 100px 66px;
 }
 .site-footer__inner {
   display: flex;
@@ -1192,8 +1192,10 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 34px;
+  line-height: 1;
   letter-spacing: -0.68px;
   color: #252324;
+  margin-bottom: -2px;
 }
 .our-collections__subtitle {
   font-family: "DM Sans", sans-serif;
@@ -1602,8 +1604,10 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 1;
   color: #cb9274;
   text-transform: uppercase;
+  margin-bottom: -5px;
 }
 .product-details__title {
   font-family: "Jost", sans-serif;
@@ -1611,49 +1615,54 @@ ul {
   font-size: 45px;
   line-height: 40px;
   color: #252324;
-  margin-top: 12px;
+  margin-top: 26px;
+  margin-bottom: -8px;
 }
 .product-details__description {
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
-  line-height: 25px;
-  color: #252324;
+  line-height: 22px;
   max-width: 581px;
-  margin-top: 20px;
+  margin-top: 26px;
 }
 .product-details__price {
   display: flex;
   align-items: baseline;
   justify-content: flex-start;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 22px;
 }
 .product-details__price-current {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 25px;
+  line-height: 1;
   letter-spacing: -0.5px;
   color: #cb9274;
+  margin-bottom: -7px;
 }
 .product-details__price-original {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 1;
   letter-spacing: -0.36px;
   color: #b9b9b9;
   text-decoration: line-through;
+  margin-bottom: -5px;
 }
 .product-details__options {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 80px;
-  margin-top: 28px;
+  margin-top: 19px;
 }
 .product-details__option-label {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 14px;
+  line-height: 1;
   color: #252324;
   margin-bottom: 12px;
 }
@@ -1702,7 +1711,7 @@ ul {
   color: #ffffff;
 }
 .product-details__quantity {
-  margin-top: 28px;
+  margin-top: 22px;
 }
 .product-details__quantity-control {
   display: flex;
@@ -1736,15 +1745,16 @@ ul {
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
-  margin-top: 36px;
+  margin-top: 26px;
 }
 .product-details__btn {
   width: 307px;
-  padding: 22px 30px;
+  padding: 19.5px 30px;
   border-radius: 2px;
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 1;
   color: #ffffff;
   text-align: center;
 }
@@ -2071,7 +2081,7 @@ ul {
   color: #cb9274;
 }
 .collections-info__accordion {
-  margin-top: 60px;
+  margin-top: 79px;
   max-width: 702px;
 }
 .collections-info__image {
@@ -2084,7 +2094,10 @@ ul {
 
 .accordion-item {
   border-bottom: 1px solid rgba(37, 35, 36, 0.2);
-  padding: 30px 0;
+  padding: 0 0 25.8px;
+}
+.accordion-item + .accordion-item {
+  margin-top: 40px;
 }
 .accordion-item__header {
   display: flex;
@@ -2110,7 +2123,7 @@ ul {
   line-height: 27px;
   color: rgba(37, 35, 36, 0.8);
   max-width: 493px;
-  margin: 24px 0 0 41px;
+  margin: 24px 0 -11px 41px;
 }
 
 @media (max-width: 768px) {
@@ -2159,8 +2172,10 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 1;
   color: #cb9274;
   text-transform: uppercase;
+  margin-bottom: -5px;
 }
 .compare__title {
   font-family: "Jost", sans-serif;
@@ -2168,7 +2183,8 @@ ul {
   font-size: 32px;
   line-height: 40px;
   color: #252324;
-  margin-top: 8px;
+  margin-top: 20px;
+  margin-bottom: -18px;
 }
 .compare__viewer {
   position: relative;
@@ -2304,8 +2320,10 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 1;
   color: #cb9274;
   text-transform: uppercase;
+  margin-bottom: -5px;
 }
 .latest-articles__title {
   font-family: "Jost", sans-serif;
@@ -2314,12 +2332,16 @@ ul {
   line-height: 40px;
   color: #252324;
   max-width: 521px;
-  margin: 8px auto 0;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -18px;
 }
 .latest-articles__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  column-gap: 10px;
+  row-gap: 24px;
   max-width: 1410px;
   margin: 60px auto 0;
   text-align: left;
@@ -2642,8 +2664,10 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 34px;
+  line-height: 1;
   letter-spacing: -0.68px;
   color: #252324;
+  margin-bottom: -2px;
 }
 .accessories__subtitle {
   font-family: "DM Sans", sans-serif;
@@ -2660,7 +2684,7 @@ ul {
   margin-right: auto;
   gap: 6px;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 .accessories__tile {
   position: relative;
@@ -2842,13 +2866,16 @@ ul {
   }
 }
 .timeline {
+  padding: 57px 0;
+}
+.timeline__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 60px;
   max-width: 1216px;
   margin: 0 auto;
-  padding: 100px 20px;
+  padding: 0 20px;
 }
 .timeline__years {
   display: flex;
@@ -2982,8 +3009,12 @@ ul {
 @media (max-width: 768px) {
   .timeline {
     margin-top: 64px;
+    padding: 0;
+  }
+  .timeline__inner {
     flex-direction: column;
     gap: 7px;
+    max-width: none;
     padding: 0 19px;
   }
   .timeline__years {
@@ -3082,22 +3113,28 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 1;
   color: #cb9274;
   text-transform: uppercase;
+  margin-bottom: -5px;
 }
 .gallery__handle {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 44px;
+  line-height: 1;
   letter-spacing: -0.88px;
   color: #252324;
-  margin-top: 4px;
+  margin-top: 19px;
+  margin-bottom: -13px;
 }
 .gallery__subtitle {
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
+  line-height: 1;
   color: rgba(37, 35, 36, 0.8);
-  margin-top: 4px;
+  margin-top: 21px;
+  margin-bottom: -5px;
 }
 .gallery__strip {
   display: flex;

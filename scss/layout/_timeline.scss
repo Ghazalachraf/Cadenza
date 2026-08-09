@@ -6,10 +6,18 @@
 @use '../abstracts/mixins' as *;
 
 .timeline {
-  @include flex($align: center, $justify: space-between, $gap: 60px);
-  max-width: 1216px;
-  margin: 0 auto;
-  padding: 100px 20px;
+  // Section pleine largeur (416:523, 1440px) : le contenu (439:213) n'en
+  // occupe que 1216px, centré — la contrainte de largeur doit porter sur
+  // .timeline__inner, pas sur la section elle-même (sinon la section entière
+  // se retrouve limitée à 1216px au lieu de 1440px).
+  padding: 57px 0;
+
+  &__inner {
+    @include flex($align: center, $justify: space-between, $gap: 60px);
+    max-width: 1216px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
   // ---- Colonne des années -------------------------------------------------
   &__years {
@@ -176,11 +184,16 @@
   .timeline {
     // Écart avec la section précédente : 451:1019 à y=9370, la FAQ finit à 9306.
     margin-top: 64px;
-    flex-direction: column;
-    // 7 px entre le bas de la ligne d'années (y=81) et le haut du bloc de
-    // contenu 451:1020 (y=88).
-    gap: 7px;
-    padding: 0 19px;
+    padding: 0;
+
+    &__inner {
+      flex-direction: column;
+      // 7 px entre le bas de la ligne d'années (y=81) et le haut du bloc de
+      // contenu 451:1020 (y=88).
+      gap: 7px;
+      max-width: none;
+      padding: 0 19px;
+    }
 
     // Rangée de flèches (35 px) au-dessus de la ligne d'années (14 px), avec
     // 32 px entre les deux : 35 + 32 + 14 = 81, hauteur du bloc dans 451:1019.

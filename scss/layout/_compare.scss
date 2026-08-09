@@ -13,8 +13,11 @@
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 1;
     color: $color-primary;
     text-transform: uppercase;
+    // Boîte ≈18px rendue (line-height:1), 13px dans la maquette (398:8).
+    margin-bottom: -5px;
   }
 
   &__title {
@@ -23,7 +26,10 @@
     font-size: 32px;
     line-height: 40px;
     color: $color-black;
-    margin-top: 8px;
+    // Écart maquette eyebrow → titre (398:8 → 398:9) : 73 à 93 = 20px.
+    margin-top: 20px;
+    // Boîte 40px rendue, 22px dans la maquette (398:9).
+    margin-bottom: -18px;
   }
 
   &__viewer {
