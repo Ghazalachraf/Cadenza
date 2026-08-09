@@ -126,6 +126,9 @@
     position: absolute;
     top: 19px;
     right: 20px;
+    // Au-dessus de __variants (inset:0) qui, sans z-index, empilerait après
+    // dans le DOM et intercepterait les clics sur les icônes favoris/aperçu.
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 6px;

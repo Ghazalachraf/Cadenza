@@ -256,6 +256,65 @@ function initPasswordToggle() {
 // groupe. Les nuances de icon-color-swatches-pd.svg sont 3 cercles séparés
 // (Ellipse10/8/9), pas un SVG assemblé — rendues cliquables (correction de
 // l'arbitrage A13).
+// Ajoute (ou incrémente si même produit + couleur + taille déjà présents)
+// une ligne au panier. Réutilisée par .product-details (fiche produit
+// complète) et par les cartes New Arrivals / Best Seller / Latest Articles,
+// qui n'ont ni sélecteur de couleur ni quantité dans la maquette : color/qty
+// valent alors '' / 1 par défaut plutôt que d'inventer des contrôles absents
+// du design.
+function addCartLine({ name, unitPrice, image, color = '', size = '', qty = 1 }) {
+  const cartList = document.querySelector('[data-cart-items]');
+  const cartInstance = document.querySelector('[data-cart-instance][data-panel]');
+  if (!cartList || !cartInstance || !name || !unitPrice || !image) return;
+
+  const existing = Array.from(cartList.querySelectorAll('.cart-item')).find((item) => {
+    const attrs = Array.from(item.querySelectorAll('.cart-item__attr'), (a) => a.textContent);
+    return item.querySelector('.cart-item__name')?.textContent === name
+      && attrs.includes(`Color - ${color}`)
+      && attrs.includes(`Size - ${size}`);
+  });
+
+  if (existing) {
+    const existingQty = existing.querySelector('[data-qty]');
+    existingQty.textContent = parseInt(existingQty.textContent, 10) + qty;
+  } else {
+    const item = document.createElement('li');
+    item.className = 'cart-item';
+    item.dataset.unitPrice = unitPrice;
+    // name/unitPrice/image/color/size come from static markup (product data
+    // already rendered on the page), not user input.
+    const attrRows = [
+      color ? `<p class="cart-item__attr">Color - ${color}</p>` : '',
+      size ? `<p class="cart-item__attr">Size - ${size}</p>` : '',
+    ].join('');
+    item.innerHTML = `
+      <img class="cart-item__image" src="${image}" alt="">
+      <div class="cart-item__body">
+        <p class="cart-item__name">${name}</p>
+        ${attrRows}
+        <div class="cart-item__quantity">
+          <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">
+            <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
+          </button>
+          <span class="cart-item__qty" data-qty>${qty}</span>
+          <button type="button" class="cart-item__step" data-qty-dec aria-label="Diminuer la quantité">
+            <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
+          </button>
+        </div>
+      </div>
+      <button type="button" class="cart-item__remove" data-cart-remove aria-label="Retirer ${name}">
+        <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
+      </button>
+      <p class="cart-item__price" data-line-price></p>
+    `;
+    cartList.appendChild(item);
+    wireCartItem(item, cartInstance);
+  }
+
+  updateCartInstance(cartInstance);
+  document.querySelector('[data-panel-open="cart"]')?.click();
+}
+
 // Quantité, Add to cart et Buy it now réutilisent le contrat data-* du
 // panier (formatPrice/updateCartInstance, définis dans includes.js) plutôt
 // que dupliquer la logique de calcul de prix.
@@ -291,60 +350,14 @@ function initProductDetails() {
   section.querySelector('[data-product-qty-dec]')?.addEventListener('click', () => stepQty(-1));
 
   const addToCart = () => {
-    const cartList = document.querySelector('[data-cart-items]');
-    const cartInstance = document.querySelector('[data-cart-instance][data-panel]');
-    if (!cartList || !cartInstance) return;
-
-    const name = section.dataset.productName;
-    const unitPrice = section.dataset.productUnitPrice;
-    const image = section.dataset.productImage;
-    const size = section.querySelector('.product-details__size--active')?.textContent || '';
-    const color = section.querySelector('.product-details__color--active')?.getAttribute('aria-label') || '';
-    const qty = parseInt(qtyEl.textContent, 10);
-
-    const existing = Array.from(cartList.querySelectorAll('.cart-item')).find((item) => {
-      const attrs = Array.from(item.querySelectorAll('.cart-item__attr'), (a) => a.textContent);
-      return item.querySelector('.cart-item__name')?.textContent === name
-        && attrs.includes(`Color - ${color}`)
-        && attrs.includes(`Size - ${size}`);
+    addCartLine({
+      name: section.dataset.productName,
+      unitPrice: section.dataset.productUnitPrice,
+      image: section.dataset.productImage,
+      size: section.querySelector('.product-details__size--active')?.textContent || '',
+      color: section.querySelector('.product-details__color--active')?.getAttribute('aria-label') || '',
+      qty: parseInt(qtyEl.textContent, 10),
     });
-
-    if (existing) {
-      const existingQty = existing.querySelector('[data-qty]');
-      existingQty.textContent = parseInt(existingQty.textContent, 10) + qty;
-    } else {
-      const item = document.createElement('li');
-      item.className = 'cart-item';
-      item.dataset.unitPrice = unitPrice;
-      // name/unitPrice/image come from static data-* attributes on this section
-      // (not user input); size is textContent of a fixed M/S/L/XL button set.
-      item.innerHTML = `
-        <img class="cart-item__image" src="${image}" alt="">
-        <div class="cart-item__body">
-          <p class="cart-item__name">${name}</p>
-          <p class="cart-item__attr">Color - ${color}</p>
-          <p class="cart-item__attr">Size - ${size}</p>
-          <div class="cart-item__quantity">
-            <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">
-              <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
-            </button>
-            <span class="cart-item__qty" data-qty>${qty}</span>
-            <button type="button" class="cart-item__step" data-qty-dec aria-label="Diminuer la quantité">
-              <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
-            </button>
-          </div>
-        </div>
-        <button type="button" class="cart-item__remove" data-cart-remove aria-label="Retirer ${name}">
-          <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
-        </button>
-        <p class="cart-item__price" data-line-price></p>
-      `;
-      cartList.appendChild(item);
-      wireCartItem(item, cartInstance);
-    }
-
-    updateCartInstance(cartInstance);
-    document.querySelector('[data-panel-open="cart"]')?.click();
   };
 
   section.querySelector('[data-product-add-cart]')?.addEventListener('click', addToCart);
@@ -392,6 +405,133 @@ function initTimeline() {
   document.querySelector('[data-timeline-next]')?.addEventListener('click', () => step(1));
 }
 
+// --- Favoris, tailles et ajout au panier sur les cartes produit ------------
+// New Arrivals, Best Seller et Latest Articles n'ont ni sélecteur de couleur
+// ni quantité dans la maquette (contrairement à .product-details) : addFromCard
+// se limite donc au nom/prix/image/taille réellement présents dans chaque carte.
+function initCardActions() {
+  document.querySelectorAll('[data-wishlist-toggle]').forEach((btn) => {
+    const img = btn.querySelector('img');
+    btn.addEventListener('click', () => {
+      const active = btn.getAttribute('aria-pressed') !== 'true';
+      btn.setAttribute('aria-pressed', String(active));
+      btn.setAttribute('aria-label', active ? 'Retirer des favoris' : 'Ajouter aux favoris');
+      if (img) {
+        img.src = active
+          ? 'assets/icons/icon-wishlist-btn-active.svg'
+          : 'assets/icons/icon-wishlist-btn.svg';
+      }
+    });
+  });
+
+  document.querySelectorAll('.product-card__sizes').forEach((group) => {
+    const sizes = group.querySelectorAll('.product-card__size');
+    sizes.forEach((button) => {
+      button.addEventListener('click', () => {
+        sizes.forEach((other) => other.classList.remove('product-card__size--active'));
+        button.classList.add('product-card__size--active');
+      });
+    });
+  });
+
+  const parsePrice = (text) => parseFloat(text.replace(/[^\d,.-]/g, '').replace(',', '.'));
+
+  const addFromCard = (card, { nameSel, priceSel, imageSel, sizeSel }) => {
+    const priceEl = card.querySelector(priceSel);
+    const name = card.querySelector(nameSel)?.textContent.trim();
+    // .firstChild ignores a trailing <span> (ex. product-card__price-original) :
+    // ne récupère que le prix courant, jamais le prix barré.
+    const priceText = priceEl?.firstChild?.textContent?.trim() || priceEl?.textContent.trim();
+    const image = card.querySelector(imageSel)?.getAttribute('src');
+    const size = sizeSel ? (card.querySelector(sizeSel)?.textContent.trim() || '') : '';
+    if (!name || !priceText || !image) return;
+    addCartLine({ name, unitPrice: parsePrice(priceText), image, size });
+  };
+
+  document.querySelectorAll('.product-card__cart-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.product-card');
+      if (!card) return;
+      addFromCard(card, {
+        nameSel: '.product-card__name',
+        priceSel: '.product-card__price',
+        imageSel: '.product-card__image',
+        sizeSel: '.product-card__size--active',
+      });
+    });
+  });
+
+  document.querySelectorAll('.best-seller-card__quickshop-btn--cart').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.best-seller-card');
+      if (!card) return;
+      addFromCard(card, {
+        nameSel: '.best-seller-card__name',
+        priceSel: '.best-seller-card__price',
+        imageSel: '.best-seller-card__image',
+      });
+    });
+  });
+
+  document.querySelectorAll('.article-card__cart').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.article-card');
+      if (!card) return;
+      addFromCard(card, {
+        nameSel: '.article-card__name',
+        priceSel: '.article-card__price',
+        imageSel: '.article-card__image',
+      });
+    });
+  });
+}
+
+// --- Onglets New Arrivals ---------------------------------------------------
+// La maquette (206:1193) ne fournit qu'un seul jeu de 5 produits, commun aux
+// 6 onglets (cf. SPECS.md A05) : basculer l'onglet actif est donc la seule
+// interaction réelle possible sans inventer un catalogue par catégorie.
+function initNewArrivalsTabs() {
+  const tabs = document.querySelectorAll('.new-arrivals__tab');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', (event) => {
+      event.preventDefault();
+      tabs.forEach((other) => other.classList.remove('new-arrivals__tab--active'));
+      tab.classList.add('new-arrivals__tab--active');
+    });
+  });
+}
+
+// --- Formulaire newsletter ---------------------------------------------------
+// Pas de backend : la validation et le retour visuel sont réels, l'envoi ne
+// l'est pas (comme le panier, qui ne persiste pas non plus côté serveur).
+function initNewsletterForm() {
+  const form = document.querySelector('.newsletter__form');
+  if (!form) return;
+
+  const submit = form.querySelector('.newsletter__submit');
+  const input = form.querySelector('.newsletter__input');
+  const defaultLabel = submit.textContent;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    submit.textContent = 'Subscribed!';
+    submit.disabled = true;
+    input.disabled = true;
+
+    setTimeout(() => {
+      form.reset();
+      submit.textContent = defaultLabel;
+      submit.disabled = false;
+      input.disabled = false;
+    }, 2500);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initCompare();
@@ -404,4 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPasswordToggle();
   initProductDetails();
   initTimeline();
+  initCardActions();
+  initNewArrivalsTabs();
+  initNewsletterForm();
 });
