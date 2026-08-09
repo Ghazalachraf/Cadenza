@@ -532,6 +532,54 @@ function initNewsletterForm() {
   });
 }
 
+// --- Checkout : bouton "Next" de l'étape 1 ----------------------------------
+// `novalidate` sur .checkout__form désactive la validation auto du navigateur
+// (le style d'erreur natif ne correspond pas à la maquette) mais l'API de
+// validation reste utilisable manuellement : on s'en sert donc pour bloquer
+// le passage à l'étape 2 tant que les champs requis (nom, e-mail, conditions)
+// ne sont pas remplis, plutôt que de laisser "Next" recharger la page (submit
+// sans action ni handler).
+function initCheckoutNext() {
+  const form = document.querySelector('.checkout__form');
+  if (!form) return;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    document.querySelector('[data-checkout-step-toggle][aria-controls="step-2-body"]')?.click();
+  });
+}
+
+// --- Checkout : code promo ---------------------------------------------------
+// Pas de catalogue de codes réel côté projet (rien à extraire de la maquette
+// sur ce point) : "Apply" valide donc réellement le champ (non vide) puis
+// répond honnêtement qu'aucun code n'est reconnu, plutôt que de simuler une
+// remise inventée ou de laisser le formulaire recharger la page.
+function initDiscountForm() {
+  const form = document.querySelector('.order-discount');
+  if (!form) return;
+
+  const input = form.querySelector('.order-discount__input');
+  const submit = form.querySelector('.order-discount__submit');
+  const defaultLabel = submit.textContent;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!input.value.trim()) {
+      input.focus();
+      return;
+    }
+
+    submit.textContent = 'Invalid code';
+    setTimeout(() => {
+      submit.textContent = defaultLabel;
+    }, 2000);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initCompare();
@@ -547,4 +595,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCardActions();
   initNewArrivalsTabs();
   initNewsletterForm();
+  initCheckoutNext();
+  initDiscountForm();
 });
