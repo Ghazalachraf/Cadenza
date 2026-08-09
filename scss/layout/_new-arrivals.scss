@@ -6,8 +6,10 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+// Pas de gouttière latérale ici, contrairement aux autres sections : le
+// carrousel (206:1202) occupe toute la largeur du frame et n'entre que de
+// 23px (206:1204), le titre et les onglets étant simplement centrés.
 .new-arrivals {
-  @include container-padding;
   padding-top: 94px;
   padding-bottom: 80px;
   display: flex;
@@ -61,6 +63,12 @@
   &__track {
     display: flex;
     gap: 8px;
+    // La première carte (206:1204) démarre à 23px du bord du frame.
+    padding-left: 23px;
+    // Sans cela, `scroll-snap-align: start` alignerait la première carte sur
+    // le bord du scrollport — qui ignore le padding — et la piste se
+    // décalerait d'elle-même de 23px au chargement.
+    scroll-padding-left: 23px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
   }
@@ -84,8 +92,9 @@
       height: 21px;
     }
 
+    // 206:1273 est à x=103 ; 206:1269 finit à 1397, soit 43px du bord droit.
     &--prev {
-      left: 8px;
+      left: 103px;
 
       img {
         transform: rotate(180deg);
@@ -93,7 +102,7 @@
     }
 
     &--next {
-      right: 8px;
+      right: 43px;
     }
   }
 }
@@ -269,6 +278,9 @@
     &__track {
       gap: 8px;
       padding: 0 8px;
+      // Doit suivre le padding mobile, sinon le snap décalerait la piste de
+      // la différence avec les 23px du desktop.
+      scroll-padding-left: 8px;
     }
   }
 
