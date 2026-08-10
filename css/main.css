@@ -1327,20 +1327,23 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 34px;
+  line-height: 24px;
   letter-spacing: -0.68px;
   color: #252324;
 }
 .our-collections__subtitle {
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
+  line-height: 13px;
   color: rgba(37, 35, 36, 0.8);
-  margin-top: 8px;
+  margin-top: 28px;
 }
 .our-collections__grid {
   display: flex;
   gap: 20px;
   margin-top: 50px;
   height: 730px;
+  padding: 20px 0;
 }
 
 .collection-tile {
@@ -1407,6 +1410,7 @@ ul {
   .our-collections__title {
     font-size: 24px;
     letter-spacing: -0.48px;
+    line-height: 17px;
   }
   .our-collections__subtitle {
     font-size: 12px;
@@ -1414,12 +1418,14 @@ ul {
     max-width: 228px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: -9px;
   }
   .our-collections__grid {
     flex-direction: column;
     height: auto;
     gap: 8px;
-    margin-top: 10px;
+    margin-top: 24px;
     padding: 10px 8px;
   }
   .collection-tile {

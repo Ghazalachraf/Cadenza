@@ -15,6 +15,9 @@
     font-family: $font-heading;
     font-weight: 500;
     font-size: 34px;
+    // Capitale du 34px (240:373 : h=24). Sans cela la boîte fait 47,6px et
+    // repousse la description puis toute la grille.
+    line-height: 24px;
     letter-spacing: -0.68px;
     color: $color-black;
   }
@@ -22,8 +25,11 @@
   &__subtitle {
     font-family: $font-display;
     font-size: 18px;
+    // Capitale du 18px (240:372 : h=13).
+    line-height: 13px;
     color: rgba(37, 35, 36, 0.8);
-    margin-top: 8px;
+    // 28px entre la capitale du titre (fin 124) et celle-ci (152).
+    margin-top: 28px;
   }
 
   &__grid {
@@ -31,6 +37,9 @@
     gap: 20px;
     margin-top: 50px;
     height: 730px;
+    // 242:1437 fait bien 730 de haut, mais ses tuiles n'en font que 690 :
+    // elles sont encadrées de 20px en haut et en bas.
+    padding: 20px 0;
   }
 }
 
@@ -114,6 +123,8 @@
     &__title {
       font-size: 24px;
       letter-spacing: -0.48px;
+      // 451:171 : h=17, capitale du 24px.
+      line-height: 17px;
     }
 
     &__subtitle {
@@ -122,15 +133,19 @@
       max-width: 228px;
       margin-left: auto;
       margin-right: auto;
+      // 451:170 : y=87 (donc 20px sous le titre), h=25 sur 2 lignes de 17 —
+      // la boîte CSS en fait 34, d'où les 9px repris.
+      margin-top: 20px;
+      margin-bottom: -9px;
     }
 
-    // Mesure comparée à la maquette : la première tuile tombait 14 px trop
-    // bas. Hauteurs (80/80/240/80) et gouttières (8) étaient déjà exactes.
+    // Hauteurs (80/80/240/80) et gouttières (8) déjà exactes ; 451:172
+    // commence à y=136 et encadre ses tuiles de 10px.
     &__grid {
       flex-direction: column;
       height: auto;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 24px;
       padding: 10px 8px;
     }
   }
