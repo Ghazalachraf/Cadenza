@@ -9,10 +9,12 @@
   padding: 60px 0 80px;
   text-align: center;
 
+  // En-tête 406:209 : accroche y=60 (h=13), titre y=93 (h=22), viewer y=193.
   &__eyebrow {
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 13px;
     color: $color-primary;
     text-transform: uppercase;
   }
@@ -21,9 +23,9 @@
     font-family: $font-heading;
     font-weight: 600;
     font-size: 32px;
-    line-height: 40px;
+    line-height: 22px;
     color: $color-black;
-    margin-top: 8px;
+    margin-top: 20px;
   }
 
   &__viewer {

@@ -8,8 +8,10 @@
 .timeline {
   @include flex($align: center, $justify: space-between, $gap: 60px);
   max-width: 1216px;
-  margin: 0 auto;
-  padding: 100px 20px;
+  // 416:523 démarre à y=11431, accessories finit à 11351 ; le contenu
+  // 439:213 y occupe 57..867 pour un frame de 924.
+  margin: 80px auto 0;
+  padding: 57px 20px;
 
   // ---- Colonne des années -------------------------------------------------
   &__years {

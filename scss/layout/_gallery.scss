@@ -9,10 +9,13 @@
   padding: 100px 10px 80px;
   text-align: center;
 
+  // En-tête 268:980 : accroche y=100 (h=11), pseudo y=130 (h=31),
+  // sous-titre y=182 (h=13), bandeau y=245.
   &__eyebrow {
     font-family: $font-display;
     font-weight: 500;
     font-size: 16px;
+    line-height: 11px;
     color: $color-primary;
     text-transform: uppercase;
   }
@@ -21,16 +24,18 @@
     font-family: $font-heading;
     font-weight: 500;
     font-size: 44px;
+    line-height: 31px;
     letter-spacing: -0.88px;
     color: $color-black;
-    margin-top: 4px;
+    margin-top: 19px;
   }
 
   &__subtitle {
     font-family: $font-display;
     font-size: 18px;
+    line-height: 13px;
     color: rgba(37, 35, 36, 0.8);
-    margin-top: 4px;
+    margin-top: 21px;
   }
 
   &__strip {

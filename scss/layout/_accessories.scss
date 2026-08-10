@@ -9,10 +9,13 @@
   padding: 94px 10px 80px;
   text-align: center;
 
+  // En-tête 287:63 : titre y=94 (h=24), sous-titre y=146 (h=13), grille
+  // y=209 (287:67).
   &__title {
     font-family: $font-heading;
     font-weight: 500;
     font-size: 34px;
+    line-height: 24px;
     letter-spacing: -0.68px;
     color: $color-black;
   }
@@ -20,8 +23,9 @@
   &__subtitle {
     font-family: $font-display;
     font-size: 18px;
+    line-height: 13px;
     color: rgba(37, 35, 36, 0.8);
-    margin-top: 8px;
+    margin-top: 28px;
   }
 
   &__grid {
@@ -35,7 +39,7 @@
     margin-right: auto;
     gap: 6px;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 50px;
   }
 
   &__tile {

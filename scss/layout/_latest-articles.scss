@@ -9,14 +9,19 @@
   padding: 30px 10px 100px;
   text-align: center;
 
+  // Rythme vertical du frame 242:1416 (h=1447) : accroche y=30 (h=13),
+  // titre y=63 (h=62), grille y=185 (h=1162), puis 100px de fond.
   &__eyebrow {
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 13px;
     color: $color-primary;
     text-transform: uppercase;
   }
 
+  // Bloc de 2 lignes : 80px rendus contre 62px rognés dans la maquette, soit
+  // 9px de demi-interligne de chaque côté à retrancher des écarts voisins.
   &__title {
     font-family: $font-heading;
     font-weight: 600;
@@ -24,15 +29,17 @@
     line-height: 40px;
     color: $color-black;
     max-width: 521px;
-    margin: 8px auto 0;
+    margin: 11px auto 0;
   }
 
+  // Deux rangées de 570px séparées de 22px (262:245).
   &__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    column-gap: 10px;
+    row-gap: 22px;
     max-width: 1410px;
-    margin: 60px auto 0;
+    margin: 51px auto 0;
     text-align: left;
   }
 
@@ -165,15 +172,18 @@
     opacity: 1;
   }
 
+  // Carte 570px (262:282) : visuel 485, ligne nom/prix rognée à 11px 28px
+  // plus bas, pastilles de 30px encore 16px plus bas.
   &__info {
     @include flex($align: baseline, $justify: space-between);
-    margin-top: 20px;
+    margin-top: 28px;
   }
 
   &__name {
     font-family: $font-heading;
     font-weight: 500;
     font-size: 16px;
+    line-height: 11px;
     letter-spacing: -0.32px;
     color: $color-black;
   }
@@ -182,12 +192,13 @@
     font-family: $font-display;
     font-weight: 500;
     font-size: 16px;
+    line-height: 11px;
     letter-spacing: -0.32px;
     color: $color-primary;
   }
 
   &__swatches {
-    margin-top: 10px;
+    margin-top: 16px;
     height: 30px;
   }
 }

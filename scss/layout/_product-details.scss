@@ -209,10 +209,14 @@
     flex-shrink: 0;
   }
 
+  // La colonne de vignettes fait 487px comme le visuel principal (264:527) :
+  // Figma y note des écarts de 10 puis 9, soit 9,5 arrondis — d'où la
+  // répartition plutôt qu'un `gap` fixe, qui donnait 488.
   &__thumbs {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    height: fluid(487px, 300px);
   }
 
   // « onClick or Hover the main img change to the target img » : les vignettes
@@ -336,7 +340,9 @@
 
     &__thumbs {
       flex-direction: row;
+      justify-content: flex-start;
       gap: 8px;
+      height: auto;
       order: 2;
     }
 

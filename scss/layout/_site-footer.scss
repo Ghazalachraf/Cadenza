@@ -8,7 +8,8 @@
 .site-footer {
   position: relative;
   background: #121212;
-  padding: 100px;
+  // 268:854 fait 400px : contenu 268:863 sur 100..334, puis 66px de fond.
+  padding: 100px 100px 66px;
 
   &__inner {
     display: flex;
@@ -104,10 +105,11 @@
     text-decoration: underline;
   }
 
+  // Pastille 490:64 : x=45, y=316 sur un cadre de 400.
   &__top {
     position: absolute;
     left: 45px;
-    bottom: 84px;
+    bottom: 16px;
     width: 68px;
     height: 68px;
   }

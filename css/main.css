@@ -593,7 +593,7 @@ ul {
 .site-footer {
   position: relative;
   background: #121212;
-  padding: 100px;
+  padding: 100px 100px 66px;
 }
 .site-footer__inner {
   display: flex;
@@ -676,7 +676,7 @@ ul {
 .site-footer__top {
   position: absolute;
   left: 45px;
-  bottom: 84px;
+  bottom: 16px;
   width: 68px;
   height: 68px;
 }
@@ -1964,7 +1964,8 @@ ul {
 .product-details__thumbs {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+  height: clamp(300px, 33.8194444444vw, 487px);
 }
 .product-details__thumb {
   width: clamp(120px, 14.0972222222vw, 203px);
@@ -2052,7 +2053,9 @@ ul {
   }
   .product-details__thumbs {
     flex-direction: row;
+    justify-content: flex-start;
     gap: 8px;
+    height: auto;
     order: 2;
   }
   .product-details__thumb, .product-details__main-image {
@@ -2081,6 +2084,7 @@ ul {
 .spotlight {
   display: flex;
   background: #e9e9e9;
+  margin-top: 10px;
 }
 .spotlight__panel {
   position: relative;
@@ -2272,6 +2276,7 @@ ul {
   display: flex;
   justify-content: center;
   gap: 73px;
+  margin-top: 4px;
   padding: 130px 10px 80px;
 }
 .collections-info__title {
@@ -2288,7 +2293,7 @@ ul {
   color: #cb9274;
 }
 .collections-info__accordion {
-  margin-top: 60px;
+  margin-top: 79px;
   max-width: 702px;
 }
 .collections-info__image {
@@ -2300,8 +2305,11 @@ ul {
 }
 
 .accordion-item {
-  border-bottom: 1px solid rgba(37, 35, 36, 0.2);
-  padding: 30px 0;
+  box-shadow: inset 0 -1px 0 rgba(37, 35, 36, 0.2);
+  padding: 0 0 30px;
+}
+.accordion-item + .accordion-item {
+  margin-top: 40px;
 }
 .accordion-item__header {
   display: flex;
@@ -2314,6 +2322,7 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 28px;
+  line-height: 36px;
   color: #201a1e;
   text-transform: uppercase;
 }
@@ -2327,7 +2336,7 @@ ul {
   line-height: 27px;
   color: rgba(37, 35, 36, 0.8);
   max-width: 493px;
-  margin: 24px 0 0 41px;
+  margin: 19px 0 -6px 41px;
 }
 
 @media (max-width: 768px) {
@@ -2360,6 +2369,7 @@ ul {
   }
   .accordion-item__title {
     font-size: 18px;
+    line-height: 1.4;
   }
   .accordion-item__body {
     font-size: 14px;
@@ -2376,6 +2386,7 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 13px;
   color: #cb9274;
   text-transform: uppercase;
 }
@@ -2383,9 +2394,9 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 600;
   font-size: 32px;
-  line-height: 40px;
+  line-height: 22px;
   color: #252324;
-  margin-top: 8px;
+  margin-top: 20px;
 }
 .compare__viewer {
   position: relative;
@@ -2521,6 +2532,7 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 13px;
   color: #cb9274;
   text-transform: uppercase;
 }
@@ -2531,14 +2543,15 @@ ul {
   line-height: 40px;
   color: #252324;
   max-width: 521px;
-  margin: 8px auto 0;
+  margin: 11px auto 0;
 }
 .latest-articles__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  column-gap: 10px;
+  row-gap: 22px;
   max-width: 1410px;
-  margin: 60px auto 0;
+  margin: 51px auto 0;
   text-align: left;
 }
 .latest-articles__cards {
@@ -2654,12 +2667,13 @@ ul {
   align-items: baseline;
   justify-content: space-between;
   gap: 0;
-  margin-top: 20px;
+  margin-top: 28px;
 }
 .article-card__name {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 11px;
   letter-spacing: -0.32px;
   color: #252324;
 }
@@ -2667,11 +2681,12 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 11px;
   letter-spacing: -0.32px;
   color: #cb9274;
 }
 .article-card__swatches {
-  margin-top: 10px;
+  margin-top: 16px;
   height: 30px;
 }
 
@@ -2859,14 +2874,16 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 34px;
+  line-height: 24px;
   letter-spacing: -0.68px;
   color: #252324;
 }
 .accessories__subtitle {
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
+  line-height: 13px;
   color: rgba(37, 35, 36, 0.8);
-  margin-top: 8px;
+  margin-top: 28px;
 }
 .accessories__grid {
   display: grid;
@@ -2877,7 +2894,7 @@ ul {
   margin-right: auto;
   gap: 6px;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 .accessories__tile {
   position: relative;
@@ -3064,8 +3081,8 @@ ul {
   justify-content: space-between;
   gap: 60px;
   max-width: 1216px;
-  margin: 0 auto;
-  padding: 100px 20px;
+  margin: 80px auto 0;
+  padding: 57px 20px;
 }
 .timeline__years {
   display: flex;
@@ -3299,6 +3316,7 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  line-height: 11px;
   color: #cb9274;
   text-transform: uppercase;
 }
@@ -3306,15 +3324,17 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 44px;
+  line-height: 31px;
   letter-spacing: -0.88px;
   color: #252324;
-  margin-top: 4px;
+  margin-top: 19px;
 }
 .gallery__subtitle {
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
+  line-height: 13px;
   color: rgba(37, 35, 36, 0.8);
-  margin-top: 4px;
+  margin-top: 21px;
 }
 .gallery__strip {
   display: flex;
@@ -3388,6 +3408,7 @@ ul {
 }
 .newsletter {
   position: relative;
+  margin-top: 39px;
   height: 366px;
   display: flex;
   flex-direction: column;

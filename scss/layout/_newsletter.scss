@@ -7,6 +7,8 @@
 
 .newsletter {
   position: relative;
+  // 268:952 démarre à y=12915, gallerySection finit à 12876.
+  margin-top: 39px;
   height: 366px;
   display: flex;
   flex-direction: column;
