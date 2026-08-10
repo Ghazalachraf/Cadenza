@@ -623,9 +623,27 @@ ul {
   justify-content: flex-start;
   gap: 26px;
 }
-.site-footer__social img {
+.site-footer__social-link {
+  position: relative;
+  display: block;
   width: 28px;
   height: 28px;
+}
+.site-footer__social-icon {
+  position: absolute;
+  inset: 0;
+  width: 28px;
+  height: 28px;
+  transition: opacity 0.15s ease;
+}
+.site-footer__social-icon--active {
+  opacity: 0;
+}
+.site-footer__social-link:active .site-footer__social-icon {
+  opacity: 0;
+}
+.site-footer__social-link:active .site-footer__social-icon--active {
+  opacity: 1;
 }
 .site-footer__column {
   display: flex;
