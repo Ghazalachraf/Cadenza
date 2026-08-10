@@ -1123,7 +1123,7 @@ ul {
   opacity: 0;
   transition: opacity 0.2s ease;
 }
-.product-card:hover .product-card__actions, .product-card:hover .product-card__variants {
+.product-card:hover .product-card__actions, .product-card:hover .product-card__variants, .product-card:hover .product-card__cart-btn {
   opacity: 1;
 }
 .product-card__variant-label {
@@ -1196,6 +1196,8 @@ ul {
   bottom: 19px;
   width: 36px;
   height: 36px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 @media (max-width: 768px) {

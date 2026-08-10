@@ -155,7 +155,8 @@
   }
 
   &:hover &__actions,
-  &:hover &__variants {
+  &:hover &__variants,
+  &:hover &__cart-btn {
     opacity: 1;
   }
 
@@ -235,6 +236,10 @@
     bottom: 19px;
     width: 36px;
     height: 36px;
+    // Même logique de révélation que __actions/__variants : caché au repos,
+    // visible seulement au survol de la carte.
+    opacity: 0;
+    transition: opacity 0.2s ease;
   }
 }
 
