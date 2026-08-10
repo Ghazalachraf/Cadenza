@@ -2782,8 +2782,8 @@ ul {
   align-items: center;
   justify-content: space-between;
   gap: 0;
-  padding-left: clamp(20px, 7.0833333333vw, 102px);
-  padding-right: clamp(20px, 7.0833333333vw, 102px);
+  padding-left: clamp(20px, 6.25vw, 90px);
+  padding-right: clamp(20px, 9.4097222222vw, 135.5px);
   overflow: hidden;
   color: #ffffff;
 }
@@ -2820,16 +2820,18 @@ ul {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 16px;
+  gap: 5px;
 }
 .seasonal-sale__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   padding: 22px 34px;
   border-radius: 4px;
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
+  line-height: 13px;
 }
 .seasonal-sale__btn--light {
   background: #ffffff;
@@ -2871,6 +2873,7 @@ ul {
     padding: 12px 24px;
     border-radius: 2px;
     font-size: 12px;
+    line-height: 1.4;
   }
   .seasonal-sale__btn--light, .seasonal-sale__btn--primary {
     text-transform: uppercase;

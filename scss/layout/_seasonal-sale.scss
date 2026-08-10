@@ -9,7 +9,10 @@
   position: relative;
   height: 268px;
   @include flex($align: center, $justify: space-between);
-  @include container-padding;
+  // Gouttières propres au bandeau (287:32), asymétriques : titre à x=90,
+  // boutons calés à 135,5 du bord droit — pas la gouttière commune de 102.
+  padding-left: fluid(90px, 20px);
+  padding-right: fluid(135.5px, 20px);
   overflow: hidden;
   color: $color-white;
 
@@ -46,19 +49,24 @@
     margin-top: 12px;
   }
 
+  // 287:83 finit à x=1150,5 et 287:37 démarre à 1155,5.
   &__actions {
     position: relative;
-    @include flex($align: center, $gap: 16px);
+    @include flex($align: center, $gap: 5px);
   }
 
+  // Boutons 287:83 (187×57) et 287:37 (149×57) : le libellé y occupe une
+  // boîte de 13px (hauteur de capitale), d'où 22 + 13 + 22 = 57.
   &__btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     padding: 22px 34px;
     border-radius: 4px;
     font-family: $font-display;
     font-size: 18px;
+    line-height: 13px;
 
     &--light {
       background: $color-white;
@@ -115,6 +123,8 @@
       padding: 12px 24px;
       border-radius: 2px;
       font-size: 12px;
+      // Le rognage à 13px du desktop ne vaut pas pour un libellé de 12px.
+      line-height: 1.4;
 
       &--light,
       &--primary {
