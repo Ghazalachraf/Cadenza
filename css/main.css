@@ -3449,6 +3449,7 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 600;
   font-size: 14px;
+  line-height: 10px;
   text-transform: uppercase;
 }
 .newsletter__title {
@@ -3456,26 +3457,29 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 40px;
-  line-height: 52px;
+  line-height: 28px;
   text-transform: uppercase;
-  margin-top: 8px;
+  margin-top: 30px;
 }
 .newsletter__note {
   position: relative;
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
-  margin-top: 8px;
+  line-height: 13px;
+  margin-top: 30px;
 }
 .newsletter__form {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
-  margin-top: 32px;
+  gap: 11.5px;
+  margin-top: 48px;
 }
 .newsletter__input {
-  width: min(426px, 100%);
+  width: 426px;
+  min-width: 0;
+  height: 53px;
   padding: 20px 34px;
   border: 0.5px solid #ffffff;
   border-radius: 4px;
@@ -3483,6 +3487,7 @@ ul {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
+  line-height: 13px;
   color: #ffffff;
 }
 .newsletter__input::placeholder {
@@ -3494,6 +3499,7 @@ ul {
   background: #ffffff;
   font-family: "DM Sans", sans-serif;
   font-size: 18px;
+  line-height: 13px;
   color: #252324;
   text-transform: capitalize;
 }
@@ -3507,6 +3513,7 @@ ul {
   }
   .newsletter__eyebrow {
     font-size: 12px;
+    line-height: 1.4;
   }
   .newsletter__title {
     font-size: 24px;
@@ -3515,6 +3522,7 @@ ul {
   }
   .newsletter__note {
     font-size: 14px;
+    line-height: 1.4;
     margin-top: 19px;
   }
   .newsletter__form {
@@ -3528,6 +3536,7 @@ ul {
     border-radius: 2px;
     box-shadow: none;
     font-size: 12px;
+    line-height: 1.4;
   }
   .newsletter__submit {
     width: 82px;
@@ -3535,6 +3544,7 @@ ul {
     padding: 10px 34px;
     border-radius: 2px;
     font-size: 12px;
+    line-height: 1.4;
     text-transform: uppercase;
   }
 }

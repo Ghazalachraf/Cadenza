@@ -33,11 +33,15 @@
     background: rgba(0, 0, 0, 0.3);
   }
 
+  // Rythme vertical du frame 268:952 (h=366) : accroche y=77 (h=10), titre
+  // y=117 (h=28), note y=175 (h=13), formulaire y=236 (h=53) — soit un bloc
+  // de 212px centré dans les 366.
   &__eyebrow {
     position: relative;
     font-family: $font-display;
     font-weight: 600;
     font-size: 14px;
+    line-height: 10px;
     text-transform: uppercase;
   }
 
@@ -46,26 +50,36 @@
     font-family: $font-heading;
     font-weight: 500;
     font-size: 40px;
-    line-height: 52px;
+    line-height: 28px;
     text-transform: uppercase;
-    margin-top: 8px;
+    margin-top: 30px;
   }
 
   &__note {
     position: relative;
     font-family: $font-display;
     font-size: 18px;
-    margin-top: 8px;
+    line-height: 13px;
+    margin-top: 30px;
   }
 
+  // Champ 268:965 (426×53) puis bouton 268:962 (111×53), séparés de 11,5.
   &__form {
     position: relative;
-    @include flex($align: center, $gap: 10px);
-    margin-top: 32px;
+    @include flex($align: center, $gap: 11.5px);
+    margin-top: 48px;
   }
 
+  // `min(426px, 100%)` renvoyait au pourcentage d'un conteneur lui-même
+  // dimensionné par son contenu : le champ retombait sur sa largeur
+  // intrinsèque de 261px. Largeur fixe + `min-width: 0` pour qu'il puisse
+  // malgré tout se réduire sur les écrans étroits.
   &__input {
-    width: min(426px, 100%);
+    width: 426px;
+    min-width: 0;
+    // Hauteur explicite : Chrome dimensionne la boîte d'un <input> sur la
+    // zone de contenu de la police, sans tenir compte du line-height réduit.
+    height: 53px;
     padding: 20px 34px;
     border: 0.5px solid $color-white;
     border-radius: 4px;
@@ -73,6 +87,8 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     font-family: $font-display;
     font-size: 18px;
+    // 20 + 13 (hauteur de capitale) + 20 = 53.
+    line-height: 13px;
     color: $color-white;
 
     &::placeholder {
@@ -86,6 +102,7 @@
     background: $color-white;
     font-family: $font-display;
     font-size: 18px;
+    line-height: 13px;
     color: $color-black;
     text-transform: capitalize;
   }
@@ -103,8 +120,10 @@
     padding: 0 20px;
     background: #151515;
 
+    // Les rognages du desktop (10 / 28 / 13px) ne valent pas pour ces tailles.
     &__eyebrow {
       font-size: 12px;
+      line-height: 1.4;
     }
 
     &__title {
@@ -115,6 +134,7 @@
 
     &__note {
       font-size: 14px;
+      line-height: 1.4;
       margin-top: 19px;
     }
 
@@ -130,6 +150,7 @@
       border-radius: 2px;
       box-shadow: none;
       font-size: 12px;
+      line-height: 1.4;
     }
 
     &__submit {
@@ -138,6 +159,7 @@
       padding: 10px 34px;
       border-radius: 2px;
       font-size: 12px;
+      line-height: 1.4;
       text-transform: uppercase;
     }
   }
