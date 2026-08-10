@@ -2074,6 +2074,9 @@ ul {
   height: 100%;
   object-fit: cover;
 }
+.spotlight__panel--right .spotlight__image {
+  object-position: 50% 71%;
+}
 .spotlight__overlay {
   position: absolute;
   inset: 0;
@@ -2230,6 +2233,9 @@ ul {
   .spotlight__panel--right .spotlight__hotspot:nth-of-type(2) {
     --x: 71.5%;
     --y: 73.4%;
+  }
+  .spotlight__panel--right .spotlight__image {
+    object-position: 50% 73.4%;
   }
   .spotlight__panel .spotlight-card {
     --x: 21.5%;

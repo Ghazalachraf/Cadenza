@@ -30,6 +30,14 @@
     object-fit: cover;
   }
 
+  // 436:117 recadre l'image plus bas que le centrage par défaut (décalée de
+  // 279px vers le haut sur une hauteur utile de 392px, soit 71%) : sans
+  // cela le 2e repère (436:121), calé sur le pantalon dans la maquette,
+  // retombe sur le bas de la chemise.
+  &__panel--right &__image {
+    object-position: 50% 71%;
+  }
+
   &__overlay {
     position: absolute;
     inset: 0;
@@ -229,6 +237,13 @@
         --x: 71.5%;
         --y: 73.4%;
       }
+    }
+
+    // Recadrage propre au frame mobile (top:-40%, height:154.47% sur 451:1240),
+    // distinct du 71% desktop : sans lui le repère du bas retombe sur la
+    // chemise au lieu du pantalon, comme en desktop.
+    &__panel--right &__image {
+      object-position: 50% 73.4%;
     }
   }
 
