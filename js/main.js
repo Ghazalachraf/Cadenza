@@ -31,6 +31,85 @@ function initProductCards() {
   });
 }
 
+// --- Cartes Best Seller : favoris, Add to Cart, Quick View ----------------
+// Favoris : même bascule que New Arrivals. Quick View est un vrai lien vers
+// product.html (markup converti depuis <button>, cf. product-card). Add to
+// Cart réutilise le contrat cart-item/wireCartItem/updateCartInstance déjà
+// en place pour product-details, mais sans les lignes Color/Size : ces
+// cartes n'ont pas de sélecteur de variante côté Figma (264:634 et
+// analogues n'ont qu'un cœur, pas de pastilles ni de tailles) — la
+// correspondance panier se fait donc seulement sur le nom.
+function initBestSellerCards() {
+  document.querySelectorAll('.best-seller-card').forEach((card) => {
+    const wishlistBtn = card.querySelector('[data-wishlist-toggle]');
+    const wishlistIcon = wishlistBtn?.querySelector('img');
+    wishlistBtn?.addEventListener('click', () => {
+      const isActive = wishlistBtn.getAttribute('aria-pressed') === 'true';
+      wishlistBtn.setAttribute('aria-pressed', String(!isActive));
+      wishlistIcon.src = isActive
+        ? 'assets/icons/icon-wishlist-btn.svg'
+        : 'assets/icons/icon-wishlist-btn-active.svg';
+    });
+
+    const cartBtn = card.querySelector('.best-seller-card__quickshop-btn--cart');
+    const name = card.querySelector('.best-seller-card__name')?.textContent;
+    const priceText = card.querySelector('.best-seller-card__price')?.textContent;
+    const image = card.querySelector('.best-seller-card__image')?.getAttribute('src');
+    if (!cartBtn || !name || !priceText || !image) return;
+
+    const unitPrice = parseFloat(priceText.replace(',', '.'));
+
+    cartBtn.addEventListener('click', () => {
+      // Récupérés au clic plutôt qu'à l'initialisation : le panneau panier
+      // (components/panels.html) est injecté de façon asynchrone par
+      // includes.js, dont le DOMContentLoaded n'attend pas celui de main.js
+      // (deux gestionnaires distincts, l'un async) — au chargement de la
+      // page ces éléments n'existent pas encore dans le DOM.
+      const cartList = document.querySelector('[data-cart-items]');
+      const cartInstance = document.querySelector('[data-cart-instance][data-panel]');
+      if (!cartList || !cartInstance) return;
+
+      const existing = Array.from(cartList.querySelectorAll('.cart-item')).find((item) => (
+        item.querySelectorAll('.cart-item__attr').length === 0
+        && item.querySelector('.cart-item__name')?.textContent === name
+      ));
+
+      if (existing) {
+        const existingQty = existing.querySelector('[data-qty]');
+        existingQty.textContent = parseInt(existingQty.textContent, 10) + 1;
+      } else {
+        const item = document.createElement('li');
+        item.className = 'cart-item';
+        item.dataset.unitPrice = unitPrice;
+        item.innerHTML = `
+          <img class="cart-item__image" src="${image}" alt="">
+          <div class="cart-item__body">
+            <p class="cart-item__name">${name}</p>
+            <div class="cart-item__quantity">
+              <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">
+                <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
+              </button>
+              <span class="cart-item__qty" data-qty>1</span>
+              <button type="button" class="cart-item__step" data-qty-dec aria-label="Diminuer la quantité">
+                <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
+              </button>
+            </div>
+          </div>
+          <button type="button" class="cart-item__remove" data-cart-remove aria-label="Retirer ${name}">
+            <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
+          </button>
+          <p class="cart-item__price" data-line-price></p>
+        `;
+        cartList.appendChild(item);
+        wireCartItem(item, cartInstance);
+      }
+
+      updateCartInstance(cartInstance);
+      document.querySelector('[data-panel-open="cart"]')?.click();
+    });
+  });
+}
+
 // --- Accordion (collectionsMoreInfo) --------------------------------------
 // Un seul panneau ouvert à la fois. Seul « Outwears » a un paragraphe dans
 // la maquette (406:213) : les 3 autres catégories (Trending Tops, latest
@@ -423,6 +502,7 @@ function initTimeline() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initProductCards();
+  initBestSellerCards();
   initAccordion();
   initCompare();
   initProductCarousel();
