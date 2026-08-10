@@ -1798,6 +1798,7 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 13px;
   color: #cb9274;
   text-transform: uppercase;
 }
@@ -1805,9 +1806,9 @@ ul {
   font-family: "Jost", sans-serif;
   font-weight: 600;
   font-size: 45px;
-  line-height: 40px;
+  line-height: 32px;
   color: #252324;
-  margin-top: 12px;
+  margin-top: 26px;
 }
 .product-details__description {
   font-family: "DM Sans", sans-serif;
@@ -1816,18 +1817,20 @@ ul {
   color: #252324;
   max-width: 581px;
   margin-top: 20px;
+  margin-bottom: -6px;
 }
 .product-details__price {
   display: flex;
   align-items: baseline;
   justify-content: flex-start;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 22px;
 }
 .product-details__price-current {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 25px;
+  line-height: 18px;
   letter-spacing: -0.5px;
   color: #cb9274;
 }
@@ -1835,6 +1838,7 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 13px;
   letter-spacing: -0.36px;
   color: #b9b9b9;
   text-decoration: line-through;
@@ -1844,14 +1848,15 @@ ul {
   align-items: flex-start;
   justify-content: flex-start;
   gap: 80px;
-  margin-top: 28px;
+  margin-top: 19px;
 }
 .product-details__option-label {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 14px;
+  line-height: 10px;
   color: #252324;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .product-details__sizes {
   display: flex;
@@ -1898,7 +1903,7 @@ ul {
   color: #ffffff;
 }
 .product-details__quantity {
-  margin-top: 28px;
+  margin-top: 22px;
 }
 .product-details__quantity-control {
   display: flex;
@@ -1932,7 +1937,7 @@ ul {
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
-  margin-top: 36px;
+  margin-top: 26px;
 }
 .product-details__btn {
   width: 307px;
@@ -1941,6 +1946,7 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 13px;
   color: #ffffff;
   text-align: center;
 }
@@ -2011,6 +2017,7 @@ ul {
     line-height: 22px;
     max-width: 348px;
     margin-top: 21px;
+    margin-bottom: 0;
   }
   .product-details__price {
     margin-top: 26px;

@@ -17,10 +17,17 @@
     min-width: 0;
   }
 
+  // Rythme vertical du bloc product_info (264:526, h=461) : accroche y=113
+  // (h=13), titre y=152 (h=32), description y=210 (h=88), prix y=320 (h=18),
+  // options y=357 (h=56), quantité y=435 (h=56), boutons y=517 (h=57).
+  // Figma rogne chaque boîte de texte à la hauteur de capitale : sans
+  // line-height explicite la colonne montait à 541px et repoussait de 54px
+  // toutes les sections à partir de « latest articles ».
   &__badge {
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 13px;
     color: $color-primary;
     text-transform: uppercase;
   }
@@ -29,11 +36,14 @@
     font-family: $font-heading;
     font-weight: 600;
     font-size: 45px;
-    line-height: 40px;
+    line-height: 32px;
     color: $color-black;
-    margin-top: 12px;
+    margin-top: 26px;
   }
 
+  // Bloc de 4 lignes : l'interligne de 25px est bien celui de la maquette
+  // (3 × 25 + 13 de capitale = 88), mais le rendu ajoute 6px de demi-interligne
+  // en haut et en bas — d'où le retrait de 6px de part et d'autre.
   &__description {
     font-family: $font-display;
     font-size: 18px;
@@ -41,17 +51,19 @@
     color: $color-black;
     max-width: 581px;
     margin-top: 20px;
+    margin-bottom: -6px;
   }
 
   &__price {
     @include flex($align: baseline, $gap: 12px);
-    margin-top: 24px;
+    margin-top: 22px;
   }
 
   &__price-current {
     font-family: $font-display;
     font-weight: 500;
     font-size: 25px;
+    line-height: 18px;
     letter-spacing: -0.5px;
     color: $color-primary;
   }
@@ -60,6 +72,7 @@
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 13px;
     letter-spacing: -0.36px;
     color: #b9b9b9;
     text-decoration: line-through;
@@ -67,15 +80,18 @@
 
   &__options {
     @include flex($align: flex-start, $gap: 80px);
-    margin-top: 28px;
+    margin-top: 19px;
   }
 
+  // Libellé 10px de haut + 16px d'écart + contrôles 30px = 56px (264:523,
+  // 264:495).
   &__option-label {
     font-family: $font-display;
     font-weight: 500;
     font-size: 14px;
+    line-height: 10px;
     color: $color-black;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
   &__sizes {
@@ -130,7 +146,7 @@
   }
 
   &__quantity {
-    margin-top: 28px;
+    margin-top: 22px;
   }
 
   &__quantity-control {
@@ -163,9 +179,10 @@
 
   &__actions {
     @include flex($align: center, $gap: 10px);
-    margin-top: 36px;
+    margin-top: 26px;
   }
 
+  // 22 + 13 (capitale) + 22 = 57px, hauteur des boutons 264:500 / 264:506.
   &__btn {
     width: 307px;
     padding: 22px 30px;
@@ -173,6 +190,7 @@
     font-family: $font-display;
     font-weight: 500;
     font-size: 18px;
+    line-height: 13px;
     color: $color-white;
     text-align: center;
 
@@ -265,10 +283,12 @@
 
     &__description {
       font-size: 14px;
-      // 5 lignes × 22 = 110px, hauteur exacte du bloc 451:244.
+      // 5 lignes × 22 = 110px, hauteur exacte du bloc 451:244 : le retrait
+      // de 6px du desktop ne s'applique pas ici.
       line-height: 22px;
       max-width: 348px;
       margin-top: 21px;
+      margin-bottom: 0;
     }
 
     &__price {
