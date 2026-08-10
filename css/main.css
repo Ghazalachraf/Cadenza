@@ -1199,8 +1199,39 @@ ul {
   background: #252324;
   color: #ffffff;
 }
-.product-card__colors img {
+.product-card__colors {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   height: 30px;
+}
+.product-card__color {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+.product-card__color--active {
+  outline: 1px solid #cb9274;
+  outline-offset: 2.5px;
+}
+.product-card__color--gray {
+  background: #989898;
+}
+.product-card__color--white {
+  background: #ffffff;
+}
+.product-card__color--plum {
+  background: #563f5f;
+}
+.product-card__color--sand {
+  background: #e7c8ab;
+}
+.product-card__color--black {
+  background: #242424;
 }
 .product-card__info {
   position: relative;
@@ -2651,7 +2682,22 @@ ul {
   flex-direction: column;
   gap: 6px;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s ease;
+}
+.article-card__wishlist-btn, .article-card__quickview-btn {
+  display: block;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.article-card__wishlist-btn img, .article-card__quickview-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .article-card__cart {
   position: absolute;
@@ -2667,10 +2713,14 @@ ul {
   font-size: 17px;
   color: #252324;
   opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  border: none;
   transition: opacity 0.2s ease;
 }
 .article-card:hover .article-card__actions, .article-card:hover .article-card__cart {
   opacity: 1;
+  pointer-events: auto;
 }
 .article-card__info {
   display: flex;
@@ -2696,8 +2746,50 @@ ul {
   color: #cb9274;
 }
 .article-card__swatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-top: 16px;
   height: 30px;
+}
+.article-card__swatch {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.article-card__swatch--active {
+  outline: 1px solid #cb9274;
+  outline-offset: 2.5px;
+}
+.article-card__swatch--gray {
+  background: #989898;
+}
+.article-card__swatch--peach {
+  background: #fbd4ba;
+}
+.article-card__swatch--plum {
+  background: #563f5f;
+}
+.article-card__swatch--lime {
+  background: #bad437;
+}
+.article-card__swatch--black {
+  background: #242424;
+}
+.article-card__swatch--tan {
+  background: #b06c4a;
+}
+.article-card__swatch--navy {
+  background: #00092b;
+}
+.article-card__swatch--blue {
+  background: #46688d;
+}
+.article-card__swatch--steel {
+  background: #243f50;
 }
 
 @media (max-width: 768px) {

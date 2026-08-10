@@ -228,8 +228,36 @@
     }
   }
 
-  &__colors img {
+  // Comme pour les cartes Latest Articles, la bande de pastilles était une
+  // seule image : icon-swatches-strip.svg contient pourtant bien 5 cercles
+  // distincts (r=12, anneau actif r=14,5 trait #cb9274, ombre portée
+  // 1/1/4 à 15 %), de quoi en faire de vrais boutons sans rien inventer.
+  &__colors {
+    display: flex;
+    align-items: center;
+    gap: 7px;
     height: 30px;
+  }
+
+  &__color {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+
+    &--active {
+      outline: 1px solid $color-primary;
+      outline-offset: 2.5px;
+    }
+
+    &--gray { background: #989898; }
+    &--white { background: $color-white; }
+    &--plum { background: #563f5f; }
+    &--sand { background: #e7c8ab; }
+    &--black { background: #242424; }
   }
 
   &__info {

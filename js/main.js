@@ -2,13 +2,9 @@
 // main.js — page content behaviour (accordion, compare slider, carousels)
 // ==========================================================================
 
-// --- Cartes New Arrivals : taille + favoris -------------------------------
-// Même mécanique de sélection que product-details (un bouton actif par
-// groupe, scopé à chaque carte). Les pastilles de couleur restent
-// décoratives : icon-swatches-strip.svg est une seule image assemblée, sans
-// pastille individuelle ni donnée de couleur extraite de Figma pour ces
-// cartes (contrairement à product-details, qui a 3 cercles séparés) — les
-// rendre cliquables demanderait d'inventer des couleurs.
+// --- Cartes New Arrivals : taille, couleur et favoris ---------------------
+// Même mécanique de sélection que product-details : un bouton actif par
+// groupe, scopé à chaque carte.
 function initProductCards() {
   document.querySelectorAll('.product-card').forEach((card) => {
     const sizes = card.querySelectorAll('.product-card__size');
@@ -19,37 +15,101 @@ function initProductCards() {
       });
     });
 
-    const wishlistBtn = card.querySelector('[data-wishlist-toggle]');
-    const wishlistIcon = wishlistBtn?.querySelector('img');
-    wishlistBtn?.addEventListener('click', () => {
-      const isActive = wishlistBtn.getAttribute('aria-pressed') === 'true';
-      wishlistBtn.setAttribute('aria-pressed', String(!isActive));
-      wishlistIcon.src = isActive
-        ? 'assets/icons/icon-wishlist-btn.svg'
-        : 'assets/icons/icon-wishlist-btn-active.svg';
+    wireSwatchGroup(card.querySelectorAll('.product-card__color'), 'product-card__color--active');
+    wireWishlistToggle(card);
+  });
+}
+
+// --- Favoris : bascule partagée par toutes les familles de cartes ---------
+function wireWishlistToggle(card) {
+  const button = card.querySelector('[data-wishlist-toggle]');
+  const icon = button?.querySelector('img');
+  if (!button || !icon) return;
+
+  button.addEventListener('click', () => {
+    const isActive = button.getAttribute('aria-pressed') === 'true';
+    button.setAttribute('aria-pressed', String(!isActive));
+    icon.src = isActive
+      ? 'assets/icons/icon-wishlist-btn.svg'
+      : 'assets/icons/icon-wishlist-btn-active.svg';
+  });
+}
+
+// --- Sélection d'une pastille de couleur ----------------------------------
+function wireSwatchGroup(swatches, activeClass) {
+  swatches.forEach((swatch) => {
+    swatch.addEventListener('click', () => {
+      swatches.forEach((other) => {
+        other.classList.remove(activeClass);
+        other.setAttribute('aria-pressed', 'false');
+      });
+      swatch.classList.add(activeClass);
+      swatch.setAttribute('aria-pressed', 'true');
     });
   });
 }
 
+// --- Ajout au panier depuis une carte sans variante nommée ----------------
+// Réutilise le contrat cart-item/wireCartItem/updateCartInstance déjà en
+// place pour product-details, mais sans les lignes Color/Size : ces cartes
+// n'exposent pas de variante nommée côté Figma (les pastilles ne portent
+// qu'une valeur hexadécimale, pas de libellé). La correspondance panier se
+// fait donc seulement sur le nom.
+function addUnnamedVariantToCart({ name, unitPrice, image }) {
+  // Récupérés au clic plutôt qu'à l'initialisation : le panneau panier
+  // (components/panels.html) est injecté de façon asynchrone par
+  // includes.js, dont le DOMContentLoaded n'attend pas celui de main.js
+  // (deux gestionnaires distincts, l'un async) — au chargement de la page
+  // ces éléments n'existent pas encore dans le DOM.
+  const cartList = document.querySelector('[data-cart-items]');
+  const cartInstance = document.querySelector('[data-cart-instance][data-panel]');
+  if (!cartList || !cartInstance) return;
+
+  const existing = Array.from(cartList.querySelectorAll('.cart-item')).find((item) => (
+    item.querySelectorAll('.cart-item__attr').length === 0
+    && item.querySelector('.cart-item__name')?.textContent === name
+  ));
+
+  if (existing) {
+    const existingQty = existing.querySelector('[data-qty]');
+    existingQty.textContent = parseInt(existingQty.textContent, 10) + 1;
+  } else {
+    const item = document.createElement('li');
+    item.className = 'cart-item';
+    item.dataset.unitPrice = unitPrice;
+    item.innerHTML = `
+      <img class="cart-item__image" src="${image}" alt="">
+      <div class="cart-item__body">
+        <p class="cart-item__name">${name}</p>
+        <div class="cart-item__quantity">
+          <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">
+            <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
+          </button>
+          <span class="cart-item__qty" data-qty>1</span>
+          <button type="button" class="cart-item__step" data-qty-dec aria-label="Diminuer la quantité">
+            <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
+          </button>
+        </div>
+      </div>
+      <button type="button" class="cart-item__remove" data-cart-remove aria-label="Retirer ${name}">
+        <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
+      </button>
+      <p class="cart-item__price" data-line-price></p>
+    `;
+    cartList.appendChild(item);
+    wireCartItem(item, cartInstance);
+  }
+
+  updateCartInstance(cartInstance);
+  document.querySelector('[data-panel-open="cart"]')?.click();
+}
+
 // --- Cartes Best Seller : favoris, Add to Cart, Quick View ----------------
-// Favoris : même bascule que New Arrivals. Quick View est un vrai lien vers
-// product.html (markup converti depuis <button>, cf. product-card). Add to
-// Cart réutilise le contrat cart-item/wireCartItem/updateCartInstance déjà
-// en place pour product-details, mais sans les lignes Color/Size : ces
-// cartes n'ont pas de sélecteur de variante côté Figma (264:634 et
-// analogues n'ont qu'un cœur, pas de pastilles ni de tailles) — la
-// correspondance panier se fait donc seulement sur le nom.
+// Quick View est un vrai lien vers product.html (markup converti depuis
+// <button>, cf. product-card).
 function initBestSellerCards() {
   document.querySelectorAll('.best-seller-card').forEach((card) => {
-    const wishlistBtn = card.querySelector('[data-wishlist-toggle]');
-    const wishlistIcon = wishlistBtn?.querySelector('img');
-    wishlistBtn?.addEventListener('click', () => {
-      const isActive = wishlistBtn.getAttribute('aria-pressed') === 'true';
-      wishlistBtn.setAttribute('aria-pressed', String(!isActive));
-      wishlistIcon.src = isActive
-        ? 'assets/icons/icon-wishlist-btn.svg'
-        : 'assets/icons/icon-wishlist-btn-active.svg';
-    });
+    wireWishlistToggle(card);
 
     const cartBtn = card.querySelector('.best-seller-card__quickshop-btn--cart');
     const name = card.querySelector('.best-seller-card__name')?.textContent;
@@ -58,55 +118,27 @@ function initBestSellerCards() {
     if (!cartBtn || !name || !priceText || !image) return;
 
     const unitPrice = parseFloat(priceText.replace(',', '.'));
+    cartBtn.addEventListener('click', () => addUnnamedVariantToCart({ name, unitPrice, image }));
+  });
+}
 
-    cartBtn.addEventListener('click', () => {
-      // Récupérés au clic plutôt qu'à l'initialisation : le panneau panier
-      // (components/panels.html) est injecté de façon asynchrone par
-      // includes.js, dont le DOMContentLoaded n'attend pas celui de main.js
-      // (deux gestionnaires distincts, l'un async) — au chargement de la
-      // page ces éléments n'existent pas encore dans le DOM.
-      const cartList = document.querySelector('[data-cart-items]');
-      const cartInstance = document.querySelector('[data-cart-instance][data-panel]');
-      if (!cartList || !cartInstance) return;
+// --- Cartes Latest Articles : favoris, couleurs, Add to Cart --------------
+// Contrairement aux cartes New Arrivals, les pastilles ne sont plus une image
+// assemblée : chaque cercle des fichiers swatches-*.svg est devenu un bouton,
+// donc sélectionnable.
+function initArticleCards() {
+  document.querySelectorAll('.article-card').forEach((card) => {
+    wireWishlistToggle(card);
+    wireSwatchGroup(card.querySelectorAll('.article-card__swatch'), 'article-card__swatch--active');
 
-      const existing = Array.from(cartList.querySelectorAll('.cart-item')).find((item) => (
-        item.querySelectorAll('.cart-item__attr').length === 0
-        && item.querySelector('.cart-item__name')?.textContent === name
-      ));
+    const cartBtn = card.querySelector('.article-card__cart');
+    const name = card.querySelector('.article-card__name')?.textContent;
+    const priceText = card.querySelector('.article-card__price')?.textContent;
+    const image = card.querySelector('.article-card__image')?.getAttribute('src');
+    if (!cartBtn || !name || !priceText || !image) return;
 
-      if (existing) {
-        const existingQty = existing.querySelector('[data-qty]');
-        existingQty.textContent = parseInt(existingQty.textContent, 10) + 1;
-      } else {
-        const item = document.createElement('li');
-        item.className = 'cart-item';
-        item.dataset.unitPrice = unitPrice;
-        item.innerHTML = `
-          <img class="cart-item__image" src="${image}" alt="">
-          <div class="cart-item__body">
-            <p class="cart-item__name">${name}</p>
-            <div class="cart-item__quantity">
-              <button type="button" class="cart-item__step" data-qty-inc aria-label="Augmenter la quantité">
-                <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
-              </button>
-              <span class="cart-item__qty" data-qty>1</span>
-              <button type="button" class="cart-item__step" data-qty-dec aria-label="Diminuer la quantité">
-                <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
-              </button>
-            </div>
-          </div>
-          <button type="button" class="cart-item__remove" data-cart-remove aria-label="Retirer ${name}">
-            <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
-          </button>
-          <p class="cart-item__price" data-line-price></p>
-        `;
-        cartList.appendChild(item);
-        wireCartItem(item, cartInstance);
-      }
-
-      updateCartInstance(cartInstance);
-      document.querySelector('[data-panel-open="cart"]')?.click();
-    });
+    const unitPrice = parseFloat(priceText.replace(',', '.'));
+    cartBtn.addEventListener('click', () => addUnnamedVariantToCart({ name, unitPrice, image }));
   });
 }
 
@@ -503,6 +535,7 @@ function initTimeline() {
 document.addEventListener('DOMContentLoaded', () => {
   initProductCards();
   initBestSellerCards();
+  initArticleCards();
   initAccordion();
   initCompare();
   initProductCarousel();
