@@ -2,6 +2,35 @@
 // main.js — page content behaviour (accordion, compare slider, carousels)
 // ==========================================================================
 
+// --- Cartes New Arrivals : taille + favoris -------------------------------
+// Même mécanique de sélection que product-details (un bouton actif par
+// groupe, scopé à chaque carte). Les pastilles de couleur restent
+// décoratives : icon-swatches-strip.svg est une seule image assemblée, sans
+// pastille individuelle ni donnée de couleur extraite de Figma pour ces
+// cartes (contrairement à product-details, qui a 3 cercles séparés) — les
+// rendre cliquables demanderait d'inventer des couleurs.
+function initProductCards() {
+  document.querySelectorAll('.product-card').forEach((card) => {
+    const sizes = card.querySelectorAll('.product-card__size');
+    sizes.forEach((button) => {
+      button.addEventListener('click', () => {
+        sizes.forEach((other) => other.classList.remove('product-card__size--active'));
+        button.classList.add('product-card__size--active');
+      });
+    });
+
+    const wishlistBtn = card.querySelector('[data-wishlist-toggle]');
+    const wishlistIcon = wishlistBtn?.querySelector('img');
+    wishlistBtn?.addEventListener('click', () => {
+      const isActive = wishlistBtn.getAttribute('aria-pressed') === 'true';
+      wishlistBtn.setAttribute('aria-pressed', String(!isActive));
+      wishlistIcon.src = isActive
+        ? 'assets/icons/icon-wishlist-btn.svg'
+        : 'assets/icons/icon-wishlist-btn-active.svg';
+    });
+  });
+}
+
 // --- Accordion (collectionsMoreInfo) --------------------------------------
 // Un seul panneau ouvert à la fois. Seul « Outwears » a un paragraphe dans
 // la maquette (406:213) : les 3 autres catégories (Trending Tops, latest
@@ -393,6 +422,7 @@ function initTimeline() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initProductCards();
   initAccordion();
   initCompare();
   initProductCarousel();
