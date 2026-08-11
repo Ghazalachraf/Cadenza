@@ -324,6 +324,9 @@
       margin-bottom: -7px;
     }
 
+    // 451:74 : 5 onglets de x=20 à x=370, séparés de 21px. `space-between`
+    // sur les 350px utiles produit exactement ces 21px — à condition d'avoir
+    // 5 onglets et non 6, sinon l'écart tombe à 6px.
     &__tabs {
       justify-content: space-between;
       gap: 0;
@@ -335,6 +338,20 @@
 
     &__tab {
       font-size: 12px;
+
+      // BOTTOMS ne figure pas sur le frame mobile...
+      &:nth-child(4) {
+        display: none;
+      }
+
+      // ...et GYM SUITS y précède SNEAKERS, contrairement au desktop.
+      &:nth-child(5) {
+        order: 2;
+      }
+
+      &:nth-child(6) {
+        order: 1;
+      }
     }
   }
 

@@ -429,6 +429,15 @@ ul {
     width: 18px;
     height: 18px;
   }
+  .site-header__mobile-icon--dark {
+    display: none;
+  }
+  .site-header--fixed .site-header__mobile-icon--light {
+    display: none;
+  }
+  .site-header--fixed .site-header__mobile-icon--dark {
+    display: block;
+  }
   .site-header--fixed .site-header__icons {
     display: none;
   }
@@ -1299,6 +1308,15 @@ ul {
   }
   .new-arrivals__tab {
     font-size: 12px;
+  }
+  .new-arrivals__tab:nth-child(4) {
+    display: none;
+  }
+  .new-arrivals__tab:nth-child(5) {
+    order: 2;
+  }
+  .new-arrivals__tab:nth-child(6) {
+    order: 1;
   }
   .product-carousel {
     margin-top: 20px;

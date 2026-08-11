@@ -306,6 +306,23 @@
       }
     }
 
+    // Le burger et les deux icônes sont blancs par-dessus le hero ; sur le
+    // fond blanc du header fixe (494:434) ils passent en #5C5A5B, sans quoi
+    // ils disparaissaient purement et simplement. Même bascule que le logo.
+    &__mobile-icon--dark {
+      display: none;
+    }
+
+    &--fixed {
+      .site-header__mobile-icon--light {
+        display: none;
+      }
+
+      .site-header__mobile-icon--dark {
+        display: block;
+      }
+    }
+
     // En mobile l'état fixe garde le burger et les deux icônes du frame
     // mobile (451:63) plutôt que le triptyque desktop.
     &--fixed .site-header__icons {
