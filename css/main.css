@@ -1314,6 +1314,21 @@ ul {
   .product-card {
     flex-basis: clamp(240px, 87.6923076923vw, 342px);
   }
+  .product-card:nth-child(1) {
+    order: 3;
+  }
+  .product-card:nth-child(2) {
+    order: 4;
+  }
+  .product-card:nth-child(3) {
+    order: 1;
+  }
+  .product-card:nth-child(4) {
+    order: 2;
+  }
+  .product-card:nth-child(5) {
+    order: 5;
+  }
 }
 .sale-banner {
   position: relative;

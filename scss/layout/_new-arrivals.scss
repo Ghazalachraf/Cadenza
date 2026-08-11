@@ -354,7 +354,18 @@
     }
   }
 
+  // Le frame mobile (451:80) ne présente pas les cartes dans l'ordre du
+  // desktop : Jelna Split Dress ouvre le carrousel, puis Roselle Tube Dress,
+  // Samantha Activewear, Noya Slim Dress et Shorte with back. On réordonne
+  // plutôt que de dupliquer le balisage — même procédé que les tuiles de
+  // Latest Articles en mobile.
   .product-card {
     flex-basis: fluid-m(342px, 240px);
+
+    &:nth-child(1) { order: 3; } // Samantha Activewear
+    &:nth-child(2) { order: 4; } // Noya Slim Dress
+    &:nth-child(3) { order: 1; } // Jelna Split Dress
+    &:nth-child(4) { order: 2; } // Roselle Tube Dress
+    &:nth-child(5) { order: 5; } // Shorte with back
   }
 }
