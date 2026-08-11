@@ -3,9 +3,17 @@
 // then wires up their behavior (burger menu, promo slider, dropdowns).
 // ==========================================================================
 
+// Les fragments étaient chargés sans numéro de version : le navigateur
+// pouvait servir un components/*.html périmé alors même que le script venait
+// d'être rechargé. On reprend la chaîne de version du <script> lui-même, pour
+// n'avoir qu'un seul numéro à incrémenter.
+const INCLUDE_VERSION = document.currentScript
+  ? new URL(document.currentScript.src, location.href).search
+  : '';
+
 async function loadInclude(el) {
   const name = el.dataset.include;
-  const res = await fetch(`components/${name}.html`);
+  const res = await fetch(`components/${name}.html${INCLUDE_VERSION}`);
   el.innerHTML = await res.text();
 }
 

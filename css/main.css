@@ -438,7 +438,7 @@ ul {
   inset: 0;
   z-index: 60;
   overflow-y: auto;
-  background: rgba(245, 243, 241, 0.96);
+  background: #eceae8;
   padding: 89px 41px 40px;
 }
 .mobile-menu[hidden] {
