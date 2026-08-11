@@ -257,7 +257,7 @@ function initFaq() {
       const answer = item.querySelector('.faq__answer');
       const chevron = item.querySelector('.faq__chevron');
       if (answer) answer.style.display = 'none';
-      if (chevron) chevron.src = 'assets/icons/icon-faq-chevron-right.svg';
+      if (chevron) chevron.src = 'assets/icons/icon-faq-chevron-right.svg?v=2';
     });
   };
 
@@ -272,7 +272,7 @@ function initFaq() {
       closeAll();
       if (answer && !wasOpen) {
         answer.style.display = '';
-        chevron.src = 'assets/icons/icon-faq-chevron-down.svg';
+        chevron.src = 'assets/icons/icon-faq-chevron-down.svg?v=2';
       }
     });
   });
