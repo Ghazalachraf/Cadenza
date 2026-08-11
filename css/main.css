@@ -872,16 +872,16 @@ ul {
 }
 .hero__dots {
   position: absolute;
-  right: 90px;
-  bottom: 79px;
+  right: 126px;
+  bottom: 78px;
   z-index: 1;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
 }
 .hero__dot {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
   border: none;
@@ -897,7 +897,7 @@ ul {
 .hero__dot--active::after {
   content: "";
   position: absolute;
-  inset: 3px;
+  inset: 2px;
   border-radius: 50%;
   background: #ffffff;
 }

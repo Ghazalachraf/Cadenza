@@ -122,24 +122,29 @@
     }
   }
 
+  // Groupe 443:61 / 443:60 : 64 × 16 posé à x=1250, y=779 sur un hero de
+  // 1440 × 873 — soit 126 depuis la droite et 78 depuis le bas.
+  // 10 + 14 + 16 + 14 + 10 = 64.
   &__dots {
     position: absolute;
-    right: 90px;
-    bottom: 79px;
+    right: 126px;
+    bottom: 78px;
     z-index: 1;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 14px;
   }
 
   &__dot {
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
     border: none;
     padding: 0;
 
+    // Puce active : anneau de 16 (trait 1), 2px de vide, puis le même disque
+    // de 10 que les puces inactives.
     &--active {
       width: 16px;
       height: 16px;
@@ -150,7 +155,7 @@
       &::after {
         content: '';
         position: absolute;
-        inset: 3px;
+        inset: 2px;
         border-radius: 50%;
         background: $color-white;
       }
