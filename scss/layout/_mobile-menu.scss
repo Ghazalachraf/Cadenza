@@ -105,11 +105,45 @@
 
   // ---- "You may also like" (réutilise .panel__section-title/.panel__slider/
   // .mini-card, identiques au tiroir panier) --------------------------------
+  // Le bloc déborde des 41px de gouttière du menu : la maquette le cale à
+  // x=21 sur 348 de large (451:614), contre 41 / 308 pour la navigation.
   &__suggestions {
     margin-top: 40px;
+    margin-left: -20px;
+    margin-right: -20px;
 
+    // Boîte rognée à la hauteur de capitale (451:615, h=14), puis 14px avant
+    // le bandeau : 14 + 14 + 111 = 139, la hauteur du bloc.
     .panel__section-title {
       margin-top: 0;
+      line-height: 14px;
+    }
+
+    .panel__slider {
+      margin-top: 14px;
+    }
+  }
+
+  // Titre et puces partagent la même ligne, les puces calées à droite et
+  // alignées sur le bas du titre (451:653 : y=494 pour un titre 488→502).
+  &__suggestions-head {
+    @include flex($align: flex-end, $justify: space-between);
+  }
+
+  // 5 puces de 8px espacées de 10 (80,4 de large en tout), la première
+  // active en #a6a6a6, les autres en #d9d9d9.
+  &__dots {
+    @include flex($align: center, $gap: 10px);
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d9d9d9;
+
+    &--active {
+      background: #a6a6a6;
     }
   }
 
