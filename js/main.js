@@ -242,21 +242,38 @@ function initProductCarousel() {
 }
 
 // --- Accordéon FAQ (mobile) -----------------------------------------------
+// Un seul bloc ouvert à la fois, comme pour l'accordéon collectionsMoreInfo.
+// Seule la première question a une réponse dans la maquette (451:966) : les
+// 4 autres n'en ont aucune côté Figma. Avant ce correctif, `if (!answer)
+// return` faisait que cliquer dessus ne produisait rien du tout — chevron
+// compris. Elles referment désormais le bloc ouvert, sans qu'on invente de
+// texte pour autant.
 function initFaq() {
-  const toggles = document.querySelectorAll('[data-faq-toggle]');
+  const items = document.querySelectorAll('.faq__item');
+  if (!items.length) return;
 
-  toggles.forEach((toggle) => {
-    toggle.addEventListener('click', () => {
-      const item = toggle.closest('.faq__item');
+  const closeAll = () => {
+    items.forEach((item) => {
       const answer = item.querySelector('.faq__answer');
-      const chevron = toggle.querySelector('.faq__chevron');
-      if (!answer) return;
+      const chevron = item.querySelector('.faq__chevron');
+      if (answer) answer.style.display = 'none';
+      if (chevron) chevron.src = 'assets/icons/icon-faq-chevron-right.svg';
+    });
+  };
 
-      const isOpen = answer.style.display !== 'none';
-      answer.style.display = isOpen ? 'none' : '';
-      chevron.src = isOpen
-        ? 'assets/icons/icon-faq-chevron-right.svg'
-        : 'assets/icons/icon-faq-chevron-down.svg';
+  items.forEach((item) => {
+    const toggle = item.querySelector('[data-faq-toggle]');
+    const answer = item.querySelector('.faq__answer');
+    const chevron = item.querySelector('.faq__chevron');
+    if (!toggle) return;
+
+    toggle.addEventListener('click', () => {
+      const wasOpen = answer ? answer.style.display !== 'none' : false;
+      closeAll();
+      if (answer && !wasOpen) {
+        answer.style.display = '';
+        chevron.src = 'assets/icons/icon-faq-chevron-down.svg';
+      }
     });
   });
 }
