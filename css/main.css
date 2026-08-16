@@ -3119,9 +3119,6 @@ ul {
   background: rgba(203, 146, 116, 0.2);
   transition: background 0.3s ease;
 }
-.accessories__overlay--dark {
-  background: rgba(0, 0, 0, 0.4);
-}
 .accessories__tile-title {
   position: relative;
   font-family: "Jost", sans-serif;

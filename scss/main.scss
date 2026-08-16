@@ -1,7 +1,11 @@
 // ==========================================================================
 // Cadenza — main stylesheet entry
-// Compiled manually to css/main.css (no build tool):
-//   npx sass scss/main.scss css/main.css --no-source-map --style=expanded
+// Compiled manually, pas d'outil de build. Deux sorties a chaque modification :
+//   npx sass scss/main.scss css/main.css     --no-source-map --style=expanded
+//   npx sass scss/main.scss css/main.min.css --no-source-map --style=compressed
+// main.css reste la version lisible pour le developpement et la revue de code ;
+// les pages HTML chargent main.min.css (livraison), a versionner ensemble via
+// le parametre ?v= de chaque <link>.
 // ==========================================================================
 
 // --- Abstracts (no CSS output) --------------------------------------------
