@@ -1,0 +1,915 @@
+// ==========================================================================
+// Category — page catégorie : bannière, barre de filtres, grille 3×3
+// Frames Figma  desktop 5127:67 (1440 × 3129)
+//               mobile  544:14446 (390 × 4175)
+//
+// La page a ses propres gouttières (26 à gauche, 29 à droite) : elle
+// n'utilise pas les 102px du reste du site.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+$col-gutter-left: 26px;
+$col-gutter-right: 29px;
+$col-divider: #9c9c9c; // trait de séparation des groupes de filtres
+$col-chip-bg: #f5f4f2;
+$col-old-price: #b9b9b9;
+$col-input-bg: #e7e7e7;
+
+// --------------------------------------------------------------------------
+// Bannière — frame 5127:199 (1440 × 377)
+// --------------------------------------------------------------------------
+.collection-hero {
+  position: relative;
+  height: fluid(377px, 260px);
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    // 5127:200 : la photo est agrandie à 101,73 % et remontée de 121,03 %.
+    left: -0.9%;
+    top: -121.03%;
+    width: 101.73%;
+    height: 259.3%;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  &__title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    // 5127:201 : bloc de 548 posé à y=111, deux lignes de 60 rognées à la
+    // hauteur de capitale (h=98 = 60 + 38). La boîte CSS en fait 120 : on
+    // reprend les 11px de demi-interligne pour que la capitale tombe à 111.
+    top: 111px;
+    margin-top: -11px;
+    width: 548px;
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 54px;
+    line-height: 60px;
+    color: $color-white;
+    text-align: center;
+  }
+
+  &__breadcrumb {
+    position: absolute;
+    // 5127:202 : posé à x=22, hors des gouttières du reste du site.
+    left: 22px;
+    top: 315px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 24px;
+    // Hauteur de capitale du 24px (h=17).
+    line-height: 17px;
+    color: $color-white;
+    text-transform: uppercase;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Barre d'outils — bouton de filtres, tri, compteur
+// Les trois éléments ne sont pas alignés dans la maquette : le tri démarre à
+// 559, le bouton à 565 et le compteur à 571. On part du plus haut.
+// --------------------------------------------------------------------------
+.collection {
+  padding-left: $col-gutter-left;
+  padding-right: $col-gutter-right;
+
+  &__toolbar {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    // La bannière finit à 499, 5127:322 commence à 559.
+    margin-top: 60px;
+  }
+
+  // Le tri est ancré à 371 quelle que soit la largeur rendue du bouton de
+  // filtres, dont le libellé dépend des métriques de la police.
+  &__sort {
+    @include flex($align: center, $gap: 14px);
+    position: absolute;
+    left: 345px;
+    top: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 20px;
+    color: $color-black;
+    cursor: pointer;
+
+    img {
+      width: 26px;
+      height: 26px;
+    }
+
+    span {
+      // Hauteur de capitale du 20px (5127:323 : h=14).
+      line-height: 14px;
+    }
+  }
+
+  &__filters-toggle {
+    @include flex($align: center, $justify: center, $gap: 7px);
+    // 5127:203 : le bouton démarre à 26, comme la gouttière de la page ; ce
+    // sont la colonne de filtres et la grille qui sont décalées de 3 de plus.
+    margin-top: 6px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 3px;
+    background: $color-black;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    // Hauteur de capitale du 18px : le bouton fait 38 = 10 + 18 + 10.
+    line-height: 18px;
+    color: $color-white;
+    cursor: pointer;
+
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  // Les deux variantes d'icône et les deux libellés cohabitent dans le
+  // balisage ; le point de rupture choisit celui qui s'affiche.
+  &__filters-icon--dark,
+  &__filters-label--mobile {
+    display: none;
+  }
+
+  &__count {
+    margin-left: auto;
+    // 5127:327 commence à 571, soit 12 sous le tri.
+    margin-top: 12px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 14px;
+    color: $color-black;
+  }
+
+  // ---- Corps : colonne de filtres + grille -------------------------------
+  &__body {
+    display: grid;
+    // 5127:328 fait 310 de large, 5127:207 en fait 1042, 30 les séparent.
+    grid-template-columns: 310px minmax(0, 1042px);
+    gap: 30px;
+    // La barre d'outils finit à 603, la grille commence à 637.
+    margin-top: 34px;
+    // Le bouton de filtres déborde de 3px à gauche : on recale la grille.
+    margin-left: 3px;
+  }
+
+  &__sidebar {
+    // 5127:328 démarre à 643 quand la grille démarre à 637.
+    padding-top: 6px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    // 3 × 342 + 2 × 8 = 1042 ; les rangées sont espacées de 11.
+    column-gap: 8px;
+    row-gap: 11px;
+  }
+
+  // ---- Pagination --------------------------------------------------------
+  // 5127:310 est centrée sur le viewport (494 → 946, centre 720), pas sur la
+  // colonne de droite : elle sort donc du corps à deux colonnes.
+  &__pagination {
+    @include flex($align: center, $justify: center, $gap: 20px);
+    // La dernière rangée finit à 2105, 5127:310 commence à 2178.
+    margin-top: 73px;
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 18px;
+    color: $color-black;
+  }
+
+  &__page-link {
+    // Hauteur de capitale du 18px (5127:320 : h=13).
+    line-height: 13px;
+
+    // Bornes de la pagination : Previous en page 1, Next en dernière page.
+    &.is-disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+  }
+
+  &__pages {
+    @include flex($align: center, $gap: 20px);
+    padding: 10px;
+  }
+
+  &__page {
+    @include flex($align: center, $justify: center);
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: $col-chip-bg;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-black;
+    cursor: pointer;
+
+    &--active {
+      background: $color-black;
+      color: $color-white;
+    }
+  }
+}
+
+// La newsletter suit la pagination de plus loin que sur l'accueil : la grille
+// finit à 2252, 5127:187 commence à 2315.
+.page--category .newsletter {
+  margin-top: 63px;
+}
+
+// --------------------------------------------------------------------------
+// Colonne de filtres — frame 5127:328
+//
+// Chaque groupe fait : en-tête de 24 (titre + chevron), corps à +52, puis le
+// trait de séparation 20 plus bas. Les groupes s'enchaînent tous les 40.
+// --------------------------------------------------------------------------
+.filter-panel {
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 18px;
+    // Hauteur de capitale du 18px (5127:434 : h=13).
+    line-height: 13px;
+  }
+
+  // ---- Filtres appliqués -------------------------------------------------
+  &__applied-head {
+    @include flex($align: baseline, $justify: space-between);
+  }
+
+  &__clear {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 8px;
+    color: $color-text-secondary;
+    text-decoration: underline;
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    // 5127:409 démarre à 673, le titre est rogné à 13 depuis 643.
+    gap: 10px 8px;
+    margin-top: 17px;
+  }
+}
+
+.filter-chip {
+  @include flex($align: center, $justify: center, $gap: 7px);
+  height: 20px;
+  padding: 5px 6px;
+  border: none;
+  border-radius: 3px;
+  background: $col-chip-bg;
+  font-family: $font-display;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 10px;
+  color: $color-black;
+  cursor: pointer;
+
+  img {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Groupe de filtres repliable
+// --------------------------------------------------------------------------
+.filter-group {
+  // Le groupe précédent finit sur son trait, 40px avant celui-ci.
+  margin-top: 40px;
+  // Trait de séparation en ombre intérieure plutôt qu'en bordure : une
+  // bordure de 0,6px est arrondie à 1 dans le calcul de mise en page et
+  // décalait chaque groupe d'un pixel de plus que le précédent.
+  box-shadow: inset 0 -0.6px 0 $col-divider;
+
+  &__header {
+    @include flex($align: center, $justify: space-between);
+    width: 100%;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    img {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.2s ease;
+      // Chevron retourné tant que le groupe est ouvert.
+      transform: scaleY(-1);
+    }
+
+    &[aria-expanded='false'] img {
+      transform: none;
+    }
+  }
+
+  &__body {
+    // L'en-tête finit à 24, les corps démarrent à 52.
+    margin-top: 28px;
+    // Le dernier élément du corps s'arrête 20 avant le trait.
+    padding-bottom: 20px;
+  }
+
+  &--empty {
+    // « More filters » n'a pas de corps : son trait suit l'en-tête de 20.
+    padding-bottom: 20px;
+  }
+}
+
+// ---- Disponibilité : deux boutons radio ---------------------------------
+.filter-radio {
+  @include flex($align: center, $gap: 9px);
+  // 5127:335 démarre à 813, soit 50 sous le haut du groupe (763).
+  margin-top: -2px;
+  font-family: $font-display;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 12px;
+  color: $color-black;
+  cursor: pointer;
+
+  & + & {
+    // 813 → 837.
+    margin-top: 12px;
+  }
+
+  input {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    border: 0.4px solid #000000;
+    border-radius: 50%;
+    background: $color-white;
+    cursor: pointer;
+
+    &:checked {
+      // Pastille de 8 centrée dans les 12.
+      background: radial-gradient($color-black 0 4px, $color-white 4px);
+    }
+  }
+}
+
+// ---- Tailles et couleurs ------------------------------------------------
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  // 30 de pastille, 6 d'intervalle (x = 29, 65, 101, 137, 173, 209…).
+  gap: 6px;
+  // Les corps « taille » et « couleur » démarrent à 52, les autres à 50.
+  margin-top: 0;
+}
+
+.filter-size {
+  @include flex($align: center, $justify: center);
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0.5px solid $color-black;
+  border-radius: 50%;
+  background: $color-white;
+  font-family: $font-display;
+  font-weight: 400;
+  font-size: 9px;
+  line-height: 9px;
+  color: $color-black;
+  cursor: pointer;
+
+  &--active {
+    background: $color-black;
+    color: $color-white;
+  }
+}
+
+.filter-color {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  // Les douze teintes du frame 5127:364, dans l'ordre de la maquette.
+  &--black { background: $color-black; }
+  &--white { background: $color-white; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05); }
+  // Sélection : même liseré que les nuanciers de l'accueil.
+  &--active {
+    outline: 1px solid $color-primary;
+    outline-offset: 2.5px;
+  }
+
+  &--tan { background: $color-primary; }
+  &--orange { background: $color-orange; }
+  &--flame { background: #ff5900; }
+  &--blue { background: #0084ff; }
+  &--pink { background: #ff0783; }
+  &--green { background: #0eb031; }
+  &--lime { background: #e3f11b; }
+  &--purple { background: #7c08c9; }
+  &--steel { background: #46688d; }
+  &--sky { background: #79dded; }
+}
+
+// ---- Prix ---------------------------------------------------------------
+.filter-price {
+  &__labels {
+    display: grid;
+    grid-template-columns: 140px 140px;
+    // 5127:391 à x=29, 5127:392 à x=197 : 28 séparent les deux champs.
+    gap: 28px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    color: #333333;
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: 140px 140px;
+    gap: 28px;
+    // Les libellés sont à 1281, les champs à 1303.
+    margin-top: 8px;
+    position: relative;
+  }
+
+  &__field {
+    @include flex($align: center, $justify: space-between);
+    height: 30px;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 2px;
+    background: $col-input-bg;
+    font-family: $font-display;
+    font-size: 14px;
+    color: $color-black;
+
+    input {
+      width: 100%;
+      min-width: 0;
+      border: none;
+      background: none;
+      font: inherit;
+      color: inherit;
+      appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        appearance: none;
+        margin: 0;
+      }
+    }
+
+    span {
+      font-weight: 500;
+      // La maquette réserve exactement 5px au signe (5127:395).
+      width: 5px;
+      text-align: center;
+    }
+  }
+
+  // Le tiret vit entre les deux champs (5127:399 : x=179 sur un intervalle
+  // de 169 à 197).
+  &__dash {
+    position: absolute;
+    left: 150px;
+    top: 6px;
+    font-family: $font-display;
+    font-size: 14px;
+    color: $color-black;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Carte produit de la grille — 342 × 482 (visuel 408 + bandeau 74)
+// Le frame 5127:216 montre la carte survolée : tailles, nuancier et actions
+// apparaissent par-dessus le visuel. On en fait l'état :hover / :focus-within,
+// une grille n'ayant pas de carte ouverte en permanence.
+// --------------------------------------------------------------------------
+.collection-card {
+  position: relative;
+
+  &__media {
+    position: relative;
+    height: 408px;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    background: $color-white;
+  }
+
+  // Chaque photo a son propre cadrage : le designer les a posées à la main
+  // dans le cadre de 342 × 408. On transcrit les quatre valeurs de chaque
+  // frame plutôt que d'uniformiser en `cover`, qui donnerait un autre cadrage.
+  &__img {
+    position: absolute;
+    left: var(--crop-x, 0);
+    top: var(--crop-y, 0);
+    width: var(--crop-w, 100%);
+    height: var(--crop-h, 100%);
+    max-width: none;
+    object-fit: cover;
+  }
+
+  // Voile qui éclaircit le bas du visuel pour porter les options (5127:219).
+  &__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 76.828%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  &__options {
+    position: absolute;
+    left: 27px;
+    // 5127:220 : bloc de 104 posé à 289 dans les 408.
+    top: 289px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  &__option-label {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 10px;
+    color: $color-black;
+
+    // « Color » est en Jost dans la maquette là où « Size » est en DM Sans.
+    &--color {
+      font-family: $font-heading;
+    }
+  }
+
+  &__sizes {
+    @include flex($align: center, $gap: 3px);
+    // Le libellé est à 289 (h=10), les pastilles à 309.
+    margin-top: 10px;
+  }
+
+  &__size {
+    @include flex($align: center, $justify: center);
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0.5px solid $color-black;
+    border-radius: 50%;
+    background: $color-white;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 9px;
+    line-height: 9px;
+    color: $color-black;
+    cursor: pointer;
+
+    &--active {
+      background: $color-black;
+      color: $color-white;
+    }
+  }
+
+  &__colors {
+    // Les pastilles sont à 343 pour le libellé, 363 pour le nuancier.
+    margin-top: 14px;
+  }
+
+  &__swatches {
+    display: block;
+    // Le nuancier occupe 142 × 30 ; le SVG porte son ombre au-delà du cadre.
+    width: 150px;
+    height: 32px;
+    margin: 10px 0 0 -3px;
+  }
+
+  // ---- Actions flottantes ------------------------------------------------
+  &__actions {
+    position: absolute;
+    // 5127:247 et 5127:251 : 42 × 42 posés à x=282, y=19 puis 67.
+    right: 18px;
+    top: 19px;
+    @include flex($gap: 6px);
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  &__action {
+    display: block;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  // Le survol (ou le focus clavier) révèle voile, options et actions.
+  &:hover,
+  &:focus-within {
+    .collection-card__veil,
+    .collection-card__options,
+    .collection-card__actions {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  // ---- Bandeau de description -------------------------------------------
+  &__info {
+    position: relative;
+    height: 74px;
+    border: 1px solid $col-chip-bg;
+    border-top: none;
+    border-radius: 0 0 11px 11px;
+    background: $color-white;
+  }
+
+  &__name {
+    position: absolute;
+    left: 17px;
+    // 5127:214 : capitale à 429 sur un bandeau qui démarre à 408.
+    top: 21px;
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 11px;
+    letter-spacing: -0.32px;
+    color: $color-black;
+  }
+
+  &__prices {
+    position: absolute;
+    left: 16px;
+    // 5127:215 : capitale à 452.
+    top: 44px;
+    @include flex($align: baseline, $gap: 8px);
+  }
+
+  &__price {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 11px;
+    letter-spacing: -0.32px;
+    color: $color-primary;
+  }
+
+  &__price-old {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 8px;
+    color: $col-old-price;
+    text-decoration: line-through;
+  }
+
+  &__cart {
+    position: absolute;
+    // 5127:244 : 36 × 36 posé à x=286, y=427 (soit 19 dans le bandeau).
+    right: 20px;
+    top: 19px;
+    display: block;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+
+    img {
+      display: block;
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &:hover &__cart,
+  &:focus-within &__cart {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// Cadrages relevés frame par frame (largeur, hauteur, décalages).
+.collection-card--samantha-a .collection-card__img { --crop-w: 117.54%; --crop-h: 131.86%; --crop-x: -8.77%; --crop-y: -6.37%; }
+.collection-card--noya .collection-card__img { --crop-w: 132.75%; --crop-h: 148.4%; --crop-x: -16.37%; --crop-y: -14.61%; }
+.collection-card--jelna-a .collection-card__img { --crop-w: 108.77%; --crop-h: 121.57%; --crop-x: -2.92%; --crop-y: 0%; }
+.collection-card--samantha-b .collection-card__img { --crop-w: 123.39%; --crop-h: 128.92%; --crop-x: -15.79%; --crop-y: -22.06%; }
+.collection-card--jelna-b .collection-card__img { --crop-w: 100%; --crop-h: 125.49%; --crop-x: 0%; --crop-y: -8.33%; }
+.collection-card--skirt-a .collection-card__img { --crop-w: 102.34%; --crop-h: 128.61%; --crop-x: -1.17%; --crop-y: -14.31%; }
+.collection-card--samantha-c .collection-card__img { --crop-w: 102.81%; --crop-h: 129.34%; --crop-x: -1.55%; --crop-y: -4.82%; }
+.collection-card--jelna-c .collection-card__img { --crop-w: 104.09%; --crop-h: 112.5%; --crop-x: -2.05%; --crop-y: -6.25%; }
+.collection-card--skirt-b .collection-card__img { --crop-w: 102.92%; --crop-h: 129.66%; --crop-x: -1.46%; --crop-y: -16.67%; }
+// Carte reprise par le carrousel de la fiche produit (519:11618).
+.collection-card--shorte .collection-card__img { --crop-w: 101.75%; --crop-h: 136.27%; --crop-x: -0.88%; --crop-y: 0%; }
+
+// --------------------------------------------------------------------------
+// Mobile — frame 544:14446 (390 × 4175)
+//
+// La colonne de filtres disparaît : la barre d'outils se réduit à « Filter »,
+// « Sort » et au compteur, en simple texte. La grille passe à une carte par
+// rangée, à la même taille de 342 × 482 qu'en desktop.
+// --------------------------------------------------------------------------
+@include mobile {
+  .collection-hero {
+    // 544:14529 : 390 × 394,875.
+    height: 395px;
+
+    &__bg {
+      // 544:14530 : cadrage propre au frame mobile.
+      left: -26.48%;
+      top: -0.33%;
+      width: 152.6%;
+      height: 100.76%;
+    }
+
+    &__title {
+      // 544:14532 : DM Sans Bold 32 sur deux lignes de 40, bloc de 315 centré
+      // à y=156 ; la boîte CSS fait 80 pour 62 rognés, d'où les 9 repris.
+      top: 156px;
+      margin-top: -9px;
+      width: 315px;
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+      letter-spacing: -0.64px;
+    }
+
+    &__breadcrumb {
+      // 544:14531 : x=22, y=357, capitale de 10.
+      top: 357px;
+      font-size: 14px;
+      line-height: 10px;
+    }
+  }
+
+  .collection {
+    // 544:14533 démarre à 21, la grille à 24.
+    padding-left: 21px;
+    padding-right: 21px;
+
+    &__toolbar {
+      // La bannière finit à 469, 544:14533 commence à 522.
+      margin-top: 53px;
+    }
+
+    // En mobile ce n'est plus un bouton plein mais un simple couple
+    // icône + libellé (544:14534).
+    &__filters-toggle {
+      gap: 10px;
+      margin-top: 0;
+      padding: 0;
+      border-radius: 0;
+      background: none;
+      font-size: 14px;
+      // Capitale du 14px (h=10) ; le couple fait 18 de haut, comme l'icône.
+      line-height: 10px;
+      color: $color-black;
+    }
+
+    &__filters-icon--light,
+    &__filters-label {
+      display: none;
+    }
+
+    &__filters-icon--dark,
+    &__filters-label--mobile {
+      display: block;
+    }
+
+    &__sort {
+      // 544:14540 : icône de 18 à x=99, libellé à x=127.
+      left: 78px;
+      gap: 10px;
+      font-size: 14px;
+
+      img {
+        width: 18px;
+        height: 18px;
+      }
+
+      span {
+        line-height: 10px;
+      }
+    }
+
+    &__count {
+      // 544:14543 commence à 528, soit 6 sous la barre.
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 10px;
+    }
+
+    &__body {
+      // La barre d'outils finit à 540, la grille commence à 563.
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      margin-top: 23px;
+      // 21 + 3 = 24 à gauche, 342 de large.
+      margin-right: 3px;
+    }
+
+    // Le frame mobile ne décline pas la colonne de filtres.
+    &__sidebar {
+      display: none;
+    }
+
+    &__grid {
+      grid-template-columns: minmax(0, 1fr);
+      // Les cartes s'enchaînent tous les 502 pour 482 de haut.
+      row-gap: 20px;
+    }
+
+    &__pagination {
+      // La grille finit à 2551, 544:14574 commence à 2588.
+      margin-top: 37px;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    &__page-link {
+      line-height: 10px;
+    }
+
+    // La maquette n'a jamais que 4 pages ; le catalogue piloté par script
+    // (main.js) peut en produire davantage selon les filtres. Au-delà de ce
+    // que 390px peut tenir à côté de Previous/Next, les numéros défilent
+    // horizontalement plutôt que de faire déborder la page.
+    &__pages {
+      gap: 10px;
+      max-width: calc(100vw - 148px);
+      overflow-x: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__page {
+      // 544:14576 : pastilles de 35 au lieu de 54.
+      width: 35px;
+      height: 35px;
+      font-size: 14px;
+      // Sans quoi le flex les compresserait avant de faire défiler le
+      // conteneur : les pastilles doivent rester rondes.
+      flex-shrink: 0;
+    }
+  }
+
+  // La pagination finit à 2643, 544:14586 commence à 2712.
+  .page--category .newsletter {
+    margin-top: 69px;
+  }
+
+  // Le survol n'existe pas au doigt : les options restent masquées et la
+  // carte se réduit au visuel et à son bandeau, comme dans le frame mobile.
+  .collection-card {
+    &__actions,
+    &__cart {
+      display: none;
+    }
+  }
+}

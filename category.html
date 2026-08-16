@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collection — Cadenza</title>
+  <meta name="description" content="Browse the Cadenza dresses collection.">
+  <link rel="stylesheet" href="css/main.css?v=87">
+</head>
+<body class="page--light-header page--category">
+  <div data-include="header"></div>
+
+  <main>
+    <!-- ====================================================================
+         Bannière de catégorie — frame Figma 5127:199
+         ==================================================================== -->
+    <section class="collection-hero">
+      <img class="collection-hero__bg" src="assets/images/collection-hero.jpg" alt="">
+      <div class="collection-hero__overlay"></div>
+      <h1 class="collection-hero__title">Shield Your Eyes with Fashion.</h1>
+      <p class="collection-hero__breadcrumb">Collection / dresses</p>
+    </section>
+
+    <!-- ====================================================================
+         Catalogue — barre d'outils, colonne de filtres et grille 3 × 3
+         Frame Figma 5127:67
+         ==================================================================== -->
+    <div class="collection">
+      <div class="collection__toolbar">
+        <!-- Icône blanche sur le bouton noir du desktop, #252324 sur le fond
+             clair du mobile ; libellé « Hide filters » puis « Filter ». -->
+        <button type="button" class="collection__filters-toggle" data-filters-toggle aria-expanded="true" aria-controls="filter-panel">
+          <img class="collection__filters-icon collection__filters-icon--light" src="assets/icons/icon-filters.svg" alt="" width="18" height="18">
+          <img class="collection__filters-icon collection__filters-icon--dark" src="assets/icons/icon-filters-dark.svg" alt="" width="18" height="18">
+          <span class="collection__filters-label" data-filters-label>Hide filters</span>
+          <span class="collection__filters-label collection__filters-label--mobile">Filter</span>
+        </button>
+        <button type="button" class="collection__sort">
+          <img src="assets/icons/icon-sort.svg" alt="" width="26" height="26">
+          <span>Sort</span>
+        </button>
+        <p class="collection__count">81 items</p>
+      </div>
+
+      <div class="collection__body">
+        <!-- Colonne de filtres — frame 5127:328 -->
+        <aside class="collection__sidebar filter-panel" id="filter-panel">
+          <div class="filter-panel__applied-head">
+            <h2 class="filter-panel__title">Applied filters</h2>
+            <a class="filter-panel__clear" href="category.html">Clear filter</a>
+          </div>
+          <div class="filter-panel__chips">
+            <button type="button" class="filter-chip">15,00$ - 300,00$
+              <img src="assets/icons/icon-chip-cross.svg" alt="Remove filter" width="10" height="10">
+            </button>
+            <button type="button" class="filter-chip">Black
+              <img src="assets/icons/icon-chip-cross.svg" alt="Remove filter" width="10" height="10">
+            </button>
+            <button type="button" class="filter-chip">Yellow
+              <img src="assets/icons/icon-chip-cross.svg" alt="Remove filter" width="10" height="10">
+            </button>
+            <button type="button" class="filter-chip">L
+              <img src="assets/icons/icon-chip-cross.svg" alt="Remove filter" width="10" height="10">
+            </button>
+            <button type="button" class="filter-chip">In stock
+              <img src="assets/icons/icon-chip-cross.svg" alt="Remove filter" width="10" height="10">
+            </button>
+            <button type="button" class="filter-chip">In stock
+              <img src="assets/icons/icon-chip-cross.svg" alt="Remove filter" width="10" height="10">
+            </button>
+          </div>
+
+          <div class="filter-group">
+            <button type="button" class="filter-group__header" data-filter-toggle aria-expanded="true" aria-controls="filter-availability">
+              <span class="filter-panel__title">Availability</span>
+              <img src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+            </button>
+            <div class="filter-group__body" id="filter-availability">
+              <label class="filter-radio">
+                <input type="radio" name="availability" value="in-stock" checked>
+                In stock
+              </label>
+              <label class="filter-radio">
+                <input type="radio" name="availability" value="out-of-stock">
+                Out of stock
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button type="button" class="filter-group__header" data-filter-toggle aria-expanded="true" aria-controls="filter-size">
+              <span class="filter-panel__title">Size</span>
+              <img src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+            </button>
+            <div class="filter-group__body" id="filter-size">
+              <div class="filter-options">
+                <button type="button" class="filter-size" aria-pressed="false">XS</button>
+                <button type="button" class="filter-size filter-size--active" aria-pressed="true">S</button>
+                <button type="button" class="filter-size" aria-pressed="false">M</button>
+                <button type="button" class="filter-size" aria-pressed="false">L</button>
+                <button type="button" class="filter-size filter-size--active" aria-pressed="true">XL</button>
+                <button type="button" class="filter-size" aria-pressed="false">2XL</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button type="button" class="filter-group__header" data-filter-toggle aria-expanded="true" aria-controls="filter-color">
+              <span class="filter-panel__title">Color</span>
+              <img src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+            </button>
+            <div class="filter-group__body" id="filter-color">
+              <div class="filter-options">
+                <button type="button" class="filter-color filter-color--black" aria-label="Black" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--white" aria-label="White" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--tan" aria-label="Tan" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--orange" aria-label="Orange" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--flame" aria-label="Flame" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--blue" aria-label="Blue" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--pink" aria-label="Pink" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--green" aria-label="Green" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--lime" aria-label="Lime" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--purple" aria-label="Purple" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--steel" aria-label="Steel blue" aria-pressed="false"></button>
+                <button type="button" class="filter-color filter-color--sky" aria-label="Sky blue" aria-pressed="false"></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button type="button" class="filter-group__header" data-filter-toggle aria-expanded="true" aria-controls="filter-price">
+              <span class="filter-panel__title">Price</span>
+              <img src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+            </button>
+            <div class="filter-group__body filter-price" id="filter-price">
+              <div class="filter-price__labels">
+                <label for="price-min">min</label>
+                <label for="price-max">max</label>
+              </div>
+              <div class="filter-price__fields">
+                <span class="filter-price__field">
+                  <input id="price-min" type="number" name="price-min" value="15" min="0">
+                  <span>$</span>
+                </span>
+                <span class="filter-price__dash">-</span>
+                <span class="filter-price__field">
+                  <input id="price-max" type="number" name="price-max" value="300" min="0">
+                  <span>$</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group filter-group--empty">
+            <button type="button" class="filter-group__header" data-filter-toggle aria-expanded="false" aria-controls="filter-more">
+              <span class="filter-panel__title">More filters</span>
+              <img src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+            </button>
+            <div class="filter-group__body" id="filter-more" hidden></div>
+          </div>
+        </aside>
+
+        <!-- Grille produits — frames 5127:208, 5127:262 et 5127:285 -->
+        <div class="collection__grid">
+          <article class="collection-card collection-card--samantha-a">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-samantha-a.jpg" alt="Samantha Activewear">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Samantha Activewear</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">99,00$</span>
+                <span class="collection-card__price-old">200,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+
+          <article class="collection-card collection-card--noya">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-noya.jpg" alt="Noya Slim Dress">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Noya Slim Dress</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">79,00$</span>
+                <span class="collection-card__price-old">109,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+
+          <article class="collection-card collection-card--jelna-a">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-jelna-a.jpg" alt="Jelna Split Dress">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Jelna Split Dress</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">100,00$</span>
+                <span class="collection-card__price-old">200,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+
+          <article class="collection-card collection-card--samantha-b">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-samantha-b.jpg" alt="Samantha Activewear">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Samantha Activewear</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">120,00$</span>
+                <span class="collection-card__price-old">200,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+
+          <article class="collection-card collection-card--jelna-b">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-jelna-b.jpg" alt="Jelna Split Dress">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Jelna Split Dress</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">165,00$</span>
+                <span class="collection-card__price-old">200,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+
+          <article class="collection-card collection-card--skirt-a">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-skirt-a.jpg" alt="Skirt Sets">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Skirt Sets</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">179,00$</span>
+                <span class="collection-card__price-old">450,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+
+          <article class="collection-card collection-card--samantha-c">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-samantha-c.jpg" alt="Samantha Activewear">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Samantha Activewear</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">99,00$</span>
+                <span class="collection-card__price-old">120,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+
+          <article class="collection-card collection-card--jelna-c">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-jelna-c.jpg" alt="Jelna Split Dress">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Jelna Split Dress</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">40,00$</span>
+                <span class="collection-card__price-old">60,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+
+          <article class="collection-card collection-card--skirt-b">
+            <div class="collection-card__media">
+              <img class="collection-card__img" src="assets/images/col-skirt-b.jpg" alt="Skirt Sets">
+              <div class="collection-card__veil"></div>
+              <div class="collection-card__options">
+                <p class="collection-card__option-label">Size</p>
+                <div class="collection-card__sizes">
+                  <button type="button" class="collection-card__size" aria-pressed="false">M</button>
+                  <button type="button" class="collection-card__size collection-card__size--active" aria-pressed="true">S</button>
+                  <button type="button" class="collection-card__size" aria-pressed="false">L</button>
+                </div>
+                <div class="collection-card__colors">
+                  <p class="collection-card__option-label collection-card__option-label--color">Color</p>
+                  <img class="collection-card__swatches" src="assets/icons/icon-collection-swatches.svg" alt="Available colours" width="150" height="32">
+                </div>
+              </div>
+            </div>
+            <div class="collection-card__actions">
+              <button type="button" class="collection-card__action" aria-label="Add to wishlist" aria-pressed="false">
+                <img src="assets/icons/icon-collection-heart.svg" alt="" width="42" height="42">
+              </button>
+              <button type="button" class="collection-card__action" data-panel-open="search" aria-label="Quick view">
+                <img src="assets/icons/icon-collection-search.svg" alt="" width="42" height="42">
+              </button>
+            </div>
+            <div class="collection-card__info">
+              <h3 class="collection-card__name"><a href="product.html">Skirt Sets</a></h3>
+              <p class="collection-card__prices">
+                <span class="collection-card__price">79,00$</span>
+                <span class="collection-card__price-old">120,00$</span>
+              </p>
+              <button type="button" class="collection-card__cart" aria-label="Add to cart">
+                <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination — frame 5127:310, centrée sur le viewport -->
+    <nav class="collection__pagination" aria-label="Pagination">
+      <a class="collection__page-link" href="category.html">Previous</a>
+      <div class="collection__pages">
+        <button type="button" class="collection__page collection__page--active" aria-current="page">1</button>
+        <button type="button" class="collection__page">2</button>
+        <button type="button" class="collection__page">3</button>
+        <button type="button" class="collection__page">4</button>
+      </div>
+      <a class="collection__page-link" href="category.html">Next</a>
+    </nav>
+
+    <!-- Bande newsletter, reprise à l'identique de l'accueil (5127:187) -->
+    <section class="newsletter">
+      <img class="newsletter__bg" src="assets/images/newsletter-bg.jpg" alt="">
+      <div class="newsletter__overlay"></div>
+      <p class="newsletter__eyebrow">Goodbye Deals</p>
+      <h2 class="newsletter__title">Never Miss a Moment</h2>
+      <p class="newsletter__note">Final day to save: September 30, 2024!</p>
+      <form class="newsletter__form">
+        <label class="visually-hidden" for="newsletter-email">Email address</label>
+        <input class="newsletter__input" type="email" id="newsletter-email" name="email" placeholder="Enter your email" required>
+        <button type="submit" class="newsletter__submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <div data-include="panels"></div>
+
+  <script src="js/includes.js?v=27"></script>
+  <script src="js/main.js?v=41"></script>
+</body>
+</html>
