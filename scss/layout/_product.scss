@@ -1,0 +1,1055 @@
+// ==========================================================================
+// Product — fiche produit « Twilight Whisper Skirt »
+// Frames Figma  desktop 519:7584 (1440 × 3831)
+//               mobile  519:11731 (390 × 3831)
+//
+// Trois blocs : galerie + colonne d'informations (519:11656), onglets et
+// description (519:11653), puis le carrousel « You may also like »
+// (519:11553), qui réutilise la carte de la page catégorie.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+$pd-rule: #e6e6e6; // filets horizontaux de la colonne d'informations
+$pd-tab-track: #eaecf0;
+$pd-tab-active: #575757;
+$pd-tab-muted: #1d364d;
+$pd-qty-bg: #ebebeb;
+$pd-badge-hot: #fff0f0;
+$pd-badge-hot-text: #d46f77;
+$pd-badge-soft: #f5f4f2;
+$pd-rating-bg: #fbf3ea;
+$pd-recommend: #3e9242;
+$pd-old-price: #b9b9b9; // prix barré du bloc mobile
+
+// --------------------------------------------------------------------------
+// Bloc principal — frame 519:11656 (x=68, y=179, 1293 × 844)
+// Galerie de 609 à gauche, informations de 584 à droite, 100 entre les deux.
+// --------------------------------------------------------------------------
+.product {
+  display: grid;
+  grid-template-columns: minmax(0, 609px) minmax(0, 584px);
+  // 519:11655 démarre à 68, 519:11654 à 777 : 100 les séparent.
+  gap: 100px;
+  // Le header finit à 122, les badges commencent à 179.
+  padding: 57px fluid(79px, 20px) 0 fluid(68px, 20px);
+
+  // ---- Galerie ------------------------------------------------------------
+  &__gallery {
+    position: relative;
+  }
+
+  &__stage {
+    position: relative;
+    // 519:11411 : 587 × 691 posé à 80, dans une colonne de 609 qui démarre
+    // à 68 — d'où 12 à gauche et 10 à droite. Le visuel démarre à 180 quand
+    // les badges de droite démarrent à 179.
+    width: calc(100% - 22px);
+    margin: 1px 0 0 12px;
+    height: fluid(691px, 420px);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  // Les quatre vues sont superposées ; le desktop n'en montre qu'une, le
+  // mobile les fait défiler côte à côte.
+  &__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+
+    &--active {
+      opacity: 1;
+    }
+  }
+
+  // Cadrage relevé sur 519:11412 : la photo est agrandie et remontée.
+  &__stage-img {
+    position: absolute;
+    left: -5.04%;
+    top: -13.35%;
+    width: 110.96%;
+    height: 126.69%;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  // ---- Vignettes et flèches ----------------------------------------------
+  // 519:7659 : quatre carrés de 115 espacés de 20, posés à x=114 y=908 ; les
+  // flèches de 24 les encadrent à y=954, soit 46 sous le haut des vignettes.
+  &__thumbs {
+    @include flex($align: center, $gap: 20px);
+    position: relative;
+    // 519:11411 finit à 871, 519:7659 commence à 908.
+    margin-top: 37px;
+    // 519:7659 démarre à 114 quand la colonne démarre à 68.
+    padding-left: 46px;
+  }
+
+  &__thumb {
+    position: relative;
+    flex-shrink: 0;
+    width: 115px;
+    height: 115px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: $color-white;
+    overflow: hidden;
+    cursor: pointer;
+
+    // 519:11534 : la vignette courante porte un liseré orange de 2.
+    &--active {
+      border-color: $color-orange;
+    }
+
+    img {
+      position: absolute;
+      left: var(--crop-x, 0);
+      top: var(--crop-y, 0);
+      width: var(--crop-w, 100%);
+      height: var(--crop-h, 100%);
+      max-width: none;
+      object-fit: cover;
+    }
+  }
+
+  // 519:7670 et 519:7668 : posées aux deux bords de la colonne (68 et 653),
+  // centrées sur la rangée de vignettes (y=954 pour 115 de haut).
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+
+    &--prev {
+      left: 0;
+
+      // La flèche de gauche est la même, retournée.
+      img {
+        transform: scaleX(-1);
+      }
+    }
+
+    &--next {
+      right: 0;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Colonne d'informations — frame 519:11654
+//
+// Rythme vertical : badges 179, titre 243, filet 337, prix 367, filet 469,
+// couleurs 499, filet 614, tailles 659, filet 760, quantité 805, filet 896,
+// boutons 930 (h=57). Chaque section finit sur un filet de 582.
+// --------------------------------------------------------------------------
+.product-info {
+  // ---- Badges (compteur de vues, favori, partage) -------------------------
+  &__badges {
+    @include flex($align: flex-start, $gap: 13px);
+  }
+
+  &__badge {
+    @include flex($align: center, $gap: 7px);
+    padding: 7px 10px;
+    border: none;
+    border-radius: 4px;
+    background: $pd-badge-soft;
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 16px;
+    // 519:7629 : la rangée fait 35 = 7 + 21 + 7.
+    line-height: 21px;
+    color: $color-black;
+    cursor: pointer;
+
+    // 519:7630 : le compteur est sur fond rosé, texte #d46f77.
+    &--hot {
+      background: $pd-badge-hot;
+      color: $pd-badge-hot-text;
+    }
+
+    // 519:7634 et 519:7637 : icône seule, 7 de marge tout autour.
+    &--icon {
+      padding: 7px;
+    }
+
+    // Le cœur est un simple contour (icon-pd-heart.svg, sans variante
+    // remplie) : la sélection se lit sur le fond du badge plutôt que sur le
+    // glyphe, comme la puce déjà cerclée des nuanciers de couleur.
+    &[aria-pressed='true'] {
+      background: $color-primary;
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    img {
+      display: block;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // ---- Sections séparées par un filet -------------------------------------
+  // Ombre intérieure plutôt que bordure : une bordure occupe le flux et
+  // décalait chaque section d'un pixel de plus que la précédente.
+  &__section {
+    // `flow-root` : sans bordure, les marges des enfants fusionneraient avec
+    // celles de la section et fausseraient tout le rythme vertical.
+    display: flow-root;
+    box-shadow: inset 0 -1px 0 $pd-rule;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 45px;
+    // 519:7627 : bloc de 40 pour du 45 (interligne serré de la maquette).
+    line-height: 40px;
+    color: $color-black;
+    // Les badges finissent à 214, 519:7626 commence à 243.
+    margin-top: 29px;
+  }
+
+  &__brand {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: $color-black;
+    // 519:7626 : 11 d'écart entre le titre et la marque.
+    margin-top: 11px;
+    // 519:7628 finit à 315, le filet 519:7655 est à 337.
+    padding-bottom: 22px;
+  }
+
+  // ---- Prix et notes ------------------------------------------------------
+  &__pricing {
+    @include flex($align: center, $gap: 41px);
+    // Le filet est à 337, 519:7640 commence à 367.
+    margin-top: 30px;
+    // 519:7640 finit à 444, le filet 519:7656 est à 469.
+    padding-bottom: 25px;
+  }
+
+  &__price {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 44px;
+    color: $color-primary;
+  }
+
+  &__price-old {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 27px;
+    color: rgba(0, 0, 0, 0.5);
+    // 519:7641 : 6 séparent les deux lignes de prix.
+    margin-top: 6px;
+  }
+
+  &__ratings {
+    @include flex($gap: 14px);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__rating-row {
+    @include flex($align: flex-start, $gap: 12px);
+  }
+
+  &__rating {
+    @include flex($align: center, $gap: 7px);
+    padding: 7px 10px;
+    border-radius: 27px;
+    background: $pd-badge-soft;
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 14px;
+    color: $color-black;
+
+    // 519:7646 : la note moyenne est sur fond crème, texte orange.
+    &--score {
+      background: $pd-rating-bg;
+      color: $color-orange;
+    }
+
+    img {
+      display: block;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__recommend {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: $color-black;
+
+    // 519:7654 : seul le pourcentage est vert et en demi-gras.
+    strong {
+      font-weight: 600;
+      color: $pd-recommend;
+    }
+  }
+
+  // ---- Libellés d'option --------------------------------------------------
+  &__option-label {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 16px;
+    // Hauteur de capitale du 16px (519:7673 : h=11).
+    line-height: 11px;
+    color: $color-black;
+  }
+
+  // Les filets 3 et 4 sont suivis de 45 (614 → 659, 760 → 805) là où le
+  // filet 2 n'est suivi que de 30 (469 → 499).
+  &__options {
+    margin-top: 45px;
+
+    &--tight {
+      margin-top: 30px;
+    }
+  }
+
+  // ---- Couleurs : pastille de 50 dans un anneau de 64 ---------------------
+  &__colors {
+    @include flex($align: center, $gap: 12px);
+    // Le libellé fait 11, les pastilles démarrent 26 plus bas.
+    margin-top: 15px;
+    // 519:7674 finit à 589, le filet 519:7657 est à 614.
+    margin-bottom: 25px;
+  }
+
+  &__color {
+    @include flex($align: center, $justify: center);
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+
+    // 519:7678 : la couleur choisie prend un anneau de 3 en #cb9274.
+    &--active {
+      border-color: $color-primary;
+    }
+
+    span {
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  // ---- Tailles ------------------------------------------------------------
+  &__sizes {
+    @include flex($align: center, $gap: 12px);
+    margin-top: 15px;
+    // 519:11448 finit à 735, le filet 519:7658 est à 760.
+    margin-bottom: 25px;
+  }
+
+  &__size {
+    @include flex($align: center, $justify: center);
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: 0.5px solid $color-black;
+    border-radius: 50%;
+    background: $color-white;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: $color-black;
+    cursor: pointer;
+
+    &--active {
+      background: $color-black;
+      color: $color-white;
+    }
+  }
+
+  // ---- Quantité -----------------------------------------------------------
+  // 519:11476 reprend l'ordre de la maquette : [+] valeur [−], comme la
+  // section « Twilight Whisper Skirt » de l'accueil.
+  &__quantity {
+    @include flex($align: center, $gap: 22px);
+    margin-top: 15px;
+    // 519:11476 finit à 871, le filet 519:11473 est à 896.
+    margin-bottom: 25px;
+  }
+
+  &__qty-btn {
+    @include flex($align: center, $justify: center);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: $pd-qty-bg;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__qty-value {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 11px;
+    letter-spacing: -0.32px;
+    color: $color-black;
+  }
+
+  // ---- Boutons ------------------------------------------------------------
+  // 519:11503 et 519:11509 : deux blocs de 287 × 57, 6 entre les deux.
+  &__actions {
+    @include flex($align: center, $gap: 6px);
+    // Le dernier filet est à 896, les boutons commencent à 930.
+    margin-top: 34px;
+  }
+
+  &__btn {
+    @include flex($align: center, $justify: center);
+    width: 287px;
+    padding: 22px 30px;
+    border: none;
+    border-radius: 2px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    // Capitale du 18px : 22 + 13 + 22 = 57.
+    line-height: 13px;
+    color: $color-white;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    &--cart {
+      background: $color-primary;
+    }
+
+    &--buy {
+      background: $color-black;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Onglets et description — frame 519:11653 (x=80, y=1117)
+//
+// Chaque onglet possède son propre rail de 128 × 4 posé à y=1154 ; seul
+// celui de l'onglet actif est foncé. Un rail gris de 1279 court derrière.
+// --------------------------------------------------------------------------
+.product-tabs {
+  position: relative;
+  // La galerie finit à 1023 — plus bas que la colonne d'infos —, et
+  // 519:7743 commence à 1117.
+  margin-top: 94px;
+  padding: 0 fluid(81px, 20px) 0 fluid(80px, 20px);
+
+  // Chaque onglet et son panneau vivent dans un même groupe. En desktop la
+  // grille remet les quatre boutons sur la première rangée et les panneaux
+  // sur la seconde ; en mobile les groupes s'empilent en accordéon.
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(4, 128px) minmax(0, 1fr);
+    // Rail gris continu de 1279, sous les rails individuels.
+    background-image: linear-gradient($pd-tab-track, $pd-tab-track);
+    background-size: 100% 4px;
+    background-position: 0 37px;
+    background-repeat: no-repeat;
+  }
+
+  &__group {
+    display: contents;
+  }
+
+  &__tab {
+    @include flex($align: center, $justify: center);
+    grid-row: 1;
+    width: 128px;
+    // 1117 → 1158, rail de 4 compris.
+    height: 41px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 16px;
+    color: $color-black;
+    cursor: pointer;
+
+    // 519:7744 : l'onglet courant est en demi-gras et porte le rail foncé.
+    &--active {
+      font-weight: 600;
+      box-shadow: inset 0 -4px 0 $pd-tab-active;
+    }
+
+    // 519:11549 et 519:11552 : les deux derniers sont en 17px, teinte #1d364d.
+    &--muted {
+      font-size: 17px;
+      color: $pd-tab-muted;
+    }
+
+    // 519:11550 démarre à 472 quand le précédent finit à 464.
+    &:last-child {
+      margin-left: 8px;
+    }
+  }
+
+  // ---- Corps --------------------------------------------------------------
+  &__panel {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    // Les rails sont à 1154, 519:7748 commence à 1207.
+    margin-top: 49px;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__heading {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    color: $color-black;
+
+    // 519:7748 : 40 séparent les groupes du panneau.
+    &--spaced {
+      margin-top: 40px;
+    }
+  }
+
+  &__text {
+    max-width: 1054px;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 27.2px;
+    color: $color-black;
+    // Le titre occupe 31, le corps démarre 50 plus bas.
+    margin-top: 19px;
+  }
+
+  &__list-items {
+    @include flex($gap: 14px);
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 19px;
+  }
+
+  &__item {
+    @include flex($align: center, $gap: 14px);
+    // 519:7755 : chaque ligne fait 28, un peu plus que l'interligne du texte.
+    height: 28px;
+
+    img {
+      display: block;
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      font-family: $font-display;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 27.2px;
+      color: $color-black;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Carrousel « You may also like » — frame 519:11553 (y=2195, h=745)
+// Reprend la carte 342 × 482 de la page catégorie.
+// --------------------------------------------------------------------------
+.product-related {
+  position: relative;
+  // 519:7748 finit à 2155, 519:11553 commence à 2195.
+  margin-top: 40px;
+  padding: 94px fluid(101px, 20px) 80px;
+
+  &__eyebrow {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    // Hauteur de capitale du 18px (519:11650 : h=13).
+    line-height: 13px;
+    color: $color-primary;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: 32px;
+    // 519:11651 : capitale de 22 pour un interligne de 40.
+    line-height: 22px;
+    color: $color-black;
+    // 519:11650 finit à 2302, 519:11651 commence à 2322.
+    margin-top: 20px;
+  }
+
+  // 519:11562 : la piste déborde de la gouttière (x=84 pour un contenu à 101).
+  &__track {
+    display: flex;
+    gap: 8px;
+    // Le titre finit à 2344, 519:11562 commence à 2378.
+    margin-top: 34px;
+    margin-left: -17px;
+    padding-left: 17px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > * {
+      flex: 0 0 342px;
+    }
+  }
+
+  // 519:11640 et 519:11644 : pastilles de 60 posées à y=2406, soit 28 sous
+  // le haut de la piste, alignées sur les bords du contenu.
+  &__arrow {
+    position: absolute;
+    top: 2406px - 2195px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: $color-white;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    z-index: 1;
+
+    img {
+      display: block;
+      width: 21px;
+      height: 21px;
+    }
+
+    &--prev {
+      left: 98px;
+
+      img {
+        transform: scaleX(-1);
+      }
+    }
+
+    &--next {
+      right: 196px;
+    }
+  }
+}
+
+// La newsletter suit le carrousel de 77 (519:11553 finit à 2940,
+// 519:11718 commence à 3017).
+.page--product .newsletter {
+  margin-top: 77px;
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame 519:11731 (390 × 3831)
+//
+// La galerie devient un carrousel de quatre vues de 303, les onglets un
+// accordéon, et les options changent d'ordre : Taille, Quantité, Couleur,
+// là où le desktop enchaîne Couleur, Taille, Quantité.
+// --------------------------------------------------------------------------
+@include mobile {
+  .product {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    // 535:12690 démarre à 128 quand le header finit à 74.
+    padding: 54px 21px 0;
+
+    &__gallery {
+      padding: 0;
+    }
+
+    // 535:12690 : quatre vues de 303 × 381 espacées de 8, défilement au doigt.
+    &__stage {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      height: 381px;
+      margin: 0;
+      border-radius: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__slide {
+      position: relative;
+      flex: 0 0 303px;
+      height: 381px;
+      opacity: 1;
+      scroll-snap-align: start;
+    }
+
+    // Chaque vue a son propre cadrage dans le frame mobile.
+    &__stage-img {
+      left: var(--m-x, 0);
+      top: var(--m-y, 0);
+      width: var(--m-w, 100%);
+      height: var(--m-h, 100%);
+    }
+
+    // Vignettes et flèches n'existent pas dans le frame mobile.
+    &__thumbs,
+    &__arrow {
+      display: none;
+    }
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    // 535:13015 commence à 559, la galerie finit à 509.
+    margin-top: 50px;
+
+    // 535:12944 (Taille) précède 535:12961 (Quantité), puis 535:12978
+    // (Couleur) : l'ordre du frame mobile diffère de celui du desktop.
+    &__section--size {
+      order: 3;
+    }
+
+    &__section--quantity {
+      order: 4;
+    }
+
+    &__section--color {
+      order: 5;
+    }
+
+    &__actions {
+      order: 6;
+    }
+
+    // ---- Titre et marque --------------------------------------------------
+    &__title {
+      font-size: 25px;
+      // 535:13017 : capitale de 18 pour un interligne de 40.
+      line-height: 18px;
+      // Les badges finissent à 594, le titre commence à 616.
+      margin-top: 22px;
+    }
+
+    &__brand {
+      // 535:13029 commence à 645, le titre s'arrête à 634.
+      margin-top: 11px;
+      // Le filet 535:13030 est à 682.
+      padding-bottom: 16px;
+    }
+
+    // ---- Prix et notes ----------------------------------------------------
+    &__pricing {
+      align-items: flex-start;
+      // 535:13001 démarre 113 après le prix.
+      gap: 43px;
+      // Le filet est à 682, 535:12994 commence à 716.
+      margin-top: 34px;
+      // Le bloc finit à 765, le filet 535:13014 est à 781.
+      padding-bottom: 16px;
+    }
+
+    &__price {
+      font-size: 18px;
+      // Capitale du 18px (535:12999 : h=13).
+      line-height: 13px;
+      letter-spacing: -0.36px;
+    }
+
+    &__price-old {
+      font-size: 12px;
+      line-height: 8px;
+      color: $pd-old-price;
+      text-decoration: line-through;
+      // 535:13000 commence à 742, le prix s'arrête à 729.
+      margin-top: 13px;
+    }
+
+    // 535:13013 : le taux de recommandation est 33 sous le haut des pastilles,
+    // qui font 24 — soit 9 d'intervalle.
+    &__ratings {
+      gap: 9px;
+    }
+
+    &__rating-row {
+      gap: 6px;
+    }
+
+    &__rating {
+      padding: 4px 8px;
+      font-size: 12px;
+      // 535:13005 : pastille de 24 = 4 + 16 + 4.
+      line-height: 16px;
+
+      img {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    &__recommend {
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    // ---- Options ----------------------------------------------------------
+    // Tous les filets sont suivis de 34 en mobile, sans l'exception du
+    // desktop entre le prix et les couleurs.
+    &__options {
+      margin-top: 34px;
+
+      &--tight {
+        margin-top: 34px;
+      }
+    }
+
+    &__colors,
+    &__sizes,
+    &__quantity {
+      // Le libellé fait 11, les commandes démarrent 26 plus bas.
+      margin-top: 15px;
+      margin-bottom: 16px;
+    }
+
+    // 535:12978 : la teinte choisie garde un anneau de 30, les autres se
+    // réduisent à 24 et se resserrent.
+    &__colors {
+      gap: 4px;
+      // Le nuancier finit à 1083, les boutons commencent à 1113.
+      margin-bottom: 30px;
+    }
+
+    &__color {
+      width: 24px;
+      height: 24px;
+      border-width: 0;
+
+      span {
+        width: 24px;
+        height: 24px;
+      }
+
+      &--active {
+        width: 30px;
+        height: 30px;
+        border-width: 2px;
+
+        span {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+
+    &__size {
+      width: 30px;
+      height: 30px;
+      font-size: 9px;
+    }
+
+    &__qty-btn {
+      width: 30px;
+      height: 30px;
+    }
+
+    // ---- Boutons ----------------------------------------------------------
+    &__actions {
+      // 535:12973 : deux blocs de 170,72 espacés de 7.
+      gap: 7px;
+      margin-top: 0;
+    }
+
+    &__btn {
+      flex: 1 1 0;
+      width: auto;
+      padding: 14px 10px;
+      font-size: 16px;
+      // 39 = 14 + 11 + 14.
+      line-height: 11px;
+    }
+  }
+
+  // ---- Onglets → accordéon (535:13032) -----------------------------------
+  .product-tabs {
+    // La fiche finit à 1152, 535:13032 commence à 1204.
+    margin-top: 52px;
+    padding: 0 21px;
+
+    &__inner {
+      display: block;
+      background-image: none;
+    }
+
+    &__group {
+      display: block;
+    }
+
+    // 535:13037 : en-tête de 21 avec 22 de part et d'autre, chevron à droite.
+    &__tab {
+      @include flex($align: center, $justify: space-between);
+      width: 100%;
+      height: auto;
+      padding: 22px 19px;
+      font-size: 16px;
+      line-height: 21px;
+      text-align: left;
+      box-shadow: none;
+
+      &--active,
+      &--muted {
+        box-shadow: none;
+        font-size: 16px;
+        color: $color-black;
+      }
+
+      // Le chevron pointe à droite quand le bloc est replié.
+      &::after {
+        content: '';
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        background: url('../assets/icons/icon-chevron-down-dark.svg') center / 16px 16px no-repeat;
+        transform: rotate(-90deg);
+        transition: transform 0.2s ease;
+      }
+
+      &--active::after {
+        transform: none;
+      }
+    }
+
+    &__panel {
+      margin-top: 0;
+      padding: 0 19px 22px;
+    }
+
+    &__heading {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    &__text,
+    &__item span {
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    &__item {
+      align-items: flex-start;
+      height: auto;
+    }
+  }
+
+  // ---- Carrousel « You may also like » (535:13181) ------------------------
+  .product-related {
+    // L'accordéon finit à 1709, 535:13181 commence à 1723.
+    margin-top: 14px;
+    padding: 30px 20px 44px;
+
+    &__eyebrow {
+      font-size: 14px;
+      line-height: 10px;
+    }
+
+    &__title {
+      font-size: 20px;
+      // 535:13185 : deux lignes de 26 rognées à 47 ; la boîte CSS en fait 52,
+      // on reprend les 5 de demi-interligne.
+      line-height: 26px;
+      margin-top: 12px;
+      margin-bottom: -5px;
+    }
+
+    &__track {
+      // 535:13186 commence à 1851, le titre s'arrête à 1822.
+      margin: 29px 0 0;
+      padding-left: 0;
+
+      > * {
+        flex: 0 0 303px;
+      }
+    }
+
+    // Les flèches disparaissent : le carrousel se fait au doigt.
+    &__arrow {
+      display: none;
+    }
+
+    // 535:13192 : visuel de 303 × 381, nom et prix posés dessous sans cadre.
+    .collection-card__media {
+      height: 381px;
+      border-radius: 0;
+    }
+
+    .collection-card__info {
+      height: auto;
+      border: none;
+      border-radius: 0;
+    }
+
+    .collection-card__name {
+      position: static;
+      // 535:13195 : le nom démarre 18 sous le visuel.
+      padding-top: 18px;
+    }
+
+    .collection-card__prices {
+      position: static;
+      padding-top: 12px;
+    }
+
+    // Le frame mobile ne montre que le nom et le prix courant.
+    .collection-card__price-old,
+    .collection-card__cart {
+      display: none;
+    }
+  }
+}
