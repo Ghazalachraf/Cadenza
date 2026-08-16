@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart — Cadenza</title>
+  <meta name="description" content="Review the items in your Cadenza cart.">
+  <link rel="stylesheet" href="css/main.css?v=87">
+</head>
+<body class="page--light-header page--cart">
+  <div data-include="header"></div>
+
+  <main>
+    <!-- ====================================================================
+         Panier — frame Figma 529:12571
+         Tableau des articles et estimation à gauche, récapitulatif à droite.
+         ==================================================================== -->
+    <div class="cart" data-cart-page>
+      <div class="cart__main">
+        <div class="cart__head">
+          <h1 class="cart__title">Cart</h1>
+          <p class="cart__count" data-cart-page-count>3 item in your cart</p>
+        </div>
+
+        <div class="cart__table">
+          <div class="cart__columns">
+            <span>Product</span>
+            <span>Quantity</span>
+            <span>Total</span>
+          </div>
+
+          <ul class="cart__items" data-cart-lines>
+            <li class="cart-line" data-unit-price="149">
+              <div class="cart-line__media">
+                <img class="cart-line__img" src="assets/images/cart-shorte-back.jpg" alt="Shorte with back"
+                     style="--crop-w: 105.17%; --crop-h: 135.34%; --crop-x: -2.59%; --crop-y: -21.55%">
+              </div>
+              <div class="cart-line__body">
+                <p class="cart-line__name">Shorte with back</p>
+                <p class="cart-line__attr">Color - Gray</p>
+                <p class="cart-line__attr">Size - S</p>
+                <p class="cart-line__prices">
+                  <span class="cart-line__price">149,00$</span>
+                  <span class="cart-line__price-old">200,00$</span>
+                </p>
+              </div>
+              <div class="cart-line__quantity">
+                <button type="button" class="cart-line__step" data-line-inc aria-label="Increase quantity">
+                  <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
+                </button>
+                <span class="cart-line__qty" data-line-qty>2</span>
+                <button type="button" class="cart-line__step" data-line-dec aria-label="Decrease quantity">
+                  <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
+                </button>
+              </div>
+              <p class="cart-line__total" data-line-total>298,00$</p>
+              <button type="button" class="cart-line__remove" data-line-remove aria-label="Remove Shorte with back">
+                <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
+              </button>
+            </li>
+
+            <li class="cart-line" data-unit-price="79">
+              <div class="cart-line__media">
+                <img class="cart-line__img" src="assets/images/cart-samantha.jpg" alt="Samantha Activewear"
+                     style="--crop-w: 100%; --crop-h: 128.7%; --crop-x: 0%; --crop-y: -17.24%">
+              </div>
+              <div class="cart-line__body">
+                <p class="cart-line__name">Samantha Activewear</p>
+                <p class="cart-line__attr">Color - white</p>
+                <p class="cart-line__attr">Size - S</p>
+                <p class="cart-line__prices">
+                  <span class="cart-line__price">79,00$</span>
+                  <span class="cart-line__price-old">200,00$</span>
+                </p>
+              </div>
+              <div class="cart-line__quantity">
+                <button type="button" class="cart-line__step" data-line-inc aria-label="Increase quantity">
+                  <img src="assets/icons/icon-plus-small.svg" alt="" width="22" height="22">
+                </button>
+                <span class="cart-line__qty" data-line-qty>1</span>
+                <button type="button" class="cart-line__step" data-line-dec aria-label="Decrease quantity">
+                  <img src="assets/icons/icon-minus-small.svg" alt="" width="22" height="22">
+                </button>
+              </div>
+              <p class="cart-line__total" data-line-total>79,00$</p>
+              <button type="button" class="cart-line__remove" data-line-remove aria-label="Remove Samantha Activewear">
+                <img src="assets/icons/icon-trash.svg" alt="" width="16" height="16">
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Estimation de livraison — frame 529:12499 -->
+        <div class="cart-estimate">
+          <button type="button" class="cart-estimate__head" data-estimate-toggle aria-expanded="true" aria-controls="estimate-body">
+            Get shipping estimates
+            <img src="assets/icons/icon-cart-collapse.svg" alt="" width="16" height="2">
+          </button>
+          <div id="estimate-body">
+            <div class="cart-estimate__fields">
+              <div class="cart-estimate__field">
+                <label class="cart-estimate__label" for="estimate-country">Country</label>
+                <span class="cart-estimate__control">
+                  <input id="estimate-country" type="text" name="country" value="United States">
+                  <img src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+                </span>
+              </div>
+              <div class="cart-estimate__field">
+                <label class="cart-estimate__label" for="estimate-province">Province</label>
+                <span class="cart-estimate__control">
+                  <input id="estimate-province" type="text" name="province" value="California">
+                  <img src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+                </span>
+              </div>
+              <div class="cart-estimate__field">
+                <label class="cart-estimate__label" for="estimate-zip">Zip/Postal Code</label>
+                <span class="cart-estimate__control">
+                  <input id="estimate-zip" type="text" name="zip" autocomplete="postal-code">
+                </span>
+              </div>
+            </div>
+            <div class="cart-estimate__actions">
+              <button type="button" class="cart-estimate__submit">Get estimates</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Récapitulatif — frame 527:12438 -->
+      <aside class="cart-summary">
+        <div class="cart-summary__shipping">
+          <img src="assets/icons/icon-cart-package.svg" alt="" width="20" height="20">
+          <p>You’re just €140.00 EUR short of qualifying for free shipping!</p>
+        </div>
+        <div class="cart-summary__progress"><span></span></div>
+
+        <div class="cart-summary__instructions">
+          <label class="cart-summary__label" for="cart-instructions">Order special instructions</label>
+          <textarea class="cart-summary__textarea" id="cart-instructions" name="instructions" placeholder="Order special instructions"></textarea>
+        </div>
+
+        <div class="cart-summary__coupon">
+          <label class="cart-summary__label" for="cart-coupon">Coupon</label>
+          <div class="cart-summary__coupon-row">
+            <input class="cart-summary__coupon-input" id="cart-coupon" type="text" name="coupon" placeholder="Code coupon">
+            <button type="button" class="cart-summary__coupon-save" data-coupon-save>save</button>
+          </div>
+          <small class="cart-summary__note cart-summary__coupon-note" data-coupon-note>Coupon code will work on checkout page.</small>
+        </div>
+
+        <div class="cart-summary__rule"></div>
+
+        <p class="cart-summary__total">
+          <span>Total</span>
+          <span data-cart-total>377,00$</span>
+        </p>
+        <small class="cart-summary__note cart-summary__legal">Taxes, discounts and shipping calculated at checkout</small>
+
+        <a class="cart-summary__checkout" href="checkout.html">Check out</a>
+
+        <small class="cart-summary__note cart-summary__accept">We accept</small>
+        <img class="cart-summary__payment" src="assets/icons/icons-payment.svg" alt="Accepted payment methods" width="283" height="24">
+      </aside>
+    </div>
+
+    <!-- ====================================================================
+         Carrousel « You may also like » — frame Figma 526:12193
+         ==================================================================== -->
+    <section class="product-related">
+      <p class="product-related__eyebrow">You may also like</p>
+      <h2 class="product-related__title">Latest Arrivals For Every Season And Occasion</h2>
+
+      <button type="button" class="product-related__arrow product-related__arrow--prev" data-related-prev aria-label="Previous products">
+        <img src="assets/icons/icon-chevron-right.svg" alt="" width="21" height="21">
+      </button>
+      <button type="button" class="product-related__arrow product-related__arrow--next" data-related-next aria-label="Next products">
+        <img src="assets/icons/icon-chevron-right.svg" alt="" width="21" height="21">
+      </button>
+
+      <div class="product-related__track" data-related-track>
+        <article class="collection-card collection-card--samantha-a">
+          <div class="collection-card__media">
+            <img class="collection-card__img" src="assets/images/col-samantha-a.jpg" alt="Samantha Activewear">
+            <div class="collection-card__veil"></div>
+          </div>
+          <div class="collection-card__info">
+            <h3 class="collection-card__name"><a href="product.html">Samantha Activewear</a></h3>
+            <p class="collection-card__prices">
+              <span class="collection-card__price">99,00$</span>
+              <span class="collection-card__price-old">200,00$</span>
+            </p>
+            <button type="button" class="collection-card__cart" aria-label="Add to cart">
+              <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+            </button>
+          </div>
+        </article>
+
+        <article class="collection-card collection-card--noya">
+          <div class="collection-card__media">
+            <img class="collection-card__img" src="assets/images/col-noya.jpg" alt="Noya Slim Dress">
+            <div class="collection-card__veil"></div>
+          </div>
+          <div class="collection-card__info">
+            <h3 class="collection-card__name"><a href="product.html">Noya Slim Dress</a></h3>
+            <p class="collection-card__prices">
+              <span class="collection-card__price">79,00$</span>
+              <span class="collection-card__price-old">109,00$</span>
+            </p>
+            <button type="button" class="collection-card__cart" aria-label="Add to cart">
+              <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+            </button>
+          </div>
+        </article>
+
+        <article class="collection-card collection-card--jelna-a">
+          <div class="collection-card__media">
+            <img class="collection-card__img" src="assets/images/col-jelna-a.jpg" alt="Jelna Split Dress">
+            <div class="collection-card__veil"></div>
+          </div>
+          <div class="collection-card__info">
+            <h3 class="collection-card__name"><a href="product.html">Jelna Split Dress</a></h3>
+            <p class="collection-card__prices">
+              <span class="collection-card__price">100,00$</span>
+              <span class="collection-card__price-old">200,00$</span>
+            </p>
+            <button type="button" class="collection-card__cart" aria-label="Add to cart">
+              <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+            </button>
+          </div>
+        </article>
+
+        <article class="collection-card collection-card--shorte">
+          <div class="collection-card__media">
+            <img class="collection-card__img" src="assets/images/col-shorte.jpg" alt="Shorte with back">
+            <div class="collection-card__veil"></div>
+          </div>
+          <div class="collection-card__info">
+            <h3 class="collection-card__name"><a href="product.html">Shorte with back</a></h3>
+            <p class="collection-card__prices">
+              <span class="collection-card__price">149,00$</span>
+              <span class="collection-card__price-old">200,00$</span>
+            </p>
+            <button type="button" class="collection-card__cart" aria-label="Add to cart">
+              <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+            </button>
+          </div>
+        </article>
+
+        <article class="collection-card collection-card--skirt-a">
+          <div class="collection-card__media">
+            <img class="collection-card__img" src="assets/images/col-skirt-a.jpg" alt="Skirt Sets">
+            <div class="collection-card__veil"></div>
+          </div>
+          <div class="collection-card__info">
+            <h3 class="collection-card__name"><a href="product.html">Skirt Sets</a></h3>
+            <p class="collection-card__prices">
+              <span class="collection-card__price">179,00$</span>
+              <span class="collection-card__price-old">450,00$</span>
+            </p>
+            <button type="button" class="collection-card__cart" aria-label="Add to cart">
+              <img src="assets/icons/icon-collection-cart.svg" alt="" width="36" height="36">
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Bande newsletter, reprise à l'identique de l'accueil (526:12344) -->
+    <section class="newsletter">
+      <img class="newsletter__bg" src="assets/images/newsletter-bg.jpg" alt="">
+      <div class="newsletter__overlay"></div>
+      <p class="newsletter__eyebrow">Goodbye Deals</p>
+      <h2 class="newsletter__title">Never Miss a Moment</h2>
+      <p class="newsletter__note">Final day to save: September 30, 2024!</p>
+      <form class="newsletter__form">
+        <label class="visually-hidden" for="newsletter-email">Email address</label>
+        <input class="newsletter__input" type="email" id="newsletter-email" name="email" placeholder="Enter your email" required>
+        <button type="submit" class="newsletter__submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <div data-include="panels"></div>
+
+  <script src="js/includes.js?v=27"></script>
+  <script src="js/main.js?v=41"></script>
+</body>
+</html>

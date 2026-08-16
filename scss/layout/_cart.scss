@@ -1,0 +1,893 @@
+// ==========================================================================
+// Cart — page panier
+// Frames Figma  desktop 526:11948 (1440 × 2687)
+//               mobile  535:12575 (390 × 3716)
+//
+// Deux colonnes : le tableau des articles et l'estimation de livraison à
+// gauche (754), le récapitulatif à droite (437). Le carrousel « You may also
+// like » et la newsletter reprennent ceux de la fiche produit.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+$cart-rule: #e4e4e4; // filets du tableau
+$cart-panel: #f5f4f2; // fond du récapitulatif
+$cart-muted: #b9b9b9; // prix barrés et mentions légales
+$cart-attr: #5b5859; // couleur et taille de l'article
+$cart-field-border: #ddd;
+
+// --------------------------------------------------------------------------
+// Ossature — frame 529:12571 (x=99, y=214, 1239 × 802)
+// --------------------------------------------------------------------------
+.cart {
+  display: grid;
+  // 529:12570 fait 754, 527:12438 fait 437, 48 les séparent.
+  grid-template-columns: minmax(0, 754px) minmax(0, 437px);
+  gap: 48px;
+  // Le header finit à 122, le titre commence à 214.
+  padding: 92px fluid(102px, 20px) 0 fluid(99px, 20px);
+
+  // ---- En-tête : titre et compteur ---------------------------------------
+  // Le compteur n'est pas aligné sur la ligne de base du titre : 526:12361
+  // démarre à 233 quand 526:12356 démarre à 214.
+  &__head {
+    @include flex($align: flex-start, $justify: space-between);
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 400;
+    font-size: 54px;
+    // 526:12356 : bloc de 40 pour du 54.
+    line-height: 40px;
+    color: $color-black;
+  }
+
+  &__count {
+    margin-top: 19px;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: $color-black;
+  }
+
+  // ---- Tableau des articles ----------------------------------------------
+  &__table {
+    // 529:12497 finit à 254, 529:12498 commence à 342.
+    margin-top: 88px;
+    // 529:12498 démarre à 102 quand la colonne démarre à 99.
+    margin-left: 3px;
+  }
+
+  &__columns {
+    display: grid;
+    // « Product » à 102, « Quantity » à 464, « Total » à 816.
+    grid-template-columns: 362px 352px minmax(0, 1fr);
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    color: $color-black;
+  }
+
+  &__items {
+    list-style: none;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Ligne d'article — 751 × 159, filet en haut (et en bas pour la dernière)
+// Repères internes : visuel 116 centré, informations à 140, quantité à 362,
+// total à 693 et corbeille à 725.
+// --------------------------------------------------------------------------
+.cart-line {
+  position: relative;
+  height: 159px;
+  border-top: 1px solid $cart-rule;
+
+  // 526:12394 démarre à 385 quand les intitulés s'arrêtent à 363.
+  &:first-child {
+    margin-top: 22px;
+  }
+
+  // 526:12373 démarre à 554 quand la ligne précédente s'arrête à 544.
+  & + & {
+    margin-top: 10px;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $cart-rule;
+  }
+
+  &__media {
+    position: absolute;
+    left: 0;
+    // 526:12389 : 116 centré sur la ligne, remonté de 4,5.
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: -4.5px;
+    width: 116px;
+    height: 116px;
+    border-radius: 4px;
+    background: $color-white;
+    overflow: hidden;
+  }
+
+  &__img {
+    position: absolute;
+    left: var(--crop-x, 0);
+    top: var(--crop-y, 0);
+    width: var(--crop-w, 100%);
+    height: var(--crop-h, 100%);
+    max-width: none;
+    object-fit: cover;
+  }
+
+  &__body {
+    position: absolute;
+    left: 140px;
+    // Le contenu de la ligne démarre à 16, le nom 24 plus bas.
+    top: 40px;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 16px;
+    // Hauteur de capitale du 16px (526:12374 : h=11).
+    line-height: 11px;
+    letter-spacing: -0.32px;
+    color: $color-black;
+  }
+
+  &__attr {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 10px;
+    letter-spacing: -0.28px;
+    color: $cart-attr;
+    // 24 → 55 puis 55 → 85 : les attributs s'enchaînent tous les 30.
+    margin-top: 20px;
+  }
+
+  &__prices {
+    @include flex($align: baseline, $gap: 20px);
+    // Le dernier attribut est à 85, les prix à 115.
+    margin-top: 20px;
+  }
+
+  &__price {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 11px;
+    letter-spacing: -0.32px;
+    color: $color-primary;
+  }
+
+  &__price-old {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 8px;
+    color: $cart-muted;
+    text-decoration: line-through;
+  }
+
+  // ---- Quantité -----------------------------------------------------------
+  &__quantity {
+    position: absolute;
+    // 526:12381 : 106 de large posé à 362, 60 sous le haut de la ligne.
+    left: 362px;
+    top: 76px;
+    @include flex($align: center, $justify: space-between);
+    width: 106px;
+  }
+
+  &__step {
+    @include flex($align: center, $justify: center);
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: $cart-panel;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__qty {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 11px;
+    letter-spacing: -0.32px;
+    color: $color-black;
+  }
+
+  // ---- Total et suppression -----------------------------------------------
+  &__total {
+    position: absolute;
+    // 526:12377 : centré à 722, capitale à 135 depuis le haut de la ligne.
+    right: 0;
+    top: 135px;
+    width: 70px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 13px;
+    letter-spacing: -0.36px;
+    color: $color-primary;
+    text-align: center;
+  }
+
+  &__remove {
+    position: absolute;
+    // 526:12378 : 26 posé à 725, 34 sous le haut de la ligne.
+    right: 0;
+    top: 34px;
+    @include flex($align: center, $justify: center);
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: $cart-panel;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Estimation de livraison — frame 529:12499 (750 × 249)
+// --------------------------------------------------------------------------
+.cart-estimate {
+  // Le tableau finit à 713, 529:12499 commence à 767.
+  margin-top: 54px;
+  margin-left: 3px;
+  // 529:12569 s'arrête à 224 dans un bloc de 249. Les deux bordures de
+  // 0,5px sont arrondies à 1 chacune dans le calcul de mise en page, d'où 23.
+  padding-bottom: 23px;
+  border: 0.5px solid $cart-rule;
+  border-radius: 4px;
+
+  &__head {
+    @include flex($align: center, $justify: space-between);
+    width: 100%;
+    padding: 22px 24px;
+    border: none;
+    background: none;
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 18px;
+    // 529:12501 : en-tête de 22, soit 66 avec ses 22 de marge.
+    line-height: 22px;
+    color: $color-black;
+    cursor: pointer;
+
+    // 529:12508 : un simple trait de 16, pas une icône carrée.
+    img {
+      display: block;
+      width: 16px;
+      height: 1.5px;
+    }
+  }
+
+  &__fields {
+    @include flex($align: center, $gap: 10px);
+    padding: 20px 24px;
+  }
+
+  &__field {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  &__label {
+    display: block;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 12px;
+    // Hauteur de capitale du 12px (529:12549 : h=8).
+    line-height: 8px;
+    color: $color-black;
+  }
+
+  // 529:12545 : 230 × 42, bordure 0,5px, 14 de retrait et 9 de hauteur.
+  &__control {
+    @include flex($align: center, $justify: space-between);
+    height: 42px;
+    // Le libellé occupe 8, le champ démarre 22 plus bas.
+    margin-top: 14px;
+    padding: 9px 14px;
+    border: 0.5px solid $cart-field-border;
+    border-radius: 2px;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 12px;
+    color: $color-black;
+
+    input {
+      width: 100%;
+      min-width: 0;
+      border: none;
+      background: none;
+      font: inherit;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__actions {
+    @include flex($justify: flex-end);
+    padding: 6px 0;
+  }
+
+  &__submit {
+    @include flex($align: center, $justify: center);
+    width: 360px;
+    padding: 16px 30px;
+    border: none;
+    border-radius: 2px;
+    background: $color-black;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 14px;
+    // 42 = 16 + 10 + 16.
+    line-height: 10px;
+    color: $color-white;
+    cursor: pointer;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Récapitulatif — frame 527:12438 (437 × 647)
+// --------------------------------------------------------------------------
+.cart-summary {
+  align-self: start;
+  height: 647px;
+  padding: 39px 38px;
+  border-radius: 10px;
+  background: $cart-panel;
+
+  // ---- Jauge de livraison gratuite ---------------------------------------
+  &__shipping {
+    @include flex($align: center, $gap: 6px);
+
+    img {
+      display: block;
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+    }
+
+    p {
+      font-family: $font-display;
+      font-weight: 400;
+      font-size: 12px;
+      // Hauteur de capitale du 12px (527:12445 : h=8).
+      line-height: 8px;
+      color: $color-black;
+    }
+  }
+
+  // 527:12462 : piste blanche de 361 × 4, remplie sur 117.
+  &__progress {
+    height: 4px;
+    // L'icône fait 20, la piste démarre 36 sous le haut du bloc.
+    margin-top: 16px;
+    border-radius: 1px;
+    background: $color-white;
+
+    span {
+      display: block;
+      width: 117px;
+      height: 4px;
+      border-radius: 1px;
+      background: $color-primary;
+    }
+  }
+
+  // ---- Libellés et champs -------------------------------------------------
+  &__label {
+    display: block;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 8px;
+    color: $color-black;
+  }
+
+  &__note {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 7px;
+    color: $cart-muted;
+  }
+
+  &__instructions {
+    // La jauge finit à 79, 529:12485 commence à 109.
+    margin-top: 30px;
+  }
+
+  &__textarea {
+    display: block;
+    width: 100%;
+    // 529:12483 : 361 × 95.
+    height: 95px;
+    // Le libellé occupe 8, la zone démarre 24 plus bas.
+    margin-top: 16px;
+    padding: 12px 17px;
+    border: 0.5px solid $cart-field-border;
+    border-radius: 2px;
+    background: $color-white;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: $color-black;
+    resize: none;
+
+    &::placeholder {
+      color: $cart-muted;
+    }
+  }
+
+  // ---- Coupon -------------------------------------------------------------
+  &__coupon {
+    // La zone finit à 228, 529:12466 commence à 258.
+    margin-top: 30px;
+  }
+
+  &__coupon-row {
+    display: grid;
+    // 245,64 + 42 + 111,29 = 399 pour une largeur utile de 361 : les deux
+    // blocs se chevauchent dans la maquette, on répartit à leurs proportions.
+    grid-template-columns: minmax(0, 245.64fr) minmax(0, 111.29fr);
+    gap: 4.07px;
+    margin-top: 16px;
+  }
+
+  &__coupon-input {
+    height: 30px;
+    padding: 10px 14px;
+    border: 0.5px solid $cart-field-border;
+    border-radius: 2px;
+    background: $color-white;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 10px;
+    color: $color-black;
+
+    &::placeholder {
+      color: $cart-muted;
+    }
+  }
+
+  &__coupon-save {
+    @include flex($align: center, $justify: center);
+    height: 30px;
+    padding: 10px 34px;
+    border: none;
+    border-radius: 2px;
+    background: $color-primary;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 10px;
+    color: $color-white;
+    text-transform: capitalize;
+    cursor: pointer;
+  }
+
+  &__coupon-note {
+    display: block;
+    // Le champ finit à 312, 529:12488 commence à 320.
+    margin-top: 8px;
+  }
+
+  // ---- Total et validation ------------------------------------------------
+  // La mention finit à 327, le filet 529:12490 est à 360. Le trait ne doit
+  // pas peser dans le flux : sa hauteur est reprise en marge négative.
+  &__rule {
+    height: 0;
+    margin: 33px 0 -1px;
+    border-top: 1px solid rgba(37, 35, 36, 0.1);
+  }
+
+  &__total {
+    @include flex($align: baseline, $justify: space-between);
+    // Le filet est à 360, 526:11937 commence à 393.
+    margin-top: 33px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 20px;
+    // Hauteur de capitale du 20px (526:11937 : h=14).
+    line-height: 14px;
+    letter-spacing: -0.4px;
+    color: $color-black;
+  }
+
+  &__legal {
+    display: block;
+    // Le total s'arrête à 407, 529:12492 commence à 427.
+    margin-top: 20px;
+    letter-spacing: -0.2px;
+  }
+
+  &__checkout {
+    @include flex($align: center, $justify: center);
+    width: 100%;
+    // La mention finit à 434, 529:12494 commence à 464.
+    margin-top: 30px;
+    padding: 16px 30px;
+    border: none;
+    border-radius: 2px;
+    background: $color-primary;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 14px;
+    // 42 = 16 + 10 + 16.
+    line-height: 10px;
+    color: $color-white;
+    text-transform: capitalize;
+  }
+
+  &__accept {
+    display: block;
+    // Le bouton finit à 506, 529:12572 commence à 546.
+    margin-top: 40px;
+    text-align: center;
+    letter-spacing: -0.2px;
+  }
+
+  &__payment {
+    display: block;
+    // 529:12573 : 283 × 24 centré à 577.
+    width: 283px;
+    height: 24px;
+    margin: 24px auto 0;
+  }
+}
+
+// Le carrousel suit le bloc principal de 35 (529:12571 finit à 1016,
+// 526:12193 commence à 1051), et la newsletter le carrousel de 77.
+.page--cart .product-related {
+  margin-top: 35px;
+}
+
+.page--cart .newsletter {
+  margin-top: 77px;
+}
+
+// --------------------------------------------------------------------------
+// Coupon refusé — frame 569:490
+// --------------------------------------------------------------------------
+.cart-summary__coupon-input--error {
+  border-color: #e5533d;
+}
+
+.cart-summary__note--error {
+  color: #e5533d;
+}
+
+// --------------------------------------------------------------------------
+// Entre 769 et 1239 px, les deux colonnes ne tiennent plus : 754 + 48 + 437
+// plus les gouttières font 1440 au minimum. On les empile, en gardant les
+// mesures desktop — c'est la seule plage que la maquette ne couvre pas.
+// --------------------------------------------------------------------------
+@media (min-width: #{$bp-mobile + 1px}) and (max-width: 1239px) {
+  .cart {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+
+  .cart-summary {
+    height: auto;
+    padding-bottom: 39px;
+  }
+
+  // Les repères du tableau (intitulés à 362 et 816, quantité à 362) sont des
+  // mesures fixes de la maquette : sous 754 de colonne on le fait défiler
+  // plutôt que de déplacer ce que Figma a posé.
+  .cart__table {
+    overflow-x: auto;
+  }
+
+  .cart__columns,
+  .cart__items {
+    min-width: 751px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame 535:12575 (390 × 3716)
+//
+// Une seule colonne, dans un ordre différent du desktop : titre, lignes,
+// récapitulatif, puis l'estimation de livraison. Les lignes se compactent
+// (visuel 82, quantité de 57) et le sélecteur passe en [−] valeur [+].
+// --------------------------------------------------------------------------
+@include mobile {
+  .cart {
+    display: flex;
+    flex-direction: column;
+    // Les écarts sont portés par chaque bloc, pas par la pile.
+    gap: 0;
+    // Le header finit à 74, « Cart » commence à 108.
+    padding: 34px 21px 0;
+
+    // Le récapitulatif s'intercale entre les lignes et l'estimation : les
+    // enfants de la colonne gauche deviennent des éléments de la pile.
+    &__main {
+      display: contents;
+    }
+
+    &__head {
+      order: 1;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__title {
+      // 536:13265 : « Cart » fait 42 de large pour 17 de capitale.
+      font-size: 24px;
+      line-height: 17px;
+    }
+
+    &__count {
+      // 536:13266 commence à 134, le titre s'arrête à 125.
+      margin-top: 9px;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    &__table {
+      order: 2;
+      // Le compteur finit à 152, 536:13348 commence à 190.
+      margin: 38px 0 0;
+    }
+
+    // Le frame mobile n'affiche pas les intitulés de colonnes.
+    &__columns {
+      display: none;
+    }
+  }
+
+  // ---- Ligne compacte — frame 536:13348 (348 × 106) ----------------------
+  .cart-line {
+    height: 106px;
+    border-top-width: 0.4px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    // 536:13348 à 190 puis 539:13389 à 311 : 15 séparent les lignes.
+    & + & {
+      margin-top: 15px;
+    }
+
+    &__media {
+      // 536:13351 : 82 posé à 6, centré et remonté de 1,2.
+      left: 6px;
+      margin-top: -1.2px;
+      width: 82px;
+      height: 82px;
+    }
+
+    &__body {
+      left: 101px;
+      // 536:13314 : capitale à 13,6.
+      top: 13.6px;
+    }
+
+    &__name {
+      font-size: 12px;
+      // Capitale du 12px (h=8).
+      line-height: 8px;
+      letter-spacing: -0.24px;
+    }
+
+    &__attr {
+      font-size: 8px;
+      line-height: 6px;
+      letter-spacing: -0.16px;
+      // 13,6 → 28,6 puis 28,6 → 41,6.
+      margin-top: 7px;
+
+      & + & {
+        margin-top: 7px;
+      }
+    }
+
+    &__prices {
+      gap: 9px;
+      // Le dernier attribut est à 41,6, les prix à 55.
+      margin-top: 7.4px;
+    }
+
+    &__price {
+      font-size: 10px;
+      line-height: 7px;
+      letter-spacing: -0.2px;
+    }
+
+    &__price-old {
+      font-size: 8px;
+      line-height: 6px;
+    }
+
+    // 536:13302 : 57 de large à 78,6, et l'ordre s'inverse — [−] puis [+].
+    &__quantity {
+      left: 101px;
+      top: 78.6px;
+      width: 57px;
+      flex-direction: row-reverse;
+    }
+
+    &__step {
+      width: 14px;
+      height: 14px;
+
+      img {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    &__qty {
+      font-size: 10px;
+      line-height: 7px;
+      letter-spacing: 0;
+    }
+
+    &__total {
+      // 538:13384 : centré à 316,5, capitale à 84,6.
+      top: 84.6px;
+      width: 47px;
+      font-size: 12px;
+      line-height: 8px;
+      letter-spacing: -0.24px;
+    }
+
+    &__remove {
+      // 538:13383 : 14 posé à 347, 11 sous le haut de la ligne.
+      top: 11px;
+      width: 14px;
+      height: 14px;
+      background: none;
+
+      img {
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
+
+  // ---- Récapitulatif — frame 544:13537 (348 × 661) -----------------------
+  .cart-summary {
+    order: 3;
+    height: auto;
+    // Les lignes finissent à 417, 544:13537 commence à 447.
+    margin-top: 30px;
+    padding: 35px 21px 35px;
+
+    // 544:13562 : le texte démarre 6 sous l'icône, d'où une ligne de 30.
+    &__shipping {
+      align-items: flex-start;
+    }
+
+    &__shipping p {
+      margin-top: 6px;
+      // 544:13563 : deux lignes de 12.
+      line-height: 12px;
+    }
+
+    &__progress {
+      // La ligne de tête finit à 65, la piste est à 86.
+      margin-top: 21px;
+    }
+
+    &__instructions {
+      // La jauge finit à 90, 544:13573 commence à 135.
+      margin-top: 45px;
+    }
+
+    &__coupon {
+      // La zone finit à 254, 544:13541 commence à 271.
+      margin-top: 17px;
+    }
+
+    &__coupon-row {
+      // 225 + 5 + 76 = 306.
+      grid-template-columns: minmax(0, 225fr) minmax(0, 76fr);
+      gap: 5px;
+    }
+
+    &__rule {
+      // La mention finit à 340, le filet 544:13549 est à 377.
+      margin-top: 37px;
+    }
+
+    &__total {
+      // Le filet est à 377, 544:13550 commence à 412.
+      margin-top: 35px;
+    }
+
+    &__legal {
+      // Le total finit à 426, 544:13554 commence à 462.
+      margin-top: 36px;
+    }
+
+    &__checkout {
+      // La mention finit à 469, 544:13555 commence à 482.
+      margin-top: 13px;
+    }
+
+    &__accept {
+      // Le bouton finit à 524, 544:13559 commence à 571.
+      margin-top: 47px;
+    }
+
+    &__payment {
+      // 544:13560 : 283 × 24 à 602.
+      margin-top: 24px;
+    }
+  }
+
+  // ---- Estimation de livraison — frame 541:13422 (348 × 383) -------------
+  .cart-estimate {
+    order: 4;
+    // Le récapitulatif finit à 1108, 541:13422 commence à 1143.
+    margin: 35px 0 0;
+    // 541:13444 s'arrête à 350 dans un bloc de 383.
+    padding-bottom: 31px;
+
+    // Les trois champs s'empilent (541:13429, 541:13435, 541:13441).
+    &__fields {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding: 20px 24px 0;
+    }
+
+    &__actions {
+      justify-content: stretch;
+      padding: 10px 24px 0;
+    }
+
+    &__submit {
+      width: 100%;
+    }
+  }
+
+  // Le carrousel suit l'estimation de 47, la newsletter le carrousel de 75.
+  .page--cart .product-related {
+    margin-top: 47px;
+  }
+
+  .page--cart .newsletter {
+    margin-top: 75px;
+  }
+}
