@@ -5,18 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout — Cadenza</title>
   <meta name="description" content="Complete your order at Cadenza.">
-  <link rel="stylesheet" href="css/main.css?v=70">
+  <link rel="stylesheet" href="css/main.css?v=87">
 </head>
 <body>
   <div data-include="checkout-header"></div>
 
   <main>
+    <!-- La maquette n'affiche aucun titre de page : il est fourni hors écran
+         pour que le document garde une hiérarchie de titres complète -->
+    <h1 class="visually-hidden">Checkout</h1>
+
     <div class="checkout">
       <form class="checkout__form" novalidate>
         <div class="checkout-step">
           <button type="button" class="checkout-step__header is-active" data-checkout-step-toggle aria-expanded="true" aria-controls="step-1-body">
             <span class="checkout-step__title">1 - Social Information</span>
-            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
           </button>
           <div class="checkout-step__body" id="step-1-body">
             <div class="checkout-guest">
@@ -100,29 +104,231 @@
         <div class="checkout-step">
           <button type="button" class="checkout-step__header" data-checkout-step-toggle aria-expanded="false" aria-controls="step-2-body">
             <span class="checkout-step__title">2 - Addresses</span>
-            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
           </button>
-          <div class="checkout-step__body" id="step-2-body" hidden></div>
+          <!-- Étape 2 « Addresses » — frame Figma 616:64 -->
+          <div class="checkout-step__body checkout-step__body--address" id="step-2-body" hidden>
+            <!-- « Country/Redion » : la coquille est celle de la maquette
+                 (613:107), elle est reprise telle quelle -->
+            <div class="checkout-field">
+              <label class="checkout-field__label" for="ship-country">Country/Redion</label>
+              <span class="checkout-field__control">
+                <select class="checkout-field__input checkout-field__input--select" id="ship-country" name="country" required>
+                  <option value="" selected disabled>Morocco</option>
+                  <option value="ma">Morocco</option>
+                  <option value="fr">France</option>
+                  <option value="es">Spain</option>
+                  <option value="us">United States</option>
+                </select>
+                <img class="checkout-field__icon" src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+              </span>
+            </div>
+
+            <div class="checkout-field">
+              <label class="checkout-field__label" for="ship-address">Address</label>
+              <span class="checkout-field__control">
+                <input class="checkout-field__input" id="ship-address" type="text" name="address"
+                       placeholder="sale" autocomplete="address-line1">
+                <img class="checkout-field__icon" src="assets/icons/icon-field-search.svg" alt="" width="24" height="24">
+              </span>
+              <p class="checkout-hint">
+                <img src="assets/icons/icon-question-circle.svg" alt="" width="14" height="14">
+                Add a house number if you have one
+              </p>
+            </div>
+
+            <label class="checkout-field">
+              <span class="checkout-field__label">Apartment</span>
+              <input class="checkout-field__input" type="text" name="apartment"
+                     placeholder="av 2mars N° 133 sale" autocomplete="address-line2">
+            </label>
+
+            <div class="checkout-row">
+              <label class="checkout-field">
+                <span class="checkout-field__label">Postal code</span>
+                <input class="checkout-field__input" type="text" name="postal-code"
+                       placeholder="mohamed" autocomplete="postal-code">
+              </label>
+              <label class="checkout-field">
+                <span class="checkout-field__label">City</span>
+                <input class="checkout-field__input" type="text" name="city"
+                       placeholder="haddou" autocomplete="address-level2">
+              </label>
+            </div>
+
+            <button type="submit" class="checkout-next checkout-next--tight">Next</button>
+          </div>
         </div>
 
         <div class="checkout-step">
           <button type="button" class="checkout-step__header" data-checkout-step-toggle aria-expanded="false" aria-controls="step-3-body">
             <span class="checkout-step__title">3 - Shipping Method</span>
-            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
           </button>
-          <div class="checkout-step__body" id="step-3-body" hidden></div>
+          <!-- Étape 3 « Shipping Method » — frame Figma 617:144 -->
+          <div class="checkout-step__body checkout-step__body--shipping" id="step-3-body" hidden>
+            <p class="checkout-field__label shipping-list__label">Shipping method</p>
+
+            <!-- « adys » et « 00.00$ » sont les libellés de la maquette (617:222,
+                 617:197), repris tels quels -->
+            <ul class="shipping-list">
+              <li class="shipping-option">
+                <label class="shipping-option__label">
+                  <input type="radio" name="shipping-method" value="free">
+                  <span class="shipping-option__name">Free</span>
+                </label>
+                <span class="shipping-option__delay">between 7 to 10 adys</span>
+                <span class="shipping-option__price">00.00$</span>
+              </li>
+              <li class="shipping-option">
+                <label class="shipping-option__label">
+                  <input type="radio" name="shipping-method" value="standard" checked>
+                  <span class="shipping-option__name">Standard</span>
+                </label>
+                <span class="shipping-option__delay">after 2 days</span>
+                <span class="shipping-option__price">17.00$</span>
+              </li>
+            </ul>
+
+            <button type="submit" class="checkout-next checkout-next--tight">Next</button>
+          </div>
         </div>
 
         <div class="checkout-step">
           <button type="button" class="checkout-step__header" data-checkout-step-toggle aria-expanded="false" aria-controls="step-4-body">
             <span class="checkout-step__title">4 - Payment</span>
-            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down.svg" alt="" width="24" height="24">
+            <img class="checkout-step__chevron" src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
           </button>
-          <div class="checkout-step__body" id="step-4-body" hidden></div>
+          <!-- Étape 4 « Payment » — frames Figma 617:230 (repliée) et 569:94
+               (adresse de facturation dépliée quand la case est décochée) -->
+          <div class="checkout-step__body checkout-step__body--payment" id="step-4-body" hidden>
+            <h2 class="checkout-payment__title">Payment</h2>
+            <p class="checkout-payment__note">All transactions are secure and encrypted.</p>
+
+            <div class="pay-card">
+              <div class="pay-card__head">
+                <span class="pay-card__label">Credit card</span>
+                <span class="pay-card__brand">B</span>
+              </div>
+
+              <div class="pay-card__body">
+                <span class="pay-field">
+                  <label class="visually-hidden" for="card-number">Card number</label>
+                  <input class="pay-field__input" id="card-number" type="text" name="card-number"
+                         placeholder="Card number" autocomplete="cc-number" inputmode="numeric">
+                  <img class="pay-field__icon" src="assets/icons/icon-lock-on.svg" alt="" width="20" height="20">
+                </span>
+
+                <div class="pay-row">
+                  <span class="pay-field">
+                    <label class="visually-hidden" for="card-expiry">Expiry date</label>
+                    <input class="pay-field__input" id="card-expiry" type="text" name="card-expiry"
+                           placeholder="MM/YY" autocomplete="cc-exp">
+                  </span>
+                  <span class="pay-field">
+                    <label class="visually-hidden" for="card-cvc">Security code</label>
+                    <input class="pay-field__input" id="card-cvc" type="text" name="card-cvc"
+                           placeholder="Security code" autocomplete="cc-csc" inputmode="numeric">
+                    <img class="pay-field__icon" src="assets/icons/icon-question-circle.svg" alt="" width="18" height="18">
+                  </span>
+                </div>
+
+                <span class="pay-field">
+                  <label class="visually-hidden" for="card-name">Name on card</label>
+                  <input class="pay-field__input" id="card-name" type="text" name="card-name"
+                         placeholder="Name on card" autocomplete="cc-name">
+                  <img class="pay-field__icon" src="assets/icons/icon-outline-cross.svg" alt="" width="20" height="20">
+                </span>
+
+                <label class="checkout-checkbox checkout-checkbox--tick">
+                  <input type="checkbox" name="billing-same" checked
+                         data-billing-toggle aria-controls="billing-address">
+                  Use shipping address as billing address
+                </label>
+
+                <!-- Adresse de facturation : masquée tant que la case ci-dessus
+                     est cochée, dépliée sinon (569:94) -->
+                <div class="billing" id="billing-address" hidden>
+                  <h3 class="billing__title">Billing address</h3>
+
+                  <span class="pay-field">
+                    <label class="visually-hidden" for="bill-country">Country</label>
+                    <select class="pay-field__input pay-field__input--select" id="bill-country" name="bill-country" required>
+                      <option value="" selected disabled>Country</option>
+                      <option value="ma">Morocco</option>
+                      <option value="fr">France</option>
+                      <option value="es">Spain</option>
+                      <option value="us">United States</option>
+                    </select>
+                    <img class="pay-field__icon" src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+                  </span>
+
+                  <div class="pay-row">
+                    <span class="pay-field">
+                      <label class="visually-hidden" for="bill-first-name">First name (optional)</label>
+                      <input class="pay-field__input" id="bill-first-name" type="text" name="bill-first-name"
+                             placeholder="First name (optional)" autocomplete="billing given-name">
+                    </span>
+                    <span class="pay-field">
+                      <label class="visually-hidden" for="bill-last-name">Last name</label>
+                      <input class="pay-field__input" id="bill-last-name" type="text" name="bill-last-name"
+                             placeholder="last name" autocomplete="billing family-name">
+                      <img class="pay-field__icon" src="assets/icons/icon-question-circle.svg" alt="" width="18" height="18">
+                    </span>
+                  </div>
+
+                  <span class="pay-field">
+                    <label class="visually-hidden" for="bill-address">Address</label>
+                    <input class="pay-field__input" id="bill-address" type="text" name="bill-address"
+                           placeholder="Address" autocomplete="billing address-line1">
+                    <img class="pay-field__icon" src="assets/icons/icon-field-search.svg" alt="" width="24" height="24">
+                  </span>
+
+                  <span class="pay-field">
+                    <label class="visually-hidden" for="bill-apartment">Apartment, suite, etc, (optional)</label>
+                    <input class="pay-field__input" id="bill-apartment" type="text" name="bill-apartment"
+                           placeholder="Apartment, suite, etc, (optional)" autocomplete="billing address-line2">
+                  </span>
+
+                  <div class="pay-row">
+                    <span class="pay-field">
+                      <label class="visually-hidden" for="bill-postal">Postal code</label>
+                      <input class="pay-field__input" id="bill-postal" type="text" name="bill-postal"
+                             placeholder="Postal code" autocomplete="billing postal-code">
+                    </span>
+                    <span class="pay-field">
+                      <label class="visually-hidden" for="bill-city">City</label>
+                      <input class="pay-field__input" id="bill-city" type="text" name="bill-city"
+                             placeholder="City" autocomplete="billing address-level2">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="checkout-next checkout-next--pay">Pay now</button>
+          </div>
         </div>
       </form>
 
       <aside class="checkout__summary" data-cart-instance>
+        <!-- Barre de repli du récapitulatif — mobile uniquement (575:383
+             replié, 575:490 déplié). Masquée en desktop, où le récapitulatif
+             est toujours ouvert dans la colonne de droite. -->
+        <button type="button" class="order-toggle" data-order-toggle
+                aria-expanded="false" aria-controls="order-summary-body">
+          <span class="order-toggle__label">
+            <!-- « summry » : coquille de la maquette, reprise telle quelle -->
+            <span data-order-toggle-text>Show order summry</span>
+            <!-- Chevron carré 16×16 réduit à 10 puis pivoté : la variante
+                 « small-right » du jeu d'icônes fait 6,5 × 11,5 avec
+                 preserveAspectRatio="none" et se déformerait en 10 × 10. -->
+            <img class="order-toggle__chevron" src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="10" height="10">
+          </span>
+          <span class="order-toggle__total">394,00$</span>
+        </button>
+
+        <div class="order-summary__body" id="order-summary-body">
         <ul class="order-item-list" data-qty-scope>
           <li class="order-item" data-unit-price="149">
             <img class="order-item__thumb" src="assets/images/product-shorte-back.jpg" alt="Shorte with back">
@@ -172,6 +378,7 @@
           <p><span>Shipping</span><span>17,00$</span></p>
           <p class="order-totals__total"><span>Total</span><span data-cart-total>394,00$</span></p>
         </div>
+        </div>
       </aside>
     </div>
   </main>
@@ -179,7 +386,7 @@
   <div data-include="footer"></div>
   <div data-include="panels"></div>
 
-  <script src="js/includes.js?v=25"></script>
-  <script src="js/main.js?v=28"></script>
+  <script src="js/includes.js?v=27"></script>
+  <script src="js/main.js?v=41"></script>
 </body>
 </html>

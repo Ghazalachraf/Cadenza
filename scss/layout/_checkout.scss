@@ -107,6 +107,32 @@
     }
   }
 
+  // Champ portant une icône à droite (chevron du pays, loupe de l'adresse)
+  &__control {
+    position: relative;
+    display: block;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  // Le <select> garde l'apparence des <input> ; tant qu'aucun pays n'est
+  // choisi l'option initiale est invalide, ce qui donne la teinte de
+  // placeholder de la maquette sans recourir à JavaScript.
+  &__input--select {
+    appearance: none;
+    padding-right: 54px;
+
+    &:invalid {
+      color: rgba(51, 51, 51, 0.3);
+    }
+  }
+
   &--password {
     position: relative;
   }
@@ -160,6 +186,25 @@
   @include flex($align: center, $gap: 40px);
 }
 
+// Pastille radio 12 px, anneau blanc de 2 px une fois cochée : le cœur noir
+// mesure alors 8 px, comme dans la maquette (617:214 / 617:215). Partagée
+// entre la civilité (étape 1) et le mode de livraison (étape 3).
+@mixin checkout-radio-dot {
+  appearance: none;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+
+  &:checked {
+    border-color: $color-black;
+    background: $color-black;
+    box-shadow: inset 0 0 0 2px $color-white;
+  }
+}
+
 .checkout-radio {
   @include flex($align: center, $gap: 8px);
   cursor: pointer;
@@ -169,18 +214,7 @@
   color: $color-text-secondary;
 
   input {
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    margin: 0;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-
-    &:checked {
-      border-color: $color-black;
-      background: $color-black;
-      box-shadow: inset 0 0 0 2px $color-white;
-    }
+    @include checkout-radio-dot;
   }
 }
 
@@ -228,18 +262,335 @@
   }
 }
 
+// Hauteur totale de 49 px : 13 px de remplissage de part et d'autre d'une
+// ligne de 23 px, comme les quatre boutons de la maquette (613:274, 616:138,
+// 617:226 et 613:180).
 .checkout-next {
   display: block;
   width: 100%;
   margin-top: 36px;
-  padding: 22px;
+  padding: 13px 0;
   border-radius: 4px;
   background: $color-black;
   font-family: $font-display;
   font-weight: 500;
   font-size: 18px;
+  line-height: 23px;
   color: $color-white;
   text-align: center;
+}
+
+// Écarts relevés au-dessus du bouton : 30 px aux étapes 2 et 3 (616:138,
+// 617:226), 40 px à l'étape 4 (613:180).
+.checkout-next--tight {
+  margin-top: 30px;
+}
+
+.checkout-next--pay {
+  margin-top: 40px;
+}
+
+// ==========================================================================
+// Étape 2 — Addresses (616:64)
+// ==========================================================================
+
+// Le premier libellé est à 29 px du haut du volet, soit 9 px sous le
+// remplissage de 20 px commun à toutes les étapes.
+.checkout-step__body--address > .checkout-field:first-child {
+  margin-top: 9px;
+}
+
+// Ligne d'aide « Add a house number if you have one » (613:114 / 613:115)
+.checkout-hint {
+  @include flex($align: center, $gap: 6px);
+  margin-top: 13px;
+  font-family: $font-display;
+  font-size: 14px;
+  line-height: 30px;
+  color: #838589;
+
+  img {
+    flex-shrink: 0;
+  }
+}
+
+// ==========================================================================
+// Étape 3 — Shipping Method (617:144)
+// ==========================================================================
+.checkout-step__body--shipping {
+  padding-top: 30px;
+}
+
+.shipping-list {
+  margin-top: 14px;
+
+  &__label {
+    margin-bottom: 0;
+    line-height: 14px;
+  }
+}
+
+.shipping-option {
+  @include flex($align: center, $justify: space-between);
+  height: 50px;
+  padding: 0 20px;
+  border: 0.5px solid #ddd;
+  border-radius: 4px;
+
+  & + & {
+    margin-top: 4px;
+  }
+
+  // La pastille est à 18 px du texte, soit 6 px de gouttière après ses 12 px
+  &__label {
+    @include flex($align: center, $gap: 6px);
+    cursor: pointer;
+
+    input {
+      @include checkout-radio-dot;
+    }
+  }
+
+  &__name {
+    font-family: $font-display;
+    font-size: 15px;
+    color: $color-black;
+  }
+
+  &__delay {
+    font-family: $font-display;
+    font-size: 10px;
+    color: #5b5859;
+  }
+
+  &__price {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+  }
+}
+
+// ==========================================================================
+// Étape 4 — Payment (617:230) et adresse de facturation (569:94)
+// ==========================================================================
+.checkout-step__body--payment {
+  padding-top: 38px;
+}
+
+.checkout-payment {
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 24px;
+    color: $color-black;
+  }
+
+  &__note {
+    margin-top: 13px;
+    font-family: $font-display;
+    font-size: 14px;
+    line-height: 30px;
+    color: #838589;
+  }
+}
+
+.pay-card {
+  width: 100%;
+  max-width: 463px;
+  margin-top: 10px;
+  border-radius: 6px;
+  background: #f5f4f2;
+  overflow: hidden;
+
+  &__head {
+    @include flex($align: center, $justify: space-between);
+    height: 56px;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  &__label {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+  }
+
+  // Vignette de l'émetteur : rectangle orange de 54 × 29 frappé d'un « B »
+  &__brand {
+    @include flex($align: center, $justify: center);
+    width: 54px;
+    height: 29px;
+    border-radius: 2px;
+    background: #eda125;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 22px;
+    color: $color-white;
+  }
+
+  // Les champs font 383 px dans un panneau de 463 : 40 px de marge de chaque
+  // côté. Le bas vaut 52 px quand la facturation est masquée ; le bloc
+  // .billing en reprend 14 pour retomber sur les 38 px du frame 569:94.
+  &__body {
+    padding: 37px 40px 52px;
+  }
+}
+
+.pay-field {
+  position: relative;
+  display: block;
+
+  & + & {
+    margin-top: 10px;
+  }
+
+  // display:block supprime l'espace de descendante que le champ, sinon en
+  // ligne, ajoute sous son conteneur et qui décalait la suite de 5 px
+  &__input {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: 0.5px solid #ddd;
+    border-radius: 2px;
+    background: $color-white;
+    font-family: $font-display;
+    font-size: 14px;
+    color: $color-black;
+
+    &::placeholder {
+      color: #b9b9b9;
+    }
+  }
+
+  &__input--select {
+    appearance: none;
+    padding-right: 44px;
+
+    &:invalid {
+      color: #b9b9b9;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}
+
+.pay-row {
+  @include flex($gap: 10px);
+  margin-top: 10px;
+
+  // margin-top: 0 est indispensable : le second champ de la paire est un
+  // frère adjacent du premier et récupérerait sinon la marge d'empilement,
+  // ce qui rendrait la ligne plus haute que ses champs.
+  .pay-field {
+    flex: 1;
+    min-width: 0;
+    margin-top: 0;
+  }
+
+  // Le champ qui suit une paire n'est pas couvert par `.pay-field + .pay-field`
+  & + .pay-field {
+    margin-top: 10px;
+  }
+}
+
+// La case « Use shipping address as billing address » est la seule du
+// parcours à porter une coche blanche (613:160).
+.pay-card__body .checkout-checkbox {
+  margin-top: 21px;
+}
+
+.checkout-checkbox--tick input:checked {
+  background-image: url('../assets/icons/icon-check-small.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+}
+
+.billing {
+  margin-bottom: -14px;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__title {
+    margin-top: 21px;
+    margin-bottom: 16px;
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    color: $color-black;
+  }
+
+  // Gouttière de 11 px entre les champs de facturation, contre 10 px dans le
+  // bloc carte (569:94)
+  // Enfants directs uniquement : sans le `>`, ces règles l'emporteraient sur
+  // le `margin-top: 0` des champs situés à l'intérieur d'une paire.
+  > .pay-field + .pay-field,
+  > .pay-row,
+  > .pay-row + .pay-field {
+    margin-top: 11px;
+  }
+}
+
+// ==========================================================================
+// Barre de repli du récapitulatif — mobile uniquement (575:383 / 575:490)
+// Barre de 36 px : 13 px de remplissage autour d'une ligne de 10 px.
+// ==========================================================================
+.order-toggle {
+  // Masquée en desktop : le récapitulatif y est toujours ouvert.
+  display: none;
+  width: 100%;
+  padding: 13px 20px;
+  border-bottom: 0.4px solid #e4e4e4;
+  background: #f5f4f2;
+  text-align: left;
+
+  &__label {
+    @include flex($align: center, $gap: 12px);
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    // Le chevron pointe vers le bas : -90° le tourne vers la droite (état
+    // replié, 575:416), 180° vers le haut (état déplié, 575:493).
+    transform: rotate(-90deg);
+    transition: transform 0.2s ease;
+  }
+
+  &[aria-expanded='true'] &__chevron {
+    transform: rotate(180deg);
+  }
+
+  &__label > span {
+    font-family: $font-display;
+    font-size: 10px;
+    line-height: 10px;
+    color: $color-black;
+  }
+
+  &__total {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
+    color: #333;
+  }
+}
+
+.order-summary__body[hidden] {
+  display: none;
 }
 
 // ---- Récapitulatif de commande ---------------------------------------------
@@ -368,25 +719,152 @@
 }
 
 // --------------------------------------------------------------------------
-// Mobile — le récapitulatif passe avant le formulaire, colonnes empilées
-// (même traitement que product-details : ce que l'utilisateur achète avant
-// ce qu'il doit remplir). Non extrait pixel par pixel des frames 575:214 /
-// 578:656 : ceux-ci pèsent 3410 et 3806 px pour un contenu déjà connu par
-// le desktop, se limiter à la mise en page fluide déjà en place ailleurs
-// dans le projet évite une double extraction pour un gain marginal.
+// Mobile — frames 575:214 (récapitulatif replié) et 578:656 (déplié)
+//
+// Le récapitulatif remonte au-dessus du formulaire et se replie derrière une
+// barre de 36 px. Déplié il mesure 466 px : barre 36, deux articles, code
+// promo puis totaux.
 // --------------------------------------------------------------------------
 @include mobile {
   .checkout {
     flex-direction: column-reverse;
 
-    &__form,
-    &__summary {
+    &__form {
       width: 100%;
       padding: 24px 20px 60px;
     }
 
+    // Le récapitulatif colle sous l'en-tête et gère lui-même ses retraits :
+    // la barre va d'un bord à l'autre, le contenu garde ses 20 px.
     &__summary {
       position: static;
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  // Hauteur fixée plutôt que déduite du remplissage : le montant est en 12 px
+  // alors que le libellé est en 10 px, et c'est lui qui imposerait la hauteur
+  // de la ligne. 36 px avec centrage vertical redonne le cadrage de 575:490.
+  .order-toggle {
+    @include flex($align: center, $justify: space-between);
+    height: 36px;
+    padding: 0 20px;
+  }
+
+  // Contenu du panneau : 18 px sous la barre, 34 px avant le bas (575:419)
+  .order-summary__body {
+    padding: 18px 20px 34px;
+  }
+
+  // ---- Articles ----------------------------------------------------------
+  // 74 px de vignette, 28 px entre deux articles, filet à mi-chemin.
+  .order-item {
+    padding: 0;
+    gap: 16px;
+
+    & + & {
+      margin-top: 28px;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    // Le filet est à 14 px sous l'article précédent, donc au milieu des 28.
+    & + &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -14px;
+      border-top: 0.4px solid #ddd;
+    }
+
+    position: relative;
+
+    // Le nom démarre 6 px sous le haut de la vignette (575:438 à 60, article
+    // à 54), le texte n'est donc pas aligné sur le bord de l'image.
+    &__body {
+      padding-top: 6px;
+    }
+
+    &__name {
+      font-size: 14px;
+      line-height: 14px;
+      letter-spacing: -0.28px;
+    }
+
+    &__attr {
+      // Nom à +6 du haut, attribut à +26 : 6 px séparent les deux boîtes.
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 12px;
+      letter-spacing: -0.24px;
+    }
+
+    // La maquette mobile remplace les boutons +/- par un simple « x2 ».
+    &__qty {
+      margin-top: 14px;
+      gap: 0;
+      font-family: $font-display;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 12px;
+      color: $color-black;
+
+      &::before {
+        content: 'x';
+      }
+    }
+
+    &__step {
+      display: none;
+    }
+
+    &__price {
+      align-self: flex-end;
+      font-size: 12px;
+      letter-spacing: -0.24px;
+    }
+  }
+
+  // ---- Code promo --------------------------------------------------------
+  // Dernier article → champ : 264 - 230 = 34
+  .order-discount {
+    margin-top: 34px;
+    gap: 6px;
+
+    &__input {
+      height: 30px;
+    }
+
+    &__submit {
+      height: 30px;
+      padding: 0 17px;
+    }
+  }
+
+  // ---- Totaux ------------------------------------------------------------
+  // Filet 30 px sous le code promo, première ligne 20 px sous le filet.
+  // Boîtes de texte de la maquette : 18 px pour les lignes courantes (575:482)
+  // et 21 px pour le total (575:484). Sans ces hauteurs de ligne explicites,
+  // l'interligne par défaut de 1,4 les porterait à 19,6 px et décalerait tout
+  // le bas du panneau.
+  .order-totals {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top-color: #ddd;
+
+    p {
+      line-height: 18px;
+    }
+
+    p + p {
+      margin-top: 10px;
+    }
+
+    &__total {
+      margin-top: 21px !important;
+      line-height: 21px;
     }
   }
 
@@ -397,5 +875,34 @@
 
   .checkout-guest {
     flex-wrap: wrap;
+  }
+
+  // Le panneau de paiement fait 463 px de large en desktop : sur mobile il
+  // occupe toute la colonne et ses marges internes passent de 40 à 16 px.
+  .pay-card__body {
+    padding: 24px 16px 32px;
+  }
+
+  // Les trois blocs de l'option de livraison ne tiennent plus sur une ligne
+  // de 350 px : le délai passe sous le libellé, le prix reste à droite.
+  .shipping-option {
+    height: auto;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    row-gap: 6px;
+
+    &__label {
+      flex: 1 1 100%;
+      order: 1;
+    }
+
+    &__delay {
+      order: 2;
+    }
+
+    &__price {
+      order: 3;
+      margin-left: auto;
+    }
   }
 }
