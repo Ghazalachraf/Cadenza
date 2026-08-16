@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Cadenza</title>
+  <meta name="description" content="Sign in to your Cadenza account.">
+  <link rel="stylesheet" href="css/main.css?v=87">
+</head>
+<body class="page--light-header page--auth">
+  <div data-include="header"></div>
+
+  <main>
+    <!-- ====================================================================
+         Login — frames Figma 493:238 (desktop) et 544:14171 (mobile)
+         ==================================================================== -->
+    <div class="auth">
+      <div class="auth__media">
+        <img class="auth__media-img" src="assets/images/auth-side.jpg" alt="Two models in streetwear at a fashion show">
+      </div>
+
+      <div class="auth__panel">
+        <form class="auth-form" novalidate>
+          <h1 class="auth-form__title">Login</h1>
+          <p class="auth-form__subtitle">Please enter your e-mail and password</p>
+
+          <div class="auth-form__field">
+            <label class="auth-form__label" for="login-email">Email / Phone</label>
+            <input class="auth-form__input" id="login-email" type="email" name="email"
+                   placeholder="haddou0mohamed@gmail.com" autocomplete="username" required>
+          </div>
+
+          <div class="auth-form__field">
+            <label class="auth-form__label" for="login-password">Password</label>
+            <div class="auth-form__control">
+              <input class="auth-form__input" id="login-password" type="password" name="password"
+                     placeholder="••••••••" autocomplete="current-password" required>
+              <button type="button" class="auth-form__reveal" data-password-toggle
+                      aria-controls="login-password" aria-pressed="false" aria-label="Show password">
+                <img src="assets/icons/icon-eye.svg" alt="" width="20" height="18">
+              </button>
+            </div>
+            <a class="auth-form__forgot" href="forgot-password.html">Forget Password ?</a>
+          </div>
+
+          <button type="submit" class="auth-form__submit">Login</button>
+
+          <p class="auth-form__switch">If you don’t have an account ? <a href="signup.html">Sign Up</a></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bande newsletter, reprise à l'identique de l'accueil (493:212) -->
+    <section class="newsletter">
+      <img class="newsletter__bg" src="assets/images/newsletter-bg.jpg" alt="">
+      <div class="newsletter__overlay"></div>
+      <p class="newsletter__eyebrow">Goodbye Deals</p>
+      <h2 class="newsletter__title">Never Miss a Moment</h2>
+      <p class="newsletter__note">Final day to save: September 30, 2024!</p>
+      <form class="newsletter__form">
+        <label class="visually-hidden" for="newsletter-email">Email address</label>
+        <input class="newsletter__input" type="email" id="newsletter-email" name="email" placeholder="Enter your email" required>
+        <button type="submit" class="newsletter__submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <div data-include="panels"></div>
+
+  <script src="js/includes.js?v=27"></script>
+  <script src="js/main.js?v=41"></script>
+</body>
+</html>

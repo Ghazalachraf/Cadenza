@@ -1,0 +1,447 @@
+// ==========================================================================
+// Auth — pages de compte : Login, Create Account, Forget Your Password
+// Frames Figma  desktop 493:78 / 494:774 / 494:977   (1440 × 1665)
+//               mobile  544:14086 / 544:14205 / 544:14331 (390 × …)
+//
+// Les trois pages partagent la même ossature : photo à gauche, formulaire à
+// droite, puis la bande newsletter et le pied de page de l'accueil. Seul le
+// contenu du formulaire change, d'où un unique bloc `.auth-form` décliné.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Teintes propres aux formulaires, absentes du reste de la maquette.
+$auth-field-bg: #f5f4f2; // Light_gray-100
+$auth-field-border: #ddd; // Light_gray
+$auth-label: #333;
+$auth-title: #222;
+$auth-subtitle: #5b5859; // text-dark-gray
+$auth-placeholder: rgba(51, 51, 51, 0.3);
+
+// Le header de ces pages est traité avec `.page--light-header`
+// (cf. _site-header.scss), partagé avec la collection, le panier et le contact.
+//
+// La newsletter suit ici le formulaire sans intervalle : les 39px de l'accueil
+// séparent la galerie de la bande, ils n'ont pas lieu d'être.
+.page--auth .newsletter {
+  margin-top: 0;
+}
+
+// --------------------------------------------------------------------------
+// Ossature : photo 720 | formulaire 720 (frame 493:238, 1440 × 729)
+// --------------------------------------------------------------------------
+.auth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: fluid(729px, 600px);
+
+  &__media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  // Figma ne cadre pas la photo en `cover` : elle est agrandie à 145,56 % de
+  // la largeur du bloc puis décalée, et le frame mobile (544:14169) reprend
+  // exactement les mêmes valeurs. On les transcrit telles quelles.
+  &__media-img {
+    position: absolute;
+    left: -22.78%;
+    top: -57.91%;
+    width: 145.56%;
+    height: 215.69%;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  &__panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-white;
+    // 128px de marge de part et d'autre d'un contenu de 464 dans les 720 de
+    // la colonne (494:345).
+    padding: 0 fluid(128px, 24px);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Formulaire — rythme vertical du frame 494:325 (colonne de 729)
+//
+//   titre 106 (h 34) · sous-titre 162 (h 17) · libellé 253 (h 20)
+//   champ 283 (h 50) · libellé 356 · champ 386 · lien 442 (h 12)
+//   bouton 511 (h 50) · bas de bloc 604 (h 18)   → bloc de 516 centré
+// --------------------------------------------------------------------------
+.auth-form {
+  width: 100%;
+  max-width: 464px;
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 42px;
+    // Figma rogne la boîte à la hauteur de capitale (494:341 : h=34) ;
+    // l'interligne global de 1,4 donnerait 58,8px et décalerait tout le bloc.
+    line-height: 34px;
+    color: $auth-title;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  &__subtitle {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 17px;
+    color: $auth-subtitle;
+    text-align: center;
+    // 494:341 finit à 140, 494:342 commence à 162.
+    margin-top: 22px;
+  }
+
+  // ---- Champs ------------------------------------------------------------
+  // Deux champs côte à côte : les prénoms/noms de Create Account (494:952,
+  // 227 + 10 + 227 = 464).
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  &__field {
+    // 494:342 finit à 179, le libellé 494:340 commence à 253.
+    margin-top: 74px;
+
+    // Le second champ suit le premier de bien moins loin (333 → 356).
+    & + & {
+      margin-top: 23px;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    color: $auth-label;
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    // Chrome ignore un interligne réduit pour la hauteur d'un `input` : elle
+    // doit être posée explicitement.
+    height: 50px;
+    padding: 0 22px;
+    border: 0.5px solid $auth-field-border;
+    border-radius: 4px;
+    background: $auth-field-bg;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 14px;
+    color: $color-black;
+    // Le libellé occupe 20px et le champ démarre 30px plus bas (253 → 283).
+    margin-top: 10px;
+
+    &::placeholder {
+      color: $auth-placeholder;
+    }
+  }
+
+  // Le champ mot de passe porte l'œil de révélation par-dessus lui.
+  &__control {
+    position: relative;
+  }
+
+  &__reveal {
+    position: absolute;
+    // 494:334 : 20 × 18,3 posé à x=555, le champ finissant à 594.
+    right: 19px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 20px;
+      height: 18px;
+    }
+  }
+
+  &__forgot {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
+    color: $color-orange;
+    text-decoration: underline;
+    // Le champ finit à 436, 494:335 commence à 442.
+    margin-top: 6px;
+  }
+
+  // ---- Validation et bas de bloc -----------------------------------------
+  &__submit {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 4px;
+    background: $color-black;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-white;
+    cursor: pointer;
+    // 494:335 finit à 454, 494:327 commence à 511.
+    margin-top: 57px;
+  }
+
+  // Submit et Cancel côte à côte (494:1139) : le bouton perd sa marge, portée
+  // par la rangée.
+  &__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    // Le champ finit à 409, 494:1139 commence à 437.
+    margin-top: 28px;
+
+    .auth-form__submit {
+      margin-top: 0;
+    }
+  }
+
+  &__cancel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border: 1px solid $color-primary;
+    border-radius: 4px;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    color: $color-primary;
+  }
+
+  &__switch {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: $color-black;
+    text-align: center;
+    // 494:327 finit à 561, 494:326 commence à 604.
+    margin-top: 43px;
+
+    a {
+      font-weight: 700;
+      color: $color-orange;
+      text-decoration: underline;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Create Account — frame 494:909 : quatre champs au lieu de deux, d'où un
+// bloc plus haut (566) et des intervalles resserrés.
+// --------------------------------------------------------------------------
+.auth-form--signup {
+  .auth-form__field {
+    // 494:928 finit à 154, 494:957 commence à 203.
+    margin-top: 49px;
+  }
+
+  .auth-form__field + .auth-form__field {
+    // 283 → 301, puis 381 → 399.
+    margin-top: 18px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Forget Your Password — frame 494:1112 : un seul champ et deux boutons. Le
+// bloc de 305 n'est pas centré dans les 729 mais remonté de 30 (494:1147).
+// --------------------------------------------------------------------------
+.auth-form--reset {
+  transform: translateY(-30px);
+
+  .auth-form__subtitle {
+    // 494:1131 : deux lignes de 24 sur 330 de large, dans un gris plus clair
+    // que celui du Login.
+    max-width: 330px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 24px;
+    color: #838589;
+  }
+
+  .auth-form__field {
+    // 494:1131 finit à 286, 494:1128 commence à 329.
+    margin-top: 43px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame 544:14171 (389 × 567) : la photo passe au-dessus du
+// formulaire, qui reprend le même enchaînement à des mesures réduites.
+//
+//   libellé 0 · champ 30 (h 46) · libellé 88 · champ 118 · lien 166 (h 12)
+//   bouton 204 (h 46) · bas de bloc 297 (h 18)   → bloc de 315
+// --------------------------------------------------------------------------
+@include mobile {
+  .auth {
+    grid-template-columns: 1fr;
+    min-height: 0;
+
+    &__media {
+      // 544:14169 : 390 × 394,875.
+      height: 395px;
+    }
+
+    &__panel {
+      // 544:14171 : 45px en haut, 75px en bas, 32px sur les côtés.
+      padding: 45px 32px 75px;
+    }
+  }
+
+  .auth-form {
+    max-width: none;
+
+    &__title {
+      font-size: 32px;
+    }
+
+    &__subtitle {
+      font-size: 14px;
+      // 544:14174 finit à 34, 544:14175 commence à 50.
+      margin-top: 16px;
+    }
+
+    &__field {
+      // Le sous-titre finit à 67, le premier libellé commence à 132.
+      margin-top: 65px;
+
+      & + & {
+        // Le premier champ finit à 76, le second libellé démarre à 88.
+        margin-top: 12px;
+      }
+    }
+
+    &__label {
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    &__input {
+      height: 46px;
+      padding: 0 17px;
+      // Le libellé occupe 18px et le champ démarre 30px plus bas.
+      margin-top: 12px;
+    }
+
+    &__reveal {
+      // 544:14189 : l'œil s'arrête à 311 sur un champ large de 324.
+      right: 13px;
+    }
+
+    &__forgot {
+      font-size: 10px;
+      // Le champ finit à 164, 544:14190 commence à 166.
+      margin-top: 2px;
+    }
+
+    &__submit {
+      height: 46px;
+      font-weight: 600;
+      font-size: 14px;
+      background: $auth-title;
+      // Le lien finit à 178, 544:14181 commence à 204.
+      margin-top: 26px;
+    }
+
+    &__switch {
+      color: rgba(54, 57, 57, 0.7);
+      // Le bouton finit à 250, 544:14184 commence à 297.
+      margin-top: 47px;
+    }
+
+    // Les deux champs de nom passent l'un sous l'autre (544:14304, 544:14300),
+    // au même pas de 88 que les autres : 18 de libellé + 12 + 46 de champ.
+    &__row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    // 544:14426 : deux boutons de 157 séparés de 10.
+    &__actions {
+      gap: 10px;
+      // Le champ finit à 245, 544:14426 commence à 265.
+      margin-top: 20px;
+    }
+
+    &__cancel {
+      height: 46px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
+  // ---- Create Account mobile — frame 544:14290 (389 × 701) ----------------
+  .page--signup .auth__panel {
+    // 544:14291 : 43,5 en haut, 73,5 en bas.
+    padding-top: 43.5px;
+    padding-bottom: 73.5px;
+  }
+
+  .auth-form--signup {
+    .auth-form__field {
+      // 544:14294 finit à 110,5, 544:14307 commence à 142,5.
+      margin-top: 32px;
+    }
+
+    .auth-form__field + .auth-form__field {
+      margin-top: 12px;
+    }
+
+    .auth-form__submit {
+      // Le dernier champ finit à 482,5, 544:14308 commence à 516.
+      margin-top: 33.5px;
+    }
+
+    .auth-form__switch {
+      // Le bouton finit à 562, 544:14311 commence à 609,5.
+      margin-top: 47.5px;
+    }
+  }
+
+  // ---- Forget Your Password mobile — frame 544:14416 (388 × 386) ----------
+  // Seule page mobile où la bande newsletter n'est pas collée au formulaire :
+  // le frame s'arrête à 855 et 544:14433 commence à 863. Les frames Login et
+  // Signup, eux, s'enchaînent sans intervalle.
+  .page--reset .newsletter {
+    margin-top: 8px;
+  }
+
+  .auth-form--reset {
+    // Le bloc mobile est bien calé sur le haut du conteneur (544:14417 : 45).
+    transform: none;
+
+    .auth-form__subtitle {
+      // 544:14420 : deux lignes de 17 sur 289 de large.
+      max-width: 289px;
+      line-height: 17px;
+    }
+
+    .auth-form__field {
+      // 544:14420 finit à 129, 544:14425 commence à 169.
+      margin-top: 40px;
+    }
+  }
+}
