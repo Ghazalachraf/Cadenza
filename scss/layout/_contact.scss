@@ -1,0 +1,476 @@
+// ==========================================================================
+// Contact — page « We're here to assist you! »
+// Frames Figma  desktop 544:13613 (1440 × 2389)
+//               mobile  553:14895 (390 × 3246)
+//
+// Trois blocs : l'accroche centrée, puis la carte de coordonnées (365) et le
+// formulaire (578) côte à côte, enfin la bande Instagram de l'accueil.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+$contact-muted: #838589; // textes secondaires
+$contact-panel: #f5f4f2; // fond de la carte de coordonnées
+$contact-label: #333;
+$contact-field-border: #ddd;
+$contact-placeholder: rgba(51, 51, 51, 0.3);
+$contact-error: #ff504d;
+
+// --------------------------------------------------------------------------
+// Accroche — frame 546:14618 (577 × 158, centré)
+// --------------------------------------------------------------------------
+.contact-intro {
+  // Le header finit à 122, 546:14609 commence à 231.
+  padding: 109px 20px 0;
+  text-align: center;
+
+  &__eyebrow {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 18px;
+    // Hauteur de capitale du 18px (546:14609 : h=17).
+    line-height: 17px;
+    color: $contact-muted;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 42px;
+    // 546:14606 : bloc de 34 pour du 42.
+    line-height: 34px;
+    color: #222222;
+    // L'accroche finit à 248, le titre commence à 268.
+    margin-top: 20px;
+  }
+
+  &__text {
+    max-width: 577px;
+    // Le titre finit à 302, 546:14607 commence à 329.
+    margin: 27px auto 0;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 18px;
+    // Deux lignes de 30 (546:14607 : h=60).
+    line-height: 30px;
+    color: $contact-muted;
+
+    a {
+      font-weight: 500;
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Corps — carte de coordonnées et formulaire
+// 552:14867 fait 365 à x=231, 549:14767 fait 578 à x=640 : 44 les séparent.
+// --------------------------------------------------------------------------
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 365px) minmax(0, 578px);
+  gap: 44px;
+  justify-content: center;
+  // L'accroche finit à 389, les deux blocs commencent à 517.
+  margin-top: 128px;
+  padding: 0 fluid(222px, 20px) 0 fluid(231px, 20px);
+}
+
+// --------------------------------------------------------------------------
+// Carte de coordonnées — frame 552:14867 (365 × 471)
+// --------------------------------------------------------------------------
+.contact-card {
+  position: relative;
+  height: 471px;
+  // 552:14878 commence à 32 dans une carte qui démarre à 517.
+  padding: 32px 28px 0;
+  border-radius: 10px;
+  background: $contact-panel;
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 24px;
+    // 552:14878 : bloc de 34 pour du 24.
+    line-height: 34px;
+    color: #222222;
+    text-transform: capitalize;
+  }
+
+  // 552:14868 : trois pavés blancs de 309 × 96, arrondis de 2, tous les 107.
+  &__block {
+    height: 96px;
+    padding: 0 19px;
+    border-radius: 2px;
+    background: $color-white;
+
+    &:first-of-type {
+      // Le titre finit à 65, le premier pavé commence à 87.
+      margin-top: 22px;
+    }
+
+    & + & {
+      margin-top: 11px;
+    }
+  }
+
+  &__label {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: 16px;
+    // Hauteur de capitale du 16px (552:14869 : h=11) ; le libellé démarre 29
+    // sous le haut du pavé.
+    line-height: 11px;
+    color: $color-black;
+    padding-top: 29px;
+  }
+
+  &__value {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
+    color: $contact-muted;
+    // Le libellé s'arrête à 40, la valeur commence à 58.
+    margin-top: 8px;
+  }
+
+  // 552:14879 : quatre icônes de 18 espacées de 26, centrées, à 19 du bas.
+  &__social {
+    position: absolute;
+    left: 50%;
+    bottom: 19px;
+    transform: translateX(-50%);
+    @include flex($align: center, $gap: 26px);
+
+    img {
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Formulaire — frame 549:14767 (578 × 471)
+// Rythme : nom et e-mail 517, sujet 617, message 717, bouton 939.
+// --------------------------------------------------------------------------
+.contact-form {
+  &__row {
+    display: grid;
+    // 549:14769 et 549:14773 : deux blocs de 284 séparés de 10.
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  &__field {
+    // Les groupes s'enchaînent tous les 100 (517 → 617 → 717).
+    & + & {
+      margin-top: 20px;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 15px;
+    // 549:14772 : bloc de 20.
+    line-height: 20px;
+    color: $contact-label;
+  }
+
+  // 549:14770 : 50 de haut, bordure 0,5px, arrondi 4, 20 de retrait.
+  &__control {
+    @include flex($align: center, $justify: space-between);
+    width: 100%;
+    height: 50px;
+    // Le libellé occupe 20, le champ démarre 30 plus bas.
+    margin-top: 10px;
+    padding: 16px 20px;
+    border: 0.5px solid $contact-field-border;
+    border-radius: 4px;
+    background: $color-white;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 14px;
+    color: $color-black;
+    text-align: left;
+    cursor: text;
+
+    input {
+      width: 100%;
+      min-width: 0;
+      border: none;
+      background: none;
+      font: inherit;
+      color: inherit;
+    }
+
+    &::placeholder,
+    input::placeholder {
+      color: $contact-placeholder;
+    }
+
+    img {
+      display: block;
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  // Le sujet est une liste déroulante : le champ est un bouton.
+  &__select {
+    cursor: pointer;
+
+    &[aria-expanded='true'] img {
+      transform: scaleY(-1);
+    }
+  }
+
+  &__placeholder {
+    color: $contact-placeholder;
+  }
+
+  // 549:14785 : 172 de haut, même habillage que les champs simples.
+  &__textarea {
+    display: block;
+    width: 100%;
+    height: 172px;
+    margin-top: 10px;
+    padding: 20px 21px;
+    border: 0.5px solid $contact-field-border;
+    border-radius: 4px;
+    background: $color-white;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: $color-black;
+    resize: none;
+
+    &::placeholder {
+      color: $contact-placeholder;
+    }
+  }
+
+  // 549:14788 : pleine largeur, 13 + 23 + 13 = 49.
+  &__submit {
+    @include flex($align: center, $justify: center);
+    width: 100%;
+    // Le message finit à 919, le bouton commence à 939.
+    margin-top: 20px;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 4px;
+    background: $color-black;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    color: $color-white;
+    cursor: pointer;
+  }
+
+  // ---- Liste déroulante du sujet ------------------------------------------
+  // Panneau 578 × 173 (553:15262) : padding 21,5px de haut en bas, 40px de
+  // côté, quatre options espacées de 30px, ombre portée 4 4 14 rgba(0,0,0,.1)
+  // sans bordure. Le panneau mobile (553:15281) ne change que le padding
+  // latéral, ramené à 30px pour un tiroir de 348px de large.
+  &__options {
+    position: relative;
+  }
+
+  &__list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 4px);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 21.5px 40px;
+    border-radius: 2px;
+    background: $color-white;
+    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.1);
+    list-style: none;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__option {
+    // display:block sort le bouton de son contexte de mise en forme en ligne
+    // : sinon la boîte <li> qui le contient garde la hauteur de ligne par
+    // défaut (≈22px) au lieu des 10px cap-trim du bouton lui-même.
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: 14px;
+    // Boîte cap-trim de 10px (553:15283..15286) : sans ce line-height, le
+    // panneau s'étire à 223px de haut au lieu des 173px de la maquette.
+    line-height: 10px;
+    color: $color-black;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: $contact-muted;
+    }
+  }
+
+  // ---- E-mail invalide — frame 569:476 -----------------------------------
+  &__error {
+    display: block;
+    font-family: $font-display;
+    // `display: block` prendrait le pas sur l'attribut `hidden`.
+    &[hidden] {
+      display: none;
+    }
+
+    font-weight: 400;
+    font-size: 8px;
+    // 569:477 : le message est 7 sous le champ.
+    line-height: 30px;
+    color: $contact-error;
+  }
+
+  // 569:479 : bordure pleine en #ff504d quand l'adresse est refusée.
+  .contact-form__field--invalid & ,
+  &__field--invalid .contact-form__control {
+    border: 1px solid $contact-error;
+  }
+}
+
+// La bande Instagram suit le formulaire de 66 (549:14767 finit à 988,
+// 549:14793 commence à 1054) et la newsletter la suit sans intervalle.
+.page--contact .gallery {
+  margin-top: 66px;
+}
+
+.page--contact .newsletter {
+  margin-top: 0;
+}
+
+// --------------------------------------------------------------------------
+// Mobile — frame 553:14895 (390 × 3246), relevé au pixel près
+// --------------------------------------------------------------------------
+@include mobile {
+  // En-tête (30 + 44) → accroche : 143 - 74 = 69
+  .contact-intro {
+    padding: 69px 21px 0;
+
+    &__eyebrow {
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    &__title {
+      // Titre sur une ligne, boîte cap-trim de 17px (553:14990)
+      margin-top: 5px;
+      font-size: 24px;
+      line-height: 17px;
+    }
+
+    &__text {
+      // Trois lignes de 22 (553:14991 : h=66)
+      max-width: 301px;
+      margin-top: 24px;
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+
+  // Le formulaire précède la carte de coordonnées (553:15236 avant 553:15174)
+  // alors que le desktop les place côte à côte carte-puis-formulaire.
+  .contact {
+    grid-template-columns: minmax(0, 1fr);
+    // Accroche → formulaire : 347 - 277 = 70. Formulaire → carte : 958 - 910 = 48
+    margin-top: 70px;
+    gap: 48px;
+    padding-left: 21px;
+    padding-right: 21px;
+  }
+
+  .contact-form {
+    order: 1;
+  }
+
+  .contact-card {
+    order: 2;
+    // Pas de titre « Contact Info » sur mobile (absent de 553:15174)
+    height: 363px;
+    padding: 26px 21.5px 0;
+
+    &__title {
+      display: none;
+    }
+
+    &__block {
+      // 81px sur mobile contre 96px en desktop (553:15175 vs 552:14868)
+      height: 81px;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+
+    &__label {
+      font-size: 16px;
+      // La maquette centre le seul libellé « Address » (553:15177) ; traité
+      // comme un accident isolé et aligné à gauche comme les deux autres.
+      padding-top: 22px;
+    }
+
+    &__value {
+      margin-top: 16px;
+      font-size: 12px;
+    }
+
+    &__social {
+      bottom: 22px;
+    }
+  }
+
+  .contact-form__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  // Rythme mobile : les groupes s'enchaînent tous les 98 (label20 + gap10 +
+  // contrôle50 + 18) contre 100 en desktop.
+  .contact-form__field + .contact-form__field {
+    margin-top: 18px;
+  }
+
+  .contact-form__submit {
+    margin-top: 18px;
+  }
+
+  .contact-form__list {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  // Carte → bande Instagram : 1403 - 1321 = 82
+  .page--contact .gallery {
+    margin-top: 82px;
+  }
+
+  // Bande Instagram → newsletter : 1783 - 1713 = 70
+  .page--contact .newsletter {
+    margin-top: 70px;
+  }
+}

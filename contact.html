@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Cadenza</title>
+  <meta name="description" content="Get in touch with the Cadenza team.">
+  <link rel="stylesheet" href="css/main.css?v=87">
+</head>
+<body class="page--light-header page--contact">
+  <div data-include="header"></div>
+
+  <main>
+    <!-- ====================================================================
+         Accroche — frame Figma 546:14618
+         ==================================================================== -->
+    <section class="contact-intro">
+      <p class="contact-intro__eyebrow">Looking for help?</p>
+      <h1 class="contact-intro__title">We’re here to assist you!</h1>
+      <p class="contact-intro__text">If you have any questions, check out our <a href="index.html#faq">FAQ</a>. Have another request?<br>Our team is here to help!</p>
+    </section>
+
+    <!-- ====================================================================
+         Coordonnées et formulaire — frames 552:14867 et 549:14767
+         ==================================================================== -->
+    <div class="contact">
+      <aside class="contact-card">
+        <h2 class="contact-card__title">Contact Info</h2>
+
+        <div class="contact-card__block">
+          <p class="contact-card__label">Address</p>
+          <p class="contact-card__value">1234 Elm Street Springfield, IL 62701 USA</p>
+        </div>
+        <div class="contact-card__block">
+          <p class="contact-card__label">Phone</p>
+          <p class="contact-card__value">211 556 9888</p>
+        </div>
+        <div class="contact-card__block">
+          <p class="contact-card__label">Email</p>
+          <p class="contact-card__value">mohamed0haddou@gmail.com</p>
+        </div>
+
+        <div class="contact-card__social">
+          <a href="#"><img src="assets/icons/social-insta-d.svg" alt="Instagram" width="18" height="18"></a>
+          <a href="#"><img src="assets/icons/social-face-d.svg" alt="Facebook" width="18" height="18"></a>
+          <a href="#"><img src="assets/icons/social-yout-d.svg" alt="YouTube" width="18" height="18"></a>
+          <a href="#"><img src="assets/icons/social-whats-d.svg" alt="WhatsApp" width="18" height="18"></a>
+        </div>
+      </aside>
+
+      <form class="contact-form" novalidate data-contact-form>
+        <div class="contact-form__field contact-form__row">
+          <div>
+            <label class="contact-form__label" for="contact-first-name">First Name</label>
+            <span class="contact-form__control">
+              <input id="contact-first-name" type="text" name="first-name" placeholder="haddou" autocomplete="given-name">
+            </span>
+          </div>
+          <div data-email-field>
+            <label class="contact-form__label" for="contact-email">E-mail</label>
+            <span class="contact-form__control">
+              <input id="contact-email" type="email" name="email" placeholder="haddou0mohamed@gmail.com" autocomplete="email">
+            </span>
+            <small class="contact-form__error" data-email-error hidden>Enter a valid email</small>
+          </div>
+        </div>
+
+        <div class="contact-form__field contact-form__options">
+          <label class="contact-form__label" for="contact-subject">Subject</label>
+          <button type="button" class="contact-form__control contact-form__select" id="contact-subject"
+                  data-subject-toggle aria-expanded="false" aria-controls="contact-subject-list">
+            <span class="contact-form__placeholder" data-subject-value>order</span>
+            <img src="assets/icons/icon-chevron-down-dark.svg?v=2" alt="" width="24" height="24">
+          </button>
+          <ul class="contact-form__list" id="contact-subject-list" data-subject-list hidden>
+            <li><button type="button" class="contact-form__option" data-subject-option>Product</button></li>
+            <li><button type="button" class="contact-form__option" data-subject-option>Order</button></li>
+            <li><button type="button" class="contact-form__option" data-subject-option>Press</button></li>
+            <li><button type="button" class="contact-form__option" data-subject-option>Others</button></li>
+          </ul>
+        </div>
+
+        <div class="contact-form__field">
+          <label class="contact-form__label" for="contact-message">Message</label>
+          <textarea class="contact-form__textarea" id="contact-message" name="message" placeholder="Please enter your message"></textarea>
+        </div>
+
+        <button type="submit" class="contact-form__submit">Send message</button>
+      </form>
+    </div>
+
+    <!-- Bande Instagram, reprise à l'identique de l'accueil (549:14793) -->
+    <section class="gallery">
+      <p class="gallery__eyebrow">Stay Connected</p>
+      <h2 class="gallery__handle">@Cadenza</h2>
+      <p class="gallery__subtitle">Follow the leading lifestyle influencers on Instagram today!</p>
+
+      <div class="gallery__strip">
+        <a href="#" class="gallery__item">
+          <img class="gallery__image" src="assets/images/gallery-1.jpg" alt="Gold necklace detail">
+        </a>
+        <a href="#" class="gallery__item">
+          <img class="gallery__image" src="assets/images/best-wide-leg-jeans.jpg" alt="Casual winter outfit">
+        </a>
+        <a href="#" class="gallery__item">
+          <img class="gallery__image" src="assets/images/best-instagram-crush.jpg" alt="Model seated at a Paris cafe">
+        </a>
+        <a href="#" class="gallery__item gallery__item--wide">
+          <img class="gallery__image" src="assets/images/gallery-4.jpg" alt="Two friends seated against a wall">
+          <div class="gallery__overlay"></div>
+          <img class="gallery__logo" src="assets/icons/logo.svg" alt="Cadenza">
+        </a>
+        <a href="#" class="gallery__item">
+          <img class="gallery__image" src="assets/images/gallery-5.jpg" alt="Model in a knitted turtleneck">
+        </a>
+      </div>
+    </section>
+
+    <!-- Bande newsletter, reprise à l'identique de l'accueil (544:13823) -->
+    <section class="newsletter">
+      <img class="newsletter__bg" src="assets/images/newsletter-bg.jpg" alt="">
+      <div class="newsletter__overlay"></div>
+      <p class="newsletter__eyebrow">Goodbye Deals</p>
+      <h2 class="newsletter__title">Never Miss a Moment</h2>
+      <p class="newsletter__note">Final day to save: September 30, 2024!</p>
+      <form class="newsletter__form">
+        <label class="visually-hidden" for="newsletter-email">Email address</label>
+        <input class="newsletter__input" type="email" id="newsletter-email" name="email" placeholder="Enter your email" required>
+        <button type="submit" class="newsletter__submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <div data-include="panels"></div>
+
+  <script src="js/includes.js?v=27"></script>
+  <script src="js/main.js?v=41"></script>
+</body>
+</html>
