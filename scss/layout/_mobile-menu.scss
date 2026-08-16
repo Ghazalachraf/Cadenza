@@ -166,9 +166,12 @@
   }
 }
 
-// Le menu mobile n'est atteignable que par le burger, absent au-delà de
-// $bp-mobile : par sécurité il reste malgré tout masqué au-delà.
-@include desktop {
+// Le menu mobile n'est atteignable que par le burger, qui reste affiché
+// jusqu'à $bp-header (cf. @include header-compact dans _site-header.scss) :
+// le panneau doit donc rester utilisable sur la même plage, pas seulement
+// jusqu'à $bp-mobile. Par sécurité il reste masqué au-delà, quand la barre
+// desktop complète reprend la main.
+@include header-full {
   .mobile-menu {
     display: none;
   }

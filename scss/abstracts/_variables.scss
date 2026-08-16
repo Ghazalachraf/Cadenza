@@ -33,6 +33,13 @@ $container-padding: 102px;
 $bp-mobile: 768px;
 $bp-design: 1440px;
 
+// Le header fait exception. Sa barre desktop a une largeur incompressible :
+// menu 403 + logo 155 + actions 169, le logo devant rester centré sur le
+// viewport. En dessous d'environ 1140 px le menu vient toucher le logo et
+// « New Arrivals » repasse à la ligne. On bascule donc sur la barre burger
+// du frame mobile avant d'en arriver là, plutôt que de déformer la maquette.
+$bp-header: 1200px;
+
 // Largeurs de référence des deux maquettes, utilisées pour convertir une
 // mesure en pourcentage de viewport.
 $w-design: 1440;

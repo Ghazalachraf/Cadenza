@@ -40,5 +40,20 @@
 @use 'layout/newsletter';
 @use 'layout/panels';        // Panneaux Recherche et Panier (en-tête)
 
-// --- Checkout page ----------------------------------------------------------
+// --- Checkout page --------------------------------------------------------
 @use 'layout/checkout';
+
+// --- Account pages (Login, Create Account, Forget Password) ----------------
+@use 'layout/auth';
+
+// --- Collection page (category listing) ------------------------------------
+@use 'layout/collection';
+
+// --- Product page (single product) -----------------------------------------
+@use 'layout/product';
+
+// --- Cart page -------------------------------------------------------------
+@use 'layout/cart';
+
+// --- Contact page ----------------------------------------------------------
+@use 'layout/contact';

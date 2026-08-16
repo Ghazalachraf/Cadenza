@@ -73,8 +73,15 @@
     }
   }
 
+  // Les chevrons du menu sont blancs par-dessus le hero. Sur le fond blanc du
+  // Fixed_Header (et des pages de compte) ils disparaîtraient : on bascule sur
+  // la version #252324, comme le logo et les icônes mobiles.
   &__chevron {
     transition: transform 0.2s ease;
+
+    &--dark {
+      display: none;
+    }
   }
 }
 
@@ -242,6 +249,13 @@
   &--fixed {
     position: fixed;
     top: 0;
+  }
+
+  // Le même habillage sert aux pages sans hero — compte (493:107), collection
+  // (5127:95), panier, contact — à la différence près qu'il y reste dans le
+  // flux, faute de hero à recouvrir. D'où l'habillage séparé du positionnement.
+  &--fixed,
+  .page--light-header & {
     background: $color-white;
     border-bottom: 1px solid rgba(37, 35, 36, 0.1);
 
@@ -257,6 +271,14 @@
       display: block;
     }
 
+    .site-header__chevron--light {
+      display: none;
+    }
+
+    .site-header__chevron--dark {
+      display: block;
+    }
+
     .site-header__actions {
       display: none;
     }
@@ -268,9 +290,15 @@
 }
 
 // --------------------------------------------------------------------------
-// Mobile — frame Figma 451:52 : burger 24px / logo centré / user + panier 18px
+// Barre compacte — frame Figma 451:52 (burger 24px / logo centré / user +
+// panier 18px), étendue de $bp-mobile à $bp-header : la barre desktop pleine
+// (menu + logo + actions) est incompressible et se brise entre 769 et
+// ~1150px (« New Arrivals » passe à la ligne, « About » chevauche le logo) —
+// cf. le commentaire sur $bp-header. On reprend donc la barre du frame
+// mobile sur toute la plage 0–1200px plutôt que de déformer la maquette
+// desktop hors de sa largeur de conception.
 // --------------------------------------------------------------------------
-@include mobile {
+@include header-compact {
   .site-header {
     height: 44px;
     padding-left: 18px;
@@ -313,7 +341,8 @@
       display: none;
     }
 
-    &--fixed {
+    &--fixed,
+    .page--light-header & {
       .site-header__mobile-icon--light {
         display: none;
       }
@@ -325,8 +354,33 @@
 
     // En mobile l'état fixe garde le burger et les deux icônes du frame
     // mobile (451:63) plutôt que le triptyque desktop.
-    &--fixed .site-header__icons {
+    &--fixed .site-header__icons,
+    .page--light-header & .site-header__icons {
       display: none;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Pages sans hero : le header prend l'habillage Fixed_Header mais reste dans
+// le flux, sous la barre promo. Le conteneur d'injection garde la hauteur des
+// deux barres, sans quoi le passage en `fixed` au scroll sortirait le header
+// du flux et remonterait la page d'un coup.
+// --------------------------------------------------------------------------
+.page--light-header {
+  [data-include='header'] {
+    min-height: 122px;
+  }
+
+  .site-header:not(.site-header--fixed) {
+    position: static;
+  }
+
+  // Barre promo 30 + header compact 44, sur toute la plage où le header
+  // bascule sur la barre burger (cf. @include header-compact ci-dessus).
+  @include header-compact {
+    [data-include='header'] {
+      min-height: 74px;
     }
   }
 }

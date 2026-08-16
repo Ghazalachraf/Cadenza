@@ -32,6 +32,23 @@
   }
 }
 
+// Barre compacte du header (burger + logo + icônes) : elle sert au frame
+// mobile, mais aussi à toute la plage où la barre desktop ne tient plus.
+// Cf. `$bp-header`.
+@mixin header-compact {
+  @media (max-width: $bp-header) {
+    @content;
+  }
+}
+
+// Symétrique de `header-compact` : la barre desktop complète, réservée à la
+// plage où le menu tient sans se toucher avec le logo.
+@mixin header-full {
+  @media (min-width: $bp-header + 1px) {
+    @content;
+  }
+}
+
 // --------------------------------------------------------------------------
 // Mesures fluides
 // --------------------------------------------------------------------------
