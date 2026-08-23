@@ -291,33 +291,34 @@ function initHeroCarousel() {
   const playback = hero.querySelector('[data-hero-playback]');
   if (!slides.length || !dots.length) return;
 
-  const enabledIndexes = [...dots].reduce((acc, dot, i) => {
-    if (!dot.disabled) acc.push(i);
-    return acc;
-  }, []);
+  // Chaque puce cible un slide via data-hero-target : plusieurs puces
+  // peuvent pointer vers le même slide (la 3e puce reboucle sur la photo
+  // du 1er slide), donc la position "courante" suit l'index de puce, pas
+  // l'index de slide.
+  const targets = [...dots].map((dot) => Number(dot.dataset.heroTarget ?? 0));
 
   let current = 0;
   let timer = null;
 
-  const show = (index) => {
-    current = index;
+  const show = (dotIndex) => {
+    current = dotIndex;
+    const slideIndex = targets[dotIndex];
     slides.forEach((slide, i) => {
-      slide.hidden = i !== index;
-      slide.classList.toggle('hero__slide--active', i === index);
+      slide.hidden = i !== slideIndex;
+      slide.classList.toggle('hero__slide--active', i === slideIndex);
     });
     dots.forEach((dot, i) => {
-      dot.classList.toggle('hero__dot--active', i === index);
-      dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+      dot.classList.toggle('hero__dot--active', i === dotIndex);
+      dot.setAttribute('aria-current', i === dotIndex ? 'true' : 'false');
     });
   };
 
   const next = () => {
-    const pos = enabledIndexes.indexOf(current);
-    show(enabledIndexes[(pos + 1) % enabledIndexes.length]);
+    show((current + 1) % dots.length);
   };
 
   const play = () => {
-    if (timer || enabledIndexes.length < 2) return;
+    if (timer || dots.length < 2) return;
     timer = setInterval(next, 5000);
     playback?.setAttribute('aria-pressed', 'true');
     playback?.setAttribute('aria-label', 'Pause slideshow');
