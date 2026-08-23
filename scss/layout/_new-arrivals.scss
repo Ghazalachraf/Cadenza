@@ -71,6 +71,13 @@
     scroll-padding-left: 23px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    // La piste se pilote avec les flèches ; la barre de défilement native
+    // n'apporte rien et casse le visuel de la maquette.
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__arrow {

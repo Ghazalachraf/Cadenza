@@ -1189,6 +1189,10 @@ ul {
   scroll-padding-left: 23px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.product-carousel__track::-webkit-scrollbar {
+  display: none;
 }
 .product-carousel__arrow {
   position: absolute;
