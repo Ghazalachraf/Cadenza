@@ -42,9 +42,9 @@
   }
 
   // Icônes blanches par défaut, orange (#ffb86d, déjà établi comme couleur
-  // d'accent — cf. __link--highlight) pendant le clic : deux images
-  // superposées, la seconde ne devenant visible qu'à :active plutôt qu'un
-  // <img src> qu'on ne peut pas changer en CSS seul.
+  // d'accent — cf. __link--highlight) au survol : deux images superposées,
+  // la seconde ne devenant visible qu'à :hover plutôt qu'un <img src> qu'on
+  // ne peut pas changer en CSS seul.
   &__social-link {
     position: relative;
     display: block;
@@ -64,7 +64,7 @@
     }
   }
 
-  &__social-link:active &__social-icon {
+  &__social-link:hover &__social-icon {
     opacity: 0;
 
     &--active {

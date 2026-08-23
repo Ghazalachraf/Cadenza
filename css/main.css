@@ -703,10 +703,10 @@ ul {
 .site-footer__social-icon--active {
   opacity: 0;
 }
-.site-footer__social-link:active .site-footer__social-icon {
+.site-footer__social-link:hover .site-footer__social-icon {
   opacity: 0;
 }
-.site-footer__social-link:active .site-footer__social-icon--active {
+.site-footer__social-link:hover .site-footer__social-icon--active {
   opacity: 1;
 }
 .site-footer__column {
