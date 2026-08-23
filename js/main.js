@@ -288,9 +288,19 @@ function initHeroCarousel() {
 
   const slides = hero.querySelectorAll('[data-hero-slide]');
   const dots = hero.querySelectorAll('[data-hero-dot]');
+  const playback = hero.querySelector('[data-hero-playback]');
   if (!slides.length || !dots.length) return;
 
+  const enabledIndexes = [...dots].reduce((acc, dot, i) => {
+    if (!dot.disabled) acc.push(i);
+    return acc;
+  }, []);
+
+  let current = 0;
+  let timer = null;
+
   const show = (index) => {
+    current = index;
     slides.forEach((slide, i) => {
       slide.hidden = i !== index;
       slide.classList.toggle('hero__slide--active', i === index);
@@ -301,11 +311,39 @@ function initHeroCarousel() {
     });
   };
 
+  const next = () => {
+    const pos = enabledIndexes.indexOf(current);
+    show(enabledIndexes[(pos + 1) % enabledIndexes.length]);
+  };
+
+  const play = () => {
+    if (timer || enabledIndexes.length < 2) return;
+    timer = setInterval(next, 5000);
+    playback?.setAttribute('aria-pressed', 'true');
+    playback?.setAttribute('aria-label', 'Pause slideshow');
+  };
+
+  const pause = () => {
+    clearInterval(timer);
+    timer = null;
+    playback?.setAttribute('aria-pressed', 'false');
+    playback?.setAttribute('aria-label', 'Play slideshow');
+  };
+
   dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => show(index));
+    dot.addEventListener('click', () => {
+      pause();
+      show(index);
+    });
+  });
+
+  playback?.addEventListener('click', () => {
+    if (timer) pause();
+    else play();
   });
 
   show(0);
+  play();
 }
 
 // --- Galerie produit ------------------------------------------------------

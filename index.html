@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadenza — New Arrivals</title>
   <meta name="description" content="Satisfy your top obsession with the range of new arrivals at Cadenza.">
-  <link rel="stylesheet" href="css/main.min.css?v=90">
+  <link rel="stylesheet" href="css/main.min.css?v=91">
 </head>
 <body>
   <div data-include="header"></div>
@@ -37,10 +37,16 @@
         </div>
       </div>
 
-      <div class="hero__dots">
-        <button type="button" class="hero__dot hero__dot--active" data-hero-dot aria-label="Slide 1"></button>
-        <button type="button" class="hero__dot" data-hero-dot aria-label="Slide 2"></button>
-        <button type="button" class="hero__dot" disabled aria-label="Slide 3"></button>
+      <div class="hero__controls">
+        <button type="button" class="hero__playback" data-hero-playback aria-pressed="true" aria-label="Pause slideshow">
+          <span class="hero__playback-icon hero__playback-icon--pause"></span>
+          <span class="hero__playback-icon hero__playback-icon--play"></span>
+        </button>
+        <div class="hero__dots">
+          <button type="button" class="hero__dot hero__dot--active" data-hero-dot aria-label="Slide 1"></button>
+          <button type="button" class="hero__dot" data-hero-dot aria-label="Slide 2"></button>
+          <button type="button" class="hero__dot" disabled aria-label="Slide 3"></button>
+        </div>
       </div>
     </section>
 
@@ -1045,6 +1051,6 @@
   <div data-include="panels"></div>
 
   <script src="js/includes.js?v=27"></script>
-  <script src="js/main.js?v=41"></script>
+  <script src="js/main.js?v=42"></script>
 </body>
 </html>

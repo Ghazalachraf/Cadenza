@@ -122,14 +122,75 @@
     }
   }
 
-  // Groupe 443:61 / 443:60 : 64 × 16 posé à x=1250, y=779 sur un hero de
-  // 1440 × 873 — soit 126 depuis la droite et 78 depuis le bas.
-  // 10 + 14 + 16 + 14 + 10 = 64.
-  &__dots {
+  // Bouton lecture/pause + puces, empilés et centrés au-dessus du groupe
+  // 443:61 / 443:60 (64 × 16 posé à x=1250, y=779 sur un hero de 1440 × 873
+  // — soit 126 depuis la droite et 78 depuis le bas).
+  &__controls {
     position: absolute;
     right: 126px;
     bottom: 78px;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__playback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+  }
+
+  &__playback-icon {
+    position: relative;
+    display: none;
+    width: 14px;
+    height: 14px;
+
+    &--pause {
+      width: 12px;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 3px;
+        height: 14px;
+        background: $color-white;
+        border-radius: 1px;
+      }
+
+      &::before { left: 0; }
+      &::after { right: 0; }
+    }
+
+    &--play {
+      border-style: solid;
+      border-width: 7px 0 7px 12px;
+      border-color: transparent transparent transparent $color-white;
+      margin-left: 2px;
+    }
+  }
+
+  // Icône affichée = action disponible au clic : pause visible tant que ça
+  // défile, play visible une fois en pause.
+  &__playback[aria-pressed='true'] &__playback-icon--pause {
+    display: block;
+  }
+
+  &__playback[aria-pressed='false'] &__playback-icon--play {
+    display: block;
+  }
+
+  &__dots {
     display: flex;
     align-items: center;
     gap: 14px;
@@ -229,7 +290,7 @@
       margin-top: 25px;
     }
 
-    &__dots {
+    &__controls {
       display: none;
     }
   }
