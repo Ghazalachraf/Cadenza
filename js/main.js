@@ -225,6 +225,44 @@ function initCompare() {
   });
 }
 
+// Défile jusqu'à la carte suivante/précédente réellement présente dans la
+// piste, plutôt qu'un pas fixe en pixels : un pas fixe se désynchronise dès
+// que la largeur de carte varie (breakpoints fluides) et, en bout de piste,
+// le navigateur clampe le scroll à une position qui ne tombe sur aucune
+// carte — un clic « précédent » ramenait alors sur une carte coupée en deux
+// au lieu de la précédente entière.
+function scrollTrackByCard(track, direction) {
+  const items = [...track.children];
+  if (!items.length) return;
+
+  const current = track.scrollLeft;
+  const tolerance = 4;
+  // Sert seulement à repérer l'index visé : le repère (ancêtre positionné le
+  // plus proche, pas forcément la piste) n'a pas besoin d'être exact ici.
+  // On retranche scroll-padding-left : la première carte a une position
+  // brute égale à ce padding (New Arrivals : 23px) alors que sa position
+  // réellement "au repos" une fois casée par le snap est 0 — sans cette
+  // correction, la carte déjà affichée ressortait comme "suivante".
+  const trackLeft = track.getBoundingClientRect().left;
+  const scrollPadding = parseFloat(getComputedStyle(track).scrollPaddingLeft) || 0;
+  const positions = items.map((el) => el.getBoundingClientRect().left - trackLeft + current - scrollPadding);
+  let index;
+
+  if (direction > 0) {
+    index = positions.findIndex((pos) => pos > current + tolerance);
+    if (index === -1) index = items.length - 1;
+  } else {
+    index = positions.reduce((found, pos, i) => (pos < current - tolerance ? i : found), -1);
+    if (index === -1) index = 0;
+  }
+
+  // scrollIntoView délègue le calcul de la position finale au navigateur,
+  // qui applique correctement scroll-snap-align et scroll-padding — un
+  // scrollTo(pixel calculé à la main) se faisait immédiatement écraser par
+  // le snap natif dès que le pixel ciblé ne tombait pas exactement dessus.
+  items[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+}
+
 // --- Product carousel arrows ----------------------------------------------
 function initProductCarousel() {
   const carousels = document.querySelectorAll('.product-carousel');
@@ -235,9 +273,8 @@ function initProductCarousel() {
     const next = carousel.querySelector('.product-carousel__arrow--next');
     if (!track) return;
 
-    const step = 350;
-    if (prev) prev.addEventListener('click', () => track.scrollBy({ left: -step, behavior: 'smooth' }));
-    if (next) next.addEventListener('click', () => track.scrollBy({ left: step, behavior: 'smooth' }));
+    if (prev) prev.addEventListener('click', () => scrollTrackByCard(track, -1));
+    if (next) next.addEventListener('click', () => scrollTrackByCard(track, 1));
   });
 }
 
@@ -1135,12 +1172,10 @@ function initRelatedCarousel() {
   const track = document.querySelector('[data-related-track]');
   if (!track) return;
 
-  // 342 de carte + 8 d'intervalle (frame 519:11563).
-  const step = 350;
   const prev = document.querySelector('[data-related-prev]');
   const next = document.querySelector('[data-related-next]');
-  if (prev) prev.addEventListener('click', () => track.scrollBy({ left: -step, behavior: 'smooth' }));
-  if (next) next.addEventListener('click', () => track.scrollBy({ left: step, behavior: 'smooth' }));
+  if (prev) prev.addEventListener('click', () => scrollTrackByCard(track, -1));
+  if (next) next.addEventListener('click', () => scrollTrackByCard(track, 1));
 }
 
 // --- Page panier (cart.html) ---------------------------------------------
