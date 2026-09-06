@@ -20,6 +20,105 @@ function initProductCards() {
   });
 }
 
+// --- Onglets New Arrivals -------------------------------------------------
+// Les six onglets de la maquette (Outwears, Dresses, Skirt, Bottoms,
+// Sneakers, Gym Suits) n'étaient que décoratifs : le carrousel affichait les
+// mêmes robes quel que soit l'onglet actif. Chacun rend désormais sa propre
+// sélection depuis `NEW_ARRIVALS_CATALOG` (js/products.js).
+//
+// Le markup produit est recréé à l'identique de celui de la page, pour que
+// les styles et les comportements existants (favoris, tailles, couleurs)
+// s'appliquent sans exception.
+function buildProductCard(product) {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+
+  const sizes = product.sizes
+    .map((size) => {
+      const active = size === product.activeSize ? ' product-card__size--active' : '';
+      return `<button type="button" class="product-card__size${active}">${size}</button>`;
+    })
+    .join('');
+
+  const colors = product.colors
+    .map((color) => {
+      const active = color === product.activeColor ? ' product-card__color--active' : '';
+      const pressed = color === product.activeColor ? 'true' : 'false';
+      const label = COLOR_LABELS[color] || color;
+      return `<button type="button" class="product-card__color product-card__color--${color}${active}" aria-label="${label}" aria-pressed="${pressed}"></button>`;
+    })
+    .join('');
+
+  card.innerHTML = `
+    <div class="product-card__media">
+      <img class="product-card__image" src="${product.image}" alt="${product.name}">
+      <div class="product-card__actions">
+        <button type="button" class="product-card__wishlist-btn" data-wishlist-toggle aria-pressed="false" aria-label="Ajouter aux favoris">
+          <img src="assets/icons/icon-wishlist-btn.svg" alt="" width="42" height="42">
+        </button>
+        <a class="product-card__quickview-btn" href="product.html" aria-label="Voir le produit">
+          <img src="assets/icons/icon-search-btn.svg" alt="" width="42" height="42">
+        </a>
+      </div>
+      <div class="product-card__variants">
+        <p class="product-card__variant-label">Size</p>
+        <div class="product-card__sizes">${sizes}</div>
+        <p class="product-card__variant-label">Color</p>
+        <div class="product-card__colors" role="group" aria-label="Couleurs disponibles">${colors}</div>
+      </div>
+    </div>
+    <div class="product-card__info">
+      <p class="product-card__name">${product.name}</p>
+      <p class="product-card__price">${product.price} <span class="product-card__price-original">${product.original}</span></p>
+      <img class="product-card__cart-btn" src="assets/icons/icon-cart-btn.svg" alt="Add to bag" role="button">
+    </div>
+  `;
+
+  return card;
+}
+
+function initNewArrivalsTabs() {
+  const section = document.querySelector('.new-arrivals');
+  if (!section || typeof NEW_ARRIVALS_CATALOG === 'undefined') return;
+
+  const tabs = section.querySelectorAll('.new-arrivals__tab');
+  const track = section.querySelector('.product-carousel__track');
+  if (!tabs.length || !track) return;
+
+  const render = (key) => {
+    const products = NEW_ARRIVALS_CATALOG[key];
+    if (!products) return;
+
+    track.innerHTML = '';
+    // La maquette double la série pour que le carrousel garde de la matière
+    // à faire défiler après les quatre cartes visibles.
+    [...products, ...products].forEach((product) => {
+      track.appendChild(buildProductCard(product));
+    });
+
+    // Les écouteurs de `initProductCards()` étaient posés sur les cartes
+    // remplacées : il faut les reposer sur les nouvelles.
+    initProductCards();
+    track.scrollTo({ left: 0, behavior: 'smooth' });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      tabs.forEach((other) => other.classList.remove('new-arrivals__tab--active'));
+      tab.classList.add('new-arrivals__tab--active');
+
+      render(tab.textContent.trim().toLowerCase());
+    });
+  });
+
+  // Rend l'onglet actif du markup au chargement, pour que les cartes de la
+  // page et le catalogue ne divergent jamais.
+  const initial = section.querySelector('.new-arrivals__tab--active') || tabs[0];
+  render(initial.textContent.trim().toLowerCase());
+}
+
 // --- Favoris : bascule partagée par toutes les familles de cartes ---------
 function wireWishlistToggle(card) {
   const button = card.querySelector('[data-wishlist-toggle]');
@@ -1538,6 +1637,7 @@ function initTimeline() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initProductCards();
+  initNewArrivalsTabs();
   initBestSellerCards();
   initArticleCards();
   initAccordion();
