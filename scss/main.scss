@@ -64,3 +64,7 @@
 
 // --- About page --------------------------------------------------------------
 @use 'layout/about';
+
+// --- Account page (client dashboard) -----------------------------------------
+@use 'layout/account';
+@use 'layout/personal-info';

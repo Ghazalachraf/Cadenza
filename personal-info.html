@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Information Settings — Cadenza</title>
+  <meta name="description" content="Manage your personal details — view, edit, or add new information.">
+  <link rel="stylesheet" href="css/main.min.css?v=93">
+</head>
+<body class="page--light-header page--personal-info">
+  <div data-include="header"></div>
+
+  <main>
+    <!-- ====================================================================
+         Informations personnelles — frame Figma 1618873268
+         Page courte : ni bannière ni newsletter, le footer suit le formulaire.
+         ==================================================================== -->
+    <section class="personal-info">
+      <h1 class="personal-info__title">Personal Information Settings</h1>
+      <p class="personal-info__subtitle">Manage your personal details—view, edit, or add new information.</p>
+
+      <form class="personal-form" novalidate>
+        <!-- Civilité : libellé et options en français dans la maquette -->
+        <fieldset class="personal-form__titles">
+          <legend class="personal-form__legend">Titre</legend>
+
+          <label class="personal-form__radio">
+            <input type="radio" name="title" value="mr">
+            <span>M.</span>
+          </label>
+
+          <label class="personal-form__radio">
+            <input type="radio" name="title" value="mrs">
+            <span>Mme.</span>
+          </label>
+        </fieldset>
+
+        <div class="personal-form__row">
+          <div class="personal-form__field">
+            <label class="personal-form__label" for="pi-first-name">First Name</label>
+            <input class="personal-form__input" id="pi-first-name" type="text" name="first-name"
+                   placeholder="mohamed" autocomplete="given-name">
+          </div>
+
+          <div class="personal-form__field">
+            <label class="personal-form__label" for="pi-last-name">Last Name</label>
+            <input class="personal-form__input" id="pi-last-name" type="text" name="last-name"
+                   placeholder="haddou" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="personal-form__field">
+          <label class="personal-form__label" for="pi-email">Email</label>
+          <input class="personal-form__input" id="pi-email" type="email" name="email"
+                 placeholder="haddou0mohamed@gmail.com" autocomplete="email">
+        </div>
+
+        <div class="personal-form__field">
+          <label class="personal-form__label" for="pi-password">Password</label>
+          <div class="personal-form__control">
+            <input class="personal-form__input" id="pi-password" type="password" name="password"
+                   placeholder="••••••••••" autocomplete="current-password">
+            <button type="button" class="personal-form__reveal" data-password-toggle
+                    aria-controls="pi-password" aria-pressed="false" aria-label="Show password">
+              <img src="assets/icons/icon-eye.svg" alt="" width="20" height="18">
+            </button>
+          </div>
+        </div>
+
+        <div class="personal-form__field">
+          <label class="personal-form__label" for="pi-new-password">
+            New password <span class="personal-form__optional">(optionel)</span>
+          </label>
+          <div class="personal-form__control">
+            <input class="personal-form__input" id="pi-new-password" type="password" name="new-password"
+                   placeholder="••••••••••" autocomplete="new-password">
+            <button type="button" class="personal-form__reveal" data-password-toggle
+                    aria-controls="pi-new-password" aria-pressed="false" aria-label="Show new password">
+              <img src="assets/icons/icon-eye.svg" alt="" width="20" height="18">
+            </button>
+          </div>
+        </div>
+
+        <div class="personal-form__field">
+          <label class="personal-form__label" for="pi-birth">
+            Date of birth <span class="personal-form__optional">(optionel)</span>
+          </label>
+          <select class="personal-form__input personal-form__input--select" id="pi-birth" name="birth" required>
+            <option value="" selected disabled>Wednesday, 1th January</option>
+            <option value="1">Monday, 1th January</option>
+            <option value="2">Tuesday, 1th January</option>
+            <option value="3">Wednesday, 1th January</option>
+            <option value="4">Thursday, 1th January</option>
+            <option value="5">Friday, 1th January</option>
+          </select>
+        </div>
+
+        <label class="personal-form__checkbox">
+          <input type="checkbox" name="partner-offers">
+          <span>Recevoir les offres de nos partenaires</span>
+        </label>
+
+        <label class="personal-form__checkbox">
+          <input type="checkbox" name="terms" required>
+          <span>I agree to the terms and conditions and the privacy policy</span>
+        </label>
+
+        <label class="personal-form__checkbox">
+          <input type="checkbox" name="newsletter">
+          <span>Recevoir notre newsletter vous pouvez vous desinscrire a tout moment.vous trouvez pour cela nos informations de contact dans les condition du site.</span>
+        </label>
+
+        <button type="submit" class="personal-form__submit">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <div data-include="panels"></div>
+
+  <script src="js/includes.js?v=27"></script>
+  <script src="js/main.js?v=48"></script>
+</body>
+</html>

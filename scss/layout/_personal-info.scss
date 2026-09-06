@@ -1,0 +1,272 @@
+// ==========================================================================
+// Personal Info — page « Personal Information Settings »
+// Frame Figma desktop 1618873268 (1440 × 1790)
+//
+// Page courte : pas de bannière ni de bande newsletter, le pied de page suit
+// directement le formulaire. Les champs reprennent la charte des pages de
+// compte (cf. _auth.scss) : fond gris clair, bordure fine, hauteur de 50px.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Mêmes teintes que les formulaires Login / Create Account.
+$pi-field-bg: #f5f4f2;
+$pi-field-border: #ddd;
+$pi-label: #333;
+$pi-title: #222;
+$pi-subtitle: #5b5859;
+$pi-placeholder: rgba(51, 51, 51, 0.3);
+
+// Colonne du formulaire : 560px centrés dans les 1440 de la maquette.
+$pi-form-width: 560px;
+
+.personal-info {
+  @include container-padding;
+
+  padding-top: fluid(100px, 48px);
+  padding-bottom: fluid(120px, 56px);
+  text-align: center;
+
+  &__title {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: fluid(48px, 28px);
+    line-height: fluid(58px, 36px);
+    color: $pi-title;
+  }
+
+  &__subtitle {
+    max-width: fluid(490px, 320px);
+    margin: fluid(18px, 12px) auto 0;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: fluid(20px, 15px);
+    line-height: fluid(30px, 24px);
+    color: $pi-subtitle;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Formulaire — colonne centrée, alignée à gauche
+// --------------------------------------------------------------------------
+.personal-form {
+  width: 100%;
+  max-width: $pi-form-width;
+  margin: fluid(60px, 36px) auto 0;
+  text-align: left;
+
+  // ---- Civilité --------------------------------------------------------
+  // `fieldset` sans bordure : la maquette pose « Titre » puis les deux
+  // options sur la même ligne.
+  &__titles {
+    display: flex;
+    align-items: center;
+    gap: fluid(30px, 18px);
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  &__legend {
+    float: left;
+    padding: 0;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: fluid(17px, 15px);
+    line-height: 1.4;
+    color: $pi-label;
+  }
+
+  &__radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: fluid(17px, 15px);
+    line-height: 1.4;
+    color: $pi-label;
+    cursor: pointer;
+
+    input {
+      appearance: none;
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      border: 1.5px solid $color-black;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &:checked {
+        border-width: 5px;
+      }
+    }
+  }
+
+  // ---- Champs ----------------------------------------------------------
+  // Prénom et nom côte à côte, comme sur Create Account.
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: fluid(20px, 12px);
+    margin-top: fluid(28px, 22px);
+  }
+
+  &__field {
+    margin-top: fluid(24px, 18px);
+
+    // Les deux champs de la rangée n'héritent pas de l'écart vertical :
+    // il est déjà porté par `__row`.
+    .personal-form__row & {
+      margin-top: 0;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: fluid(17px, 15px);
+    line-height: 1.4;
+    color: $pi-label;
+  }
+
+  // « (optionel) » suit le libellé en plus petit — orthographe de la maquette.
+  &__optional {
+    font-size: fluid(12px, 11px);
+    color: $pi-subtitle;
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    // Chrome ignore un interligne réduit pour la hauteur d'un `input`.
+    height: fluid(56px, 48px);
+    padding: 0 fluid(22px, 16px);
+    border: 1px solid $pi-field-border;
+    border-radius: 6px;
+    background: $pi-field-bg;
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: fluid(16px, 14px);
+    color: $color-black;
+    margin-top: 10px;
+
+    &::placeholder {
+      color: $pi-placeholder;
+    }
+  }
+
+  // Le menu déroulant garde l'apparence des champs ; le chevron est peint en
+  // fond puisque `appearance: none` retire celui du navigateur.
+  &__input--select {
+    appearance: none;
+    padding-right: fluid(54px, 44px);
+    background-image: url('../assets/icons/icon-chevron-down-dark.svg');
+    background-repeat: no-repeat;
+    background-position: right fluid(20px, 16px) center;
+    background-size: 20px 20px;
+    cursor: pointer;
+
+    // Tant qu'aucune date n'est choisie, le libellé garde la teinte des
+    // textes de substitution.
+    &:invalid {
+      color: $pi-placeholder;
+    }
+  }
+
+  // Le champ mot de passe porte l'œil de révélation par-dessus lui.
+  &__control {
+    position: relative;
+  }
+
+  &__reveal {
+    position: absolute;
+    right: fluid(20px, 16px);
+    // Le champ est précédé de son libellé et d'une marge de 10px : le centre
+    // du champ se situe donc 5px sous le centre du bloc.
+    top: calc(50% + 5px);
+    transform: translateY(-50%);
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 20px;
+      height: 18px;
+    }
+  }
+
+  // ---- Cases à cocher --------------------------------------------------
+  &__checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: fluid(14px, 10px);
+    margin-top: fluid(20px, 16px);
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: fluid(16px, 14px);
+    line-height: 1.6;
+    color: $pi-label;
+    cursor: pointer;
+
+    // La première case suit le dernier champ d'un cran plus bas.
+    &:first-of-type {
+      margin-top: fluid(36px, 26px);
+    }
+
+    input {
+      appearance: none;
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      // Aligne la case sur la première ligne du libellé.
+      margin-top: 3px;
+      border: 1.5px solid $color-black;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &:checked {
+        border-color: $color-black;
+        background: $color-black url('../assets/icons/icon-check-small.svg') no-repeat center;
+        background-size: 12px 12px;
+      }
+    }
+  }
+
+  // ---- Validation ------------------------------------------------------
+  &__submit {
+    display: block;
+    width: 100%;
+    height: fluid(62px, 52px);
+    margin-top: fluid(48px, 32px);
+    border: none;
+    border-radius: 4px;
+    background: $color-black;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: fluid(18px, 16px);
+    color: $color-white;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.88;
+    }
+  }
+}
+
+// Sous 480px, prénom et nom s'empilent : à deux colonnes les champs
+// deviennent trop étroits pour leur texte de substitution.
+@media (max-width: 480px) {
+  .personal-form__row {
+    grid-template-columns: 1fr;
+    gap: fluid-m(18px, 14px);
+  }
+}

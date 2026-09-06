@@ -1,0 +1,131 @@
+// ==========================================================================
+// Account — page « Votre compte » : tuiles de navigation du compte client
+// Frame Figma desktop 1618873269 (1440 × 1350)
+//
+// Page courte : pas de bannière ni de bande newsletter, le footer suit
+// directement la grille de tuiles.
+// ==========================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Comme About Us, la page utilise les gouttières de 71px de la maquette
+// (tuiles de 248px calées à x=71 et x=1369) plutôt que les 102px du reste
+// du site : à 102px les six tuiles deviennent trop étroites et les libellés
+// passent sur trois lignes.
+$account-gutter: 71px;
+
+.account {
+  padding-top: fluid(100px, 48px);
+  padding-bottom: fluid(120px, 56px);
+  padding-left: fluid($account-gutter, 20px);
+  padding-right: fluid($account-gutter, 20px);
+  text-align: center;
+
+  // Titre « Bienvenue … Sur Votre Compte! » — Jost 54/60, centré.
+  &__title {
+    font-family: $font-heading;
+    font-weight: 500;
+    font-size: fluid(54px, 28px);
+    line-height: fluid(60px, 36px);
+    color: $color-black;
+  }
+
+  // Grille des 6 tuiles, sur une seule rangée comme la maquette : 1298px
+  // entre les gouttières, soit 6 colonnes de 208px séparées par 18px.
+  // Le nombre de colonnes est fixé explicitement — `auto-fit` avec `1fr`
+  // étire les colonnes pour remplir la ligne et fait systématiquement
+  // retomber la 6ᵉ tuile sur une seconde rangée.
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: fluid(18px, 12px);
+    margin-top: fluid(90px, 40px);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Tuile — carte cliquable : icône centrée + libellé en capitales
+// --------------------------------------------------------------------------
+.account-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: fluid(18px, 14px);
+  min-height: fluid(120px, 110px);
+  padding: fluid(22px, 18px) fluid(16px, 12px);
+  border: 1px solid rgba($color-black, 0.1);
+  border-radius: 8px;
+  background: $color-white;
+  color: $color-black;
+  text-decoration: none;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+
+  // État survolé de la maquette : la 5ᵉ tuile y est présentée sur fond gris.
+  &:hover,
+  &:focus-visible {
+    background: #f4f2f1;
+    border-color: rgba($color-black, 0.18);
+  }
+
+  &__icon {
+    width: fluid(36px, 30px);
+    height: fluid(36px, 30px);
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-family: $font-heading;
+    font-weight: 600;
+    font-size: fluid(14px, 12px);
+    line-height: 1.6;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Bouton de déconnexion — pastille terracotta centrée sous la grille
+// --------------------------------------------------------------------------
+.account__logout {
+  display: inline-block;
+  margin-top: fluid(80px, 40px);
+  padding: fluid(18px, 14px) fluid(38px, 28px);
+  border: 0;
+  background: $color-primary;
+  color: $color-white;
+  font-family: $font-heading;
+  font-weight: 600;
+  font-size: fluid(14px, 12px);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+
+  // Le site n'emploie pas de fonction de couleur Sass : l'état survolé
+  // bascule sur le noir de la charte, comme les autres boutons pleins.
+  &:hover,
+  &:focus-visible {
+    background: $color-black;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Repli responsive : la rangée de 6 tuiles devient 3 puis 2 colonnes.
+// Pas de frame mobile fournie pour cette page — les paliers sont choisis à
+// la largeur où les libellés commencent à passer sur trois lignes.
+// --------------------------------------------------------------------------
+@media (max-width: 1100px) {
+  .account__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@include mobile {
+  .account__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

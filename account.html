@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon compte — Cadenza</title>
+  <meta name="description" content="Gérez votre compte Cadenza : informations, adresses, commandes, avoirs et favoris.">
+  <link rel="stylesheet" href="css/main.min.css?v=93">
+</head>
+<body class="page--light-header page--account">
+  <div data-include="header"></div>
+
+  <main>
+    <!-- ====================================================================
+         Compte client — frame Figma 1618873269
+         Page courte : ni bannière ni newsletter, le footer suit la grille.
+         ==================================================================== -->
+    <section class="account">
+      <h1 class="account__title">Bienvenue Amine Sur Votre Compte!</h1>
+
+      <div class="account__grid">
+        <a class="account-tile" href="personal-info.html">
+          <img class="account-tile__icon" src="assets/icons/icon-account-info.svg" alt="" width="44" height="44">
+          <span class="account-tile__label">Information</span>
+        </a>
+
+        <a class="account-tile" href="#">
+          <img class="account-tile__icon" src="assets/icons/icon-account-address.svg" alt="" width="44" height="44">
+          <span class="account-tile__label">Ajouter une première adresse</span>
+        </a>
+
+        <a class="account-tile" href="#">
+          <img class="account-tile__icon" src="assets/icons/icon-account-orders.svg" alt="" width="44" height="44">
+          <span class="account-tile__label">Historique et détails de mes commandes</span>
+        </a>
+
+        <a class="account-tile" href="#">
+          <img class="account-tile__icon" src="assets/icons/icon-account-credit.svg" alt="" width="44" height="44">
+          <span class="account-tile__label">Avoirs</span>
+        </a>
+
+        <a class="account-tile" href="#">
+          <img class="account-tile__icon" src="assets/icons/icon-account-wishlist.svg" alt="" width="44" height="44">
+          <span class="account-tile__label">Mes favoris</span>
+        </a>
+
+        <a class="account-tile" href="personal-info.html">
+          <img class="account-tile__icon" src="assets/icons/icon-account-data.svg" alt="" width="44" height="44">
+          <span class="account-tile__label">Mes données personnelles</span>
+        </a>
+      </div>
+
+      <a class="account__logout" href="login.html">Déconnexion</a>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <div data-include="panels"></div>
+
+  <script src="js/includes.js?v=27"></script>
+  <script src="js/main.js?v=48"></script>
+</body>
+</html>
