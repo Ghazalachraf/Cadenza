@@ -225,19 +225,67 @@ function initBestSellerCards() {
 // Contrairement aux cartes New Arrivals, les pastilles ne sont plus une image
 // assemblée : chaque cercle des fichiers swatches-*.svg est devenu un bouton,
 // donc sélectionnable.
+// Chaque pastille porte son visuel dans `data-variant` : le survol donne un
+// aperçu, le clic fixe le choix — même mécanique que les vignettes de
+// Product Details (`initProductGallery`). Sans cet appel, les pastilles ne
+// faisaient que déplacer leur anneau de sélection, l'image restant la même.
+function wireArticleSwatchImages(card) {
+  const image = card.querySelector('.article-card__image');
+  const swatches = card.querySelectorAll('.article-card__swatch[data-variant]');
+  if (!image || !swatches.length) return;
+
+  // Visuel de référence : celui de la pastille active, à défaut celui déjà
+  // posé dans le markup.
+  const active = card.querySelector('.article-card__swatch--active[data-variant]');
+  let selected = active?.dataset.variant || image.getAttribute('src');
+
+  swatches.forEach((swatch) => {
+    swatch.addEventListener('mouseenter', () => {
+      image.src = swatch.dataset.variant;
+    });
+
+    swatch.addEventListener('mouseleave', () => {
+      image.src = selected;
+    });
+
+    swatch.addEventListener('click', () => {
+      selected = swatch.dataset.variant;
+      image.src = selected;
+    });
+
+    // Le survol seul ne suffit pas au clavier : le focus doit donner le
+    // même aperçu.
+    swatch.addEventListener('focus', () => {
+      image.src = swatch.dataset.variant;
+    });
+
+    swatch.addEventListener('blur', () => {
+      image.src = selected;
+    });
+  });
+}
+
 function initArticleCards() {
   document.querySelectorAll('.article-card').forEach((card) => {
     wireWishlistToggle(card);
     wireSwatchGroup(card.querySelectorAll('.article-card__swatch'), 'article-card__swatch--active');
+    wireArticleSwatchImages(card);
 
     const cartBtn = card.querySelector('.article-card__cart');
     const name = card.querySelector('.article-card__name')?.textContent;
     const priceText = card.querySelector('.article-card__price')?.textContent;
-    const image = card.querySelector('.article-card__image')?.getAttribute('src');
-    if (!cartBtn || !name || !priceText || !image) return;
+    const imageEl = card.querySelector('.article-card__image');
+    if (!cartBtn || !name || !priceText || !imageEl) return;
 
     const unitPrice = parseFloat(priceText.replace(',', '.'));
-    cartBtn.addEventListener('click', () => addUnnamedVariantToCart({ name, unitPrice, image }));
+    // Le visuel est relu au moment du clic : les pastilles de couleur le
+    // changent, et le figer au chargement enverrait au panier la photo du
+    // coloris initial plutôt que celle du coloris choisi.
+    cartBtn.addEventListener('click', () => addUnnamedVariantToCart({
+      name,
+      unitPrice,
+      image: imageEl.getAttribute('src'),
+    }));
   });
 }
 
