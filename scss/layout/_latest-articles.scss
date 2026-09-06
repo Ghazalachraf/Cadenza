@@ -170,28 +170,7 @@
     }
   }
 
-  &__cart {
-    position: absolute;
-    left: 50%;
-    bottom: 20px;
-    transform: translateX(-50%);
-    width: 263px;
-    padding: 16px 20px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.9);
-    font-family: $font-display;
-    font-weight: 500;
-    font-size: 17px;
-    color: $color-black;
-    opacity: 0;
-    pointer-events: none;
-    cursor: pointer;
-    border: none;
-    transition: opacity 0.2s ease;
-  }
-
-  &:hover &__actions,
-  &:hover &__cart {
+  &:hover &__actions {
     opacity: 1;
     pointer-events: auto;
   }

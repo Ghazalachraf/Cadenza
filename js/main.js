@@ -270,22 +270,6 @@ function initArticleCards() {
     wireWishlistToggle(card);
     wireSwatchGroup(card.querySelectorAll('.article-card__swatch'), 'article-card__swatch--active');
     wireArticleSwatchImages(card);
-
-    const cartBtn = card.querySelector('.article-card__cart');
-    const name = card.querySelector('.article-card__name')?.textContent;
-    const priceText = card.querySelector('.article-card__price')?.textContent;
-    const imageEl = card.querySelector('.article-card__image');
-    if (!cartBtn || !name || !priceText || !imageEl) return;
-
-    const unitPrice = parseFloat(priceText.replace(',', '.'));
-    // Le visuel est relu au moment du clic : les pastilles de couleur le
-    // changent, et le figer au chargement enverrait au panier la photo du
-    // coloris initial plutôt que celle du coloris choisi.
-    cartBtn.addEventListener('click', () => addUnnamedVariantToCart({
-      name,
-      unitPrice,
-      image: imageEl.getAttribute('src'),
-    }));
   });
 }
 
