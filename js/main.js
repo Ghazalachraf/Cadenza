@@ -286,26 +286,27 @@ function initAccordion() {
   const items = document.querySelectorAll('.accordion-item');
   if (!items.length) return;
 
+  // L'état ouvert est porté par la classe `--open` plutôt que par un style
+  // inline : le repli par défaut vient du CSS, si bien que le premier clic
+  // ouvre réellement l'entrée visée au lieu de commencer par tout refermer.
   const closeAll = () => {
     items.forEach((item) => {
-      const body = item.querySelector('.accordion-item__body');
+      item.classList.remove('accordion-item--open');
       const icon = item.querySelector('.accordion-item__icon');
-      if (body) body.style.display = 'none';
       if (icon) icon.src = 'assets/icons/icon-plus.svg';
     });
   };
 
   items.forEach((item) => {
     const toggle = item.querySelector('[data-accordion-toggle]');
-    const body = item.querySelector('.accordion-item__body');
     const icon = item.querySelector('.accordion-item__icon');
 
     toggle.addEventListener('click', () => {
-      const wasOpen = body ? body.style.display !== 'none' : false;
+      const wasOpen = item.classList.contains('accordion-item--open');
       closeAll();
-      if (body && !wasOpen) {
-        body.style.display = '';
-        icon.src = 'assets/icons/icon-minus.svg';
+      if (!wasOpen) {
+        item.classList.add('accordion-item--open');
+        if (icon) icon.src = 'assets/icons/icon-minus.svg';
       }
     });
   });

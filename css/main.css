@@ -2524,12 +2524,16 @@ ul {
   height: 28px;
 }
 .accordion-item__body {
+  display: none;
   font-family: "DM Sans", sans-serif;
   font-size: 19px;
   line-height: 27px;
   color: rgba(37, 35, 36, 0.8);
   max-width: 493px;
   margin: 19px 0 -6px 41px;
+}
+.accordion-item--open .accordion-item__body {
+  display: block;
 }
 
 @media (max-width: 768px) {

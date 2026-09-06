@@ -76,13 +76,22 @@
 
   // Bloc ouvert 406:202 (h=160) : description 406:213 de 3 lignes rognée à
   // 67px, soit 7px de demi-interligne à retrancher de part et d'autre.
+  // Replié par défaut : les quatre entrées portent désormais un paragraphe et,
+  // sans cette règle, toutes s'afficheraient ouvertes au chargement. Seule
+  // celle marquée `--open` dans le markup reste dépliée, conformément à la
+  // maquette où Outwears est l'entrée ouverte.
   &__body {
+    display: none;
     font-family: $font-display;
     font-size: 19px;
     line-height: 27px;
     color: rgba(37, 35, 36, 0.8);
     max-width: 493px;
     margin: 19px 0 -6px 41px;
+  }
+
+  &--open &__body {
+    display: block;
   }
 }
 
