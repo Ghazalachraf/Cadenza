@@ -1121,6 +1121,80 @@ function initCollectionFilters() {
 // Galerie : la vignette cliquée devient l'image principale et hérite de son
 // cadrage ; les deux flèches font défiler la sélection. Onglets, options,
 // quantité et ajout au panier reprennent les contrats data-* du site.
+// --- Fiche produit : variantes de couleur et de taille --------------------
+// Couleur → change les quatre vues de la galerie, le nom et le prix.
+// Taille  → ajuste le prix seul (supplément sur les tailles étendues).
+// Les données viennent de js/product-variants.js.
+function initProductVariants(page, showThumb) {
+  if (typeof PRODUCT_VARIANTS === 'undefined') return;
+
+  const colors = [...page.querySelectorAll('.product-info__color')];
+  const sizes = [...page.querySelectorAll('.product-info__size')];
+  const title = page.querySelector('.product-info__title');
+  const price = page.querySelector('[data-product-price]');
+  const priceOld = page.querySelector('.product-info__price-old');
+  const slides = [...page.querySelectorAll('[data-gallery-slide] img')];
+  const thumbs = [...page.querySelectorAll('[data-gallery-thumb] img')];
+  if (!colors.length || !title || !price) return;
+
+  // « $220,00 » à partir de 22000 centimes : le séparateur décimal est la
+  // virgule, comme partout sur la maquette.
+  const format = (cents) => `$${Math.floor(cents / 100)},${String(cents % 100).padStart(2, '0')}`;
+
+  const activeColor = () => (
+    page.querySelector('.product-info__color--active')?.getAttribute('aria-label') || ''
+  );
+
+  const activeSize = () => (
+    page.querySelector('.product-info__size--active')?.textContent.trim() || ''
+  );
+
+  const refreshPrice = () => {
+    const variant = PRODUCT_VARIANTS.colors[activeColor()];
+    if (!variant) return;
+
+    const surcharge = PRODUCT_VARIANTS.sizeSurcharge[activeSize()] || 0;
+    price.textContent = format(variant.price + surcharge);
+    if (priceOld) priceOld.textContent = format(variant.priceOld + surcharge);
+  };
+
+  const applyColor = (label) => {
+    const variant = PRODUCT_VARIANTS.colors[label];
+    if (!variant) return;
+
+    title.textContent = variant.name;
+
+    // Les quatre vues et leurs vignettes changent ensemble : le cadrage
+    // (variables --m-* et --crop-*) reste celui posé dans le markup, il
+    // décrit la vue et non le produit.
+    variant.images.forEach((src, i) => {
+      if (slides[i]) {
+        slides[i].src = src;
+        slides[i].alt = i === 0 ? variant.name : `${variant.name}, view ${i + 1}`;
+      }
+      if (thumbs[i]) thumbs[i].src = src;
+    });
+
+    // Revient à la première vue : la vue affichée pour le coloris précédent
+    // n'a pas d'équivalent garanti dans la nouvelle série.
+    if (typeof showThumb === 'function') showThumb(0);
+
+    refreshPrice();
+  };
+
+  colors.forEach((button) => {
+    button.addEventListener('click', () => applyColor(button.getAttribute('aria-label')));
+  });
+
+  sizes.forEach((button) => {
+    button.addEventListener('click', refreshPrice);
+  });
+
+  // Aligne l'affichage sur le coloris et la taille actifs du markup, pour que
+  // le prix tienne compte du supplément de taille dès le chargement.
+  refreshPrice();
+}
+
 function initProductPage() {
   const page = document.querySelector('.product');
   if (!page) return;
@@ -1149,6 +1223,11 @@ function initProductPage() {
   // ---- Couleurs, tailles, favori -----------------------------------------
   wireSwatchGroup(page.querySelectorAll('.product-info__color'), 'product-info__color--active');
   wireSwatchGroup(page.querySelectorAll('.product-info__size'), 'product-info__size--active');
+
+  // Les pastilles ne faisaient que déplacer leur anneau de sélection : la
+  // galerie, le nom et le prix restaient ceux du chargement. La couleur
+  // change désormais de variante complète, la taille ajuste le prix.
+  initProductVariants(page, showThumb);
 
   const wishlist = page.querySelector('[data-wishlist]');
   if (wishlist) {
