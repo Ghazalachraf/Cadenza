@@ -1123,10 +1123,57 @@
       </div>
 
       <div class="timeline__content" data-timeline-content>
-        <!-- 2020, 2021 et 2023 : la maquette Figma ne fournit pas de contenu pour ces
-             années (aucun frame trouvé) ; les boutons restent sélectionnables (le
-             repère change) mais le panneau affiché ne change pas tant que le contenu
-             réel n'a pas été extrait — rien n'est inventé pour combler l'absence. -->
+        <!-- La maquette Figma ne fournit de frame que pour 2022 (Opening Day) et
+             2024 (First collaboration). Les panneaux 2020, 2021 et 2023 reprennent
+             la même ossature avec un contenu de remplacement, pour que chaque année
+             de la colonne mène à un panneau. Textes et visuels sont à remplacer par
+             le contenu éditorial définitif. -->
+        <div class="timeline__panel" data-timeline-panel="2020" hidden>
+          <div class="timeline__col">
+            <div>
+              <h2 class="timeline__title">The First Sketch</h2>
+              <p class="timeline__text">Cadenza began as a handful of drawings on a studio table. Long before the first storefront, we spent the year defining what the label would stand for: considered cuts, natural fabrics, and pieces made to outlast a season.</p>
+            </div>
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/article-elevate-style.jpg" alt="Designer wearing a knitted sweater and leather jacket">
+              <div class="timeline__overlay"></div>
+              <img class="timeline__card-logo" src="assets/icons/logo.svg" alt="Cadenza">
+              <p class="timeline__card-date">14/09/2020</p>
+            </div>
+            <a href="#" class="timeline__more">Read more</a>
+          </div>
+
+          <div class="timeline__col timeline__col--second">
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/spotlight-blouse.jpg" alt="Silk blouse from the first design studies">
+            </div>
+            <p class="timeline__text">Those early studies set the tone for everything that followed. We tested fabrics, refined proportions, and learned that restraint says more than excess — a principle still at the centre of every Cadenza collection.</p>
+          </div>
+        </div>
+
+        <div class="timeline__panel" data-timeline-panel="2021" hidden>
+          <div class="timeline__col">
+            <div>
+              <h2 class="timeline__title">First Collection</h2>
+              <p class="timeline__text">Our debut collection left the studio and met its first audience. Twelve pieces, each cut from fabric we had sourced ourselves, presented in a small showroom to friends, buyers and the first customers who believed in us.</p>
+            </div>
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/cat-best-sellers.jpg" alt="Model presenting the first Cadenza collection">
+              <div class="timeline__overlay"></div>
+              <img class="timeline__card-logo" src="assets/icons/logo.svg" alt="Cadenza">
+              <p class="timeline__card-date">22/06/2021</p>
+            </div>
+            <a href="#" class="timeline__more">Read more</a>
+          </div>
+
+          <div class="timeline__col timeline__col--second">
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/cat-new-arrivals.jpg" alt="Piece from the debut Cadenza collection">
+            </div>
+            <p class="timeline__text">The response gave us the confidence to keep going. Orders came in faster than we could sew, and by the end of the year the studio had grown from two people to a proper team.</p>
+          </div>
+        </div>
+
         <div class="timeline__panel" data-timeline-panel="2022">
           <div class="timeline__col">
             <div>
@@ -1147,6 +1194,29 @@
               <img class="timeline__image" src="assets/images/timeline-boutique.jpg" alt="Interior of the Cadenza boutique">
             </div>
             <p class="timeline__text">With a warm atmosphere filled with laughter and inspiration, our opening day celebrated not just a store, but a community where fashion meets passion. We are thrilled to embark on this adventure and look forward to sharing our love for fashion with you!</p>
+          </div>
+        </div>
+
+        <div class="timeline__panel" data-timeline-panel="2023" hidden>
+          <div class="timeline__col">
+            <div>
+              <h2 class="timeline__title">Going Global</h2>
+              <p class="timeline__text">Cadenza crossed its first border. Our online store opened to international orders and the first parcels left for Paris, Milan and Montreal — a year spent learning how to serve a community far beyond our own city.</p>
+            </div>
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/collection-accessories.jpg" alt="Cadenza accessories prepared for international shipping">
+              <div class="timeline__overlay"></div>
+              <img class="timeline__card-logo" src="assets/icons/logo.svg" alt="Cadenza">
+              <p class="timeline__card-date">11/04/2023</p>
+            </div>
+            <a href="#" class="timeline__more">Read more</a>
+          </div>
+
+          <div class="timeline__col timeline__col--second">
+            <div class="timeline__card">
+              <img class="timeline__image" src="assets/images/gallery-1.jpg" alt="Cadenza customer photographed abroad">
+            </div>
+            <p class="timeline__text">Seeing our pieces worn in cities we had never visited changed how we design. Every collection since has been built for a wardrobe that travels, in climates and occasions we could only imagine at the start.</p>
           </div>
         </div>
 
@@ -1220,6 +1290,6 @@
 
   <script src="js/includes.js?v=27"></script>
   <script src="js/products.js?v=1"></script>
-  <script src="js/main.js?v=52"></script>
+  <script src="js/main.js?v=53"></script>
 </body>
 </html>
