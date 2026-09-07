@@ -46,6 +46,14 @@
     padding: 8px 0;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    // La barre de défilement native n'apporte rien ici et coupe la rangée
+    // d'un trait gris sous les cartes : même traitement que les autres
+    // pistes défilantes du site (new-arrivals, product, collection).
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     // 1re rangée (264:623) à 34px du titre ; 2e rangée (264:687) collée à
     // la 1re (0px d'écart dans la maquette).
