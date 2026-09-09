@@ -99,9 +99,14 @@
       height: 21px;
     }
 
-    // 206:1273 est à x=103 ; 206:1269 finit à 1397, soit 43px du bord droit.
+    // 206:1269 finit à 1397, soit 43px du bord droit. La maquette pose la
+    // flèche gauche à x=103 (206:1273), c'est-à-dire 80px à l'intérieur de la
+    // première carte, qui démarre à 23px : elle en masquait une bonne part
+    // alors que celle de droite flotte dans la marge. Les deux sont alignées
+    // sur le même retrait pour rester symétriques et ne mordre sur les cartes
+    // que par leur bord.
     &--prev {
-      left: 103px;
+      left: 43px;
 
       img {
         transform: rotate(180deg);
