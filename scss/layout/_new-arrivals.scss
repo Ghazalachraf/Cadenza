@@ -181,7 +181,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 27px 20px;
+    // 274:102 : le panneau s'arrête à 393 dans un média de 408, soit 15 du bas.
+    padding: 0 27px 15px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.8) 77%);
     opacity: 0;
     // Le conteneur (inset:0) reste non cliquable en permanence, même visible :
@@ -244,11 +245,20 @@
   // seule image : icon-swatches-strip.svg contient pourtant bien 5 cercles
   // distincts (r=12, anneau actif r=14,5 trait #cb9274, ombre portée
   // 1/1/4 à 15 %), de quoi en faire de vrais boutons sans rien inventer.
+  // Les écarts ne sont pas uniformes dans la source : les centres du SVG sont
+  // à 15, 43, 71, 102, 133, soit des gaps bord à bord de 4, 4, 7, 7. Un gap
+  // unique de 7 portait la bande à 148 alors que 274:114 mesure 142 — les
+  // valeurs du SVG la font tomber juste (3 → 145 = 142).
   &__colors {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 4px;
     height: 30px;
+
+    // Les deux derniers intervalles s'élargissent à 7.
+    .product-card__color:nth-child(n + 4) {
+      margin-left: 3px;
+    }
   }
 
   &__color {

@@ -41,8 +41,8 @@
     @include flex($align: center, $gap: 26px);
   }
 
-  // Icônes blanches par défaut, orange (#ffb86d, déjà établi comme couleur
-  // d'accent — cf. __link--highlight) au survol : deux images superposées,
+  // Icônes blanches par défaut, orange (#ffb86d, couleur d'accent partagée
+  // avec le survol des liens de colonne) au survol : deux images superposées,
   // la seconde ne devenant visible qu'à :hover plutôt qu'un <img src> qu'on
   // ne peut pas changer en CSS seul.
   &__social-link {
@@ -95,11 +95,11 @@
       font-family: $font-display;
       font-size: 16px;
       line-height: 1.5;
-      color: #ddddde;
+      color: $color-white;
       transition: color 0.15s ease;
 
-      // Même orange d'accent que les icônes sociales et que « Search »
-      // (__link--highlight), pour un survol homogène dans tout le pied de page.
+      // Même orange d'accent que les icônes sociales, pour un survol homogène
+      // dans tout le pied de page.
       &:hover,
       &:focus-visible {
         color: $color-orange;
@@ -107,21 +107,6 @@
     }
   }
 
-  // Lien mis en avant (« Search »). Le sélecteur reprend `__links a` : sans
-  // lui, la règle de couleur des liens de colonne, plus spécifique, l'emporte
-  // et le lien reste gris.
-  &__links a.site-footer__link--highlight {
-    color: $color-orange;
-    font-weight: 600;
-    text-decoration: underline;
-
-    // Déjà orange au repos : le survol bascule vers le blanc pour rester
-    // perceptible, à rebours des autres liens de colonne.
-    &:hover,
-    &:focus-visible {
-      color: $color-white;
-    }
-  }
 
   // Pastille 490:64 : x=45, y=316 sur un cadre de 400.
   &__top {

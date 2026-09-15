@@ -623,14 +623,19 @@ $pd-old-price: #b9b9b9; // prix barré du bloc mobile
     margin-top: 20px;
   }
 
-  // 519:11562 : la piste déborde de la gouttière (x=84 pour un contenu à 101).
+  // 519:11562 : la piste déborde de la gouttière des deux côtés — elle va de
+  // 84 à 1356 quand le contenu tient de 101 à 1339, soit 17 de débord à
+  // gauche comme à droite. Sans le débord droit, la carte de bord est coupée
+  // 17 trop tôt et le défilement ne découvre pas la même portion.
   &__track {
     display: flex;
     gap: 8px;
     // Le titre finit à 2344, 519:11562 commence à 2378.
     margin-top: 34px;
     margin-left: -17px;
+    margin-right: -17px;
     padding-left: 17px;
+    padding-right: 17px;
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
@@ -644,11 +649,18 @@ $pd-old-price: #b9b9b9; // prix barré du bloc mobile
     }
   }
 
-  // 519:11640 et 519:11644 : pastilles de 60 posées à y=2406, soit 28 sous
-  // le haut de la piste, alignées sur les bords du contenu.
+  // 519:11640 et 519:11644 : pastilles de 60 posées dans 519:11562
+  // (« slid Container », lui-même à x=84 y=183 dans la section de 745 de
+  // haut). Leurs coordonnées sont locales au conteneur : y=211 donne un haut
+  // de pastille à 183 + 211 = 394, soit 745 - 394 - 60 = 291 du bas.
+  //
+  // Elles ne sont pas centrées sur les 408 de visuel (ce qui donnerait 387) :
+  // la maquette les pose 37 plus bas, à 424. On ancre depuis le bas pour que
+  // la hauteur du bloc de titre — variable au retour à la ligne — ne les
+  // décale pas.
   &__arrow {
     position: absolute;
-    top: 2406px - 2195px;
+    bottom: 291px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -666,18 +678,32 @@ $pd-old-price: #b9b9b9; // prix barré du bloc mobile
       display: block;
       width: 21px;
       height: 21px;
+      // 519:11642 : le chevron est posé à 14,46 dans une pastille de 60 pour
+      // une icône de 21,08, là où le centre géométrique tomberait à 19,46 —
+      // soit 5 vers la pointe. Correction optique : un « › » centré au pixel
+      // paraît décalé, son vide étant du côté de la pointe. Le centrage
+      // vertical de la maquette, lui, est exact (19,46).
+      margin-right: 10px;
     }
 
+    // Retraits asymétriques, comme la maquette : 519:11644 est à x=98 dans le
+    // conteneur (84 + 98 = 182 du bord gauche) et 519:11640 à x=1184, soit un
+    // bord droit à 84 + 1184 + 60 = 1328 et donc 112 du bord droit.
+    // La gauche mord davantage sur la piste que la droite — ce n'est pas une
+    // symétrie ratée, les deux valeurs diffèrent dans le frame.
     &--prev {
-      left: 98px;
+      left: fluid(182px, 20px);
 
       img {
         transform: scaleX(-1);
+        // Le miroir inverse aussi le décalage optique.
+        margin-right: 0;
+        margin-left: 10px;
       }
     }
 
     &--next {
-      right: 196px;
+      right: fluid(112px, 20px);
     }
   }
 }
@@ -1011,7 +1037,10 @@ $pd-old-price: #b9b9b9; // prix barré du bloc mobile
     &__track {
       // 535:13186 commence à 1851, le titre s'arrête à 1822.
       margin: 29px 0 0;
+      // Le frame mobile ne déborde pas la gouttière : on annule les deux
+      // retraits du desktop, pas seulement celui de gauche.
       padding-left: 0;
+      padding-right: 0;
 
       > * {
         flex: 0 0 303px;

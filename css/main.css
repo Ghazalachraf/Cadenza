@@ -730,19 +730,11 @@ ul {
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #ddddde;
+  color: #ffffff;
   transition: color 0.15s ease;
 }
 .site-footer__links a:hover, .site-footer__links a:focus-visible {
   color: #ffb86d;
-}
-.site-footer__links a.site-footer__link--highlight {
-  color: #ffb86d;
-  font-weight: 600;
-  text-decoration: underline;
-}
-.site-footer__links a.site-footer__link--highlight:hover, .site-footer__links a.site-footer__link--highlight:focus-visible {
-  color: #ffffff;
 }
 .site-footer__top {
   position: absolute;
@@ -1279,7 +1271,7 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 27px 20px;
+  padding: 0 27px 15px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.8) 77%);
   opacity: 0;
   pointer-events: none;
@@ -1330,8 +1322,11 @@ ul {
 .product-card__colors {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 4px;
   height: 30px;
+}
+.product-card__colors .product-card__color:nth-child(n+4) {
+  margin-left: 3px;
 }
 .product-card__color {
   width: 24px;
@@ -6584,7 +6579,9 @@ ul {
   gap: 8px;
   margin-top: 34px;
   margin-left: -17px;
+  margin-right: -17px;
   padding-left: 17px;
+  padding-right: 17px;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -6597,7 +6594,7 @@ ul {
 }
 .product-related__arrow {
   position: absolute;
-  top: 211px;
+  bottom: 291px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6615,15 +6612,18 @@ ul {
   display: block;
   width: 21px;
   height: 21px;
+  margin-right: 10px;
 }
 .product-related__arrow--prev {
-  left: 98px;
+  left: clamp(20px, 12.6388888889vw, 182px);
 }
 .product-related__arrow--prev img {
   transform: scaleX(-1);
+  margin-right: 0;
+  margin-left: 10px;
 }
 .product-related__arrow--next {
-  right: 196px;
+  right: clamp(20px, 7.7777777778vw, 112px);
 }
 
 .page--product .newsletter {
@@ -6858,6 +6858,7 @@ ul {
   .product-related__track {
     margin: 29px 0 0;
     padding-left: 0;
+    padding-right: 0;
   }
   .product-related__track > * {
     flex: 0 0 303px;
